@@ -7,7 +7,7 @@ from __future__ import print_function
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2014-2024, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
-__license__    = "BSD"
+__license__    = "GPLv3"
 __version__    = "0.2.0"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
@@ -32,7 +32,7 @@ setuptools.setup(
     version="0.2.0",
     author="dkrajzew",
     author_email="d.krajzewicz@gmail.com",
-    description="A BibTex parser and converter",
+    description="A simple private blogging system",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='http://gresiblos.readthedocs.org/',
@@ -43,10 +43,10 @@ setuptools.setup(
         'Tracker': 'https://github.com/dkrajzew/gresiblos/issues',
         'Discussions': 'https://github.com/dkrajzew/gresiblos/discussions',
     },
-    license='BSD',
+    license='GPLv3',
     # add modules
     packages=setuptools.find_packages(),
-    package_data={'': ["tex.db"]},
+    package_data={'data': ["data/entry1.txt", "data/entry2.txt", "data/template.html"]},
     entry_points = {
         'console_scripts': [
             'gresiblos = gresiblos:main'
@@ -54,22 +54,21 @@ setuptools.setup(
     },
     # see https://pypi.org/classifiers/
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Environment :: Console",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: BSD License",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
         "Intended Audience :: Developers",
         "Intended Audience :: Information Technology",
-        "Intended Audience :: System Administrators",
         "Intended Audience :: Telecommunications Industry",
+        "Intended Audience :: Other Audience",
+        "Topic :: Communications",
         "Topic :: Documentation",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-        "Topic :: Software Development :: Localization",
-        "Topic :: Text Processing :: Markup :: HTML",
-        "Topic :: Other/Nonlisted Topic",
-        "Topic :: Artistic Software"
+        "Topic :: Internet"
+        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+        "Topic :: Text Processing"
     ],
     python_requires='>=3, <4',
 )
