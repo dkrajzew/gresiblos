@@ -46,7 +46,11 @@ setuptools.setup(
     license='GPLv3',
     # add modules
     packages=setuptools.find_packages(),
-    package_data={'data': ["data/entry1.txt", "data/entry2.txt", "data/template.html"]},
+    data_files=[
+        ('', ['data/entry1.txt', 'data/entry2.txt', 'data/template.html',
+            'tests/cfg1.cfg', 'tests/cfg2.cfg', 
+            'tests/my-first-blog-entry.html', 'tests/my-second-blog-entry.html']),
+    ],
     entry_points = {
         'console_scripts': [
             'gresiblos = gresiblos:main'
@@ -66,7 +70,7 @@ setuptools.setup(
         "Intended Audience :: Other Audience",
         "Topic :: Communications",
         "Topic :: Documentation",
-        "Topic :: Internet"
+        "Topic :: Internet",
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
         "Topic :: Text Processing"
     ],
