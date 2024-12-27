@@ -1,0 +1,13 @@
+state:release
+title:My first blog entry
+filename:my-first-blog-entry
+author:Daniel Krajzewicz
+date:26.12.2024 19:25
+topics:blog,example
+abstract:A very first introduction into blogging
+content:
+<b>Hello there!</b><br/>
+This is my very first blog post!
+===
+
+

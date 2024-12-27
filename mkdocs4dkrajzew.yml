@@ -1,0 +1,64 @@
+site_name: gresiblos
+site_url: https://github.com/dkrajzew/gresiblos
+site_description: greyrat's simple blog system.
+site_author: Daniel Krajzewicz
+docs_dir: ./docs
+
+repo_url: https://github.com/dkrajzew/gresiblos.git
+edit_uri: ""
+
+theme:
+    name: mkdocs
+    custom_dir: dkrajzew_theme
+    theme_dir: dkrajzew_theme
+    font: false
+
+
+
+extra_css:
+    - stylesheets/extra.css
+    - stylesheets/prism.css
+
+extra_javascript:
+    - js/prism.js
+    - js/colors.js
+    - js/sfx.js
+
+nav:
+    - Home: index.md
+    - Installation: install.md
+    - Usage: 
+        - Entry Definitions: use_entries.md
+        - Template: use_template.md
+        - Command Line: use_cmd.md
+    - Links: links.md
+    - API:
+        - gresiblos: api_gresiblos.md
+    - Developer Docs:
+        - How To Release: release.md
+    - ChangeLog: changes.md
+    - License (GPL): license.md
+    - Legal: legal.md
+
+markdown_extensions:
+    - admonition
+    - sane_lists
+  
+copyright: "&copy; Copyright 2014&ndash;2024, Daniel Krajzewicz."
+
+use_directory_urls: false
+
+plugins:
+    - search
+    - mkdocstrings:
+        handlers:
+            python:
+                paths: [./src]
+                options:
+                    filters: [""]
+                    show_source: False
+                    docstring_style: "google"
+
+extra:
+    analytics:
+        provider: custom
