@@ -135,6 +135,7 @@ def main(arguments : List[str] = []) -> int:
         else:
             nfiles.extend(glob.glob(glob_pattern))
     files = nfiles
+    files.sort()
     # load files
     template = ""
     with open(args.template, mode="r", encoding="utf-8") as fd:
