@@ -27,6 +27,7 @@ import sys
 import argparse
 import configparser
 import glob
+import json
 from typing import List
 
 
@@ -90,8 +91,25 @@ class Entry:
                 template = template.replace("%"+f+"%", "(Draft) " + self._fields[f])
             else:
                 template = template.replace("%"+f+"%", self._fields[f])
-        return template, topics
+        return template
 
+
+class PlainStorage:
+    def __init__(self):
+        self._meta = {}
+
+    def add(self, filename, entry):
+        self._meta[filename] = {
+            "date": entry.get("date"),
+            "title": entry.get("title"),
+            "state": entry.get("state"),
+            "topics": entry.get("topics"),
+            "abstract": entry.get("abstract"),
+            "filename": entry.get("filename")
+        }
+
+    def get(self):
+        return self._meta
 
 
 
@@ -146,6 +164,7 @@ def main(arguments : List[str] = []) -> int:
     if args.have_php_index:
         topics_format = '<a href="index.php?topic=%topic%">%topic%</a>'
     # process files
+    storage = PlainStorage()
     topics = {}
     for file in files:
         print ("Processing '%s'" % file)
@@ -154,7 +173,7 @@ def main(arguments : List[str] = []) -> int:
         if args.state is not None and args.state!=entry.get("state"):
             print (" ... skipped for state=%s" % entry.get("state"))
             continue
-        c, doc_topics = entry.embed(template, topics_format)
+        c = entry.embed(template, topics_format)
         # write file
         filename = f"{entry.get('filename')}.{args.extension}"
         dest_path = os.path.join(args.destination, filename)
@@ -162,10 +181,11 @@ def main(arguments : List[str] = []) -> int:
         with open(dest_path, mode="w", encoding="utf-8") as fdo:
             fdo.write(c)
         # add to topics
-        for topic in doc_topics:
-            if topic not in topics:
-                topics[topic] = []
-            topics[topic].append(filename)
+        storage.add(filename, entry)
+    # write json
+    meta = storage.get()
+    with open("tst.json", "w") as fdo:
+        fdo.write(json.dumps(meta))
     return 0
 
 
