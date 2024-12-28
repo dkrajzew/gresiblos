@@ -183,8 +183,9 @@ def main(arguments : List[str] = []) -> int:
         # add to topics
         storage.add(filename, entry)
     # write json
+    dest_path = os.path.join(args.destination, "entries.json")
     meta = storage.get()
-    with open("tst.json", "w") as fdo:
+    with open(dest_path, "w", encoding="utf-8") as fdo:
         fdo.write(json.dumps(meta))
     return 0
 
