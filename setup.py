@@ -46,16 +46,6 @@ setuptools.setup(
     license='GPLv3',
     # add modules
     packages=setuptools.find_packages(),
-    data_files=[
-        ('', ['data/entry1.txt', 'data/entry2.txt', 
-            'data/index.php', 'data/template.html',
-            'tests/cfg1.cfg', 'tests/cfg2.cfg', 
-            'tests/my-first-blog-entry.html', 'tests/my-second-blog-entry.html', 
-            'tests/my-first-blog-entry_phpindex.html',
-            'tests/entries_sum.json', 'tests/entries_sum_php.json', 
-            'tests/entry1_sum.json', 'tests/entry1_sum_php.json', 
-            'tests/entry2_sum.json' ]),
-    ],
     entry_points = {
         'console_scripts': [
             'gresiblos = gresiblos:main'
