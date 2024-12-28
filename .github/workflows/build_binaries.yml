@@ -23,7 +23,7 @@ jobs:
     - run: pyinstaller gresiblos.spec
     # Optionally verify that it works (provided that it does not need user interaction)
     #- run: ./dist/your-code/your-code
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: gresiblos-${{ matrix.os }}
         path: dist/gresiblos*
