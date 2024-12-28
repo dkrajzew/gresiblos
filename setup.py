@@ -49,7 +49,8 @@ setuptools.setup(
     data_files=[
         ('', ['data/entry1.txt', 'data/entry2.txt', 'data/template.html',
             'tests/cfg1.cfg', 'tests/cfg2.cfg', 
-            'tests/my-first-blog-entry.html', 'tests/my-second-blog-entry.html']),
+            'tests/my-first-blog-entry.html', 'tests/my-second-blog-entry.html', 
+            'tests/my-first-blog-entry_phpindex.html']),
     ],
     entry_points = {
         'console_scripts': [
