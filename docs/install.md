@@ -25,10 +25,9 @@ pip install --upgrade pip
 ```
 
 
-Installing gresiblos
-----------------
+## Installing gresiblos
 
-The __current version__ is [gresiblos-0.4.0](https://github.com/dkrajzew/gresiblos/releases/tag/0.2.0).
+The __current version__ is [gresiblos-0.4.0](https://github.com/dkrajzew/gresiblos/releases/tag/0.4.0).
 
 You may __install gresiblos__ using
 
