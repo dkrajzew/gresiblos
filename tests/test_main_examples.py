@@ -52,6 +52,9 @@ Writing to <DIR>/my-first-blog-entry.html
     p1g = tmp_path / "my-first-blog-entry.html"
     p1o = Path(TEST_PATH) / "my-first-blog-entry.html"
     assert p1g.read_text() == p1o.read_text()
+    psg = tmp_path / "entries.json"
+    pso = Path(TEST_PATH) / "entry1_sum.json"
+    assert psg.read_text() == pso.read_text()
 
 
 def test_main_entry2_by_name(capsys, tmp_path):
@@ -66,6 +69,9 @@ Writing to <DIR>/my-second-blog-entry.html
     p2g = tmp_path / "my-second-blog-entry.html"
     p2o = Path(TEST_PATH) / "my-second-blog-entry.html"
     assert p2g.read_text() == p2o.read_text()
+    psg = tmp_path / "entries.json"
+    pso = Path(TEST_PATH) / "entry2_sum.json"
+    assert psg.read_text() == pso.read_text()
 
 
 def test_main_both_entries_by_name(capsys, tmp_path):
@@ -85,6 +91,9 @@ Writing to <DIR>/my-second-blog-entry.html
     p2g = tmp_path / "my-second-blog-entry.html"
     p2o = Path(TEST_PATH) / "my-second-blog-entry.html"
     assert p2g.read_text() == p2o.read_text()
+    psg = tmp_path / "entries.json"
+    pso = Path(TEST_PATH) / "entries_sum.json"
+    assert psg.read_text() == pso.read_text()
 
 
 def test_main_both_entries_by_extension_glob(capsys, tmp_path):
@@ -104,6 +113,9 @@ Writing to <DIR>/my-second-blog-entry.html
     p2g = tmp_path / "my-second-blog-entry.html"
     p2o = Path(TEST_PATH) / "my-second-blog-entry.html"
     assert p2g.read_text() == p2o.read_text()
+    psg = tmp_path / "entries.json"
+    pso = Path(TEST_PATH) / "entries_sum.json"
+    assert psg.read_text() == pso.read_text()
 
 
 def test_main_state_release_by_extension_glob(capsys, tmp_path):
@@ -120,4 +132,7 @@ Processing '<DIR>/entry2.txt'
     p1g = tmp_path / "my-first-blog-entry.html"
     p1o = Path(TEST_PATH) / "my-first-blog-entry.html"
     assert p1g.read_text() == p1o.read_text()
+    psg = tmp_path / "entries.json"
+    pso = Path(TEST_PATH) / "entry1_sum.json"
+    assert psg.read_text() == pso.read_text()
 

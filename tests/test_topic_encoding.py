@@ -52,6 +52,9 @@ Writing to <DIR>/my-first-blog-entry.html
     p1g = tmp_path / "my-first-blog-entry.html"
     p1o = Path(TEST_PATH) / "my-first-blog-entry.html"
     assert p1g.read_text() == p1o.read_text()
+    psg = tmp_path / "entries.json"
+    pso = Path(TEST_PATH) / "entry1_sum.json"
+    assert psg.read_text() == pso.read_text()
 
 
 def test_main_entry1_phpindex(capsys, tmp_path):
@@ -66,3 +69,6 @@ Writing to <DIR>/my-first-blog-entry.html
     p1g = tmp_path / "my-first-blog-entry.html"
     p1o = Path(TEST_PATH) / "my-first-blog-entry_phpindex.html"
     assert p1g.read_text() == p1o.read_text()
+    psg = tmp_path / "entries.json"
+    pso = Path(TEST_PATH) / "entry1_sum.json"
+    assert psg.read_text() == pso.read_text()

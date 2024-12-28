@@ -68,6 +68,9 @@ Writing to <DIR>/my-first-blog-entry.php
     p1g = tmp_path / "my-first-blog-entry.php"
     p1o = Path(TEST_PATH) / "my-first-blog-entry.html"
     assert p1g.read_text() == p1o.read_text()
+    psg = tmp_path / "entries.json"
+    pso = Path(TEST_PATH) / "entry1_sum_php.json"
+    assert psg.read_text() == pso.read_text()
 
 
 def test_main_two_entries_by_name(capsys, tmp_path):
@@ -88,6 +91,9 @@ Writing to <DIR>/my-second-blog-entry.php
     p2g = tmp_path / "my-second-blog-entry.php"
     p2o = Path(TEST_PATH) / "my-second-blog-entry.html"
     assert p2g.read_text() == p2o.read_text()
+    psg = tmp_path / "entries.json"
+    pso = Path(TEST_PATH) / "entries_sum_php.json"
+    assert psg.read_text() == pso.read_text()
 
 
 def test_main_two_entries_by_name_filter_state(capsys, tmp_path):
@@ -105,3 +111,6 @@ Processing '<DIR>/entry2.txt'
     p1g = tmp_path / "my-first-blog-entry.php"
     p1o = Path(TEST_PATH) / "my-first-blog-entry.html"
     assert p1g.read_text() == p1o.read_text()
+    psg = tmp_path / "entries.json"
+    pso = Path(TEST_PATH) / "entry1_sum_php.json"
+    assert psg.read_text() == pso.read_text()
