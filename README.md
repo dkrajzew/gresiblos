@@ -46,7 +46,7 @@ All information starts with a key that is separated from the value by a ':'. Mul
 
 Then run __gresiblos__ on it:
 
-```shell
+```console
 python src\gresiblos.py entry1.txt
 ```
 
@@ -76,6 +76,16 @@ Besides, you may __download the current release__ here:
 
 * [gresiblos-0.2.0.zip](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.2.0.zip)
 * [gresiblos-0.2.0.tar.gz](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.2.0.tar.gz)
+
+
+
+## Further Documentation
+
+* A complete documentation is located at <https://gresiblos.readthedocs.io/en/latest/>
+* Discussions are open at <https://github.com/dkrajzew/gresiblos/discussions>
+* The github repository is located at: <https://github.com/dkrajzew/gresiblos>
+* The issue tracker is located at: <https://github.com/dkrajzew/gresiblos/issues>
+* The PyPI page is located at: <https://pypi.org/project/gresiblos/>
 
 
 
