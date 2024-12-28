@@ -43,7 +43,8 @@ def test_main_empty1(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
-                 [-s STATE] [-d DESTINATION] [--default-author DEFAULT_AUTHOR]
+                 [-s STATE] [-d DESTINATION] [--have-php-index]
+                 [--default-author DEFAULT_AUTHOR]
                  [--default-copyright-date DEFAULT_COPYRIGHT_DATE]
                  [--default-state DEFAULT_STATE]
                  input
@@ -62,7 +63,8 @@ def test_main_empty2(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
-                 [-s STATE] [-d DESTINATION] [--default-author DEFAULT_AUTHOR]
+                 [-s STATE] [-d DESTINATION] [--have-php-index]
+                 [--default-author DEFAULT_AUTHOR]
                  [--default-copyright-date DEFAULT_COPYRIGHT_DATE]
                  [--default-state DEFAULT_STATE]
                  input
@@ -81,7 +83,8 @@ def test_main_help(capsys):
         assert e.code==0
     captured = capsys.readouterr()
     assert patch(captured.out) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
-                 [-s STATE] [-d DESTINATION] [--default-author DEFAULT_AUTHOR]
+                 [-s STATE] [-d DESTINATION] [--have-php-index]
+                 [--default-author DEFAULT_AUTHOR]
                  [--default-copyright-date DEFAULT_COPYRIGHT_DATE]
                  [--default-state DEFAULT_STATE]
                  input
@@ -104,6 +107,7 @@ options:
                         Use only files with the given state(s)
   -d DESTINATION, --destination DESTINATION
                         Sets the path to store the generated file(s) into
+  --have-php-index      References topics to index.php if set
   --default-author DEFAULT_AUTHOR
                         Sets the default author
   --default-copyright-date DEFAULT_COPYRIGHT_DATE
