@@ -31,9 +31,27 @@ import json
 from typing import List
 
 
-# --- defaults --------------------------------------------------------------
+# --- class definitions -----------------------------------------------------
 class Entry:
+    """
+    Represents a blog entry with metadata and content.
+
+    Attributes:
+        _default_author (str): The default author of the entry.
+        _default_copyright_date (str): The default copyright date.
+        _default_state (str): The default state of the entry.
+        _fields (dict): A dictionary to store entry fields.
+    """
+
     def __init__(self, default_author, default_copyright_date, default_state):
+        """
+        Initializes an Entry object with default values.
+
+        Args:
+            default_author (str): The default author of the entry.
+            default_copyright_date (str): The default copyright date.
+            default_state (str): The default state of the entry.
+        """
         self._default_author = default_author
         self._default_copyright_date = default_copyright_date
         self._default_state = default_state
@@ -41,6 +59,7 @@ class Entry:
         
         
     def _init_fields(self):
+        """Initializes the fields of the entry with default values."""
         self._fields = {}
         self._fields["state"] = self._default_state
         self._fields["includes"] = ""
@@ -49,10 +68,25 @@ class Entry:
         self._fields["author"] = self._default_author
 
     def get(self, key):
+        """
+        Gets the value of a field by key.
+
+        Args:
+            key (str): The key of the field to retrieve.
+
+        Returns:
+            str: The value of the field.
+        """
         return self._fields[key]
 
 
     def load(self, file):
+        """
+        Loads entry data from a file.
+
+        Args:
+            file (str): The path to the file containing entry data.
+        """
         self._init_fields()
         with open(file, mode="r", encoding="utf-8") as fd:
             is_multi_line = False
@@ -76,7 +110,16 @@ class Entry:
 
 
     def embed(self, template, topics_format):
-        topcis = []
+        """
+        Embeds entry data into a template.
+
+        Args:
+            template (str): The HTML template to embed data into.
+            topics_format (str): The format for topics in the template.
+
+        Returns:
+            str: The template with embedded entry data.
+        """
         for f in self._fields:
             if f=="topics":
                 topics = self._fields[f].split(",")
@@ -95,10 +138,26 @@ class Entry:
 
 
 class PlainStorage:
+    """
+    Stores metadata of blog entries.
+
+    Attributes:
+        _meta (dict): A dictionary to store metadata of entries.
+    """
+
     def __init__(self):
+        """Initializes a PlainStorage object."""
         self._meta = {}
 
+
     def add(self, filename, entry):
+        """
+        Adds an entry's metadata to the storage.
+
+        Args:
+            filename (str): The filename of the entry.
+            entry (Entry): The Entry object containing metadata.
+        """
         self._meta[filename] = {
             "date": entry.get("date"),
             "title": entry.get("title"),
@@ -108,14 +167,27 @@ class PlainStorage:
             "filename": entry.get("filename")
         }
 
+
     def get(self):
+        """
+        Gets all stored metadata.
+
+        Returns:
+            dict: A dictionary of all stored metadata.
+        """
         return self._meta
 
 
 
 def main(arguments : List[str] = []) -> int:
-    """The main method using parameter from the command line.
+    """
+    The main method using parameters from the command line.
 
+    Args:
+        arguments (List[str]): A list of command line arguments.
+
+    Returns:
+        int: The exit code (0 for success).
     """
     # parse options
     # https://stackoverflow.com/questions/3609852/which-is-the-best-way-to-allow-configuration-options-be-overridden-at-the-comman
@@ -130,9 +202,9 @@ def main(arguments : List[str] = []) -> int:
         config = configparser.ConfigParser()
         config.read([args.config])
         defaults.update(dict(config.items("gresiblos")))
-    parser = argparse.ArgumentParser(prog='gresiblos', parents=[conf_parser], 
-        description='greyrat\'s simple blog system', 
-        epilog='(c) Daniel Krajzewicz 2014-2024')
+    parser = argparse.ArgumentParser(prog='gresiblos', parents=[conf_parser],
+                                     description='greyrat\'s simple blog system',
+                                     epilog='(c) Daniel Krajzewicz 2014-2024')
     parser.add_argument("input")
     parser.add_argument('--version', action='version', version='%(prog)s 0.4.0')
     parser.add_argument("-t", "--template", default="data/template.html", help="Defines the template to use")
@@ -155,7 +227,7 @@ def main(arguments : List[str] = []) -> int:
             nfiles.extend(glob.glob(glob_pattern))
     files = nfiles
     files.sort()
-    # load files
+    # load template file
     template = ""
     with open(args.template, mode="r", encoding="utf-8") as fd:
         template = fd.read()
@@ -165,7 +237,6 @@ def main(arguments : List[str] = []) -> int:
         topics_format = '<a href="index.php?topic=%topic%">%topic%</a>'
     # process files
     storage = PlainStorage()
-    topics = {}
     for file in files:
         print ("Processing '%s'" % file)
         entry = Entry(args.default_author, args.default_copyright_date, args.default_state)
@@ -182,7 +253,7 @@ def main(arguments : List[str] = []) -> int:
             fdo.write(c)
         # add to topics
         storage.add(filename, entry)
-    # write json
+    # write metadata to a JSON file
     dest_path = os.path.join(args.destination, "entries.json")
     meta = storage.get()
     with open(dest_path, "w", encoding="utf-8") as fdo:
