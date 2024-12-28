@@ -14,19 +14,19 @@
 
 ## Introduction
 
-__gresiblos__ is the acronym for __*gre*yrat's *si*mple *blo*g *s*ystem__. It is a simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from blog content definitions.
+__gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__. It is a simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from blog content definitions.
 
 In the current stage (v0.4.0), __gresiblos__ reads a file with blog entry contents and meta information and embeds it into a template. It generates a json-file with meta information about the entries for generating lists of topics, entries, or entries with a named topic. An according php-example is enclosed.
 
 
 ## Background
 
-I wanted to have a blog and I wanted it to use static pages. That's why I wrote it. There are some features - like the inclusion of custon JavaScript and CSS files - I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).
+I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wrote it. There are some features &#8212; like the inclusion of custon JavaScript and CSS files &#8212; I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).
 
 
 ## Usage
 
-Write your blog entries as HTML contents/snippets (may be extended to .md etc. in the future) with some additional meta information, e.g. 'entry1.txt':
+Write your blog entries as HTML contents/snippets (may be extended to .md etc. in the future) with some additional meta information, e.g. &#8216;entry1.txt&#8217;:
 
 ```
 state:release
@@ -42,7 +42,7 @@ This is my very first blog post!
 ===
 ```
 
-All information starts with a key that is separated from the value by a ':'. Multi-line values start with a blank line after the key and are closed with '==='. More information about the format of the entries is given on the ['Entry Definition' page](./docs/use_entries.md).
+All information starts with a key that is separated from the value by a &#8216;:&#8217;. Multi-line values start with a blank line after the key and are closed with &#8216;===&#8217;. More information about the format of the entries is given on the [&#39;Entry Definition&#39; page](./docs/use_entries.md).
 
 Then run __gresiblos__ on it:
 
@@ -50,7 +50,7 @@ Then run __gresiblos__ on it:
 python src\gresiblos.py entry1.txt
 ```
 
-... and it will convert it into a complete HTML page using the default template stored in ```./data/```. The command line options and the usage is described on the ['Running on the Command Line' page](./docs/use_cmd.md).
+&#8230; and it will convert it into a complete HTML page using the default template stored in ```./data/```. The command line options and the usage is described on the [&#39;Running on the Command Line&#39; page](./docs/use_cmd.md).
 
 
 

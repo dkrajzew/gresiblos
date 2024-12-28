@@ -25,7 +25,7 @@ The entries include the meta-information ```state```. You may filter entries to 
 
 Some meta-information fields may be preset with default values using the options **--default-author *&lt;DEFAULT_AUTHOR&gt;***, **--default-copyright-date *&lt;DEFAULT_COPYRIGHT_DATE&gt;***, and **--default-state *&lt;DEFAULT_STATE&gt;***
 
-The entry/entries to process are given as the last parameter. Multiple entries can be given divided by a ','.
+The entry/entries to process are given as the last parameter. Multiple entries can be given divided by a &#8216;,&#8217;.
 
 The options can be stores in a configuration file which can be passed to __gresiblos__ using the option **--config *&lt;CONFIGURATION&gt;*** / **-c *&lt;CONFIGURATION&gt;***. Options given on the command line will overwrite the options set in the configuration file.
 
@@ -62,5 +62,5 @@ The script can be started on the command line with the following options:
 
 __gresiblos__ requires one parameter:
 
-* **input**: The files (entries) to read, seperated by ','; may be folders as well
+* **input**: The files (entries) to read, seperated by &#8216;,&#8217;; may be folders as well
 

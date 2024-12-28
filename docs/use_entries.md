@@ -2,9 +2,9 @@
 
 ## Basics
 
-Each blog entry is stored in a single text file with an arbotrary extension. An entry consists of key/value pairs. The key and the value are written into a single line, divided by a ':'.
+Each blog entry is stored in a single text file with an arbitrary extension. An entry consists of key/value pairs. The key and the value are written into a single line, divided by a &#8216;:&#8217;.
 
-Multi-line values start with a blank line after the key and are closed with '==='.
+Multi-line values start with a blank line after the key and are closed with &#8216;===&#8217;.
 
 An example looks like:
 
@@ -30,7 +30,7 @@ Some information is though mandatory:
 
 * **filename**
 
-Some meta information is used by the php file that reads the generated json-file with all entries' meta information and should be thereby included. The according keys are:
+Some meta information is used by the php file that reads the generated json-file with all entries&#39; meta information and should be thereby included. The according keys are:
 
 * **title**
 * **filename**

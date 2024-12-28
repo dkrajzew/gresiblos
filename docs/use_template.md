@@ -4,7 +4,7 @@
 
 The template is a plain HTML file, set up as you like it.
 
-The entry's data will be inserted into the file at places marked by **%*&lt;FIELD_NAME&gt;*%**.
+The entry&#39;s data will be inserted into the file at places marked by **%*&lt;FIELD_NAME&gt;*%**.
 
 So given the entry:
 
