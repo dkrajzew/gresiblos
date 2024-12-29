@@ -16,7 +16,7 @@
 
 __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__. It is a simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from blog content definitions.
 
-In the current stage (v0.4.0), __gresiblos__ reads a file with blog entry contents and meta information and embeds it into a template. It generates a json-file with meta information about the entries for generating lists of topics, entries, or entries with a named topic. __gresiblos__ comes with a php-file that realises browsing entries and topics, and a php-file that generates rss and atom feeds.
+In the current stage (v0.4.2), __gresiblos__ reads a file with blog entry contents and meta information and embeds it into a template. It generates a json-file with meta information about the entries for generating lists of topics, entries, or entries with a named topic. __gresiblos__ comes with a php-file that realises browsing entries and topics, and a php-file that generates rss and atom feeds.
 
 
 ## Background
@@ -62,7 +62,7 @@ __gresiblos__ is licensed under the [GPLv3 license](license.md).
 
 ## Installing gresiblos
 
-The __current version__ is [gresiblos-0.4.0](https://github.com/dkrajzew/gresiblos/releases/tag/0.4.0).
+The __current version__ is [gresiblos-0.4.2](https://github.com/dkrajzew/gresiblos/releases/tag/0.4.2).
 
 You may __install gresiblos__ using
 
@@ -74,8 +74,8 @@ You may __download a copy or fork the code__ at [gresiblos&apos;s github page](h
 
 Besides, you may __download the current release__ here:
 
-* [gresiblos-0.4.0.zip](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.4.0.zip)
-* [gresiblos-0.4.0.tar.gz](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.4.0.tar.gz)
+* [gresiblos-0.4.2.zip](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.4.2.zip)
+* [gresiblos-0.4.2.tar.gz](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.4.2.tar.gz)
 
 
 
@@ -98,11 +98,16 @@ I may extend it in the future, but that mainly depends on my motivation and your
 
 ## ChangeLog
 
-### gresiblos-0.4.0 (to come)
+## gresiblos-0.4.2 (29.12.2024)
+* fixing tests...
 
+## gresiblos-0.4.0 (29.12.2024)
 * support for entry index (using json and php)
-  * generates a json-file with entries
-  * added a php-file which lists entries or topics
+    * generates a json-file with entries
+    * added a php-file which lists entries or topics
+    * added a php-file which generates an rss or an atom feed
+* updated the documentation
+* fixing packaging
 
 ### gresiblos-0.2.0 (27.12.2024)
 

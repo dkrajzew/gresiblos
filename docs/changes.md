@@ -1,5 +1,8 @@
 # ChangeLog for gresiblos
 
+## gresiblos-0.4.2 (29.12.2024)
+* fixing tests...
+
 ## gresiblos-0.4.0 (29.12.2024)
 * support for entry index (using json and php)
     * generates a json-file with entries

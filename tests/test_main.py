@@ -7,7 +7,7 @@ __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "GPLv3"
-__version__    = "0.4.0"
+__version__    = "0.4.2"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
 __status__     = "Development"
@@ -129,6 +129,6 @@ def test_main_version(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patch(captured.out) == """gresiblos 0.4.0
+    assert patch(captured.out) == """gresiblos 0.4.2
 """
     assert patch(captured.err) == ""

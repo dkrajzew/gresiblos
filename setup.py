@@ -8,7 +8,7 @@ __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2014-2024, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "GPLv3"
-__version__    = "0.4.0"
+__version__    = "0.4.2"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
 __status__     = "Development"
@@ -29,7 +29,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="gresiblos",
-    version="0.4.0",
+    version="0.4.2",
     author="dkrajzew",
     author_email="d.krajzewicz@gmail.com",
     description="A simple private blogging system",

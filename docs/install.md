@@ -27,7 +27,7 @@ pip install --upgrade pip
 
 ## Installing gresiblos
 
-The __current version__ is [gresiblos-0.4.0](https://github.com/dkrajzew/gresiblos/releases/tag/0.4.0).
+The __current version__ is [gresiblos-0.4.2](https://github.com/dkrajzew/gresiblos/releases/tag/0.4.2).
 
 You may __install gresiblos__ using
 
@@ -39,6 +39,6 @@ You may __download a copy or fork the code__ at [gresiblos&apos;s github page](h
 
 Besides, you may __download the current release__ here:
 
-* [gresiblos-0.4.0.zip](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.4.0.zip)
-* [gresiblos-0.4.0.tar.gz](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.4.0.tar.gz)
+* [gresiblos-0.4.2.zip](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.4.2.zip)
+* [gresiblos-0.4.2.tar.gz](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.4.2.tar.gz)
 
