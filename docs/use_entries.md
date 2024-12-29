@@ -38,7 +38,7 @@ Some meta information is used by the php file that reads the generated json-file
 * **date**
 * **abstract**
 
-I personally use some further key/value pairs, as visible in the [example template](./use_template.md):
+I personally use some further key/value pairs, as partially used in the [example template](./use_template.md):
 
 * **copyright_date**
 * **author**

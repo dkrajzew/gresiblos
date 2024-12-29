@@ -4,7 +4,7 @@ gresiblos Information
 Impressum
 ---------
 
-These pages were made by Daniel Krajzewicz, 2024&ndash;2025.
+These pages were made by Daniel Krajzewicz, 2024.
 
 
 Disclaimer

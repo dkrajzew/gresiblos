@@ -16,7 +16,7 @@
 
 __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__. It is a simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from blog content definitions.
 
-In the current stage (v0.4.0), __gresiblos__ reads a file with blog entry contents and meta information and embeds it into a template. It generates a json-file with meta information about the entries for generating lists of topics, entries, or entries with a named topic. An according php-example is enclosed.
+In the current stage (v0.4.0), __gresiblos__ reads a file with blog entry contents and meta information and embeds it into a template. It generates a json-file with meta information about the entries for generating lists of topics, entries, or entries with a named topic. __gresiblos__ comes with a php-file that realises browsing entries and topics, and a php-file that generates rss and atom feeds.
 
 
 ## Background

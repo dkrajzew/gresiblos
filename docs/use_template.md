@@ -40,7 +40,7 @@ and the template:
 <div><p><b>Topics:</b> %topics%</p></div>
 <div id="blogCopy">&copy; Copyright %author%, %date%</div>
 %content%
-<div id="footer">&copy; Copyright %copyright_date% %author%</div>
+<div id="footer">&copy; Copyright %author%</div>
 
  </body>
 </html>
@@ -65,7 +65,7 @@ you will get
 <div id="blogCopy">&copy; Copyright Daniel Krajzewicz, 26.12.2024 19:25</div>
 <b>Hello there!</b><br/>
 This is my very first blog post!
-<div id="footer">&copy; Copyright %copyright_date% Daniel Krajzewicz</div>
+<div id="footer">&copy; Copyright Daniel Krajzewicz</div>
 
  </body>
 </html>
