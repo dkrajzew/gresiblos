@@ -1,5 +1,8 @@
 # ChangeLog for gresiblos
 
+## gresiblos-0.6.0 (to come)
+* improving the documentation
+
 ## gresiblos-0.4.2 (29.12.2024)
 * fixing tests...
 

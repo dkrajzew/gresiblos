@@ -16,7 +16,7 @@
 
 __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__. It is a simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from blog content definitions.
 
-In the current stage (v0.4.2), __gresiblos__ reads a file with blog entry contents and meta information and embeds it into a template. It generates a json-file with meta information about the entries for generating lists of topics, entries, or entries with a named topic. __gresiblos__ comes with a php-file that realises browsing entries and topics, and a php-file that generates rss and atom feeds.
+In the current stage (v0.4.2), __gresiblos__ reads a file with blog entry contents and meta information and embeds it into a template. It generates a json-file with meta information about the entries. __gresiblos__ comes with a php-file that realises browsing entries, topics, and entries with a named topic, as well as with a php-file that generates rss and atom feeds.
 
 
 ## Background
@@ -42,15 +42,15 @@ This is my very first blog post!
 ===
 ```
 
-All information starts with a key that is separated from the value by a &#8216;:&#8217;. Multi-line values start with a blank line after the key and are closed with &#8216;===&#8217;. More information about the format of the entries is given on the [&#39;Entry Definition&#39; page](./docs/use_entries.md).
+All information starts with a key that is separated from the value by a &#8216;:&#8217;. Multi-line values start with a new line after the key and the &#8216;:&#8217; and are closed with &#8216;===&#8217;. Please note that the content is kept as-is in the current version.
 
 Then run __gresiblos__ on it:
 
-```console
+```shell
 python src\gresiblos.py entry1.txt
 ```
 
-&#8230; and it will convert it into a complete HTML page using the default template stored in ```./data/```. The command line options and the usage is described on the [&#39;Running on the Command Line&#39; page](./docs/use_cmd.md).
+&#8230; and it will convert it into a complete HTML page using the default template stored in ```./data/```.
 
 
 

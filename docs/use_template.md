@@ -31,18 +31,16 @@ and the template:
 %includes%
  </head>
 
-
  <body>
   <div id="title">My new blog</div>
-
 <h1>%title%</h1>
 <div><p><b>Abstract:</b> %abstract%</p></div>
 <div><p><b>Topics:</b> %topics%</p></div>
 <div id="blogCopy">&copy; Copyright %author%, %date%</div>
 %content%
 <div id="footer">&copy; Copyright %author%</div>
-
  </body>
+
 </html>
 ```
 
@@ -52,13 +50,10 @@ you will get
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head><title>My first blog entry &mdash; A sample blog</title>
-%includes%
  </head>
-
 
  <body>
   <div id="title">My new blog</div>
-
 <h1>My first blog entry</h1>
 <div><p><b>Abstract:</b> A very first introduction into blogging</p></div>
 <div><p><b>Topics:</b> blog, example</p></div>
@@ -66,7 +61,7 @@ you will get
 <b>Hello there!</b><br/>
 This is my very first blog post!
 <div id="footer">&copy; Copyright Daniel Krajzewicz</div>
-
  </body>
+
 </html>
 ```

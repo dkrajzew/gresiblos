@@ -4,7 +4,7 @@
 
 Each blog entry is stored in a single text file with an arbitrary extension. An entry consists of key/value pairs. The key and the value are written into a single line, divided by a &#8216;:&#8217;.
 
-Multi-line values start with a blank line after the key and are closed with &#8216;===&#8217;.
+Multi-line values start with a new line after the key and the &#8216;:&#8217; and are closed with &#8216;===&#8217;.
 
 An example looks like:
 
@@ -21,6 +21,9 @@ content:
 This is my very first blog post!
 ===
 ```
+
+Please note that the content is kept as-is in the current version.
+
 
 ## Meta Information
 
@@ -42,6 +45,12 @@ I personally use some further key/value pairs, as partially used in the [example
 
 * **copyright_date**
 * **author**
+
+
+## Further Fields
+
+I personally use some additional fields, e.g. ```includes``` and ```js_inits``` which are then included at the proper place in the template so that I can use custom JavaScript-scripts in a page, see, e.g., [my Moirée test](https://www.krajzewicz.de/blog/moiree-test1.php). 
+
 
 
 
