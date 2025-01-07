@@ -2,9 +2,11 @@
 
 ## gresiblos-0.6.0 (to come)
 * improving the documentation
-* change: topics are stored as list in the index file
-* change: the filenames in the index now include the extension
-
+* changes:
+    * topics are stored as list in the index file
+    * the filenames in the index now include the extension
+    * the **state** attribute was removed from the index file
+    * replaced option **--have-php-index** by the option **--topic-format *&lt;FORMAT&gt;*** which directly defines how each of a blog entries topics shall be rendered when embedding it into the template
 
 ## gresiblos-0.4.2 (29.12.2024)
 * fixing tests...

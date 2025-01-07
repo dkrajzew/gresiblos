@@ -60,7 +60,7 @@ Writing to <DIR>/my-first-blog-entry.html
 def test_main_entry1_phpindex(capsys, tmp_path):
     """Parsing first example (by name)"""
     copy_from_data(tmp_path, ["template.html", "entry1.txt"])
-    ret = gresiblos.main(["--have-php-index", "--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry1.txt")])
+    ret = gresiblos.main(["--topic-format", "<a href=\"index.php?topic=%topic%\">%topic%</a>", "--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry1.txt")])
     captured = capsys.readouterr()
     assert patch(captured.out, tmp_path) == """Processing '<DIR>/entry1.txt'
 Writing to <DIR>/my-first-blog-entry.html

@@ -210,7 +210,7 @@ def main(arguments : List[str] = []) -> int:
     parser.add_argument("-e", "--extension", default="html", help="Sets the extension of the built file(s)")
     parser.add_argument("-s", "--state", default=None, help="Use only files with the given state(s)")
     parser.add_argument("-d", "--destination", default="./", help="Sets the path to store the generated file(s) into")
-    parser.add_argument("--have-php-index", default=False, action="store_true", help="References topics to index.php if set")
+    parser.add_argument("--topic-format", default="%topic%", help="Defines how each of the topics is rendered")
     parser.add_argument("--default-author", default="", help="Sets the default author")
     parser.add_argument("--default-copyright-date", default="", help="Sets the default copyright date")
     parser.add_argument("--default-state", default="", help="Sets the default state")
@@ -230,10 +230,6 @@ def main(arguments : List[str] = []) -> int:
     template = ""
     with open(args.template, mode="r", encoding="utf-8") as fd:
         template = fd.read()
-    # determine topics format
-    topics_format = "%topic%"
-    if args.have_php_index:
-        topics_format = '<a href="index.php?topic=%topic%">%topic%</a>'
     # process files
     storage = PlainStorage()
     for file in files:
@@ -243,7 +239,7 @@ def main(arguments : List[str] = []) -> int:
         if args.state is not None and args.state!=entry.get("state"):
             print (" ... skipped for state=%s" % entry.get("state"))
             continue
-        c = entry.embed(template, topics_format)
+        c = entry.embed(template, args.topic_format)
         # write file
         filename = f"{entry.get('filename')}.{args.extension}"
         dest_path = os.path.join(args.destination, filename)
