@@ -9,9 +9,11 @@ Currently, the index contains the following information about each entry:
 * **date**: The publishing date
 * **title**: The title of the blog post
 * **state**: The state of the blog post ('work' or 'release')
-* **topics**: The topics of the blog post, separated using a comma (',')
+* **topics**: The topics of the blog post
 * **abstract**: A short description of the post or a short introduction (should be probably one sentence or a small paragraph long)
 * **filename**: The filename of the blog post (without the extension)
+
+All values are strings despite the topics, which is a list of strings.
 
 Please note that this information must be given in each entry's meta-data.
 

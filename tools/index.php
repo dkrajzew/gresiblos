@@ -52,9 +52,8 @@ function filterItemsByTopic($items, $value) {
     $ret = array();
     $key = "topics";
     foreach ($items as $ekey => $row) {
-        $topics = explode(',', $row->$key);
         $found = 0;
-        foreach ($topics as $topic) {
+        foreach ($row->topics as $topic) {
             if($topic==$value) {
                 $found = 1;
             }
@@ -73,25 +72,21 @@ $toShow = params_get("show"); // "items", "topics"
 if($toShow==null) $toShow = "items";
 $db = file_get_contents("entries.json");
 $db = json_decode($db);
-$key1 = "date";
-$key2 = "idate";
 foreach ($db as $entry) {
-    $t1 = strptime($entry->$key1, '%d.%m.%Y %H:%M');
-    $entry->$key2 = mktime($t1['tm_hour'], $t1['tm_min'], 0, $t1['tm_mon']+1, $t1['tm_mday'], $t1['tm_year']+1900);
+    $t1 = strptime($entry->date, '%d.%m.%Y %H:%M');
+    $entry->idate = mktime($t1['tm_hour'], $t1['tm_min'], 0, $t1['tm_mon']+1, $t1['tm_mday'], $t1['tm_year']+1900);
 }
 if($toShow=="topics") {
 	// show (all) topics
     echo("<h1>Covered Topics</h1>\n");
     echo("<div>");
     $topics = array();
-    $key = "topics";
     foreach ($db as $entry) {
-        $tmp = explode(',', $entry->$key);
-        foreach ($tmp as $topic) {
+        foreach ($entry->topics as $topic) {
             $topics[$topic] = array("title"=>$topic);
         }
     }
-    writeItemsAsList($topics, "<li><a href=\"blog.php?topic=%title%\">%title%</a></li>\n");
+    writeItemsAsList($topics, "<li><a href=\"index.php?topic=%title%\">%title%</a></li>\n");
     echo("</div>");
 } else {
     $topicFilter = params_get("topic");
