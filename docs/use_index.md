@@ -1,6 +1,6 @@
 # Entry Index
 
-When run, __gresiblos__ builds a json file with some meta information about the processed entries. This file can be used for building a page that lists the entries, the topics, or other information, e.g. entries that address a specific topic.
+When run, __gresiblos__ builds a json file with some meta information about the processed entries. This file can be used for building a page that lists the entries, the topics, or other information, e.g. entries that address a specific topic. The file is saved into the same folder as the generated pages (option **--destination *&lt;PATH&gt;*** / **-d *&lt;PATH&gt;***).
 
 ## Index Contents
 
@@ -8,12 +8,11 @@ Currently, the index contains the following information about each entry:
 
 * **date**: The publishing date
 * **title**: The title of the blog post
-* **state**: The state of the blog post ('work' or 'release')
 * **topics**: The topics of the blog post
 * **abstract**: A short description of the post or a short introduction (should be probably one sentence or a small paragraph long)
 * **filename**: The filename of the blog post (without the extension)
 
-All values are strings despite the topics, which is a list of strings.
+All values are strings despite the topics, which are a list of strings for each blog entry.
 
 Please note that this information must be given in each entry's meta-data.
 

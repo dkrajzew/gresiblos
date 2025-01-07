@@ -31,20 +31,15 @@ The choice of the key/value pairs mainly depends on your template and what is us
 
 Some information is though mandatory:
 
-* **filename**
+* **filename** (without the extension)
 
-Some meta information is used by the php file that reads the generated json-file with all entries&#39; meta information and should be thereby included. The according keys are:
+As soon as you plan to use the supported files ```index.php``` and ```feed.php```, you must include the following meta information in your entries:
 
-* **title**
-* **filename**
-* **topics**
-* **date**
-* **abstract**
-
-I personally use some further key/value pairs, as partially used in the [example template](./use_template.md):
-
-* **copyright_date**
-* **author**
+* **date**: The publishing date
+* **title**: The title of the blog post
+* **topics**: The topics of the blog post
+* **abstract**: A short description of the post or a short introduction (should be probably one sentence or a small paragraph long)
+* **filename**: The filename of the blog post (without the extension)
 
 
 ## Further Fields

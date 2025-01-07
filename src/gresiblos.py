@@ -161,7 +161,6 @@ class PlainStorage:
         self._meta[filename] = {
             "date": entry.get("date"),
             "title": entry.get("title"),
-            "state": entry.get("state"),
             "topics": entry.get("topics").split(","),
             "abstract": entry.get("abstract"),
             "filename": filename
