@@ -101,7 +101,7 @@ if($toShow=="topics") {
         $items = filterItemsByTopic($items, $topicFilter);
     }
     $items = sortItems($items, "idate");
-    writeItemsAsList($items, "<li><a href=\"%filename%.php\">%title%</a> (%date%)<br/>%abstract% (<a href=\"%filename%.php\">read more</a>)</li>\n");
+    writeItemsAsList($items, "<li><a href=\"%filename%\">%title%</a> (%date%)<br/>%abstract% (<a href=\"%filename%\">read more</a>)</li>\n");
     echo("</p></div>");
 }
 ?>

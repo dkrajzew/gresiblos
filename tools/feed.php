@@ -373,7 +373,7 @@ date_default_timezone_set('Europe/Berlin');
 foreach ($items as $entry) {
     $desc = strtr($entry->abstract, $HTML401NamedToNumeric);
     $title = strtr($entry->title, $HTML401NamedToNumeric);
-    $url = $blogDefinition["link"].$entry->filename.".php";
+    $url = $blogDefinition["link"].$entry->filename;
     $t1 = strptime($entry->date, '%d.%m.%Y %H:%M');
     $idate = mktime($t1['tm_hour'], $t1['tm_min'], 0, $t1['tm_mon']+1, $t1['tm_mday'], $t1['tm_year']+1900);
     $date = new DateTime();

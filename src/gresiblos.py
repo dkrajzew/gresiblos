@@ -164,7 +164,7 @@ class PlainStorage:
             "state": entry.get("state"),
             "topics": entry.get("topics").split(","),
             "abstract": entry.get("abstract"),
-            "filename": entry.get("filename")
+            "filename": filename
         }
 
 
