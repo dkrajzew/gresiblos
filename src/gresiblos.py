@@ -110,6 +110,7 @@ class Entry:
         Returns:
             str: The template with embedded entry data.
         """
+        # replace plain, given fields
         for f in self._fields:
             value = self._fields[f]
             if f=="topics":
@@ -123,10 +124,10 @@ class Entry:
             elif f=="title" and self._fields["state"]!="release":
                 value = "(Draft) " + self._fields[f]
             template = template.replace("[[:"+f+":]]", value)
-        #
+        # remove plain, not given fields
         empty_regex = re.compile(r"(\[\[\:[a-zA-Z0-9_]+?\:\]\])", flags=re.MULTILINE)
         template = empty_regex.sub("", template)
-        #
+        # check for replacements with defaults
         opt_regex = re.compile(r"\[\[\:([a-zA-Z0-9_]+?)\|([^\:\]\]]+?)\:\]\]", flags=re.MULTILINE)
         # https://stackoverflow.com/questions/69376798/python3-replace-string-using-dict-with-regex
         template = opt_regex.sub(lambda x: self._fields[x.group(1)] if x.group(1) in self._fields else x.group(2), template)
@@ -207,6 +208,7 @@ def main(arguments : List[str] = []) -> int:
     parser.add_argument("-s", "--state", default=None, help="Use only files with the given state(s)")
     parser.add_argument("-d", "--destination", default="./", help="Sets the path to store the generated file(s) into")
     parser.add_argument("--topic-format", default="[[:topic:]]", help="Defines how each of the topics is rendered")
+    parser.add_argument("--index-indent", type=int, default=None, help="Defines the indent used for the index file")
     parser.set_defaults(**defaults)
     args = parser.parse_args(remaining_argv)
     # collect files; https://stackoverflow.com/questions/4568580/python-glob-multiple-filetypes
@@ -245,7 +247,7 @@ def main(arguments : List[str] = []) -> int:
     dest_path = os.path.join(args.destination, "entries.json")
     meta = storage.get()
     with open(dest_path, "w", encoding="utf-8") as fdo:
-        fdo.write(json.dumps(meta))
+        fdo.write(json.dumps(meta, indent=args.index_indent))
     return 0
 
 

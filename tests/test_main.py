@@ -44,6 +44,7 @@ def test_main_empty1(capsys):
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [-d DESTINATION] [--topic-format TOPIC_FORMAT]
+                 [--index-indent INDEX_INDENT]
                  input
 gresiblos: error: the following arguments are required: input
 """
@@ -61,6 +62,7 @@ def test_main_empty2(capsys):
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [-d DESTINATION] [--topic-format TOPIC_FORMAT]
+                 [--index-indent INDEX_INDENT]
                  input
 gresiblos: error: the following arguments are required: input
 """
@@ -78,6 +80,7 @@ def test_main_help(capsys):
     captured = capsys.readouterr()
     assert patch(captured.out) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [-d DESTINATION] [--topic-format TOPIC_FORMAT]
+                 [--index-indent INDEX_INDENT]
                  input
 
 greyrat's simple blog system
@@ -100,6 +103,8 @@ options:
                         Sets the path to store the generated file(s) into
   --topic-format TOPIC_FORMAT
                         Defines how each of the topics is rendered
+  --index-indent INDEX_INDENT
+                        Defines the indent used for the index file
 
 (c) Daniel Krajzewicz 2014-2024
 """

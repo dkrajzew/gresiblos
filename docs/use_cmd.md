@@ -17,11 +17,13 @@ __gresiblos__ reads one or multiple blog entry files and embeds them into a temp
 
 Generated pages are daved as .html-files per default. You may change it (e.g. to php) using the option **--extension *&lt;EXTENSION&gt;*** / **-e *&lt;EXTENSION&gt;***.
 
-The path to store the generated pages into can be defined using the option **--destination *&lt;PATH&gt;*** / **-d *&lt;PATH&gt;***. The default is ```./```.
+The path to store the generated pages into can be defined using the option **--destination *&lt;PATH&gt;*** / **-d *&lt;PATH&gt;***. The default is ```./```. The index will be stored in this folder as well.
 
 The entries include the meta-information ```state```. You may filter entries to process by setting the option **--state *&lt;STATE&gt;*** / **-s *&lt;STATE&gt;*** to the one that shall be processed.
 
-When embedding the meta-information of single blog entries into the template, the topics are split and rendered individually before being embedded. To allow for using them as links, the rendering format can be set using the option **--topic-format *&lt;TOPIC_FORMAT&gt;***. Please note that this string should include something like "%%topic%%", what is replaced by the topic itself.
+When embedding the meta-information of single blog entries into the template, the topics are split and rendered individually before being embedded. To allow for using them as links, the rendering format can be set using the option **--topic-format *&lt;TOPIC_FORMAT&gt;***. Please note that this string should include something like "\[\[:topic:\]\]", what is replaced by the topic itself.
+
+The index is usually stored as plain json in a single line. For a prettier output, the identation can be changed using the option **--index-indent *&lt;INT&gt;***.
 
 The entry/entries to process are given as the last parameter. Multiple entries can be given divided by a &#8216;,&#8217;. Wildcards are accepted as well, so giving ```./entries/*.txt``` will process all files with the extension .txt within the folder ```entries```.
 
@@ -53,6 +55,7 @@ The script can be started on the command line with the following options:
 * **--state *&lt;STATE&gt;*** / **-s *&lt;STATE&gt;***: The state the entries must have for being processed
 * **--destination *&lt;PATH&gt;*** / **-d *&lt;PATH&gt;***: The path to save the generated file(s) into
 * **--topic-format *&lt;TOPIC_FORMAT&gt;***: Defines how each of the topics is rendered
+* **--index-indent *&lt;INT&gt;***: Defines the indent used for the index file
 * **--help** / **-h**: Show a help message
 * **--version**: Show the version information
 
