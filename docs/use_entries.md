@@ -33,6 +33,8 @@ Some information is though mandatory:
 
 * **filename** (without the extension)
 
+... and well, yes, you should have some content :-)
+
 As soon as you plan to use the supported files ```index.php``` and ```feed.php```, you must include the following meta information in your entries:
 
 * **date**: The publishing date

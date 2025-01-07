@@ -44,9 +44,6 @@ def test_main_empty1(capsys):
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [-d DESTINATION] [--topic-format TOPIC_FORMAT]
-                 [--default-author DEFAULT_AUTHOR]
-                 [--default-copyright-date DEFAULT_COPYRIGHT_DATE]
-                 [--default-state DEFAULT_STATE]
                  input
 gresiblos: error: the following arguments are required: input
 """
@@ -64,9 +61,6 @@ def test_main_empty2(capsys):
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [-d DESTINATION] [--topic-format TOPIC_FORMAT]
-                 [--default-author DEFAULT_AUTHOR]
-                 [--default-copyright-date DEFAULT_COPYRIGHT_DATE]
-                 [--default-state DEFAULT_STATE]
                  input
 gresiblos: error: the following arguments are required: input
 """
@@ -84,9 +78,6 @@ def test_main_help(capsys):
     captured = capsys.readouterr()
     assert patch(captured.out) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [-d DESTINATION] [--topic-format TOPIC_FORMAT]
-                 [--default-author DEFAULT_AUTHOR]
-                 [--default-copyright-date DEFAULT_COPYRIGHT_DATE]
-                 [--default-state DEFAULT_STATE]
                  input
 
 greyrat's simple blog system
@@ -109,12 +100,6 @@ options:
                         Sets the path to store the generated file(s) into
   --topic-format TOPIC_FORMAT
                         Defines how each of the topics is rendered
-  --default-author DEFAULT_AUTHOR
-                        Sets the default author
-  --default-copyright-date DEFAULT_COPYRIGHT_DATE
-                        Sets the default copyright date
-  --default-state DEFAULT_STATE
-                        Sets the default state
 
 (c) Daniel Krajzewicz 2014-2024
 """

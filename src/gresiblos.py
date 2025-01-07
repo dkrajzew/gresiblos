@@ -28,6 +28,7 @@ import argparse
 import configparser
 import glob
 import json
+import re
 from typing import List
 
 
@@ -43,7 +44,7 @@ class Entry:
         _fields (dict): A dictionary to store entry fields.
     """
 
-    def __init__(self, default_author, default_copyright_date, default_state):
+    def __init__(self, fields=None):
         """
         Initializes an Entry object with default values.
 
@@ -52,21 +53,10 @@ class Entry:
             default_copyright_date (str): The default copyright date.
             default_state (str): The default state of the entry.
         """
-        self._default_author = default_author
-        self._default_copyright_date = default_copyright_date
-        self._default_state = default_state
-        self._init_fields()
+        self._fields = {} if fields is None else fields.copy()
         
         
-    def _init_fields(self):
-        """Initializes the fields of the entry with default values."""
-        self._fields = {}
-        self._fields["state"] = self._default_state
-        self._fields["includes"] = ""
-        self._fields["js_inits"] = ""
-        self._fields["copyright_date"] = self._default_copyright_date
-        self._fields["author"] = self._default_author
-
+        
     def get(self, key):
         """
         Gets the value of a field by key.
@@ -87,7 +77,7 @@ class Entry:
         Args:
             file (str): The path to the file containing entry data.
         """
-        self._init_fields()
+        self._fields = {}
         with open(file, mode="r", encoding="utf-8") as fd:
             is_multi_line = False
             for line in fd:
@@ -121,19 +111,25 @@ class Entry:
             str: The template with embedded entry data.
         """
         for f in self._fields:
+            value = self._fields[f]
             if f=="topics":
                 topics = self._fields[f].split(",")
                 html = []
                 for t in topics:
                     t = t.strip()
-                    t = topics_format.replace("%topic%", t)
+                    t = topics_format.replace("[[:topic:]]", t)
                     html.append(t)
-                html = ", ".join(html)
-                template = template.replace("%"+f+"%", html)
+                value = ", ".join(html)
             elif f=="title" and self._fields["state"]!="release":
-                template = template.replace("%"+f+"%", "(Draft) " + self._fields[f])
-            else:
-                template = template.replace("%"+f+"%", self._fields[f])
+                value = "(Draft) " + self._fields[f]
+            template = template.replace("[[:"+f+":]]", value)
+        #
+        empty_regex = re.compile(r"(\[\[\:[a-zA-Z0-9_]+?\:\]\])", flags=re.MULTILINE)
+        template = empty_regex.sub("", template)
+        #
+        opt_regex = re.compile(r"\[\[\:([a-zA-Z0-9_]+?)\|([^\:\]\]]+?)\:\]\]", flags=re.MULTILINE)
+        # https://stackoverflow.com/questions/69376798/python3-replace-string-using-dict-with-regex
+        template = opt_regex.sub(lambda x: self._fields[x.group(1)] if x.group(1) in self._fields else x.group(2), template)
         return template
 
 
@@ -210,10 +206,7 @@ def main(arguments : List[str] = []) -> int:
     parser.add_argument("-e", "--extension", default="html", help="Sets the extension of the built file(s)")
     parser.add_argument("-s", "--state", default=None, help="Use only files with the given state(s)")
     parser.add_argument("-d", "--destination", default="./", help="Sets the path to store the generated file(s) into")
-    parser.add_argument("--topic-format", default="%topic%", help="Defines how each of the topics is rendered")
-    parser.add_argument("--default-author", default="", help="Sets the default author")
-    parser.add_argument("--default-copyright-date", default="", help="Sets the default copyright date")
-    parser.add_argument("--default-state", default="", help="Sets the default state")
+    parser.add_argument("--topic-format", default="[[:topic:]]", help="Defines how each of the topics is rendered")
     parser.set_defaults(**defaults)
     args = parser.parse_args(remaining_argv)
     # collect files; https://stackoverflow.com/questions/4568580/python-glob-multiple-filetypes
@@ -234,7 +227,7 @@ def main(arguments : List[str] = []) -> int:
     storage = PlainStorage()
     for file in files:
         print ("Processing '%s'" % file)
-        entry = Entry(args.default_author, args.default_copyright_date, args.default_state)
+        entry = Entry()
         entry.load(file)
         if args.state is not None and args.state!=entry.get("state"):
             print (" ... skipped for state=%s" % entry.get("state"))
