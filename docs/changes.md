@@ -3,6 +3,7 @@
 ## gresiblos-0.6.0 (to come)
 * improving the documentation
 * change: topics are stored as list in the index file
+* change: the filenames in the index now include the extension
 
 
 ## gresiblos-0.4.2 (29.12.2024)
