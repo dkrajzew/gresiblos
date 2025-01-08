@@ -13,7 +13,6 @@ __email__      = "daniel@krajzewicz.de"
 __status__     = "Development"
 # ===========================================================================
 # - https://github.com/dkrajzew/gresiblos
-# - http://www.krajzewicz.de/docs/gresiblos/index.html
 # - http://www.krajzewicz.de
 # ===========================================================================
 
