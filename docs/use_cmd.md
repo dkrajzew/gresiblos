@@ -15,7 +15,7 @@ __gresiblos__ is implemented in [Python](https://www.python.org/). It is started
 
 __gresiblos__ reads one or multiple blog entry files and embeds them into a template. The template file to use is defined using the option **--template *&lt;TEMPLATE&gt;*** / **-t *&lt;TEMPLATE&gt;***.
 
-Generated pages are daved as .html-files per default. You may change it (e.g. to php) using the option **--extension *&lt;EXTENSION&gt;*** / **-e *&lt;EXTENSION&gt;***.
+Generated pages are saved as .html-files per default. You may change it (e.g. to php) using the option **--extension *&lt;EXTENSION&gt;*** / **-e *&lt;EXTENSION&gt;***.
 
 The path to store the generated pages into can be defined using the option **--destination *&lt;PATH&gt;*** / **-d *&lt;PATH&gt;***. The default is ```./```. The index will be stored in this folder as well.
 
@@ -23,7 +23,7 @@ The entries include the meta-information ```state```. You may filter entries to 
 
 When embedding the meta-information of single blog entries into the template, the topics are split and rendered individually before being embedded. To allow for using them as links, the rendering format can be set using the option **--topic-format *&lt;TOPIC_FORMAT&gt;***. Please note that this string should include something like &#8220;\[\[:topic:\]\]&#8221;, what is replaced by the topic itself. The date meta information is assumed to be in ISO-format (e.g. ```2025-01-08 19:26:00```), but may be adapted using the option __--date-format *&lt;DATE_FORMAT&gt;*__.
 
-The index is usually stored as plain json in a single line. For a prettier output, the identation can be changed using the option **--index-indent *&lt;INT&gt;***.
+The index is usually stored as plain json in a single line. For a prettier output, the indentation can be changed using the option **--index-indent *&lt;INT&gt;***.
 
 The entry/entries to process are given as the last parameter. Multiple entries can be given divided by a &#8216;,&#8217;. Wildcards are accepted as well, so giving ```./entries/*.txt``` will process all files with the extension .txt within the folder ```entries```.
 

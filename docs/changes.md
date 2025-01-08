@@ -10,7 +10,8 @@
     * replaced option **--have-php-index** by the option **--topic-format *&lt;FORMAT&gt;*** which directly defines how each of a blog entries topics shall be rendered when embedding it into the template
     * removed options **--default-author *&lt;NAME&gt;***, **--default-copyright-date *&lt;DATE&gt;***, **--default-state *&lt;STATE&gt;*** and introduced replacements with defaults instead
 * new
-    * the identation level of the index file can now be set using the option **--index-indent *&lt;INT&gt;***
+    * the indentation level of the index file can now be set using the option **--index-indent *&lt;INT&gt;***
+    * you may use a different format for the date in your entries than the ISO-format by defining it using **--date-format *&lt;DATE_FORMAT&gt;***
 
 
 ## gresiblos-0.4.2 (29.12.2024)
