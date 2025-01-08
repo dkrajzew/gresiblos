@@ -14,7 +14,7 @@ Currently, the index contains the following information about each entry:
 
 All values are strings despite the topics, which are a list of strings for each blog entry.
 
-Please note that this information must be given in each entry's meta-data.
+Please note that this information must be given in each entry&#39;s meta-data.
 
 
 ## php Index Browser

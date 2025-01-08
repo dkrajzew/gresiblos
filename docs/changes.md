@@ -14,7 +14,7 @@
 
 
 ## gresiblos-0.4.2 (29.12.2024)
-* fixing tests...
+* fixing tests&#8230;
 
 ## gresiblos-0.4.0 (29.12.2024)
 * support for entry index (using json and php)
