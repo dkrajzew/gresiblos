@@ -4,7 +4,7 @@
 """gresiblos - Tests for the main method - configuration."""
 # =============================================================================
 __author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
+__copyright__  = "Copyright 2024-2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "GPLv3"
 __version__    = "0.4.2"

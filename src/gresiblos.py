@@ -5,7 +5,7 @@ from __future__ import print_function
 """gresiblos - greyrat's simple blog system."""
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2014-2024, Daniel Krajzewicz"
+__copyright__  = "Copyright 2016-2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "GPLv3"
 __version__    = "0.4.2"
@@ -232,7 +232,7 @@ def main(arguments : List[str] = []) -> int:
         defaults.update(dict(config.items("gresiblos")))
     parser = argparse.ArgumentParser(prog='gresiblos', parents=[conf_parser],
                                      description='greyrat\'s simple blog system',
-                                     epilog='(c) Daniel Krajzewicz 2014-2024')
+                                     epilog='(c) Daniel Krajzewicz 2016-2025')
     parser.add_argument("input")
     parser.add_argument('--version', action='version', version='%(prog)s 0.4.2')
     parser.add_argument("-t", "--template", default="data/template.html", help="Defines the template to use")
