@@ -37,7 +37,7 @@ Some information is though mandatory:
 
 As soon as you plan to use the supported files ```index.php``` and ```feed.php```, you must include the following meta information in your entries:
 
-* **date**: The publishing date
+* **date**: The publishing date; assumed to be in ISO-format (e.g. ```2025-01-08 19:26:00```), but may be adapted using the option __--date-format *&lt;DATE_FORMAT&gt;*__
 * **title**: The title of the blog post
 * **topics**: The topics of the blog post
 * **abstract**: A short description of the post or a short introduction (should be probably one sentence or a small paragraph long)

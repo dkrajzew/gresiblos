@@ -136,3 +136,19 @@ Processing '<DIR>/entry2.txt'
     pso = Path(TEST_PATH) / "entry1_sum.json"
     assert psg.read_text() == pso.read_text()
 
+
+def test_main_dateformat_by_name(capsys, tmp_path):
+    """Parsing first example (by name)"""
+    copy_from_data(tmp_path, ["template.html", "entry1_dateformat2.txt"])
+    ret = gresiblos.main(["--date-format", "%d.%m.%Y %H:%M:%S", "--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry1_dateformat2.txt")])
+    captured = capsys.readouterr()
+    assert patch(captured.out, tmp_path) == """Processing '<DIR>/entry1_dateformat2.txt'
+Writing to <DIR>/my-first-blog-entry.html
+"""
+    assert patch(captured.err, tmp_path) == ""
+    p1g = tmp_path / "my-first-blog-entry.html"
+    p1o = Path(TEST_PATH) / "my-first-blog-entry_dateformat.html"
+    assert p1g.read_text() == p1o.read_text()
+    psg = tmp_path / "entries.json"
+    pso = Path(TEST_PATH) / "entry1_sum.json"
+    assert psg.read_text() == pso.read_text()

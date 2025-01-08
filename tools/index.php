@@ -73,8 +73,7 @@ if($toShow==null) $toShow = "items";
 $db = file_get_contents("entries.json");
 $db = json_decode($db);
 foreach ($db as $entry) {
-    $t1 = strptime($entry->date, '%d.%m.%Y %H:%M');
-    $entry->idate = mktime($t1['tm_hour'], $t1['tm_min'], 0, $t1['tm_mon']+1, $t1['tm_mday'], $t1['tm_year']+1900);
+    $entry->idate = date_create($entry->date);
 }
 if($toShow=="topics") {
 	// show (all) topics

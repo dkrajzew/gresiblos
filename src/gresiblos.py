@@ -29,6 +29,7 @@ import configparser
 import glob
 import json
 import re
+import datetime
 from typing import List
 
 
@@ -70,6 +71,33 @@ class Entry:
         return self._fields[key]
 
 
+        
+    def has_key(self, key):
+        """
+        Gets the value of a field by key.
+
+        Args:
+            key (str): The key of the field to retrieve.
+
+        Returns:
+            str: The value of the field.
+        """
+        return key in self._fields
+
+
+        
+        
+
+    def get_isodate(self, date_format):
+        if "date" not in self._fields:
+            return None # pragma: no cover
+        if date_format is None:
+            return self._fields["date"]
+        return datetime.datetime.strptime(self._fields["date"], date_format).isoformat(' ')
+
+
+
+
     def load(self, file):
         """
         Loads entry data from a file.
@@ -78,6 +106,7 @@ class Entry:
             file (str): The path to the file containing entry data.
         """
         self._fields = {}
+        # load
         with open(file, mode="r", encoding="utf-8") as fd:
             is_multi_line = False
             for line in fd:
@@ -147,7 +176,7 @@ class PlainStorage:
         self._meta = {}
 
 
-    def add(self, filename, entry):
+    def add(self, filename, entry, date_format):
         """
         Adds an entry's metadata to the storage.
 
@@ -155,13 +184,16 @@ class PlainStorage:
             filename (str): The filename of the entry.
             entry (Entry): The Entry object containing metadata.
         """
-        self._meta[filename] = {
-            "date": entry.get("date"),
-            "title": entry.get("title"),
-            "topics": entry.get("topics").split(","),
-            "abstract": entry.get("abstract"),
-            "filename": filename
-        }
+        self._meta[filename] = { }
+        if entry.has_key("date"):
+            self._meta[filename]["date"] = entry.get_isodate(date_format)
+        if entry.has_key("title"):
+            self._meta[filename]["title"] = entry.get("title")
+        if entry.has_key("topics"):
+            self._meta[filename]["topics"] = entry.get("topics").split(",")
+        if entry.has_key("abstract"):
+            self._meta[filename]["abstract"] = entry.get("abstract")
+        self._meta[filename]["filename"] = filename
 
 
     def get(self):
@@ -209,16 +241,17 @@ def main(arguments : List[str] = []) -> int:
     parser.add_argument("-d", "--destination", default="./", help="Sets the path to store the generated file(s) into")
     parser.add_argument("--topic-format", default="[[:topic:]]", help="Defines how each of the topics is rendered")
     parser.add_argument("--index-indent", type=int, default=None, help="Defines the indent used for the index file")
+    parser.add_argument("--date-format", default=None, help="Defines the time format used")
     parser.set_defaults(**defaults)
     args = parser.parse_args(remaining_argv)
     # collect files; https://stackoverflow.com/questions/4568580/python-glob-multiple-filetypes
     files = args.input.split(",")
     nfiles = []
-    for glob_pattern in files:
-        if os.path.isfile(glob_pattern):
-            nfiles.append(glob_pattern)
+    for file in files:
+        if os.path.isfile(file):
+            nfiles.append(file)
         else:
-            nfiles.extend(glob.glob(glob_pattern))
+            nfiles.extend(glob.glob(file))
     files = nfiles
     files.sort()
     # load template file
@@ -242,7 +275,7 @@ def main(arguments : List[str] = []) -> int:
         with open(dest_path, mode="w", encoding="utf-8") as fdo:
             fdo.write(c)
         # add to topics
-        storage.add(filename, entry)
+        storage.add(filename, entry, args.date_format)
     # write metadata to a JSON file
     dest_path = os.path.join(args.destination, "entries.json")
     meta = storage.get()

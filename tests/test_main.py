@@ -44,7 +44,7 @@ def test_main_empty1(capsys):
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [-d DESTINATION] [--topic-format TOPIC_FORMAT]
-                 [--index-indent INDEX_INDENT]
+                 [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
                  input
 gresiblos: error: the following arguments are required: input
 """
@@ -62,7 +62,7 @@ def test_main_empty2(capsys):
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [-d DESTINATION] [--topic-format TOPIC_FORMAT]
-                 [--index-indent INDEX_INDENT]
+                 [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
                  input
 gresiblos: error: the following arguments are required: input
 """
@@ -80,7 +80,7 @@ def test_main_help(capsys):
     captured = capsys.readouterr()
     assert patch(captured.out) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [-d DESTINATION] [--topic-format TOPIC_FORMAT]
-                 [--index-indent INDEX_INDENT]
+                 [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
                  input
 
 greyrat's simple blog system
@@ -105,6 +105,8 @@ options:
                         Defines how each of the topics is rendered
   --index-indent INDEX_INDENT
                         Defines the indent used for the index file
+  --date-format DATE_FORMAT
+                        Defines the time format used
 
 (c) Daniel Krajzewicz 2014-2024
 """

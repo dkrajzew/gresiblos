@@ -2,7 +2,7 @@ state:release
 title:My first blog entry
 filename:my-first-blog-entry
 author:Daniel Krajzewicz
-date:2024-12-26 19:25:00
+date:26.12.2024 19:25:00
 topics:blog,example
 abstract:A very first introduction into blogging
 content:
