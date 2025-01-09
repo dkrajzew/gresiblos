@@ -30,6 +30,7 @@ import json
 import re
 import datetime
 from typing import List
+from typing import Dict
 
 
 # --- class definitions -----------------------------------------------------
@@ -38,10 +39,7 @@ class Entry:
     Represents a blog entry with metadata and content.
 
     Attributes:
-        _default_author (str): The default author of the entry.
-        _default_copyright_date (str): The default copyright date.
-        _default_state (str): The default state of the entry.
-        _fields (dict): A dictionary to store entry fields.
+        _fields (Dict[str, str]): A dictionary to store entry fields.
     """
 
     def __init__(self, fields=None):
@@ -49,14 +47,12 @@ class Entry:
         Initializes an Entry object with default values.
 
         Args:
-            default_author (str): The default author of the entry.
-            default_copyright_date (str): The default copyright date.
-            default_state (str): The default state of the entry.
+            fields (Dict[str, str]): The entry's meta data and content.
         """
         self._fields = {} if fields is None else fields.copy()
         
-        
-        
+
+
     def get(self, key):
         """
         Gets the value of a field by key.
@@ -70,7 +66,6 @@ class Entry:
         return self._fields[key]
 
 
-        
     def has_key(self, key):
         """
         Gets the value of a field by key.
@@ -84,17 +79,21 @@ class Entry:
         return key in self._fields
 
 
-        
-        
-
     def get_isodate(self, date_format):
+        """
+        Returns the date in isformat, if given. Otherwise return None.
+
+        Args:
+            date_format (str): The date format if it differs from ISO
+
+        Returns:
+            str: The date in isoformat.
+        """
         if "date" not in self._fields:
             return None # pragma: no cover
         if date_format is None:
             return self._fields["date"]
         return datetime.datetime.strptime(self._fields["date"], date_format).isoformat(' ')
-
-
 
 
     def load(self, file):
@@ -162,12 +161,13 @@ class Entry:
         return template
 
 
+
 class PlainStorage:
     """
     Stores metadata of blog entries.
 
     Attributes:
-        _meta (dict): A dictionary to store metadata of entries.
+        _meta (Dict[str, str]): A dictionary to store metadata of entries.
     """
 
     def __init__(self):
@@ -182,6 +182,7 @@ class PlainStorage:
         Args:
             filename (str): The filename of the entry.
             entry (Entry): The Entry object containing metadata.
+            date_format (str): The date format if it differs from ISO
         """
         self._meta[filename] = { }
         if entry.has_key("date"):
@@ -200,7 +201,7 @@ class PlainStorage:
         Gets all stored metadata.
 
         Returns:
-            dict: A dictionary of all stored metadata.
+            Dict[str, str]: A dictionary of all stored metadata.
         """
         return self._meta
 
