@@ -48,7 +48,7 @@ setuptools.setup(
     packages=["src", "data", "tools", "tests"],
     package_data={
         'data': ['entry1.txt', 'entry2.txt', 'template.html'],
-        'tests': ['cfg1.cfg', 'cfg2.cfg', 
+        'tests': ['cfg1.cfg', 'cfg2.cfg',
             'entries_sum.json', 'entries_sum_php.json',
             'entry1_sum.json', 'entry1_sum_php.json', 'entry2_sum.json',
             'my-first-blog-entry.html', 'my-first-blog-entry_phpindex.html',

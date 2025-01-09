@@ -33,13 +33,13 @@ def test_replace_plain_given(capsys, tmp_path):
     """Parsing first example (by name)"""
     entry = gresiblos.Entry({"foo": "bar"})
     assert entry.embed("[[:foo:]]", "")=="bar"
-    
+
 
 def test_replace_plain_missing(capsys, tmp_path):
     """Parsing first example (by name)"""
     entry = gresiblos.Entry({"foo": "bar"})
     assert entry.embed("[[:bar:]]", "")==""
-    
+
 
 def test_replace_opt_given(capsys, tmp_path):
     """Parsing first example (by name)"""

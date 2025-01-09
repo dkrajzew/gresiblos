@@ -28,6 +28,6 @@
 ## gresiblos-0.2.0 (27.12.2024)
 * Initial version
     * processes entries and saves them
-    
+
 
 
