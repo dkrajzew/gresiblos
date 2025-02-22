@@ -11,7 +11,7 @@ __license__    = "GPLv3"
 __version__    = "0.4.2"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
-__status__     = "Development"
+__status__     = "Production"
 # ===========================================================================
 # - https://github.com/dkrajzew/gresiblos
 # - http://www.krajzewicz.de
