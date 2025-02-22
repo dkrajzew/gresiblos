@@ -270,22 +270,21 @@ $d = date( 'Y-m-d H:i:s T', time() );
 $mydate = gmdate(DATE_RFC822, strtotime($d));
 
 $blogDefinition = array(
-    "link"=>"http://www.krajzewicz.de/blog/",
-    "linkRSS"=>"http://www.krajzewicz.de/blog/feed.php?type=rss",
-    "linkAtom"=>"http://www.krajzewicz.de/blog/feed.php?type=atom",
-    "description"=>"Some dilettant approaches to topics of my interest",
+    "link"=>"!!!", # feed URL
+    "linkRSS"=>"!!!", # link to RSS feed
+    "linkAtom"=>"!!!", # link to atom feed
+    "description"=>"!!!", # short description
     "language"=>"en-en",
     "pubDate"=>$mydate,
     "lastBuildDate"=>$mydate,
- //"docs"=>"!!!http://blogs.law.harvard.edu/tech/rss",
-    "generator"=>"GSB 1.0",
-    "copyright"=>"(c) Daniel Krajzewicz 2014-2024",
-    "managingEditor"=>"daniel@krajzewicz.de",
-    "webMaster"=>"daniel@krajzewicz.de",
-    "title"=>"dkrajzew's Dilettante Habits",
-    "authorName"=>"Daniel Krajzewicz",
-    "authorEmail"=>"daniel@krajzewicz.de",
-    "id"=>"http://www.krajzewicz.de/blog/"
+    "generator"=>"gresiblos 0.6.0",
+    "copyright"=>"!!!", # blog copyright information
+    "managingEditor"=>"!!!", # email address of 'managing editor'
+    "webMaster"=>"!!!", # email address of web master'
+    "title"=>"!!!", # feed title
+    "authorName"=>"!!!", # the author's name
+    "authorEmail"=>"!!!", # the author's email address
+    "id"=>"!!!" # blog id (may be the URL)
 );
 
 $headerRSS = array(
