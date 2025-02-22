@@ -31,6 +31,16 @@ import re
 import datetime
 from typing import List
 from typing import Dict
+_have_degrotesque = False
+try: 
+    import degrotesque
+    _have_degrotesque = True
+except: pass
+_have_markdown = False
+try: 
+    import markdown
+    _have_markdown = True
+except: pass
 
 
 # --- class definitions -----------------------------------------------------
@@ -148,7 +158,8 @@ class Entry:
             self._fields["abstract"] = ""
 
 
-    def embed(self, template, topics_format):
+
+    def embed(self, template, topics_format, apply_markdown=False, prettifier=None):
         """
         Embeds entry data into a template.
 
@@ -160,19 +171,24 @@ class Entry:
             str: The template with embedded entry data.
         """
         # replace plain, given fields
-        for f in self._fields:
-            value = self._fields[f]
-            if f=="topics":
-                topics = self._fields[f].split(",")
+        for field_key in self._fields:
+            value = self._fields[field_key]
+            if (field_key=="content" or field_key=="title" or field_key=="abstract"):
+                if apply_markdown:
+                    value = markdown.markdown(value)
+                if prettifier is not None:
+                    value = prettifier.prettify(value, True)
+            if field_key=="topics":
+                topics = self._fields[field_key].split(",")
                 html = []
                 for t in topics:
                     t = t.strip()
                     t = topics_format.replace("[[:topic:]]", t)
                     html.append(t)
                 value = ", ".join(html)
-            elif f=="title" and self._fields["state"]!="release":
-                value = "(Draft) " + self._fields[f]
-            template = template.replace("[[:"+f+":]]", value)
+            elif field_key=="title" and self._fields["state"]!="release":
+                value = "(Draft) " + self._fields[field_key]
+            template = template.replace("[[:"+field_key+":]]", value)
         # remove plain, not given fields
         empty_regex = re.compile(r"(\[\[\:[a-zA-Z0-9_]+?\:\]\])", flags=re.MULTILINE)
         template = empty_regex.sub("", template)
@@ -189,7 +205,7 @@ class PlainStorage:
     Stores metadata of blog entries.
 
     Attributes:
-        _meta (Dict[str, str]): A dictionary to store metadata of entries.
+        _meta (Dict[str, Dict[str, str]]): A dictionary to store metadata of entries.
     """
 
     def __init__(self):
@@ -206,7 +222,7 @@ class PlainStorage:
             entry (Entry): The Entry object containing metadata.
             date_format (str): The date format if it differs from ISO
         """
-        self._meta[filename] = { }
+        self._meta[filename] = {}
         if entry.has_key("date"):
             self._meta[filename]["date"] = entry.get_isodate(date_format)
         if entry.has_key("title"):
@@ -262,11 +278,23 @@ def main(arguments : List[str] = []) -> int:
     parser.add_argument("-e", "--extension", default="html", help="Sets the extension of the built file(s)")
     parser.add_argument("-s", "--state", default=None, help="Use only files with the given state(s)")
     parser.add_argument("-d", "--destination", default="./", help="Sets the path to store the generated file(s) into")
+    parser.add_argument("--markdown", action="store_true", help="If set, markdown is applied on the contents")
+    parser.add_argument("--degrotesque", action="store_true", help="If set, degrotesque is applied on the contents and the title")
     parser.add_argument("--topic-format", default="[[:topic:]]", help="Defines how each of the topics is rendered")
     parser.add_argument("--index-indent", type=int, default=None, help="Defines the indent used for the index file")
     parser.add_argument("--date-format", default=None, help="Defines the time format used")
     parser.set_defaults(**defaults)
     args = parser.parse_args(remaining_argv)
+    # check
+    ok = True
+    if not _have_degrotesque and args.degrotesque:
+        print ("gresiblos: error: degrotesque application is set, but degrotesque is not installed", file=sys.stderr)
+        ok = False
+    if not _have_markdown and args.markdown:
+        print ("gresiblos: error: markdown application is set, but markdown is not installed", file=sys.stderr)
+        ok = False
+    if not ok:
+        raise SystemExit(2)
     # collect files; https://stackoverflow.com/questions/4568580/python-glob-multiple-filetypes
     files = args.input.split(",")
     nfiles = []
@@ -282,6 +310,10 @@ def main(arguments : List[str] = []) -> int:
     with open(args.template, mode="r", encoding="utf-8") as fd:
         template = fd.read()
     # process files
+    prettifier = None if not _have_degrotesque or not args.degrotesque else degrotesque.Degrotesque()
+    #if prettifier:
+    #    prettifier.set_format("html")
+    apply_markdown = _have_markdown and args.markdown
     storage = PlainStorage()
     for file in files:
         print ("Processing '%s'" % file)
@@ -290,7 +322,7 @@ def main(arguments : List[str] = []) -> int:
         if args.state is not None and args.state!=entry.get("state"):
             print (" ... skipped for state=%s" % entry.get("state"))
             continue
-        c = entry.embed(template, args.topic_format)
+        c = entry.embed(template, args.topic_format, apply_markdown, prettifier)
         # write file
         filename = f"{entry.get('filename')}.{args.extension}"
         dest_path = os.path.join(args.destination, filename)

@@ -42,8 +42,9 @@ def test_main_empty1(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
-                 [-s STATE] [-d DESTINATION] [--topic-format TOPIC_FORMAT]
-                 [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
+                 [-s STATE] [-d DESTINATION] [--markdown] [--degrotesque]
+                 [--topic-format TOPIC_FORMAT] [--index-indent INDEX_INDENT]
+                 [--date-format DATE_FORMAT]
                  input
 gresiblos: error: the following arguments are required: input
 """
@@ -60,8 +61,9 @@ def test_main_empty2(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
-                 [-s STATE] [-d DESTINATION] [--topic-format TOPIC_FORMAT]
-                 [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
+                 [-s STATE] [-d DESTINATION] [--markdown] [--degrotesque]
+                 [--topic-format TOPIC_FORMAT] [--index-indent INDEX_INDENT]
+                 [--date-format DATE_FORMAT]
                  input
 gresiblos: error: the following arguments are required: input
 """
@@ -78,8 +80,9 @@ def test_main_help(capsys):
         assert e.code==0
     captured = capsys.readouterr()
     assert patch(captured.out) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
-                 [-s STATE] [-d DESTINATION] [--topic-format TOPIC_FORMAT]
-                 [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
+                 [-s STATE] [-d DESTINATION] [--markdown] [--degrotesque]
+                 [--topic-format TOPIC_FORMAT] [--index-indent INDEX_INDENT]
+                 [--date-format DATE_FORMAT]
                  input
 
 greyrat's simple blog system
@@ -100,6 +103,9 @@ options:
                         Use only files with the given state(s)
   -d DESTINATION, --destination DESTINATION
                         Sets the path to store the generated file(s) into
+  --markdown            If set, markdown is applied on the contents
+  --degrotesque         If set, degrotesque is applied on the contents and the
+                        title
   --topic-format TOPIC_FORMAT
                         Defines how each of the topics is rendered
   --index-indent INDEX_INDENT
