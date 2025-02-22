@@ -96,17 +96,18 @@ class Entry:
         return datetime.datetime.strptime(self._fields["date"], date_format).isoformat(' ')
 
 
-    def load(self, file):
+    def load(self, filename):
         """
-        Loads entry data from a file.
+        Loads entry data from a filename.
 
         Args:
-            file (str): The path to the file containing entry data.
+            filename (str): The path to the filename containing entry data.
         """
         self._fields = {}
         # load
-        with open(file, mode="r", encoding="utf-8") as fd:
+        with open(filename, mode="r", encoding="utf-8") as fd:
             is_multi_line = False
+            first = True
             for line in fd:
                 ls = line.strip()
                 if is_multi_line:
@@ -117,6 +118,13 @@ class Entry:
                     continue
                 if len(ls)==0:
                     continue
+                if first and line.find(":")<0:
+                    is_multi_line = True
+                    key = "content"
+                    self._fields[key] = line
+                    first = False
+                    continue
+                first = False
                 if ls[-1]!=':':
                     vs = ls.split(":")
                     self._fields[vs[0]] = ":".join(vs[1:])
@@ -124,6 +132,20 @@ class Entry:
                 key = ls[:-1]
                 self._fields[key] = ""
                 is_multi_line = True
+        # add missing fields
+        if "filename" not in self._fields:
+            self._fields["filename"] = os.path.splitext(os.path.split(filename)[1])[0]
+        if "title" not in self._fields:
+            self._fields["title"] = os.path.splitext(os.path.split(filename)[1])[0]
+        if "state" not in self._fields:
+            self._fields["state"] = "release"
+        if "date" not in self._fields:
+            t = os.path.getmtime(filename)
+            self._fields["date"] = datetime.datetime.fromtimestamp(t).isoformat(' ')
+        if "topics" not in self._fields:
+            self._fields["topics"] = ""
+        if "abstract" not in self._fields:
+            self._fields["abstract"] = ""
 
 
     def embed(self, template, topics_format):
@@ -190,7 +212,8 @@ class PlainStorage:
         if entry.has_key("title"):
             self._meta[filename]["title"] = entry.get("title")
         if entry.has_key("topics"):
-            self._meta[filename]["topics"] = entry.get("topics").split(",")
+            topics = entry.get("topics")
+            self._meta[filename]["topics"] = topics.split(",") if len(topics)!=0 else []
         if entry.has_key("abstract"):
             self._meta[filename]["abstract"] = entry.get("abstract")
         self._meta[filename]["filename"] = filename
