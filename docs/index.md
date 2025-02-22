@@ -13,14 +13,14 @@
 
 ## Introduction
 
-__gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__. It is a simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from blog content definitions.
+__gresiblos__ is a simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from blog content definitions. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__.
 
-In the current stage (v0.4.2), __gresiblos__ reads a file with blog entry contents and meta information and embeds it into a template. It generates a json-file with meta information about the entries. __gresiblos__ comes with a php-file that realises browsing entries, topics, and entries with a named topic, as well as with a php-file that generates RSS and Atom feeds.
+In the current stage (v0.4.2), __gresiblos__ reads a file with blog entry contents and meta information and embeds it into a template. In addition, it generates a json-file with meta information about the entries. __gresiblos__ comes with a php-file that realises browsing entries, topics, and entries with a named topic, as well as with a php-file that generates rss and atom feeds.
 
 
 ## Background
 
-I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wrote it. There are some features &#8212; like the inclusion of custom JavaScript and CSS files &#8212; I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).
+I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wrote it. __gresiblos__ has some additional features &#8212; like the inclusion of custom JavaScript and CSS files &#8212; I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).
 
 
 ## Usage
@@ -60,8 +60,6 @@ __gresiblos__ is licensed under the [GPLv3 license](license.md).
 
 ## Status
 
-__gresiblos__ works as intended for me, but lacks quite some features of enterprise systems.
-
-I may extend it in the future, but that mainly depends on my motivation and your interaction with me.
+__gresiblos__ works as intended for me, but lacks quite some features of enterprise systems. Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__...
 
 
