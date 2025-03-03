@@ -29,6 +29,7 @@ import glob
 import json
 import re
 import datetime
+import urllib.parse
 from typing import List
 from typing import Dict
 _have_degrotesque = False
@@ -144,7 +145,9 @@ class Entry:
                 is_multi_line = True
         # add missing fields
         if "filename" not in self._fields:
-            self._fields["filename"] = os.path.splitext(os.path.split(filename)[1])[0]
+            fn = os.path.splitext(os.path.split(filename)[1])[0]
+            fn = urllib.parse.quote(fn)
+            self._fields["filename"] = fn
         if "title" not in self._fields:
             self._fields["title"] = os.path.splitext(os.path.split(filename)[1])[0]
         if "state" not in self._fields:
@@ -156,7 +159,6 @@ class Entry:
             self._fields["topics"] = ""
         if "abstract" not in self._fields:
             self._fields["abstract"] = ""
-
 
 
     def embed(self, template, topics_format, apply_markdown=False, prettifier=None):
