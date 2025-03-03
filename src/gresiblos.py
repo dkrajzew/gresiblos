@@ -65,39 +65,39 @@ class Entry:
 
     def get(self, key):
         """
-        Gets the value of a field by key.
+        Returns the value of a field by key.
 
         Args:
             key (str): The key of the field to retrieve.
 
         Returns:
-            str: The value of the field.
+            (str): The value of the field.
         """
         return self._fields[key]
 
 
     def has_key(self, key):
         """
-        Gets the value of a field by key.
+        Returns whether the key is known.
 
         Args:
             key (str): The key of the field to retrieve.
 
         Returns:
-            str: The value of the field.
+            (str): The value of the field.
         """
         return key in self._fields
 
 
     def get_isodate(self, date_format):
         """
-        Returns the date in isformat, if given. Otherwise return None.
+        Returns the date in isoformat, if given. Otherwise return None.
 
         Args:
             date_format (str): The date format if it differs from ISO
 
         Returns:
-            str: The date in isoformat.
+            (str): The date in isoformat.
         """
         if "date" not in self._fields:
             return None # pragma: no cover
@@ -166,9 +166,11 @@ class Entry:
         Args:
             template (str): The HTML template to embed data into.
             topics_format (str): The format for topics in the template.
+            apply_markdown (bool): Whether the content/title/abstract shall be parsed as markdown.
+            prettifier (Degrotesque): The degrotesque instance to prettify the content/title/abstract.
 
         Returns:
-            str: The template with embedded entry data.
+            (str): The template with embedded entry data.
         """
         # replace plain, given fields
         for field_key in self._fields:
@@ -237,10 +239,10 @@ class PlainStorage:
 
     def get(self):
         """
-        Gets all stored metadata.
+        Returns all stored metadata.
 
         Returns:
-            Dict[str, str]: A dictionary of all stored metadata.
+            (Dict[str, Dict[str, str]]): A dictionary of all stored metadata.
         """
         return self._meta
 
@@ -254,7 +256,7 @@ def main(arguments : List[str] = []) -> int:
         arguments (List[str]): A list of command line arguments.
 
     Returns:
-        int: The exit code (0 for success).
+        (int): The exit code (0 for success).
     """
     # parse options
     # https://stackoverflow.com/questions/3609852/which-is-the-best-way-to-allow-configuration-options-be-overridden-at-the-comman
