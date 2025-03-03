@@ -31,7 +31,7 @@ import gresiblos
 def test_main_indent_default(capsys, tmp_path):
     """Parsing secomd example (by name)"""
     copy_from_data(tmp_path, ["template.html", "entry1.txt", "entry2.txt"])
-    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt")])
+    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry*.txt")])
     captured = capsys.readouterr()
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry1.txt'
 Writing to <DIR>/my-first-blog-entry.html
@@ -53,7 +53,7 @@ Writing to <DIR>/my-second-blog-entry.html
 def test_main_indent_0(capsys, tmp_path):
     """Parsing secomd example (by name)"""
     copy_from_data(tmp_path, ["template.html", "entry1.txt", "entry2.txt"])
-    ret = gresiblos.main(["--index-indent", "0", "--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt")])
+    ret = gresiblos.main(["--index-indent", "0", "--template", str(tmp_path / "template.html"), "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry*.txt")])
     captured = capsys.readouterr()
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry1.txt'
 Writing to <DIR>/my-first-blog-entry.html
@@ -75,7 +75,7 @@ Writing to <DIR>/my-second-blog-entry.html
 def test_main_indent_2(capsys, tmp_path):
     """Parsing secomd example (by name)"""
     copy_from_data(tmp_path, ["template.html", "entry1.txt", "entry2.txt"])
-    ret = gresiblos.main(["--index-indent", "2", "--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt")])
+    ret = gresiblos.main(["--index-indent", "2", "--template", str(tmp_path / "template.html"), "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry*.txt")])
     captured = capsys.readouterr()
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry1.txt'
 Writing to <DIR>/my-first-blog-entry.html

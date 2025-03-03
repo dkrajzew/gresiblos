@@ -6,7 +6,7 @@
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
-__license__    = "BSD"
+__license__    = "GPLv3"
 __version__    = "0.4.2"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
@@ -33,7 +33,7 @@ import gresiblos
 def test_main_entry3_plain(capsys, tmp_path):
     """Parsing first example (by name)"""
     copy_from_data(tmp_path, ["template.html", "entry3_optional.txt"])
-    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
+    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
     captured = capsys.readouterr()
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry3_optional.txt'
 Writing to <DIR>/entry3_optional.html
@@ -54,7 +54,7 @@ def test_main_entry3_degrotesque_missing(capsys, tmp_path):
         reload(sys.modules['gresiblos'])
         copy_from_data(tmp_path, ["template.html", "entry3_optional.txt"])
         try:
-            ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--degrotesque", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
+            ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--degrotesque", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
             assert False # pragma: no cover
         except SystemExit as e:
             assert type(e)==type(SystemExit())
@@ -69,7 +69,7 @@ def test_main_entry3_degrotesque_missing(capsys, tmp_path):
 def test_main_entry3_degrotesque(capsys, tmp_path):
     """Parsing first example (by name)"""
     copy_from_data(tmp_path, ["template.html", "entry3_optional.txt"])
-    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--degrotesque", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
+    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--degrotesque", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
     captured = capsys.readouterr()
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry3_optional.txt'
 Writing to <DIR>/entry3_optional.html
@@ -90,7 +90,7 @@ def test_main_entry3_markdown_missing(capsys, tmp_path):
         reload(sys.modules['gresiblos'])
         copy_from_data(tmp_path, ["template.html", "entry3_optional.txt"])
         try:
-            ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--markdown", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
+            ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--markdown", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
             assert False # pragma: no cover
         except SystemExit as e:
             assert type(e)==type(SystemExit())
@@ -105,7 +105,7 @@ def test_main_entry3_markdown_missing(capsys, tmp_path):
 def test_main_entry3_markdown(capsys, tmp_path):
     """Parsing first example (by name)"""
     copy_from_data(tmp_path, ["template.html", "entry3_optional.txt"])
-    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--markdown", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
+    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--markdown", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
     captured = capsys.readouterr()
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry3_optional.txt'
 Writing to <DIR>/entry3_optional.html
@@ -126,7 +126,7 @@ def test_main_entry3_missing2(capsys, tmp_path):
         reload(sys.modules['gresiblos'])
         copy_from_data(tmp_path, ["template.html", "entry3_optional.txt"])
         try:
-            ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--markdown", "--degrotesque", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
+            ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--markdown", "--degrotesque", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
             assert False # pragma: no cover
         except SystemExit as e:
             assert type(e)==type(SystemExit())
@@ -142,7 +142,7 @@ gresiblos: error: markdown application is set, but markdown is not installed
 def test_main_entry3_both(capsys, tmp_path):
     """Parsing first example (by name)"""
     copy_from_data(tmp_path, ["template.html", "entry3_optional.txt"])
-    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--degrotesque", "--markdown", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
+    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--degrotesque", "--markdown", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
     captured = capsys.readouterr()
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry3_optional.txt'
 Writing to <DIR>/entry3_optional.html

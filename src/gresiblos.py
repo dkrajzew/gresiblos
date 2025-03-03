@@ -239,7 +239,7 @@ class PlainStorage:
         self._meta[filename]["filename"] = filename
 
 
-    def get(self):
+    def get_meta(self):
         """
         Returns all stored metadata.
 
@@ -248,6 +248,75 @@ class PlainStorage:
         """
         return self._meta
 
+
+    def _get_entries(self):
+        """
+        Returns all stored entries' metadata as a list.
+
+        Returns:
+            (List[Dict[str, str]]): A list of entry metadata
+        """
+        ret = []
+        for f in self._meta:
+            ret.append(self._meta[f])
+        return ret
+
+
+    def get_entries_chronological(self):
+        """
+        Returns all stored entries' metadata as a list, sorted by date.
+
+        Returns:
+            (List[Dict[str, str]]): A list of entry metadata
+        """
+        ret = self._get_entries()
+        ret.sort(key=lambda a: datetime.datetime.fromisoformat(a["date"]))
+        return ret
+
+
+    def get_entries_alphabetical(self):
+        """
+        Returns all stored entries' metadata as a list, sorted by title (alphabetic).
+
+        Returns:
+            (List[Dict[str, str]]): A list of entry metadata
+        """
+        ret = self._get_entries()
+        ret.sort(key=lambda a: datetime.datetime.fromisoformat(a["title"]))
+        return ret
+
+
+
+def write_list(dest_path, template, entries):
+    """
+    Generates an unordered list from the given list of entry metadata, embeds
+    it into the given template, and saves the result under the given path.
+
+    Args:
+        dest_path (str): The filename of the entry.
+        template (str): The Entry object containing metadata.
+        entries (List[Dict[str, str]]): A list of entry metadata.
+    """
+    content = "<ul>\n"
+    for entry in entries:
+        content = content + f'  <li><a href="entry["filename"]">{entry["title"]}'
+        if "date" in entry and len(entry["date"])>0:
+            content = content + f' ({entry["date"]})'
+        if "abstract" in entry and len(entry["abstract"])>0:
+            content = content + f'<br>{entry["abstract"]}'
+        content = content + '</li>\n'
+    content += "</ul>\n"
+    fields = {
+        "title": title,
+        "topics": [],
+        "date": "",
+        "abstract": "",
+        "content": content
+    }
+    entry = Entry(fields)
+    c = entry.embed(template, args.topic_format, apply_markdown, prettifier)
+    with open(dest_path, "w", encoding="utf-8") as fdo:
+        fdo.write(c)
 
 
 def main(arguments : List[str] = []) -> int:
@@ -282,6 +351,9 @@ def main(arguments : List[str] = []) -> int:
     parser.add_argument("-e", "--extension", default="html", help="Sets the extension of the built file(s)")
     parser.add_argument("-s", "--state", default=None, help="Use only files with the given state(s)")
     parser.add_argument("-d", "--destination", default="./", help="Sets the path to store the generated file(s) into")
+    parser.add_argument("--index-output", default=None, help="Writes the index to the named file")
+    parser.add_argument("--chrono-output", default=None, help="Writes the named file with entries in chronological order")
+    parser.add_argument("--alpha-output", default=None, help="Writes the named file with entries in alphabetical order")
     parser.add_argument("--markdown", action="store_true", help="If set, markdown is applied on the contents")
     parser.add_argument("--degrotesque", action="store_true", help="If set, degrotesque is applied on the contents and the title")
     parser.add_argument("--topic-format", default="[[:topic:]]", help="Defines how each of the topics is rendered")
@@ -306,7 +378,7 @@ def main(arguments : List[str] = []) -> int:
         if os.path.isfile(file):
             nfiles.append(file)
         else:
-            nfiles.extend(glob.glob(file))
+            nfiles.extend(glob.glob(file, recursive=True))
     files = nfiles
     files.sort()
     # load template file
@@ -330,16 +402,28 @@ def main(arguments : List[str] = []) -> int:
         # write file
         filename = f"{entry.get('filename')}.{args.extension}"
         dest_path = os.path.join(args.destination, filename)
+        os.makedirs(os.path.join(os.path.split(dest_path)[0]), exist_ok=True)
         print (f"Writing to {dest_path}")
         with open(dest_path, mode="w", encoding="utf-8") as fdo:
             fdo.write(c)
         # add to topics
         storage.add(filename, entry, args.date_format)
-    # write metadata to a JSON file
-    dest_path = os.path.join(args.destination, "entries.json")
-    meta = storage.get()
-    with open(dest_path, "w", encoding="utf-8") as fdo:
-        fdo.write(json.dumps(meta, indent=args.index_indent))
+    # (optional) write metadata to a JSON file
+    if args.index_output:
+        dest_path = os.path.join(args.destination, args.index_output)
+        meta = storage.get_meta()
+        with open(dest_path, "w", encoding="utf-8") as fdo:
+            fdo.write(json.dumps(meta, indent=args.index_indent))
+    # (optional) write chronological entries list
+    if args.chrono_output:
+        dest_path = os.path.join(args.destination, args.chrono_output)
+        entries = storage.get_entries_chronological()
+        write_list(dest_path, template, entries)
+    # (optional) write alphabetical entries list
+    if args.alpha_output:
+        dest_path = os.path.join(args.destination, args.alpha_output)
+        entries = storage.get_entries_alphabetical()
+        write_list(dest_path, template, entries)
     return 0
 
 
