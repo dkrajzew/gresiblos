@@ -22,7 +22,7 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
 from pathlib import Path
-from util import pname, copy_from_data, TEST_PATH
+from util import pname, copy_from_data, fread, TEST_PATH
 import gresiblos
 
 
@@ -37,12 +37,8 @@ def test_main_entry1_by_name(capsys, tmp_path):
 Writing to <DIR>/my-first-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "my-first-blog-entry.html"
-    p1o = Path(TEST_PATH) / "my-first-blog-entry.html"
-    assert p1g.read_text() == p1o.read_text()
-    psg = tmp_path / "entries.json"
-    pso = Path(TEST_PATH) / "entry1_sum.json"
-    assert psg.read_text() == pso.read_text()
+    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entry1_sum.json")
 
 
 def test_main_entry2_by_name(capsys, tmp_path):
@@ -54,12 +50,8 @@ def test_main_entry2_by_name(capsys, tmp_path):
 Writing to <DIR>/my-second-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    p2g = tmp_path / "my-second-blog-entry.html"
-    p2o = Path(TEST_PATH) / "my-second-blog-entry.html"
-    assert p2g.read_text() == p2o.read_text()
-    psg = tmp_path / "entries.json"
-    pso = Path(TEST_PATH) / "entry2_sum.json"
-    assert psg.read_text() == pso.read_text()
+    assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
+    assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entry2_sum.json")
 
 
 def test_main_both_entries_by_name(capsys, tmp_path):
@@ -73,15 +65,9 @@ Processing '<DIR>/entry2.txt'
 Writing to <DIR>/my-second-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "my-first-blog-entry.html"
-    p1o = Path(TEST_PATH) / "my-first-blog-entry.html"
-    assert p1g.read_text() == p1o.read_text()
-    p2g = tmp_path / "my-second-blog-entry.html"
-    p2o = Path(TEST_PATH) / "my-second-blog-entry.html"
-    assert p2g.read_text() == p2o.read_text()
-    psg = tmp_path / "entries.json"
-    pso = Path(TEST_PATH) / "entries_sum.json"
-    assert psg.read_text() == pso.read_text()
+    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
+    assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entries_sum.json")
 
 
 def test_main_both_entries_by_extension_glob(capsys, tmp_path):
@@ -95,15 +81,9 @@ Processing '<DIR>/entry2.txt'
 Writing to <DIR>/my-second-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "my-first-blog-entry.html"
-    p1o = Path(TEST_PATH) / "my-first-blog-entry.html"
-    assert p1g.read_text() == p1o.read_text()
-    p2g = tmp_path / "my-second-blog-entry.html"
-    p2o = Path(TEST_PATH) / "my-second-blog-entry.html"
-    assert p2g.read_text() == p2o.read_text()
-    psg = tmp_path / "entries.json"
-    pso = Path(TEST_PATH) / "entries_sum.json"
-    assert psg.read_text() == pso.read_text()
+    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
+    assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entries_sum.json")
 
 
 def test_main_state_release_by_extension_glob(capsys, tmp_path):
@@ -117,12 +97,8 @@ Processing '<DIR>/entry2.txt'
  ... skipped for state=work
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "my-first-blog-entry.html"
-    p1o = Path(TEST_PATH) / "my-first-blog-entry.html"
-    assert p1g.read_text() == p1o.read_text()
-    psg = tmp_path / "entries.json"
-    pso = Path(TEST_PATH) / "entry1_sum.json"
-    assert psg.read_text() == pso.read_text()
+    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entry1_sum.json")
 
 
 def test_main_dateformat_by_name(capsys, tmp_path):
@@ -134,12 +110,8 @@ def test_main_dateformat_by_name(capsys, tmp_path):
 Writing to <DIR>/my-first-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "my-first-blog-entry.html"
-    p1o = Path(TEST_PATH) / "my-first-blog-entry_dateformat.html"
-    assert p1g.read_text() == p1o.read_text()
-    psg = tmp_path / "entries.json"
-    pso = Path(TEST_PATH) / "entry1_sum.json"
-    assert psg.read_text() == pso.read_text()
+    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry_dateformat.html")
+    assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entry1_sum.json")
 
 
 def test_main_entries_by_extension_glob_recursive(capsys, tmp_path):
@@ -155,14 +127,8 @@ Processing '<DIR>/sub/entry2.txt'
 Writing to <DIR>/my-second-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "my-first-blog-entry.html"
-    p1o = Path(TEST_PATH) / "my-first-blog-entry.html"
-    assert p1g.read_text() == p1o.read_text()
-    p2g = tmp_path / "my-second-blog-entry.html"
-    p2o = Path(TEST_PATH) / "my-second-blog-entry.html"
-    assert p2g.read_text() == p2o.read_text()
-    psg = tmp_path / "entries.json"
-    pso = Path(TEST_PATH) / "entries_sum.json"
-    assert psg.read_text() == pso.read_text()
+    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
+    assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entries_sum.json")
 
 

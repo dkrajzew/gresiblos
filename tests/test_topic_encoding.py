@@ -37,9 +37,7 @@ def test_main_entry1_plain(capsys, tmp_path):
 Writing to <DIR>/my-first-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "my-first-blog-entry.html"
-    p1o = Path(TEST_PATH) / "my-first-blog-entry.html"
-    assert p1g.read_text() == p1o.read_text()
+    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
 
 
 def test_main_entry1_format(capsys, tmp_path):
@@ -51,6 +49,4 @@ def test_main_entry1_format(capsys, tmp_path):
 Writing to <DIR>/my-first-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "my-first-blog-entry.html"
-    p1o = Path(TEST_PATH) / "my-first-blog-entry_phpindex.html"
-    assert p1g.read_text() == p1o.read_text()
+    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry_phpindex.html")

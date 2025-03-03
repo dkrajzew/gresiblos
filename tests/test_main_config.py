@@ -23,7 +23,7 @@ import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
 import shutil
 from pathlib import Path
-from util import pname, copy_from_data, TEST_PATH
+from util import pname, copy_from_data, fread, TEST_PATH
 import gresiblos
 
 
@@ -54,12 +54,8 @@ def test_main_entry1_by_name(capsys, tmp_path):
 Writing to <DIR>/my-first-blog-entry.php
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "my-first-blog-entry.php"
-    p1o = Path(TEST_PATH) / "my-first-blog-entry.html"
-    assert p1g.read_text() == p1o.read_text()
-    psg = tmp_path / "entries.json"
-    pso = Path(TEST_PATH) / "entry1_sum_php.json"
-    assert psg.read_text() == pso.read_text()
+    assert fread(tmp_path / "my-first-blog-entry.php") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entry1_sum_php.json")
 
 
 def test_main_two_entries_by_name(capsys, tmp_path):
@@ -74,15 +70,9 @@ Processing '<DIR>/entry2.txt'
 Writing to <DIR>/my-second-blog-entry.php
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "my-first-blog-entry.php"
-    p1o = Path(TEST_PATH) / "my-first-blog-entry.html"
-    assert p1g.read_text() == p1o.read_text()
-    p2g = tmp_path / "my-second-blog-entry.php"
-    p2o = Path(TEST_PATH) / "my-second-blog-entry.html"
-    assert p2g.read_text() == p2o.read_text()
-    psg = tmp_path / "entries.json"
-    pso = Path(TEST_PATH) / "entries_sum_php.json"
-    assert psg.read_text() == pso.read_text()
+    assert fread(tmp_path / "my-first-blog-entry.php") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fread(tmp_path / "my-second-blog-entry.php") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
+    assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entries_sum_php.json")
 
 
 def test_main_two_entries_by_name_filter_state(capsys, tmp_path):
@@ -97,9 +87,6 @@ Processing '<DIR>/entry2.txt'
  ... skipped for state=work
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "my-first-blog-entry.php"
-    p1o = Path(TEST_PATH) / "my-first-blog-entry.html"
-    assert p1g.read_text() == p1o.read_text()
-    psg = tmp_path / "entries.json"
-    pso = Path(TEST_PATH) / "entry1_sum_php.json"
-    assert psg.read_text() == pso.read_text()
+    assert fread(tmp_path / "my-first-blog-entry.php") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entry1_sum_php.json")
+

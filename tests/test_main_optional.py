@@ -24,7 +24,7 @@ sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
 from unittest.mock import patch
 from importlib import reload
 from pathlib import Path
-from util import pname, copy_from_data, pdate, TEST_PATH
+from util import pname, copy_from_data, fread, pdate, TEST_PATH
 import gresiblos
 
 
@@ -39,12 +39,8 @@ def test_main_entry3_plain(capsys, tmp_path):
 Writing to <DIR>/entry3_optional.html
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "entry3_optional.html"
-    p1o = Path(TEST_PATH) / "entry3_optional_plain.html"
-    assert pdate(p1g.read_text()) == p1o.read_text()
-    psg = tmp_path / "entries.json"
-    pso = Path(TEST_PATH) / "entry3_sum.json"
-    assert pdate(psg.read_text()) == pso.read_text()
+    assert fread(tmp_path / "entry3_optional.html", True) == fread(Path(TEST_PATH) / "entry3_optional_plain.html")
+    assert fread(tmp_path / "entries.json", True) == fread(Path(TEST_PATH) / "entry3_sum.json")
 
 
 def test_main_entry3_degrotesque_missing(capsys, tmp_path):
@@ -75,12 +71,8 @@ def test_main_entry3_degrotesque(capsys, tmp_path):
 Writing to <DIR>/entry3_optional.html
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "entry3_optional.html"
-    p1o = Path(TEST_PATH) / "entry3_optional_degrotesque.html"
-    assert pdate(p1g.read_text()) == p1o.read_text()
-    psg = tmp_path / "entries.json"
-    pso = Path(TEST_PATH) / "entry3_sum.json"
-    assert pdate(psg.read_text()) == pso.read_text()
+    assert fread(tmp_path / "entry3_optional.html", True) == fread(Path(TEST_PATH) / "entry3_optional_degrotesque.html")
+    assert fread(tmp_path / "entries.json", True) == fread(Path(TEST_PATH) / "entry3_sum.json")
 
 
 def test_main_entry3_markdown_missing(capsys, tmp_path):
@@ -111,12 +103,8 @@ def test_main_entry3_markdown(capsys, tmp_path):
 Writing to <DIR>/entry3_optional.html
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "entry3_optional.html"
-    p1o = Path(TEST_PATH) / "entry3_optional_markdown.html"
-    assert pdate(p1g.read_text()) == p1o.read_text()
-    psg = tmp_path / "entries.json"
-    pso = Path(TEST_PATH) / "entry3_sum.json"
-    assert pdate(psg.read_text()) == pso.read_text()
+    assert fread(tmp_path / "entry3_optional.html", True) == fread(Path(TEST_PATH) / "entry3_optional_markdown.html")
+    assert fread(tmp_path / "entries.json", True) == fread(Path(TEST_PATH) / "entry3_sum.json")
     
     
 def test_main_entry3_missing2(capsys, tmp_path):
@@ -148,9 +136,5 @@ def test_main_entry3_both(capsys, tmp_path):
 Writing to <DIR>/entry3_optional.html
 """
     assert pname(captured.err, tmp_path) == ""
-    p1g = tmp_path / "entry3_optional.html"
-    p1o = Path(TEST_PATH) / "entry3_optional_both.html"
-    assert pdate(p1g.read_text()) == p1o.read_text()
-    psg = tmp_path / "entries.json"
-    pso = Path(TEST_PATH) / "entry3_sum.json"
-    assert pdate(psg.read_text()) == pso.read_text()
+    assert fread(tmp_path / "entry3_optional.html", True) == fread(Path(TEST_PATH) / "entry3_optional_both.html")
+    assert fread(tmp_path / "entries.json", True) == fread(Path(TEST_PATH) / "entry3_sum.json")

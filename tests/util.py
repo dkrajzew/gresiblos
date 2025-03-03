@@ -37,6 +37,13 @@ def pdate(string):
     return re.sub(regex, "<DATE>", string)
 
 
+def fread(filepath, patch_date=False):
+    c1 = filepath.read_text()
+    if patch_date:
+        c1 = pdate(c1)
+    return c1
+    
+
 def copy_from_data(tmp_path, files):
     for file in files:
         shutil.copy(os.path.join((TEST_PATH), "..", "data", file), str(tmp_path / file))
