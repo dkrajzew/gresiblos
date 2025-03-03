@@ -21,13 +21,8 @@ __status__     = "Production"
 import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
+from util import pname
 import gresiblos
-
-
-
-# --- helper functions ------------------------------------------------------
-def patch(string):
-    return string.replace("__main__.py", "gresiblos").replace("pytest", "gresiblos").replace("optional arguments", "options")
 
 
 
@@ -41,15 +36,15 @@ def test_main_empty1(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert patch(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
+    assert pname(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [-d DESTINATION] [--markdown] [--degrotesque]
                  [--topic-format TOPIC_FORMAT] [--index-indent INDEX_INDENT]
                  [--date-format DATE_FORMAT]
                  input
 gresiblos: error: the following arguments are required: input
 """
-    assert patch(captured.out) == ""
-
+    assert pname(captured.out) == ""
+    
 
 def test_main_empty2(capsys):
     """Test behaviour if no arguments are given"""
@@ -60,14 +55,14 @@ def test_main_empty2(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert patch(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
+    assert pname(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [-d DESTINATION] [--markdown] [--degrotesque]
                  [--topic-format TOPIC_FORMAT] [--index-indent INDEX_INDENT]
                  [--date-format DATE_FORMAT]
                  input
 gresiblos: error: the following arguments are required: input
 """
-    assert patch(captured.out) == ""
+    assert pname(captured.out) == ""
 
 
 def test_main_help(capsys):
@@ -79,7 +74,7 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patch(captured.out) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
+    assert pname(captured.out) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [-d DESTINATION] [--markdown] [--degrotesque]
                  [--topic-format TOPIC_FORMAT] [--index-indent INDEX_INDENT]
                  [--date-format DATE_FORMAT]
@@ -115,7 +110,7 @@ options:
 
 (c) Daniel Krajzewicz 2016-2025
 """
-    assert captured.err == ""
+    assert pname(captured.err) == ""
 
 
 def test_main_version(capsys):
@@ -127,6 +122,6 @@ def test_main_version(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patch(captured.out) == """gresiblos 0.4.2
+    assert pname(captured.out) == """gresiblos 0.4.2
 """
-    assert patch(captured.err) == ""
+    assert pname(captured.err) == ""
