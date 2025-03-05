@@ -384,11 +384,11 @@ def main(arguments : List[str] = []) -> int:
     apply_markdown = _have_markdown and args.markdown
     storage = PlainStorage()
     for file in files:
-        print ("Processing '%s'" % file)
+        print (f"Processing '{file}'")
         entry = Entry()
         entry.load(file)
         if args.state is not None and args.state!=entry.get("state"):
-            print (" ... skipped for state=%s" % entry.get("state"))
+            print (f" ... skipped for state='{entry.get('state')}'")
             continue
         c = entry.embed(template, args.topic_format, apply_markdown, prettifier)
         # write file
