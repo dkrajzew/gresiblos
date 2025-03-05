@@ -94,7 +94,7 @@ def test_main_state_release_by_extension_glob(capsys, tmp_path):
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry1.txt'
 Writing to <DIR>/my-first-blog-entry.html
 Processing '<DIR>/entry2.txt'
- ... skipped for state=work
+ ... skipped for state='work'
 """
     assert pname(captured.err, tmp_path) == ""
     assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")

@@ -167,6 +167,25 @@ class Entry:
         Returns:
             (str): The template with embedded entry data.
         """
+        # remove optional fields
+        b = template.find("[[:?")
+        while b>=0:
+            e = template.find(":]]", b+4)
+            if e<0:
+                print (f"gresiblos: error: Missing ':]]' at the begin tag of an optional document part that starts at {b}", file=sys.stderr)
+                raise SystemExit(3)
+            field_key = template[b+4:e]
+            b2 = template.find("[[:" + field_key + "?:]]")
+            if b2<0:
+                print (f"gresiblos: error: Missing closing tag of an optional document part that starts at {b}; field_key='{field_key}'", file=sys.stderr)
+                raise SystemExit(3)
+            if field_key not in self._fields:
+                template = template[:b] + template[b2+len(field_key)+7:]
+                b = template.find("[[:?", b)
+            else:
+                template = template[:b2] + template[b2+len(field_key)+7:]
+                template = template[:b] + template[b+len(field_key)+7:]
+                b = template.find("[[:?", b)
         # replace plain, given fields
         for field_key in self._fields:
             value = self._fields[field_key]

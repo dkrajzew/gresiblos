@@ -33,7 +33,7 @@ def test_main_missing_config(capsys, tmp_path):
     """Parsing first example (by name)"""
     copy_from_data(tmp_path, ["template.html", "entry1.txt"])
     try:
-        ret = gresiblos.main(["--config", str(tmp_path / "cfg1.cfg"), "--template", str(tmp_path / "template.html"), "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry1.txt")])
+        ret = gresiblos.main(["--config", str(tmp_path / "cfg1.cfg")])
         assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())
@@ -84,7 +84,7 @@ def test_main_two_entries_by_name_filter_state(capsys, tmp_path):
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry1.txt'
 Writing to <DIR>/my-first-blog-entry.php
 Processing '<DIR>/entry2.txt'
- ... skipped for state=work
+ ... skipped for state='work'
 """
     assert pname(captured.err, tmp_path) == ""
     assert fread(tmp_path / "my-first-blog-entry.php") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
