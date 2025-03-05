@@ -1,20 +1,22 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
  <head><title>[[:title:]] &mdash; A sample blog</title>
 [[:includes:]]
  </head>
 
-
  <body>
-  <div id="title">My new blog</div>
+  <h1>My new blog</h1>
 
-<h1>[[:title:]]</h1>
-<div><p><b>Abstract:</b> [[:abstract:]]</p></div>
-<div><p><b>Topics:</b> [[:topics:]]</p></div>
-<div id="blogCopy">&copy; Copyright [[:author:]], [[:date:]]</div>
+<header>
+    <h2>[[:title:]]</h2>
+[[:?abstract:]]    <p><b>Abstract:</b> [[:abstract:]]</p>[[:abstract?:]]
+[[:?topics:]]    <p><b>Topics:</b> [[:topics:]]</p>[[:topics?:]]
+</header>
+<section>
 [[:content:]]
-<div id="footer">&copy; Copyright [[:author:]]</div>
+</section>
+
+[[:?author:]]<footer>&copy; Copyright [[:author:]]</footer>[[:author?:]]
 
  </body>
 </html>
-

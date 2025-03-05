@@ -170,7 +170,7 @@ class Entry:
         # replace plain, given fields
         for field_key in self._fields:
             value = self._fields[field_key]
-            if (field_key=="content" or field_key=="title" or field_key=="abstract"):
+            if field_key=="content" or field_key=="title" or field_key=="abstract":
                 if apply_markdown:
                     value = markdown.markdown(value)
                     if value.startswith("<p>") and value.endswith("</p>"):
@@ -277,12 +277,12 @@ class PlainStorage:
             (List[Dict[str, str]]): A list of entry metadata
         """
         ret = self._get_entries()
-        ret.sort(key=lambda a: datetime.datetime.fromisoformat(a["title"]))
+        ret.sort(key=lambda a: a["title"])
         return ret
 
 
 
-def write_list(dest_path, template, entries):
+def write_list(title, dest_path, template, entries, topic_format, apply_markdown, prettifier):
     """
     Generates an unordered list from the given list of entry metadata, embeds
     it into the given template, and saves the result under the given path.
@@ -294,7 +294,7 @@ def write_list(dest_path, template, entries):
     """
     content = "<ul>\n"
     for entry in entries:
-        content = content + f'  <li><a href="entry["filename"]">{entry["title"]}'
+        content = content + f'  <li><a href="{entry["filename"]}">{entry["title"]}</a>'
         if "date" in entry and len(entry["date"])>0:
             content = content + f' ({entry["date"]})'
         if "abstract" in entry and len(entry["abstract"])>0:
@@ -303,13 +303,10 @@ def write_list(dest_path, template, entries):
     content += "</ul>\n"
     fields = {
         "title": title,
-        "topics": [],
-        "date": "",
-        "abstract": "",
         "content": content
     }
     entry = Entry(fields)
-    c = entry.embed(template, args.topic_format, apply_markdown, prettifier)
+    c = entry.embed(template, topic_format, apply_markdown, prettifier)
     with open(dest_path, "w", encoding="utf-8") as fdo:
         fdo.write(c)
 
@@ -412,13 +409,15 @@ def main(arguments : List[str] = []) -> int:
     # (optional) write chronological entries list
     if args.chrono_output:
         dest_path = os.path.join(args.destination, args.chrono_output)
+        print (f"Writing chronological list to '{dest_path}'")
         entries = storage.get_entries_chronological()
-        write_list(dest_path, template, entries)
+        write_list("entries by name", dest_path, template, entries, args.topic_format, apply_markdown, prettifier)
     # (optional) write alphabetical entries list
     if args.alpha_output:
         dest_path = os.path.join(args.destination, args.alpha_output)
+        print (f"Writing alphabetical list to '{dest_path}'")
         entries = storage.get_entries_alphabetical()
-        write_list(dest_path, template, entries)
+        write_list("entries by publication date", dest_path, template, entries, args.topic_format, apply_markdown, prettifier)
     return 0
 
 
