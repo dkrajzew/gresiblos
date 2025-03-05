@@ -150,16 +150,9 @@ class Entry:
             self._fields["filename"] = fn
         if "title" not in self._fields:
             self._fields["title"] = os.path.splitext(os.path.split(filename)[1])[0]
-        if "state" not in self._fields:
-            self._fields["state"] = "release"
         if "date" not in self._fields:
             t = os.path.getmtime(filename)
             self._fields["date"] = datetime.datetime.fromtimestamp(t).isoformat(' ')
-        if "topics" not in self._fields:
-            self._fields["topics"] = ""
-        if "abstract" not in self._fields:
-            self._fields["abstract"] = ""
-
 
     def embed(self, template, topics_format, apply_markdown=False, prettifier=None):
         """
@@ -192,7 +185,7 @@ class Entry:
                     t = topics_format.replace("[[:topic:]]", t)
                     html.append(t)
                 value = ", ".join(html)
-            elif field_key=="title" and self._fields["state"]!="release":
+            elif field_key=="title" and "state" in self._fields and self._fields["state"]!="release":
                 value = "(Draft) " + self._fields[field_key]
             template = template.replace("[[:"+field_key+":]]", value)
         # remove plain, not given fields

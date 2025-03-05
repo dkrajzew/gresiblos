@@ -1,5 +1,5 @@
 state:work
-title:My second blog entry
+title:A second blog entry
 filename:my-second-blog-entry
 author:Daniel Krajzewicz
 date:2024-12-26 20:37:00
