@@ -180,6 +180,8 @@ class Entry:
             if (field_key=="content" or field_key=="title" or field_key=="abstract"):
                 if apply_markdown:
                     value = markdown.markdown(value)
+                    if value.startswith("<p>") and value.endswith("</p>"):
+                        value = value[3:-4]
                 if prettifier is not None:
                     value = prettifier.prettify(value, True)
             if field_key=="topics":
