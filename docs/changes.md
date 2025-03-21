@@ -2,6 +2,7 @@
 
 ## gresiblos-0.6.0 (to come)
 * improving the documentation
+* changed the license from GPLv3 to BSD
 * changes:
     * **important**: the replacement pattern for values within the template changed from __%*&lt;FIELD_NAME&gt;*%__ to __\[\[:*&lt;FIELD_NAME&gt;*:\]\]__
     * topics are stored as list in the index file

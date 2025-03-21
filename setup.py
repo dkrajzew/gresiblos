@@ -7,7 +7,7 @@ from __future__ import print_function
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2014-2024, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
-__license__    = "GPLv3"
+__license__    = "BSD"
 __version__    = "0.4.2"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
@@ -66,7 +66,7 @@ setuptools.setup(
         "Environment :: Console",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
         "Intended Audience :: Developers",
         "Intended Audience :: Information Technology",

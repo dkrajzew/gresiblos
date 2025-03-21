@@ -1,4 +1,4 @@
-[![License: GPL](https://img.shields.io/badge/License-GPL-green.svg)](https://github.com/dkrajzew/gresiblos/blob/master/LICENSE)
+[![License: BSD](https://img.shields.io/badge/License-BSD-green.svg)](https://github.com/dkrajzew/gresiblos/blob/master/LICENSE)
 [![PyPI version](https://badge.fury.io/py/gresiblos.svg)](https://pypi.python.org/pypi/gresiblos)
 ![test](https://github.com/dkrajzew/gresiblos/actions/workflows/test.yml/badge.svg)
 [![Downloads](https://pepy.tech/badge/gresiblos)](https://pepy.tech/project/gresiblos)
@@ -54,7 +54,7 @@ python src\gresiblos.py entry1.txt
 
 ## License
 
-__gresiblos__ is licensed under the [GPLv3 license](license.md).
+__gresiblos__ is licensed under the [BSD license](license.md).
 
 
 
@@ -73,5 +73,6 @@ __gresiblos__ works as intended for me, but lacks quite some features of enterpr
 The next steps to release 1.0 will involve some refactorings, including API changes.
 
 Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__...
+
 
 
