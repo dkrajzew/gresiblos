@@ -17,6 +17,7 @@ __gresiblos__ is a simple blogging system written in [Python](https://www.python
 
 __gresiblos__ reads blog entries from files that may include some meta information and embeds the contents into a template. In addition, it generates a json-file with meta information about the entries. __gresiblos__ comes with a php-file that realises browsing, as well as with a php-file that generates rss and atom feeds.
 
+
 ## Background
 
 I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wrote it. __gresiblos__ has some additional features &#8212; like the inclusion of custom JavaScript and CSS files &#8212; I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).
@@ -24,7 +25,17 @@ I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wr
 
 ## Usage
 
-Write your blog entries as HTML contents/snippets (may be extended to .md etc. in the future) with some additional meta information, e.g. &#8216;entry1.txt&#8217;:
+Write your blog entries as text, markdown or HTML.
+
+Then run __gresiblos__ on it:
+
+```shell
+python src\gresiblos.py entry1.txt
+```
+
+&#8230; and it will convert it into a complete HTML page using the default template stored in ```./data/```.
+
+You may as well add some meta data, storing the blog entry contents under the ```contents``` key:
 
 ```
 state:release
@@ -42,13 +53,11 @@ This is my very first blog post!
 
 All information starts with a key that is separated from the value by a &#8216;:&#8217;. Multi-line values start with a new line after the key and the &#8216;:&#8217; and are closed with &#8216;===&#8217;. More information about the format of the entries is given on the [&#8216;Entry Definition&#8217; page](./use_entries.md). Please note that the content is kept as-is in the current version.
 
-Then run __gresiblos__ on it:
+Again, when starting gresiblos, the meta information and the contents will be stored at marked places within the template.
 
-```shell
-python src\gresiblos.py entry1.txt
-```
+__gresiblos__ templates support placeholders that be filled by meta information, as well as optional fields.
 
-&#8230; and it will convert it into a complete HTML page using the default template stored in ```./data/```. The command line options and an in-depth usage is described on the [&#8216;Running on the Command Line&#8217; page](./use_cmd.md).
+You may find further information at [the gresiblos documentation pages](https://gresiblos.readthedocs.io/en/latest/).
 
 
 

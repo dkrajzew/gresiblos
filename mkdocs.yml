@@ -27,8 +27,8 @@ nav:
     - Usage:
         - Entry Definitions: use_entries.md
         - Template: use_template.md
-        - Command Line: use_cmd.md
         - Index: use_index.md
+        - Command Line: use_cmd.md
     - Links: links.md
     - API:
         - gresiblos: api_gresiblos.md
