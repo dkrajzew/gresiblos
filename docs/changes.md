@@ -12,6 +12,7 @@
 * new
     * the indentation level of the index file can now be set using the option **--index-indent *&lt;INT&gt;***
     * you may use a different format for the date in your entries than the ISO-format by defining it using **--date-format *&lt;DATE_FORMAT&gt;***
+    * added the possibility to skip document parts using the begin/end tags __\[\[:?*&lt;FIELD_NAME&gt;*:\]\]__ and __\[\[:*&lt;FIELD_NAME&gt;*?:\]\]__ if __*&lt;FIELD_NAME&gt;*__ is not set
 
 
 ## gresiblos-0.4.2 (29.12.2024)

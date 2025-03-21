@@ -13,7 +13,7 @@
 
 ## Introduction
 
-__gresiblos__ is a simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from (optionally annotated) text files. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__.
+__gresiblos__ is a simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from optionally annotated text, markdown, or HTML files. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__.
 
 __gresiblos__ reads blog entries from files that may include some meta information and embeds the contents into a template. In addition, it generates a json-file with meta information about the entries. __gresiblos__ comes with a php-file that realises browsing, as well as with a php-file that generates rss and atom feeds.
 
@@ -57,8 +57,21 @@ python src\gresiblos.py entry1.txt
 __gresiblos__ is licensed under the [GPLv3 license](license.md).
 
 
+
+## Examples
+
+__gresiblos__ is used at the following pages:
+
+* <https://www.krajzewicz.de/blog/index.php>: my own blog
+
+
+
 ## Status
 
-__gresiblos__ works as intended for me, but lacks quite some features of enterprise systems. Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__...
+__gresiblos__ works as intended for me, but lacks quite some features of enterprise systems.
+
+The next steps to release 1.0 will involve some refactorings, including API changes.
+
+Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__...
 
 

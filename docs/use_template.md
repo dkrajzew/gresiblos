@@ -2,7 +2,7 @@
 
 ## Basics
 
-The template is a plain HTML file, set up as you like it.
+The template is a plain HTML file. Set up as you like it.
 
 The entry&#39;s meta data will be inserted into the file at places marked by **\[\[:*&lt;FIELD_NAME&gt;*:\]\]**.
 
@@ -66,11 +66,45 @@ This is my very first blog post!
 </html>
 ```
 
-## Missing Values and Defaults
+
+
+## Default values
 
 Parts of the template with replacements defined using __\[\[:*&lt;FIELD_NAME&gt;*:\]\]__ with no value in their data for ***&lt;FIELD_NAME&gt;*** will be replaced by an empty string (will be removed). In the example above, **\[\[:includes:\]\]** is such a case.
 
 But you may define defaults for the values using the format __\[\[:*&lt;FIELD_NAME&gt;*|*&lt;DEFAULT&gt;*:\]\]__. In this case, this part will be replaced by the according value from the blog entry data if ***&lt;FIELD_NAME&gt;*** is set. Otherwise, ***&lt;DEFAULT&gt;*** will be inserted. In the example above, **\[\[:author2|Daniel Krajzewicz:\]\]** is such a case, as **author2** is not set.
+
+
+
+## Optional parts
+
+In some cases, it is not sufficient to use defaults. If, e.g., no topics are given, it would not make sense to have a default:
+
+```html
+...
+<div><p><b>Topics:</b> </p></div>
+...
+```
+
+__gresiblos__ allows to tag parts of the document if a certain meta data is not given. The begin of the optional document part is marked using __\[\[:?*&lt;FIELD_NAME&gt;*:\]\]__, the end using __\[\[:*&lt;FIELD_NAME&gt;*?:\]\]__. The contents between those markers are removed if __&lt;FIELD_NAME&gt;__ is not given in the meta information. So
+
+```html
+...
+<div><p><b>Abstract:</b> [[:abstract:]]</p></div>
+[[:?topics:]]<div><p><b>Topics:</b> [[:topics:]]</p></div>[[:topics?:]]
+<div id="blogCopy">&copy; Copyright [[:author:]], [[:date:]]</div>
+...
+```
+
+will - in the case ___topics___ is not within the meta information - become
+
+```html
+...
+<div><p><b>Abstract:</b> A very first introduction into blogging</p></div>
+
+<div id="blogCopy">&copy; Copyright Daniel Krajzewicz, 26.12.2024 19:25</div>
+...
+```
 
 
 

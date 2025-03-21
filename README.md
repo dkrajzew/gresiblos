@@ -14,7 +14,7 @@
 
 ## Introduction
 
-__gresiblos__ is a simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from (optionally annotated) text files. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__. 
+__gresiblos__ is a simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from optionally annotated text, markdown, or HTML files. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__.
 
 __gresiblos__ reads blog entries from files that may include some meta information and embeds the contents into a template. In addition, it generates a json-file with meta information about the entries. __gresiblos__ comes with a php-file that realises browsing, as well as with a php-file that generates rss and atom feeds.
 
@@ -26,7 +26,17 @@ I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wr
 
 ## Usage
 
-Write your blog entries as HTML contents/snippets (may be extended to .md etc. in the future) with some additional meta information, e.g. &#8216;entry1.txt&#8217;:
+Write your blog entries as text, markdown or HTML.
+
+Then run __gresiblos__ on it:
+
+```shell
+python src\gresiblos.py entry1.txt
+```
+
+&#8230; and it will convert it into a complete HTML page using the default template stored in ```./data/```.
+
+You may as well add some meta data, storing the blog entry contents under the ```contents``` key:
 
 ```
 state:release
@@ -44,15 +54,11 @@ This is my very first blog post!
 
 All information starts with a key that is separated from the value by a &#8216;:&#8217;. Multi-line values start with a new line after the key and the &#8216;:&#8217; and are closed with &#8216;===&#8217;. Please note that the content is kept as-is in the current version.
 
-Then run __gresiblos__ on it:
+Again, when starting gresiblos, the meta information and the contents will be stored at marked places within the template.
 
-```shell
-python src\gresiblos.py entry1.txt
-```
+__gresiblos__ templates support placeholders that be filled by meta information, as well as optional fields.
 
-&#8230; and it will convert it into a complete HTML page using the default template stored in ```./data/```.
-
-
+You may find further information at [the gresiblos documentation pages](https://gresiblos.readthedocs.io/en/latest/).
 
 ## License
 
@@ -91,27 +97,51 @@ Besides, you may __download the current release__ here:
 
 ## Status
 
-__gresiblos__ works as intended for me, but lacks quite some features of enterprise systems. Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__...
+__gresiblos__ works as intended for me, but lacks quite some features of enterprise systems.
+
+The next steps to release 1.0 will involve some refactorings, including API changes.
+
+Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__...
+
+
+
+## Examples
+
+__gresiblos__ is used at the following pages:
+
+* <https://www.krajzewicz.de/blog/index.php>: my own blog
+
 
 
 ## ChangeLog
 
-## gresiblos-0.4.2 (29.12.2024)
-* fixing tests...
+## gresiblos-0.6.0 (to come)
+* improving the documentation
+* changed the license from GPLv3 to BSD
+* changes:
+    * **important**: the replacement pattern for values within the template changed from __%*&lt;FIELD_NAME&gt;*%__ to __\[\[:*&lt;FIELD_NAME&gt;*:\]\]__
+    * topics are stored as list in the index file
+    * the filenames in the index now include the extension
+    * the **state** attribute was removed from the index file
+    * replaced option **--have-php-index** by the option **--topic-format *&lt;FORMAT&gt;*** which directly defines how each of a blog entries topics shall be rendered when embedding it into the template
+    * removed options **--default-author *&lt;NAME&gt;***, **--default-copyright-date *&lt;DATE&gt;***, **--default-state *&lt;STATE&gt;*** and introduced replacements with defaults instead
+* new
+    * the indentation level of the index file can now be set using the option **--index-indent *&lt;INT&gt;***
+    * you may use a different format for the date in your entries than the ISO-format by defining it using **--date-format *&lt;DATE_FORMAT&gt;***
+    * added the possibility to skip document parts using the begin/end tags __\[\[:?*&lt;FIELD_NAME&gt;*:\]\]__ and __\[\[:*&lt;FIELD_NAME&gt;*?:\]\]__ if __*&lt;FIELD_NAME&gt;*__ is not set
 
-## gresiblos-0.4.0 (29.12.2024)
-* support for entry index (using json and php)
-    * generates a json-file with entries
-    * added a php-file which lists entries or topics
-    * added a php-file which generates an rss or an atom feed
-* updated the documentation
-* fixing packaging
-
-## gresiblos-0.2.0 (27.12.2024)
-
-* Initial version
-  * processes entries and saves them
 
 
+## Older versions
+
+You may find the complete change log at [the gresiblos documentation pages](https://gresiblos.readthedocs.io/en/latest/).
+
+
+
+## Closing
+
+Well, have fun. If you have any comments / ideas / issues, please submit them to [gresiblos' issue tracker](https://github.com/dkrajzew/gresiblos/issues) on github or drop me a mail.
+
+Don't forget to spend a star!
 
 
