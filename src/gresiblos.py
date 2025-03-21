@@ -61,7 +61,6 @@ class Entry:
             fields (Dict[str, str]): The entry's meta data and content.
         """
         self._fields = {} if fields is None else fields.copy()
-        
 
 
     def get(self, key):
@@ -153,6 +152,7 @@ class Entry:
         if "date" not in self._fields:
             t = os.path.getmtime(filename)
             self._fields["date"] = datetime.datetime.fromtimestamp(t).isoformat(' ')
+
 
     def embed(self, template, topics_format, apply_markdown=False, prettifier=None):
         """
