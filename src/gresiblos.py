@@ -358,7 +358,7 @@ def main(arguments : List[str] = []) -> int:
                                      epilog='(c) Daniel Krajzewicz 2016-2025')
     parser.add_argument("input")
     parser.add_argument('--version', action='version', version='%(prog)s 0.4.2')
-    parser.add_argument("-t", "--template", default="data/template.html", help="Defines the template to use")
+    parser.add_argument("-t", "--template", default=None, help="Defines the template to use")
     parser.add_argument("-e", "--extension", default="html", help="Sets the extension of the built file(s)")
     parser.add_argument("-s", "--state", default=None, help="Use only files with the given state(s)")
     parser.add_argument("-d", "--destination", default="./", help="Sets the path to store the generated file(s) into")
@@ -393,8 +393,11 @@ def main(arguments : List[str] = []) -> int:
     files = nfiles
     files.sort()
     # load template file
+    template_path = args.template
+    if template_path is None:
+        template_path = os.path.join(os.path.split(__file__)[0], "..", "data", "template.html")
     template = ""
-    with open(args.template, mode="r", encoding="utf-8") as fd:
+    with open(template_path, mode="r", encoding="utf-8") as fd:
         template = fd.read()
     # process files
     prettifier = None if not _have_degrotesque or not args.degrotesque else degrotesque.Degrotesque()
