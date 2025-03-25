@@ -1,12 +1,10 @@
-Download and Installation
-=========================
+# Download and Installation
 
 __gresiblos__ is a set of [Python](https://www.python.org/) modules and scripts. To run them, you must have [Python](https://www.python.org/) installed. If you have not installed [Python](https://www.python.org/), yet, please read instructions on installing [Python](https://www.python.org/) first.
 
 
 
-Installing Python
------------------
+## Installing Python
 
 [Python](https://www.python.org/) is an interpreted programming language. For running __gresiblos__ and other scripts written in Python you have to install [Python](https://www.python.org/) itself, first.
 
@@ -41,4 +39,25 @@ Besides, you may __download the current release__ here:
 
 * [gresiblos-0.4.2.zip](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.4.2.zip)
 * [gresiblos-0.4.2.tar.gz](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.4.2.tar.gz)
+
+
+## Installing add-ons
+
+__gresiblos__ currently supports two add-ons that are not part of the standard installation: markdown, and degrotesque.
+
+### Installing markdown
+
+__markdown__ is a text markup language for generating HTML, see !!!. Install __markdown__ using:
+
+```console
+python -m pip install markdown
+```
+
+### Installing degrotesque
+
+__degrotesque__ is a text text processor which replaces basic characters by some nicer, typographic, counterparts, see !!!. Install __degrotesque__ using:
+
+```console
+python -m pip install degrotesque
+```
 

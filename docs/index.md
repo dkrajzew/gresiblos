@@ -13,9 +13,9 @@
 
 ## Introduction
 
-__gresiblos__ is a simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from optionally annotated text, markdown, or HTML files. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__.
+__gresiblos__ is a simple blogging system written in [Python](https://www.python.org/).  __gresiblos__ generates static HTML pages from optionally annotated text, markdown, or HTML files. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__.
 
-__gresiblos__ reads blog entries from files that may include some meta information and embeds the contents into a template. In addition, it generates a json-file with meta information about the entries. __gresiblos__ comes with a php-file that realises browsing, as well as with a php-file that generates rss and atom feeds.
+__gresiblos__ reads blog entries from files and embeds their contents into a template. Optionally, it generates list of files sorted in chronological order or by the title, as well as a json-file with meta information about the entries. __gresiblos__ comes with a php-file that realises browsing, as well as with a php-file that generates rss and atom feeds.
 
 
 ## Background
@@ -27,38 +27,17 @@ I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wr
 
 Write your blog entries as text, markdown or HTML.
 
-Then run __gresiblos__ on it:
+Then run __gresiblos__ on them:
 
 ```shell
-python src\gresiblos.py entry1.txt
+python src\gresiblos.py ./blog/*.txt
 ```
 
-&#8230; and it will convert it into a complete HTML page using the default template stored in ```./data/```.
+&#8230; and it will convert them into complete HTML pages using a default template.
 
-You may as well add some meta data, storing the blog entry contents under the ```contents``` key:
-
-```
-state:release
-title:My first blog entry
-filename:my-first-blog-entry
-author:Daniel Krajzewicz
-date:26.12.2024 19:25
-topics:blog,example
-abstract:A very first introduction into blogging
-content:
-<b>Hello there!</b><br/>
-This is my very first blog post!
-===
-```
-
-All information starts with a key that is separated from the value by a &#8216;:&#8217;. Multi-line values start with a new line after the key and the &#8216;:&#8217; and are closed with &#8216;===&#8217;. More information about the format of the entries is given on the [&#8216;Entry Definition&#8217; page](./use_entries.md). Please note that the content is kept as-is in the current version.
-
-Again, when starting gresiblos, the meta information and the contents will be stored at marked places within the template.
-
-__gresiblos__ templates support placeholders that be filled by meta information, as well as optional fields.
+For more complete blogs - including authors, abstracts, release dates, etc., the entries can be enriched by meta information. __gresiblos__ templates support placeholders that are filled with given meta information, as well as optional fields.
 
 You may find further information at [the gresiblos documentation pages](https://gresiblos.readthedocs.io/en/latest/).
-
 
 
 ## License
