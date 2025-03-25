@@ -43,7 +43,7 @@ setuptools.setup(
         'Tracker': 'https://github.com/dkrajzew/gresiblos/issues',
         'Discussions': 'https://github.com/dkrajzew/gresiblos/discussions',
     },
-    license='GPLv3',
+    license='BSD',
     # add modules
     packages=["src", "data", "tools", "tests"],
     package_data={
