@@ -27,7 +27,7 @@ nav:
     - Developer Docs:
         - How To Release: release.md
     - ChangeLog: changes.md
-    - License (GPL): license.md
+    - License (BSD): license.md
     - Legal: legal.md
 
 markdown_extensions:
