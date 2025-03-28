@@ -1,26 +1,7 @@
 # Download and Installation
 
-__gresiblos__ is a set of [Python](https://www.python.org/) modules and scripts. To run them, you must have [Python](https://www.python.org/) installed. If you have not installed [Python](https://www.python.org/), yet, please read instructions on installing [Python](https://www.python.org/) first.
+__gresiblos__ is a [Python](https://www.python.org/) script. To run it, you must have [Python](https://www.python.org/) installed. If you have not installed [Python](https://www.python.org/), yet, please read instructions on installing [Python](https://www.python.org/) first (see below).
 
-
-
-## Installing Python
-
-[Python](https://www.python.org/) is an interpreted programming language. For running __gresiblos__ and other scripts written in Python you have to install [Python](https://www.python.org/) itself, first.
-
-For installing [Python](https://www.python.org/), use an installer for your system from <https://www.python.org>.
-
-You should as well install **pip**, a package manager for python. After installing [Python](https://www.python.org/), you should be able to install **pip** using:
-
-```console
-python get-pip.py
-```
-
-You may upgrade pip using:
-
-```console
-pip install --upgrade pip
-```
 
 
 ## Installing gresiblos
@@ -43,11 +24,11 @@ Besides, you may __download the current release__ here:
 
 ## Installing add-ons
 
-__gresiblos__ currently supports two add-ons that are not part of the standard installation: markdown, and degrotesque.
+__gresiblos__ currently supports two add-ons that are not part of the standard installation: **markdown**, and **degrotesque**.
 
 ### Installing markdown
 
-__markdown__ is a text markup language for generating HTML, see !!!. Install __markdown__ using:
+__markdown__ is a text markup language for generating HTML, see <https://python-markdown.github.io/>. Install __markdown__ using:
 
 ```console
 python -m pip install markdown
@@ -55,9 +36,29 @@ python -m pip install markdown
 
 ### Installing degrotesque
 
-__degrotesque__ is a text text processor which replaces basic characters by some nicer, typographic, counterparts, see !!!. Install __degrotesque__ using:
+__degrotesque__ is a text processor which replaces basic characters by some nicer, typographic, counterparts, see <https://degrotesque.readthedocs.io/en/latest/>. Install __degrotesque__ using:
 
 ```console
 python -m pip install degrotesque
 ```
+
+
+## Installing Python
+
+[Python](https://www.python.org/) is an interpreted programming language. For running __gresiblos__ and other scripts written in Python you have to install [Python](https://www.python.org/) itself, first.
+
+For installing [Python](https://www.python.org/), use an installer for your system from <https://www.python.org>.
+
+You should as well install **pip**, a package manager for python. After installing [Python](https://www.python.org/), you should be able to install **pip** using:
+
+```console
+python get-pip.py
+```
+
+You may upgrade pip using:
+
+```console
+pip install --upgrade pip
+```
+
 

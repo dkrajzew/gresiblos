@@ -361,7 +361,7 @@ def main(arguments : List[str] = []) -> int:
     parser.add_argument("-t", "--template", default=None, help="Defines the template to use")
     parser.add_argument("-e", "--extension", default="html", help="Sets the extension of the built file(s)")
     parser.add_argument("-s", "--state", default=None, help="Use only files with the given state(s)")
-    parser.add_argument("-d", "--destination", default="./", help="Sets the path to store the generated file(s) into")
+    parser.add_argument("-d", "--destination", default="./gresiblos_out", help="Sets the path to store the generated file(s) into")
     parser.add_argument("--index-output", default=None, help="Writes the index to the named file")
     parser.add_argument("--chrono-output", default=None, help="Writes the named file with entries in chronological order")
     parser.add_argument("--alpha-output", default=None, help="Writes the named file with entries in alphabetical order")

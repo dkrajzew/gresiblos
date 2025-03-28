@@ -24,18 +24,12 @@ extra_javascript:
 nav:
     - Home: index.md
     - Installation: install.md
-    - Usage:
-        - Entry Definitions: use_entries.md
-        - Template: use_template.md
-        - Index: use_index.md
-        - Command Line: use_cmd.md
+    - Usage: usage.md
+    - Command Line: use_cmd.md
     - Links: links.md
-    - API:
-        - gresiblos: api_gresiblos.md
-    - Developer Docs:
-        - How To Release: release.md
     - ChangeLog: changes.md
-    - License (GPL): license.md
+    - License (BSD): license.md
+    - API: api_gresiblos.md
     - Legal: legal.md
 
 markdown_extensions:

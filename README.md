@@ -14,9 +14,9 @@
 
 ## Introduction
 
-__gresiblos__ is a simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from optionally annotated text, markdown, or HTML files. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__.
+__gresiblos__ is a simple blogging system written in [Python](https://www.python.org/).  __gresiblos__ generates static HTML pages from optionally annotated text, markdown, or HTML files. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__.
 
-__gresiblos__ reads blog entries from files that may include some meta information and embeds the contents into a template. In addition, it generates a json-file with meta information about the entries. __gresiblos__ comes with a php-file that realises browsing, as well as with a php-file that generates rss and atom feeds.
+__gresiblos__ reads blog entries from files that may include some meta information and embeds the contents into a template. Optionally, in addition, it generates a json-file with meta information about the entries. __gresiblos__ comes with a php-file that realises browsing, as well as with a php-file that generates rss and atom feeds.
 
 
 ## Background

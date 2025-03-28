@@ -40,11 +40,11 @@ Again, the content may be plain text, markdown, or HTML.
 
 ### Automatically derived meta information
 
-Some meta information is derived from the given entries and does not have to be explicitly given - though it may make sense to define it explicitely.
+Some meta information can be derived from the given entries and does not have to be explicitly given - though it usually makes sense to define it explicitely.
 
 This information includes:
 
-* **filename**: If not given as meta information, the filename of the original entry is kept (without the extension); please note that Python's urllib.parse.quote method is applied to obtain a URL-valid name
+* **filename**: If not given as meta information, the filename of the original entry is kept (without the extension); please note that Python's ```urllib.parse.quote``` method is applied to obtain a URL-valid name
 * **date**: The entry file's modification date is used if no explicit meta information about the creaion date is given
 * **title**: The entry file name is used as title if no meta information about the title is given
 
