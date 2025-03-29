@@ -43,7 +43,7 @@ setuptools.setup(
         'Tracker': 'https://github.com/dkrajzew/gresiblos/issues',
         'Discussions': 'https://github.com/dkrajzew/gresiblos/discussions',
     },
-    license='BSD',
+    license='BSD-3-Clause',
     # add modules
     packages = ["gresiblos", "data", "tools", "tests"],
     package_data={
@@ -66,7 +66,6 @@ setuptools.setup(
         "Environment :: Console",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
         "Intended Audience :: Developers",
         "Intended Audience :: Information Technology",
