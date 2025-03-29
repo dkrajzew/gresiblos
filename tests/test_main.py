@@ -20,7 +20,7 @@ __status__     = "Production"
 # --- imports ---------------------------------------------------------------
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
+sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "gresiblos"))
 from util import pname
 import gresiblos
 
@@ -133,6 +133,6 @@ def test_main_version(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert pname(captured.out) == """gresiblos 0.4.2
+    assert pname(captured.out) == """gresiblos 0.6.0
 """
     assert pname(captured.err) == ""

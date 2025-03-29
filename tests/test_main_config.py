@@ -20,7 +20,7 @@ __status__     = "Production"
 # --- imports ---------------------------------------------------------------
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
+sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "gresiblos"))
 import shutil
 from pathlib import Path
 from util import pname, copy_from_data, fread, TEST_PATH
