@@ -35,7 +35,7 @@ python src\gresiblos.py ./blog/*.txt
 
 &#8230; and it will convert them into complete HTML pages using a default template.
 
-For more complete blogs - including authors, abstracts, release dates, etc., the entries can be enriched by meta information. __gresiblos__ templates support placeholders that are filled with given meta information, as well as optional fields.
+For more complete blogs &mdash; including authors, abstracts, release dates, etc., the entries can be enriched by meta information. __gresiblos__ templates support placeholders that are filled with given meta information, as well as optional fields.
 
 You may find further information at [the gresiblos documentation pages](https://gresiblos.readthedocs.io/en/latest/).
 
@@ -60,7 +60,7 @@ __gresiblos__ works as intended for me, but lacks quite some features of enterpr
 
 The next steps to release 1.0 will involve some refactorings, including API changes.
 
-Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__...
+Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__&hellip;
 
 
 

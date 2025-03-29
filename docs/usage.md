@@ -2,7 +2,7 @@
 
 ## Basics
 
-Assume you would have diverse text files with notes stored in a folder named "blog". You can use __gresiblos__ to turn them into browseable set of HTML pages with the following call:
+Assume you would have diverse text files with notes stored in a folder named &ldquo;blog&rdquo;. You can use __gresiblos__ to turn them into browseable set of HTML pages with the following call:
 
 ```shell
 > gresiblos blog/*.txt
@@ -10,7 +10,7 @@ Assume you would have diverse text files with notes stored in a folder named "bl
 
 The contents of the text files will be embedded into the default template and written to the destination folder **./gresiblos_out**.
 
-The generated files will be named as your text files, though Python's ```urllib.parse.quote``` is applied to encode characters that are not compliant for being the part of an URL. Some further information is extracted from the files: the __date__ using the file's change date, and the __title__ using the file's file name.
+The generated files will be named as your text files, though Python&apos;s ```urllib.parse.quote``` is applied to encode characters that are not compliant for being the part of an URL. Some further information is extracted from the files: the __date__ using the file&apos;s change date, and the __title__ using the file&apos;s file name.
 
 In the following, you will find some information about how the entries and the template can be enriched for obtaining full-fledged blog pages.
 
@@ -33,18 +33,18 @@ Please note that the __markdown__ module is not part of the standard installatio
 
 ### Meta information
 
-You may add meta information to your files. __gresiblos__ recognises / assumes that your files have meta information embedded if the first line contains a ':'.
+You may add meta information to your files. __gresiblos__ recognises / assumes that your files have meta information embedded if the first line contains a &lsquo;:&rsquo;.
 
 #### Defining meta information
 
-Meta information is stored in the files to process. Each meta information is stored as a key/value pair, separated by a ':', e.g.:
+Meta information is stored in the files to process. Each meta information is stored as a key/value pair, separated by a &lsquo;:&rsquo;, e.g.:
 
 ```
 author: Daniel Krajzewicz
 date: 2025-03-23
 ```
 
-You may as well include multi-line fields. In this case, the key is stored in one line and the line is closed with a ':'. The following lines are interpreted as the respective value until a line that contains "===" only occurs:
+You may as well include multi-line fields. In this case, the key is stored in one line and the line is closed with a &lsquo;:&rsquo;. The following lines are interpreted as the respective value until a line that contains &ldquo;===&rdquo; only occurs:
 
 ```
 references:
@@ -65,8 +65,8 @@ This is my first blog entry. I am so excited!
 
 Some meta information will be derived from the given entries if you do not define it. This includes:
 
-* **filename**: If not given as meta information, the filename of the original entry is kept (without the extension); please note that Python's ```urllib.parse.quote``` method is applied to obtain a URL-valid name
-* **date**: The entry file's modification date is used if no explicit meta information about the creation date is given
+* **filename**: If not given as meta information, the filename of the original entry is kept (without the extension); please note that Python&apos;s ```urllib.parse.quote``` method is applied to obtain a URL-valid name
+* **date**: The entry file&apos;s modification date is used if no explicit meta information about the creation date is given
 * **title**: The entry file name is used as title if no meta information about the title is given
 
 
@@ -82,7 +82,7 @@ As soon as you plan to use the supported files ```index.php``` and ```feed.php``
 
 It does make sense to add the following meta information:
 
-* **topics**: The topics of the blog post (a list of topics, divided by ',')
+* **topics**: The topics of the blog post (a list of topics, divided by &lsquo;,&rsquo;)
 * **abstract**: A short description of the post or a short introduction (should be probably one sentence or a small paragraph long)
 
 
@@ -198,7 +198,7 @@ __gresiblos__ allows to tag parts of the document if a certain meta data is not 
 ...
 ```
 
-will - in the case ___topics___ is not within the meta information - become
+will &mdash; in the case ___topics___ is not within the meta information &mdash; become
 
 ```html
 ...
