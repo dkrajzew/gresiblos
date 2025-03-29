@@ -85,6 +85,7 @@ import datetime
 import urllib.parse
 from typing import List
 from typing import Dict
+from typing import Any
 _have_degrotesque = False
 try: 
     import degrotesque
@@ -207,7 +208,7 @@ class Entry:
             self._fields["date"] = datetime.datetime.fromtimestamp(t).isoformat(' ')
 
 
-    def embed(self, template : str, topics_format : str, apply_markdown : bool=False, prettifier : degrotesque.Degrotesque=None) -> str:
+    def embed(self, template : str, topics_format : str, apply_markdown : bool=False, prettifier : Any=None) -> str:
         """
         Embeds entry data into a template.
 
@@ -215,7 +216,7 @@ class Entry:
             template (str): The HTML template to embed data into.
             topics_format (str): The format for topics in the template.
             apply_markdown (bool): Whether the content/title/abstract shall be parsed as markdown.
-            prettifier (degrotesque.Degrotesque): The degrotesque instance to prettify the content/title/abstract.
+            prettifier (Any): The degrotesque instance to prettify the content/title/abstract.
 
         Returns:
             (str): The template with embedded entry data.
@@ -354,7 +355,7 @@ class PlainStorage:
 
 
 
-def write_list(title : str, dest_path : str, template : str, entries : List[Dict[str, str]], topic_format : str, apply_markdown : bool, prettifier : degrotesque.Degrotesque):
+def write_list(title : str, dest_path : str, template : str, entries : List[Dict[str, str]], topic_format : str, apply_markdown : bool, prettifier : Any):
     """
     Generates an unordered list from the given list of entry metadata, embeds
     it into the given template, and saves the result under the given path.
@@ -366,7 +367,7 @@ def write_list(title : str, dest_path : str, template : str, entries : List[Dict
         entries (List[Dict[str, str]]): A list of entry metadata.
         topic_format (str): The format of topics to use.
         apply_markdown (bool): Whether markdown shall be applied.
-        prettifier (degrotesque.Degrotesque): The prettyfier to use.
+        prettifier (Any): The prettyfier to use.
     """
     content = "<ul>\n"
     for entry in entries:
@@ -387,7 +388,7 @@ def write_list(title : str, dest_path : str, template : str, entries : List[Dict
         fdo.write(c)
 
 
-def main(arguments : List[str] = []) -> int:
+def main(arguments : List[str] = None) -> int:
     """
     The main method using parameters from the command line.
 
