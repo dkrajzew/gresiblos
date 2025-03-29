@@ -101,7 +101,7 @@ __gresiblos__ works as intended for me, but lacks quite some features of enterpr
 
 The next steps to release 1.0 will involve some refactorings, including API changes.
 
-Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__...
+Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__&hellip;
 
 
 
@@ -140,8 +140,8 @@ You may find the complete change log at [the gresiblos documentation pages](http
 
 ## Closing
 
-Well, have fun. If you have any comments / ideas / issues, please submit them to [gresiblos' issue tracker](https://github.com/dkrajzew/gresiblos/issues) on github or drop me a mail.
+Well, have fun. If you have any comments / ideas / issues, please submit them to [gresiblos&apos; issue tracker](https://github.com/dkrajzew/gresiblos/issues) on github or drop me a mail.
 
-Don't forget to spend a star!
+Don&apos;t forget to spend a star!
 
 
