@@ -61,7 +61,7 @@ __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2016-2025, Daniel Krajzewicz"
 __credits__    = "Daniel Krajzewicz"
 __license__    = "BSD"
-__version__    = "0.4.2"
+__version__    = "0.6.0"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
 __status__     = "Production"
@@ -414,7 +414,7 @@ def main(arguments : List[str] = []) -> int:
                                      description='greyrat\'s simple blog system',
                                      epilog='(c) Daniel Krajzewicz 2016-2025')
     parser.add_argument("input")
-    parser.add_argument('--version', action='version', version='%(prog)s 0.4.2')
+    parser.add_argument('--version', action='version', version='%(prog)s 0.6.0')
     parser.add_argument("-t", "--template", default=None, help="Defines the template to use")
     parser.add_argument("-e", "--extension", default="html", help="Sets the extension of the built file(s)")
     parser.add_argument("-s", "--state", default=None, help="Use only files with the given state(s)")
