@@ -1,12 +1,65 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-# ===========================================================================
-"""gresiblos - greyrat's simple blog system."""
+"""gresiblos - greyrat's simple blog system.
+
+gresiblos is implemented in Python. It is started on the command line.
+
+gresiblos reads one or multiple blog entry files and embeds them into a template. The template file to use is defined using the option --template <TEMPLATE\> / -t <TEMPLATE\>.
+
+Generated pages are saved as .html-files per default. You may change it (e.g. to php) using the option --extension <EXTENSION\> / -e <EXTENSION\>.
+
+The entries may include the meta-information state. You may filter entries to process by setting the option --state <STATE\> / -s <STATE\> to the one that shall be processed.
+
+The path to store the generated pages into can be defined using the option --destination <PATH\> / -d <PATH\>. The default is ./.
+
+Besides the generated entries, _gresiblos__ may generate a json-index file that lists the entries with some meta-information. The option --index-output <FILE\> will generate the index and save it under the given file name. The index is usually stored as plain json in a single line. For a prettier output, the indentation can be changed using the option --index-indent <INT\>.
+
+In addition, files that contain the list of entries embedded into the content section of the template file can be generated. Use the option --chrono-output <FILE\> to generate a file with the entries sorted in chronological order and/or the option --alpha-output <FILE\> with the entries sorted alphabetically.
+
+To convert contents from markdown to HTML before embedding them, use the option --markdown. When set, the content, the title, and the abstract will be converted. Use the option --degrotesque to apply the degrotesque type setter on the contents before embedding them. Please note that you need to install markdown and/or degrotesque by yourself.
+
+When embedding the meta-information of single blog entries into the template, the topics are split and rendered individually before being embedded. To allow for using them as links, the rendering format can be set using the option --topic-format <TOPIC_FORMAT\>. Please note that this string should include something like “[[:topic:]]”, what is replaced by the topic itself. The date meta information is assumed to be in ISO-format (e.g. 2025-01-08 19:26:00), but may be adapted using the option --date-format <DATE_FORMAT\>.
+
+The entry/entries to process are given as the last parameter. Multiple entries can be given divided by a ‘,’. Wildcards are accepted as well, so giving ./entries/*.txt will process all files with the extension .txt within the folder entries.
+
+The options can be stored in a configuration file which can be passed to gresiblos using the option --config <CONFIGURATION\> / -c <CONFIGURATION\>. Options given on the command line will overwrite the options set in the configuration file.
+Examples
+
+python gresiblos ./entries/*
+
+Generates pages using the default template ./data/template.html and the blog entries located in entries and writes them to ./.
+
+python gresiblos --template mytemplate.html --state release ./entries/*
+
+Generates pages using the template mytemplate.html and the blog entries located in entries and writes them to ./. Processes only entries with state=release.
+Command line arguments
+
+The script can be started on the command line with the following options:
+
+* --config <CFG_FILE\> / -c <CFG_FILE\>: Reads the named configuration file
+* --template <TEMPLATE_FILE\> / -t <TEMPLATE_FILE\>: Uses the named template file
+* --extension <EXTENSION\> / -e <EXTENSION\>: The extension to use for the generated files
+* --state <STATE\> / -s <STATE\>: The state the entries must have for being processed
+* --destination <PATH\> / -d <PATH\>: The path to save the generated file(s) into
+* --index-output <FILE\>: The name of the file to write the index containing information about the entries to
+* --chrono-output <FILE\>: The name of the file with the list of entries, sorted in chronological order, embedded into the template to
+* --alpha-output <FILE\>: The name of the file with the list of entries, sorted in alphabetically, embedded into the template to
+* --markdown: When set, the contents, the title, and the abstract are converted from markdown to HTML
+* --degrotesque: When set, the degrotesque type setter is applied
+* --topic-format <TOPIC_FORMAT\>: Defines how each of the topics is rendered
+* --index-indent <INT\>: Defines the indent used for the index file
+* --date-format <DATE_FORMAT\>: Defines the time format used
+* --help / -h: Show a help message
+* --version: Show the version information
+
+gresiblos requires one parameter:
+
+* input: The files (entries) to read, separated by ‘,’; accepts wildcards as well
+"""
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2016-2025, Daniel Krajzewicz"
-__credits__    = ["Daniel Krajzewicz"]
+__credits__    = "Daniel Krajzewicz"
 __license__    = "BSD"
 __version__    = "0.4.2"
 __maintainer__ = "Daniel Krajzewicz"
