@@ -53,7 +53,7 @@ class Entry:
         _fields (Dict[str, str]): A dictionary to store entry fields.
     """
 
-    def __init__(self, fields=None):
+    def __init__(self, fields : Dict[str, str]=None):
         """
         Initializes an Entry object with default values.
 
@@ -63,7 +63,7 @@ class Entry:
         self._fields = {} if fields is None else fields.copy()
 
 
-    def get(self, key):
+    def get(self, key : str) -> str:
         """
         Returns the value of a field by key.
 
@@ -76,20 +76,20 @@ class Entry:
         return self._fields[key]
 
 
-    def has_key(self, key):
+    def has_key(self, key : str) -> bool:
         """
         Returns whether the key is known.
 
         Args:
-            key (str): The key of the field to retrieve.
+            key (str): The key of the field to check for.
 
         Returns:
-            (str): The value of the field.
+            (bool): Whether the named field is stored.
         """
         return key in self._fields
 
 
-    def get_isodate(self, date_format):
+    def get_isodate(self, date_format : str) -> str:
         """
         Returns the date in isoformat, if given. Otherwise return None.
 
@@ -106,7 +106,7 @@ class Entry:
         return datetime.datetime.strptime(self._fields["date"], date_format).isoformat(' ')
 
 
-    def load(self, filename):
+    def load(self, filename : str):
         """
         Loads entry data from a filename.
 
@@ -154,7 +154,7 @@ class Entry:
             self._fields["date"] = datetime.datetime.fromtimestamp(t).isoformat(' ')
 
 
-    def embed(self, template, topics_format, apply_markdown=False, prettifier=None):
+    def embed(self, template : str, topics_format : str, apply_markdown : bool=False, prettifier : degrotesque.Degrotesque=None) -> str:
         """
         Embeds entry data into a template.
 
@@ -162,7 +162,7 @@ class Entry:
             template (str): The HTML template to embed data into.
             topics_format (str): The format for topics in the template.
             apply_markdown (bool): Whether the content/title/abstract shall be parsed as markdown.
-            prettifier (Degrotesque): The degrotesque instance to prettify the content/title/abstract.
+            prettifier (degrotesque.Degrotesque): The degrotesque instance to prettify the content/title/abstract.
 
         Returns:
             (str): The template with embedded entry data.
@@ -231,7 +231,7 @@ class PlainStorage:
         self._meta = {}
 
 
-    def add(self, filename, entry, date_format):
+    def add(self, filename : str, entry : Entry, date_format : str):
         """
         Adds an entry's metadata to the storage.
 
@@ -253,7 +253,7 @@ class PlainStorage:
         self._meta[filename]["filename"] = filename
 
 
-    def get_meta(self):
+    def get_meta(self) -> Dict[str, Dict[str, str]]:
         """
         Returns all stored metadata.
 
@@ -263,7 +263,7 @@ class PlainStorage:
         return self._meta
 
 
-    def _get_entries(self):
+    def _get_entries(self) -> List[Dict[str, str]]:
         """
         Returns all stored entries' metadata as a list.
 
@@ -276,7 +276,7 @@ class PlainStorage:
         return ret
 
 
-    def get_entries_chronological(self):
+    def get_entries_chronological(self) -> List[Dict[str, str]]:
         """
         Returns all stored entries' metadata as a list, sorted by date.
 
@@ -288,7 +288,7 @@ class PlainStorage:
         return ret
 
 
-    def get_entries_alphabetical(self):
+    def get_entries_alphabetical(self) -> List[Dict[str, str]]:
         """
         Returns all stored entries' metadata as a list, sorted by title (alphabetic).
 
@@ -301,15 +301,19 @@ class PlainStorage:
 
 
 
-def write_list(title, dest_path, template, entries, topic_format, apply_markdown, prettifier):
+def write_list(title : str, dest_path : str, template : str, entries : List[Dict[str, str]], topic_format : str, apply_markdown : bool, prettifier : degrotesque.Degrotesque):
     """
     Generates an unordered list from the given list of entry metadata, embeds
     it into the given template, and saves the result under the given path.
 
     Args:
+        title (str): The title to apply.
         dest_path (str): The filename of the entry.
-        template (str): The Entry object containing metadata.
+        template (str): The template to fill.
         entries (List[Dict[str, str]]): A list of entry metadata.
+        topic_format (str): The format of topics to use.
+        apply_markdown (bool): Whether markdown shall be applied.
+        prettifier (degrotesque.Degrotesque): The prettyfier to use.
     """
     content = "<ul>\n"
     for entry in entries:
