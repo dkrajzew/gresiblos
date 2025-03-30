@@ -1,6 +1,6 @@
 # ChangeLog for gresiblos
 
-## gresiblos-0.6.0 (to come)
+## gresiblos-0.6.0 (30.03.2025)
 * changed the license from GPLv3 to BSD
 * improving the documentation
 * changes:
