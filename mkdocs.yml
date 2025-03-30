@@ -25,7 +25,7 @@ nav:
     - Home: index.md
     - Installation: install.md
     - Usage: usage.md
-    - Command Line: use_cmd.md
+    - Command Line: cmd.md
     - Links: links.md
     - ChangeLog: changes.md
     - License (BSD): license.md
@@ -45,7 +45,7 @@ plugins:
     - mkdocstrings:
         handlers:
             python:
-                paths: [./src]
+                paths: [./gresiblos]
                 options:
                     filters: [""]
                     show_source: False
