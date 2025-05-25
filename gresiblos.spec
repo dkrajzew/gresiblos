@@ -1,7 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 a = Analysis(
-    ['src/gresiblos.py'],
-    pathex=["src"],
+    ['gresiblos/gresiblos.py'],
+    pathex=["gresiblos"],
     binaries=[],
     datas=[],
     hiddenimports=[],
@@ -19,7 +19,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='degrotesque',
+    name='gresiblos',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

@@ -30,8 +30,8 @@ Write your blog entries as text, markdown or HTML.
 
 Then run __gresiblos__ on it:
 
-```shell
-python src\gresiblos.py entry1.txt
+```console
+python gresiblos entry1.txt
 ```
 
 &#8230; and it will convert it into a complete HTML page using the default template stored in ```./data/```.
