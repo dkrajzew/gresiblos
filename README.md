@@ -19,19 +19,14 @@ __gresiblos__ is a simple blogging system written in [Python](https://www.python
 __gresiblos__ reads blog entries from files that may include some meta information and embeds the contents into a template. Optionally, in addition, it generates a json-file with meta information about the entries. __gresiblos__ comes with a php-file that realises browsing, as well as with a php-file that generates rss and atom feeds.
 
 
-## Background
-
-I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wrote it. __gresiblos__ has some additional features &#8212; like the inclusion of custom JavaScript and CSS files &#8212; I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).
-
-
 ## Usage
 
 Write your blog entries as text, markdown or HTML.
 
 Then run __gresiblos__ on it:
 
-```console
-python gresiblos entry1.txt
+```shell
+python src\gresiblos.py entry1.txt
 ```
 
 &#8230; and it will convert it into a complete HTML page using the default template stored in ```./data/```.
@@ -60,13 +55,23 @@ __gresiblos__ templates support placeholders that be filled by meta information,
 
 You may find further information at [the gresiblos documentation pages](https://gresiblos.readthedocs.io/en/latest/).
 
+
+## Documentation
+
+__gresiblos__ is meant to be run on the command line. The documentation consists of a [user manual](https://gresiblos.readthedocs.io/en/latest/usage.html) and a [man-page like call documentation](https://gresiblos.readthedocs.io/en/latest/cmd.html) (yet incomplete).
+
+If you want to contribute, you may check the [API documentation](https://gresiblos.readthedocs.io/en/latest/api_gresiblos.html) or visit [gresiblos on github](https://github.com/dkrajzew/gresiblos) where besides the code you may find the [gresiblos issue tracker](https://github.com/dkrajzew/gresiblos/issues) or [discussions about gresiblos](https://github.com/dkrajzew/gresiblos/discussions).
+
+Additional documentation includes a page with relevant [links](https://gresiblos.readthedocs.io/en/latest/links.html) or the [ChangeLog](https://gresiblos.readthedocs.io/en/latest/changes.html).
+
+
+
 ## License
 
 __gresiblos__ is licensed under the [BSD license](license.md).
 
 
-
-## Installing gresiblos
+## Installation
 
 The __current version__ is [gresiblos-0.6.0](https://github.com/dkrajzew/gresiblos/releases/tag/0.6.0).
 
@@ -76,23 +81,7 @@ You may __install gresiblos__ using
 python -m pip install gresiblos
 ```
 
-You may __download a copy or fork the code__ at [gresiblos&apos;s github page](https://github.com/dkrajzew/gresiblos).
-
-Besides, you may __download the current release__ here:
-
-* [gresiblos-0.6.0.zip](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.6.0.zip)
-* [gresiblos-0.6.0.tar.gz](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.6.0.tar.gz)
-
-
-
-## Further Documentation
-
-* A complete documentation is located at <https://gresiblos.readthedocs.io/en/latest/>
-* Discussions are open at <https://github.com/dkrajzew/gresiblos/discussions>
-* The github repository is located at: <https://github.com/dkrajzew/gresiblos>
-* The issue tracker is located at: <https://github.com/dkrajzew/gresiblos/issues>
-* The PyPI page is located at: <https://pypi.org/project/gresiblos/>
-
+Or download the [latest release](https://github.com/dkrajzew/gresiblos/releases/tag/0.6.0) from github. You may as well clone or download the [gresiblos git repository](https://github.com/dkrajzew/gresiblos.git). There is also a page about [installing gresiblos](https://gresiblos.readthedocs.io/en/latest/install.html) which lists further options.
 
 
 ## Status
@@ -113,9 +102,14 @@ __gresiblos__ is used at the following pages:
 
 
 
-## ChangeLog
+## Changes
 
-## gresiblos-0.6.0 (30.03.2025)
+### gresiblos-0.8.0 (to come)
+* improved installation (can be now included as a module and executed on the command line after being installed with pip
+* some linting
+* corrected documentation
+
+### gresiblos-0.6.0 (30.03.2025)
 * improving the documentation
 * changed the license from GPLv3 to BSD
 * changes:
@@ -130,12 +124,14 @@ __gresiblos__ is used at the following pages:
     * you may use a different format for the date in your entries than the ISO-format by defining it using **--date-format *&lt;DATE_FORMAT&gt;***
     * added the possibility to skip document parts using the begin/end tags __\[\[:?*&lt;FIELD_NAME&gt;*:\]\]__ and __\[\[:*&lt;FIELD_NAME&gt;*?:\]\]__ if __*&lt;FIELD_NAME&gt;*__ is not set
 
-
-
-## Older versions
+### Older versions
 
 You may find the complete change log at [the gresiblos documentation pages](https://gresiblos.readthedocs.io/en/latest/).
 
+
+## Background
+
+I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wrote it. __gresiblos__ has some additional features &#8212; like the inclusion of custom JavaScript and CSS files &#8212; I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).#
 
 
 ## Closing
