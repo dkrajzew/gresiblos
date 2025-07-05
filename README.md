@@ -73,7 +73,7 @@ __gresiblos__ is licensed under the [BSD license](license.md).
 
 ## Installation
 
-The __current version__ is [gresiblos-0.6.0](https://github.com/dkrajzew/gresiblos/releases/tag/0.6.0).
+The __current version__ is [gresiblos-0.8.0](https://github.com/dkrajzew/gresiblos/releases/tag/0.8.0).
 
 You may __install gresiblos__ using
 
@@ -81,7 +81,7 @@ You may __install gresiblos__ using
 python -m pip install gresiblos
 ```
 
-Or download the [latest release](https://github.com/dkrajzew/gresiblos/releases/tag/0.6.0) from github. You may as well clone or download the [gresiblos git repository](https://github.com/dkrajzew/gresiblos.git). There is also a page about [installing gresiblos](https://gresiblos.readthedocs.io/en/latest/install.html) which lists further options.
+Or download the [latest release](https://github.com/dkrajzew/gresiblos/releases/tag/0.8.0) from github. You may as well clone or download the [gresiblos git repository](https://github.com/dkrajzew/gresiblos.git). There is also a page about [installing gresiblos](https://gresiblos.readthedocs.io/en/latest/install.html) which lists further options.
 
 
 ## Status
@@ -131,7 +131,7 @@ You may find the complete change log at [the gresiblos documentation pages](http
 
 ## Background
 
-I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wrote it. __gresiblos__ has some additional features &#8212; like the inclusion of custom JavaScript and CSS files &#8212; I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).#
+I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wrote it. __gresiblos__ has some additional features &#8212; like the inclusion of custom JavaScript and CSS files &#8212; I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).
 
 
 ## Closing
