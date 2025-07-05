@@ -1,14 +1,11 @@
-gresiblos Information
-=================
+# Legal Information
 
-Impressum
----------
+## Impressum
 
 These pages were made by Daniel Krajzewicz, 2024&ndash;2025.
 
 
-Disclaimer
-----------
+## Disclaimer
 
 * I have chosen some links to external pages as I think they contain useful information. But it may happen that some ninjas come and change the contents of the pages I link to or a proton hits the RAM of an NSA server and the link goes into a new direction or someone thinks you should not read what I liked once and then… What?
   **That&apos;s why I want to state that I am not responsible for the contents of the pages I link to.**
@@ -17,9 +14,9 @@ Disclaimer
 * The software did not hurt me, yet, and even worked as expected and there are even tests that prove it. Nonetheless, I cannot guarantee it will work as you expect.
 
 
-Regards
--------
+## Regards
 
-**gresiblos** uses [mkdocs](https://www.mkdocs.org/) together with the [material extension](https://squidfunk.github.io/mkdocs-material/).
+**gresiblos** uses [pytest](https://docs.pytest.org/en/stable/) and [mkdocs](https://www.mkdocs.org/) together with the [material extension](https://squidfunk.github.io/mkdocs-material/). I like mkdocs very much. The docs can be read online at [readthedocs](https://gresiblos.readthedocs.io/en/latest/). Thank you!
 
+**gresiblos** is validated using Python's pytest and coverage libraries and the coverage is tracked on coveralls. Thank you!
 

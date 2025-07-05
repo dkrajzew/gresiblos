@@ -39,13 +39,13 @@ The options can be stored in a configuration file which can be passed to __gresi
 ## Examples
 
 ```shell
-python gresiblos ./entries/*
+gresiblos ./entries/*
 ```
 
 Generates pages using the default template ```./data/template.html``` and the blog entries located in ```entries``` and writes them to ```./```.
 
 ```shell
-python gresiblos --template mytemplate.html --state release ./entries/*
+gresiblos --template mytemplate.html --state release ./entries/*
 ```
 
 Generates pages using the template ```mytemplate.html``` and the blog entries located in ```entries``` and writes them to ```./```. Processes only entries with state=release.

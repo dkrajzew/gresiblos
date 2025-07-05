@@ -2,7 +2,7 @@
 
 ## Basics
 
-Assume you would have diverse text files with notes stored in a folder named &ldquo;blog&rdquo;. You can use __gresiblos__ to turn them into browseable set of HTML pages with the following call:
+Assume you would have diverse text files with notes stored in a folder named &ldquo;blog&rdquo;. You can use __gresiblos__ to turn them into browsable set of HTML pages with the following call:
 
 ```shell
 > gresiblos blog/*.txt
@@ -254,9 +254,9 @@ Please note that this information must be given in each entry&#39;s meta-data.
 
 #### php Index Browser
 
-A very simple (and probably very naive) php page for listing entries, topics, an topic entries is included and can be found at  [***&lt;GRESIBLOS&gt;*/tools/index.php**](https://github.com/dkrajzew/gresiblos/tree/main/tools/index.php).
+A very simple (and probably very naive) php page for listing entries, topics, an topic entries is included and can be found at  [***&lt;GRESIBLOS&gt;*/tools/index.php**](https://github.com/dkrajzew/gresiblos/blob/main/tools/index.php).
 
 #### php RSS/Atom Feed Generator
 
-A script that generates an RSS or an Atom feed using the index is given included and can be found at [***&lt;GRESIBLOS&gt;*/tools/feed.php**](https://github.com/dkrajzew/gresiblos/tree/main/tools/feed.php).
+A script that generates an RSS or an Atom feed using the index is given included and can be found at [***&lt;GRESIBLOS&gt;*/tools/feed.php**](https://github.com/dkrajzew/gresiblos/blob/main/tools/feed.php).
 

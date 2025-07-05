@@ -1,5 +1,11 @@
 # ChangeLog for gresiblos
 
+## gresiblos-0.8.0 (to come)
+* improved installation (can be now included as a module and executed on the command line after being installed with pip
+* some linting
+* corrected documentation
+
+
 ## gresiblos-0.6.0 (30.03.2025)
 * changed the license from GPLv3 to BSD
 * improving the documentation
@@ -19,6 +25,7 @@
 ## gresiblos-0.4.2 (29.12.2024)
 * fixing tests&#8230;
 
+
 ## gresiblos-0.4.0 (29.12.2024)
 * support for entry index (using json and php)
     * generates a json-file with entries
@@ -26,6 +33,7 @@
     * added a php-file which generates an rss or an atom feed
 * updated the documentation
 * fixing packaging
+
 
 ## gresiblos-0.2.0 (27.12.2024)
 * Initial version
