@@ -1,67 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""gresiblos - greyrat's simple blog system.
-
-gresiblos is implemented in Python. It is started on the command line.
-
-gresiblos reads one or multiple blog entry files and embeds them into a template. The template file to use is defined using the option --template <TEMPLATE\> / -t <TEMPLATE\>.
-
-Generated pages are saved as .html-files per default. You may change it (e.g. to php) using the option --extension <EXTENSION\> / -e <EXTENSION\>.
-
-The entries may include the meta-information state. You may filter entries to process by setting the option --state <STATE\> / -s <STATE\> to the one that shall be processed.
-
-The path to store the generated pages into can be defined using the option --destination <PATH\> / -d <PATH\>. The default is ./.
-
-Besides the generated entries, _gresiblos__ may generate a json-index file that lists the entries with some meta-information. The option --index-output <FILE\> will generate the index and save it under the given file name. The index is usually stored as plain json in a single line. For a prettier output, the indentation can be changed using the option --index-indent <INT\>.
-
-In addition, files that contain the list of entries embedded into the content section of the template file can be generated. Use the option --chrono-output <FILE\> to generate a file with the entries sorted in chronological order and/or the option --alpha-output <FILE\> with the entries sorted alphabetically.
-
-To convert contents from markdown to HTML before embedding them, use the option --markdown. When set, the content, the title, and the abstract will be converted. Use the option --degrotesque to apply the degrotesque type setter on the contents before embedding them. Please note that you need to install markdown and/or degrotesque by yourself.
-
-When embedding the meta-information of single blog entries into the template, the topics are split and rendered individually before being embedded. To allow for using them as links, the rendering format can be set using the option --topic-format <TOPIC_FORMAT\>. Please note that this string should include something like “[[:topic:]]”, what is replaced by the topic itself. The date meta information is assumed to be in ISO-format (e.g. 2025-01-08 19:26:00), but may be adapted using the option --date-format <DATE_FORMAT\>.
-
-The entry/entries to process are given as the last parameter. Multiple entries can be given divided by a ‘,’. Wildcards are accepted as well, so giving ./entries/*.txt will process all files with the extension .txt within the folder entries.
-
-The options can be stored in a configuration file which can be passed to gresiblos using the option --config <CONFIGURATION\> / -c <CONFIGURATION\>. Options given on the command line will overwrite the options set in the configuration file.
-Examples
-
-python gresiblos ./entries/*
-
-Generates pages using the default template ./data/template.html and the blog entries located in entries and writes them to ./.
-
-python gresiblos --template mytemplate.html --state release ./entries/*
-
-Generates pages using the template mytemplate.html and the blog entries located in entries and writes them to ./. Processes only entries with state=release.
-Command line arguments
-
-The script can be started on the command line with the following options:
-
-* --config <CFG_FILE\> / -c <CFG_FILE\>: Reads the named configuration file
-* --template <TEMPLATE_FILE\> / -t <TEMPLATE_FILE\>: Uses the named template file
-* --extension <EXTENSION\> / -e <EXTENSION\>: The extension to use for the generated files
-* --state <STATE\> / -s <STATE\>: The state the entries must have for being processed
-* --destination <PATH\> / -d <PATH\>: The path to save the generated file(s) into
-* --index-output <FILE\>: The name of the file to write the index containing information about the entries to
-* --chrono-output <FILE\>: The name of the file with the list of entries, sorted in chronological order, embedded into the template to
-* --alpha-output <FILE\>: The name of the file with the list of entries, sorted in alphabetically, embedded into the template to
-* --markdown: When set, the contents, the title, and the abstract are converted from markdown to HTML
-* --degrotesque: When set, the degrotesque type setter is applied
-* --topic-format <TOPIC_FORMAT\>: Defines how each of the topics is rendered
-* --index-indent <INT\>: Defines the indent used for the index file
-* --date-format <DATE_FORMAT\>: Defines the time format used
-* --help / -h: Show a help message
-* --version: Show the version information
-
-gresiblos requires one parameter:
-
-* input: The files (entries) to read, separated by ‘,’; accepts wildcards as well
-"""
+"""gresiblos - greyrat's simple blog system."""
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2016-2025, Daniel Krajzewicz"
 __credits__    = "Daniel Krajzewicz"
 __license__    = "BSD"
-__version__    = "0.6.0"
+__version__    = "0.8.0"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
 __status__     = "Production"
@@ -73,8 +18,6 @@ __status__     = "Production"
 
 # --- imports ---------------------------------------------------------------
 import os
-import shutil
-import time
 import sys
 import argparse
 import configparser
@@ -86,16 +29,18 @@ import urllib.parse
 from typing import List
 from typing import Dict
 from typing import Any
-_have_degrotesque = False
-try: 
+_HAVE_DEGROTESQUE = False
+try:
     import degrotesque
-    _have_degrotesque = True
-except: pass
-_have_markdown = False
-try: 
+    _HAVE_DEGROTESQUE = True
+except:
+    pass
+_HAVE_MARKDOWN = False
+try:
     import markdown
-    _have_markdown = True
-except: pass
+    _HAVE_MARKDOWN = True
+except:
+    pass
 
 
 # --- class definitions -----------------------------------------------------
@@ -107,7 +52,7 @@ class Entry:
         _fields (Dict[str, str]): A dictionary to store entry fields.
     """
 
-    def __init__(self, fields : Dict[str, str]=None):
+    def __init__(self, fields : Dict[str, str]={}):
         """
         Initializes an Entry object with default values.
 
@@ -160,7 +105,7 @@ class Entry:
         return datetime.datetime.strptime(self._fields["date"], date_format).isoformat(' ')
 
 
-    def load(self, filename : str):
+    def load(self, filename : str) -> None:
         """
         Loads entry data from a filename.
 
@@ -243,7 +188,7 @@ class Entry:
         # replace plain, given fields
         for field_key in self._fields:
             value = self._fields[field_key]
-            if field_key=="content" or field_key=="title" or field_key=="abstract":
+            if field_key in ["content", "title", "abstract"]:
                 if apply_markdown:
                     value = markdown.markdown(value)
                     if value.startswith("<p>") and value.endswith("</p>"):
@@ -285,7 +230,7 @@ class PlainStorage:
         self._meta = {}
 
 
-    def add(self, filename : str, entry : Entry, date_format : str):
+    def add(self, filename : str, entry : Entry, date_format : str) -> None:
         """
         Adds an entry's metadata to the storage.
 
@@ -355,7 +300,7 @@ class PlainStorage:
 
 
 
-def write_list(title : str, dest_path : str, template : str, entries : List[Dict[str, str]], topic_format : str, apply_markdown : bool, prettifier : Any):
+def write_list(title : str, dest_path : str, template : str, entries : List[Dict[str, str]], topic_format : str, apply_markdown : bool, prettifier : Any) -> None:
     """
     Generates an unordered list from the given list of entry metadata, embeds
     it into the given template, and saves the result under the given path.
@@ -388,6 +333,7 @@ def write_list(title : str, dest_path : str, template : str, entries : List[Dict
         fdo.write(c)
 
 
+# --- functions -------------------------------------------------------------
 def main(arguments : List[str] = None) -> int:
     """
     The main method using parameters from the command line.
@@ -406,16 +352,16 @@ def main(arguments : List[str] = None) -> int:
     args, remaining_argv = conf_parser.parse_known_args(arguments)
     if args.config is not None:
         if not os.path.exists(args.config):
-            print ("gresiblos: error: configuration file '%s' does not exist" % str(args.config), file=sys.stderr)
+            print (f"gresiblos: error: configuration file '{args.config}' does not exist", file=sys.stderr)
             raise SystemExit(2)
         config = configparser.ConfigParser()
         config.read([args.config])
         defaults.update(dict(config.items("gresiblos")))
     parser = argparse.ArgumentParser(prog='gresiblos', parents=[conf_parser],
-                                     description='greyrat\'s simple blog system',
+                                     description="greyrat's simple blog system",
                                      epilog='(c) Daniel Krajzewicz 2016-2025')
-    parser.add_argument("input")
-    parser.add_argument('--version', action='version', version='%(prog)s 0.6.0')
+    parser.add_argument("input" if "input" not in defaults else "--input")
+    parser.add_argument('--version', action='version', version='%(prog)s 0.8.0')
     parser.add_argument("-t", "--template", default=None, help="Defines the template to use")
     parser.add_argument("-e", "--extension", default="html", help="Sets the extension of the built file(s)")
     parser.add_argument("-s", "--state", default=None, help="Use only files with the given state(s)")
@@ -432,10 +378,10 @@ def main(arguments : List[str] = None) -> int:
     args = parser.parse_args(remaining_argv)
     # check
     ok = True
-    if not _have_degrotesque and args.degrotesque:
+    if not _HAVE_DEGROTESQUE and args.degrotesque:
         print ("gresiblos: error: degrotesque application is set, but degrotesque is not installed", file=sys.stderr)
         ok = False
-    if not _have_markdown and args.markdown:
+    if not _HAVE_MARKDOWN and args.markdown:
         print ("gresiblos: error: markdown application is set, but markdown is not installed", file=sys.stderr)
         ok = False
     if not ok:
@@ -453,15 +399,15 @@ def main(arguments : List[str] = None) -> int:
     # load template file
     template_path = args.template
     if template_path is None:
-        template_path = os.path.join(os.path.split(__file__)[0], "..", "data", "template.html")
+        template_path = os.path.join(os.path.split(__file__)[0], "data", "template.html")
     template = ""
     with open(template_path, mode="r", encoding="utf-8") as fd:
         template = fd.read()
     # process files
-    prettifier = None if not _have_degrotesque or not args.degrotesque else degrotesque.Degrotesque()
+    prettifier = None if not _HAVE_DEGROTESQUE or not args.degrotesque else degrotesque.Degrotesque()
     #if prettifier:
     #    prettifier.set_format("html")
-    apply_markdown = _have_markdown and args.markdown
+    apply_markdown = _HAVE_MARKDOWN and args.markdown
     storage = PlainStorage()
     for file in files:
         print (f"Processing '{file}'")
@@ -501,8 +447,11 @@ def main(arguments : List[str] = None) -> int:
     return 0
 
 
+def script_run() -> int:
+    """Execute from command line."""
+    sys.exit(main(sys.argv[1:])) # pragma: no cover
+
+
 # -- main check
 if __name__ == '__main__':
-    ret = main(sys.argv[1:]) # pragma: no cover
-    sys.exit(ret) # pragma: no cover
-
+    sys.exit(main(sys.argv[1:])) # pragma: no cover
