@@ -5,10 +5,10 @@ from __future__ import print_function
 """gresiblos - Setup module."""
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2014-2024, Daniel Krajzewicz"
+__copyright__  = "Copyright 2014-2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "BSD"
-__version__    = "0.6.0"
+__version__    = "0.8.0"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
 __status__     = "Development"
@@ -29,7 +29,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="gresiblos",
-    version="0.6.0",
+    version="0.8.0",
     author="dkrajzew",
     author_email="d.krajzewicz@gmail.com",
     description="A simple private blogging system",
@@ -44,20 +44,12 @@ setuptools.setup(
         'Discussions': 'https://github.com/dkrajzew/gresiblos/discussions',
     },
     license='BSD-3-Clause',
-    # add modules
-    packages = ["gresiblos", "data", "tools", "tests"],
-    package_data={
-        'data': ['entry1.txt', 'entry2.txt', 'template.html'],
-        'tests': ['cfg1.cfg', 'cfg2.cfg',
-            'entries_sum.json', 'entries_sum_php.json',
-            'entry1_sum.json', 'entry1_sum_php.json', 'entry2_sum.json',
-            'my-first-blog-entry.html', 'my-first-blog-entry_phpindex.html',
-            'my-second-blog-entry.html'],
-        'tools': ['feed.php', 'index.php'],
-    },
+    packages = ["", "data", "tools"],
+    package_dir = { "": "gresiblos", "data": "gresiblos/data", "tools": "gresiblos/tools" },
+    package_data={"": ["data/*", "tools/*"]},
     entry_points = {
-        'console_scripts': [
-            'gresiblos = gresiblos.gresiblos:main'
+        "console_scripts": [
+            "gresiblos = gresiblos:script_run"
         ]
     },
     # see https://pypi.org/classifiers/
