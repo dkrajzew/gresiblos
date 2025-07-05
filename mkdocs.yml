@@ -4,7 +4,7 @@ site_description: greyrat's simple blog system.
 site_author: Daniel Krajzewicz
 docs_dir: ./docs
 
-repo_url: https://github.com/dkrajzew/gresiblos.git
+repo_url: https://github.com/dkrajzew/gresiblos
 edit_uri: ""
 
 theme:
@@ -27,9 +27,9 @@ nav:
     - Usage: usage.md
     - Command Line: cmd.md
     - Links: links.md
+    - API: api_gresiblos.md
     - ChangeLog: changes.md
     - License (BSD): license.md
-    - API: api_gresiblos.md
     - Legal: legal.md
 
 markdown_extensions:
