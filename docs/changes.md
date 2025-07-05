@@ -1,7 +1,8 @@
 # ChangeLog for gresiblos
 
-## gresiblos-0.8.0 (to come)
+## gresiblos-0.8.0 (05.07.2025)
 * improved installation (can be now included as a module and executed on the command line after being installed with pip
+* the default template is now included in the package
 * some linting
 * corrected documentation
 
