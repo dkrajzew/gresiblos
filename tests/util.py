@@ -7,7 +7,7 @@ __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2024-2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "BSD"
-__version__    = "0.6.0"
+__version__    = "0.8.0"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
 __status__     = "Production"
@@ -18,10 +18,14 @@ __status__     = "Production"
 
 
 # --- imports ---------------------------------------------------------------
+import sys
 import os
+sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "gresiblos"))
+import gresiblos
 import shutil
 import re
 TEST_PATH = os.path.split(__file__)[0]
+TEMPLATE_PATH = os.path.split(gresiblos.__file__)[0]
 
 
 
@@ -44,9 +48,16 @@ def fread(filepath, patch_date=False):
     return c1
     
 
-def copy_from_data(tmp_path, files):
+def copy_template(tmp_path):
+    shutil.copy(os.path.join((TEMPLATE_PATH), "data", "template.html"), str(tmp_path / "template.html"))
+
+def copy_files(tmp_path, files):
     for file in files:
-        shutil.copy(os.path.join((TEST_PATH), "..", "data", file), str(tmp_path / file))
+        shutil.copy(os.path.join((TEST_PATH), file), str(tmp_path / file))
+
+def copy_files_and_template(tmp_path, files):
+    copy_template(tmp_path)
+    copy_files(tmp_path, files)
 
 
     

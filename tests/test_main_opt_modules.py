@@ -7,7 +7,7 @@ __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "BSD"
-__version__    = "0.6.0"
+__version__    = "0.8.0"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
 __status__     = "Production"
@@ -24,7 +24,7 @@ sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "gresiblos"))
 from unittest.mock import patch
 from importlib import reload
 from pathlib import Path
-from util import pname, copy_from_data, fread, pdate, TEST_PATH
+from util import pname, copy_files_and_template, fread, pdate, TEST_PATH
 import gresiblos
 
 
@@ -32,7 +32,7 @@ import gresiblos
 # --- test functions ----------------------------------------------------------
 def test_main_entry3_plain(capsys, tmp_path):
     """Parsing first example (by name)"""
-    copy_from_data(tmp_path, ["template.html", "entry3_optional.txt"])
+    copy_files_and_template(tmp_path, ["entry3_optional.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
     captured = capsys.readouterr()
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry3_optional.txt'
@@ -48,7 +48,7 @@ def test_main_entry3_degrotesque_missing(capsys, tmp_path):
     # https://stackoverflow.com/questions/51044068/test-for-import-of-optional-dependencies-in-init-py-with-pytest-python-3-5
     with patch.dict(sys.modules, {'degrotesque': None}):
         reload(sys.modules['gresiblos'])
-        copy_from_data(tmp_path, ["template.html", "entry3_optional.txt"])
+        copy_files_and_template(tmp_path, ["entry3_optional.txt"])
         try:
             ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--degrotesque", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
             assert False # pragma: no cover
@@ -64,7 +64,7 @@ def test_main_entry3_degrotesque_missing(capsys, tmp_path):
 
 def test_main_entry3_degrotesque(capsys, tmp_path):
     """Parsing first example (by name)"""
-    copy_from_data(tmp_path, ["template.html", "entry3_optional.txt"])
+    copy_files_and_template(tmp_path, ["entry3_optional.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--degrotesque", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
     captured = capsys.readouterr()
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry3_optional.txt'
@@ -80,7 +80,7 @@ def test_main_entry3_markdown_missing(capsys, tmp_path):
     # https://stackoverflow.com/questions/51044068/test-for-import-of-optional-dependencies-in-init-py-with-pytest-python-3-5
     with patch.dict(sys.modules, {'markdown': None}):
         reload(sys.modules['gresiblos'])
-        copy_from_data(tmp_path, ["template.html", "entry3_optional.txt"])
+        copy_files_and_template(tmp_path, ["entry3_optional.txt"])
         try:
             ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--markdown", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
             assert False # pragma: no cover
@@ -96,7 +96,7 @@ def test_main_entry3_markdown_missing(capsys, tmp_path):
 
 def test_main_entry3_markdown(capsys, tmp_path):
     """Parsing first example (by name)"""
-    copy_from_data(tmp_path, ["template.html", "entry3_optional.txt"])
+    copy_files_and_template(tmp_path, ["entry3_optional.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--markdown", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
     captured = capsys.readouterr()
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry3_optional.txt'
@@ -112,7 +112,7 @@ def test_main_entry3_missing2(capsys, tmp_path):
     # https://stackoverflow.com/questions/51044068/test-for-import-of-optional-dependencies-in-init-py-with-pytest-python-3-5
     with patch.dict(sys.modules, {'degrotesque': None, 'markdown': None}):
         reload(sys.modules['gresiblos'])
-        copy_from_data(tmp_path, ["template.html", "entry3_optional.txt"])
+        copy_files_and_template(tmp_path, ["entry3_optional.txt"])
         try:
             ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--markdown", "--degrotesque", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
             assert False # pragma: no cover
@@ -129,7 +129,7 @@ gresiblos: error: markdown application is set, but markdown is not installed
 
 def test_main_entry3_both(capsys, tmp_path):
     """Parsing first example (by name)"""
-    copy_from_data(tmp_path, ["template.html", "entry3_optional.txt"])
+    copy_files_and_template(tmp_path, ["entry3_optional.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--degrotesque", "--markdown", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
     captured = capsys.readouterr()
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry3_optional.txt'
