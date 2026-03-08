@@ -1,5 +1,8 @@
 # Usage
 
+__gresiblos__ is implemented in [Python](https://www.python.org/). It is started on the command line.
+
+
 ## Basics
 
 Assume you would have diverse text files with notes stored in a folder named &ldquo;blog&rdquo;. You can use __gresiblos__ to turn them into browsable set of HTML pages with the following call:

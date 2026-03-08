@@ -1,4 +1,6 @@
-# Running on the Command Line
+# Man page
+
+__gresiblos__ is a simple private blogging system.
 
 ## Synopsis
 

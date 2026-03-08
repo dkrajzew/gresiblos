@@ -15,35 +15,44 @@ __gresiblos__ - a simple private blogging system
 
 ## Introduction
 
-__gresiblos__ is a simple blogging system written in [Python](https://www.python.org/).  __gresiblos__ generates static HTML pages from optionally annotated text, markdown, or HTML files. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__.
+__gresiblos__ is a radically simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from text, markdown, or HTML files. It has no dependencies and as static pages are generated, no server backend is needed. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__.
 
-__gresiblos__ reads blog entries from files that may include some meta information and embeds the contents into a template. Optionally, in addition, it generates a json-file with meta information about the entries. __gresiblos__ comes with a php-file that realises browsing, as well as with a php-file that generates rss and atom feeds.
+__gresiblos__ reads blog entries from files that may include some meta information and embeds their contents into a template. Optionally, it additionally generates: a) a json-file with meta information about the entries, b) lists of the entries sorted alphabetically or chronologically. __gresiblos__ comes with a php-file that realises browsing, as well as with a php-file that generates rss and atom feeds.
+
+
+## Installation
+
+The current version is 0.8.0. You may install the latest release using pip:
+
+```console
+python -m pip install gresiblos
+```
+
+There is a page about [installing gresiblos](install.md) that lists further options.
 
 
 ## Usage
 
-Write your blog entries as text, markdown or HTML.
+__gresiblos__ is started on the command line. Write your blog entries as text, markdown or HTML.
 
-Then run __gresiblos__ on them:
+Assuming they are stored in the 'blog' folder, run __gresiblos__ on them like:
 
 ```shell
 gresiblos ./blog/*.txt
 ```
 
-&#8230; and it will convert them into complete HTML pages using a default template.
+&#8230; and it will convert them into complete HTML pages using a default template and store them into the folder 'gresiblos_out'.
 
-For more complete blogs &mdash; including authors, abstracts, release dates, etc., the entries can be enriched by meta information. __gresiblos__ templates support placeholders that are filled with given meta information, as well as optional fields.
-
-You may find further information at [the gresiblos documentation pages](https://gresiblos.readthedocs.io/en/latest/).
+For more complete blogs &mdash; including authors, abstracts, release dates, etc. &mdash; the entries can be enriched by meta information. __gresiblos__ templates support placeholders that are filled with given meta information, as well as optional fields.
 
 
 ## Documentation
 
-__gresiblos__ is meant to be run on the command line. The documentation consists of a [user manual](usage.md) and a [man-page like call documentation](cmd.md).
+The documentation consists of a [user manual](usage.md) and a [man-page like call documentation](cmd.md).
 
-If you want to contribute, you may check the [API documentation](api_gresiblos.md) or visit [gresiblos on github](https://github.com/dkrajzew/gresiblos) where besides the code you may find the [gresiblos issue tracker](https://github.com/dkrajzew/gresiblos/issues) or a [discussions about gresiblos](https://github.com/dkrajzew/gresiblos/discussions) sections.
+If you want to contribute, you may check the [API documentation](api_gresiblos.md) or visit [gresiblos on github](https://github.com/dkrajzew/gresiblos) where besides the code you may find the [gresiblos issue tracker](https://github.com/dkrajzew/gresiblos/issues) or a [discussions about gresiblos](https://github.com/dkrajzew/gresiblos/discussions) section.
 
-Additional documentation includes a page with relevant [links](links.md), the [ChangeLog](changes.md), as well as the [license](license.md). __gresiblos__ is licensed under the [BSD license](license.md).
+Additional documentation includes a page with relevant [links](links.md) or the [ChangeLog](changes.md). You may find the complete documentation at the [gresiblos readthedocs pages](https://gresiblos.readthedocs.io/).
 
 
 
@@ -54,7 +63,7 @@ __gresiblos__ is licensed under the [GPL-3.0 license](license.md).
 
 ## Background
 
-I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wrote it. __gresiblos__ has some additional features &#8212; like the inclusion of custom JavaScript and CSS files &#8212; I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).
+I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wrote it. __gresiblos__ has some specific features &#8212; like the inclusion of custom JavaScript and CSS files &#8212; I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).
 
 
 
@@ -62,7 +71,7 @@ I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wr
 
 __gresiblos__ works as intended for me, but lacks quite some features of enterprise systems. The next steps to release 1.0 will involve some refactorings, including API changes.
 
-Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__&hellip;
+Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__ by [adding an issue](https://github.com/dkrajzew/gresiblos/issues) or by dropping me a mail.
 
 
 

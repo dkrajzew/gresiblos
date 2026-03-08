@@ -3,13 +3,13 @@
 __gresiblos__ is a [Python](https://www.python.org/) script. To run it, you must have [Python](https://www.python.org/) installed. If you have not installed [Python](https://www.python.org/), yet, please read instructions on installing [Python](https://www.python.org/) first (see below).
 
 
-## Installing gresiblos for Python
+## Installing gresiblos
 
 The current version is [gresiblos-0.8.0](https://github.com/dkrajzew/gresiblos/releases/tag/0.8.0).
 
 You have different options for installing __gresiblos__.
 
-### Installing the package from PyPi
+### Installing from PyPi
 
 You may __install gresiblos__ using
 
@@ -17,7 +17,7 @@ You may __install gresiblos__ using
 python -m pip install gresiblos
 ```
 
-You may consider building a virtual environment, first.
+This will install __gresiblos__ as a script that may be directly called on the command line as well as the [Python](https://www.python.org/) module which you may import using ```import gresiblos```. The PyPi version only includes the (executable) source code and files needed to run it. You may consider building a virtual environment, first.
 
 You may then run __gresiblos__ using 
 
@@ -39,6 +39,8 @@ You may then run __gresiblos__ using
 ```console
 python gresiblos/gresiblos.py
 ```
+
+Please note that the current repository version may contain an in-between version with new, undescribed, or even buggy behavior. You should rather use a recent release version.
 
 ### Download the latest release
 
