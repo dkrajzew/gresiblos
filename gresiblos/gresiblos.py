@@ -360,11 +360,10 @@ def main(arguments : List[str] = None) -> int:
                                      description="greyrat's simple blog system",
                                      epilog='(c) Daniel Krajzewicz 2016-2025')
     parser.add_argument("input" if "input" not in defaults else "--input")
-    parser.add_argument('--version', action='version', version='%(prog)s 0.8.0')
+    parser.add_argument("-d", "--destination", default="./gresiblos_out", help="Sets the path to store the generated file(s) into")
     parser.add_argument("-t", "--template", default=None, help="Defines the template to use")
     parser.add_argument("-e", "--extension", default="html", help="Sets the extension of the built file(s)")
     parser.add_argument("-s", "--state", default=None, help="Use only files with the given state(s)")
-    parser.add_argument("-d", "--destination", default="./gresiblos_out", help="Sets the path to store the generated file(s) into")
     parser.add_argument("--index-output", default=None, help="Writes the index to the named file")
     parser.add_argument("--chrono-output", default=None, help="Writes the named file with entries in chronological order")
     parser.add_argument("--alpha-output", default=None, help="Writes the named file with entries in alphabetical order")
@@ -373,28 +372,28 @@ def main(arguments : List[str] = None) -> int:
     parser.add_argument("--topic-format", default="[[:topic:]]", help="Defines how each of the topics is rendered")
     parser.add_argument("--index-indent", type=int, default=None, help="Defines the indent used for the index file")
     parser.add_argument("--date-format", default=None, help="Defines the time format used")
+    parser.add_argument('--version', action='version', version='%(prog)s 0.8.0')
     parser.set_defaults(**defaults)
     args = parser.parse_args(remaining_argv)
     # check
-    ok = True
+    errors = []
     if not _HAVE_DEGROTESQUE and args.degrotesque:
-        print ("gresiblos: error: degrotesque application is set, but degrotesque is not installed", file=sys.stderr)
-        ok = False
+        errors.append("degrotesque application is set, but degrotesque is not installed")
     if not _HAVE_MARKDOWN and args.markdown:
-        print ("gresiblos: error: markdown application is set, but markdown is not installed", file=sys.stderr)
-        ok = False
-    if not ok:
+        errors.append("markdown application is set, but markdown is not installed")
+    if len(errors)!=0:
+        for error in errors:
+            print (f"gresiblos: error: {error}", file=sys.stderr)
         raise SystemExit(2)
     # collect files; https://stackoverflow.com/questions/4568580/python-glob-multiple-filetypes
-    files = args.input.split(",")
-    nfiles = []
-    for file in files:
-        if os.path.isfile(file):
-            nfiles.append(file)
+    input_argument = args.input.split(",")
+    input_file_names = []
+    for entry in input_argument:
+        if os.path.isfile(entry):
+            input_file_names.append(entry)
         else:
-            nfiles.extend(glob.glob(file, recursive=True))
-    files = nfiles
-    files.sort()
+            input_file_names.extend(glob.glob(entry, recursive=True))
+    input_file_names.sort()
     # load template file
     template_path = args.template
     if template_path is None:
@@ -408,7 +407,7 @@ def main(arguments : List[str] = None) -> int:
     #    prettifier.set_format("html")
     apply_markdown = _HAVE_MARKDOWN and args.markdown
     storage = PlainStorage()
-    for file in files:
+    for file in input_file_names:
         print (f"Processing '{file}'")
         entry = Entry()
         entry.load(file)
@@ -436,13 +435,13 @@ def main(arguments : List[str] = None) -> int:
         dest_path = os.path.join(args.destination, args.chrono_output)
         print (f"Writing chronological list to '{dest_path}'")
         entries = storage.get_entries_chronological()
-        write_list("entries by name", dest_path, template, entries, args.topic_format, apply_markdown, prettifier)
+        write_list("entries by publication date", dest_path, template, entries, args.topic_format, apply_markdown, prettifier)
     # (optional) write alphabetical entries list
     if args.alpha_output:
         dest_path = os.path.join(args.destination, args.alpha_output)
         print (f"Writing alphabetical list to '{dest_path}'")
         entries = storage.get_entries_alphabetical()
-        write_list("entries by publication date", dest_path, template, entries, args.topic_format, apply_markdown, prettifier)
+        write_list("entries by title", dest_path, template, entries, args.topic_format, apply_markdown, prettifier)
     return 0
 
 

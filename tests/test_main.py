@@ -34,11 +34,12 @@ def test_main_empty1(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert pname(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
-                 [-s STATE] [-d DESTINATION] [--index-output INDEX_OUTPUT]
+    assert pname(captured.err) == """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
+                 [-s STATE] [--index-output INDEX_OUTPUT]
                  [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
                  [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
                  [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
+                 [--version]
                  input
 gresiblos: error: the following arguments are required: input
 """
@@ -54,11 +55,12 @@ def test_main_empty2(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert pname(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
-                 [-s STATE] [-d DESTINATION] [--index-output INDEX_OUTPUT]
+    assert pname(captured.err) == """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
+                 [-s STATE] [--index-output INDEX_OUTPUT]
                  [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
                  [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
                  [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
+                 [--version]
                  input
 gresiblos: error: the following arguments are required: input
 """
@@ -74,11 +76,12 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert pname(captured.out) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
-                 [-s STATE] [-d DESTINATION] [--index-output INDEX_OUTPUT]
+    assert pname(captured.out) == """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
+                 [-s STATE] [--index-output INDEX_OUTPUT]
                  [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
                  [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
                  [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
+                 [--version]
                  input
 
 greyrat's simple blog system
@@ -90,15 +93,14 @@ options:
   -h, --help            show this help message and exit
   -c FILE, --config FILE
                         Reads the named configuration file
-  --version             show program's version number and exit
+  -d DESTINATION, --destination DESTINATION
+                        Sets the path to store the generated file(s) into
   -t TEMPLATE, --template TEMPLATE
                         Defines the template to use
   -e EXTENSION, --extension EXTENSION
                         Sets the extension of the built file(s)
   -s STATE, --state STATE
                         Use only files with the given state(s)
-  -d DESTINATION, --destination DESTINATION
-                        Sets the path to store the generated file(s) into
   --index-output INDEX_OUTPUT
                         Writes the index to the named file
   --chrono-output CHRONO_OUTPUT
@@ -116,6 +118,7 @@ options:
                         Defines the indent used for the index file
   --date-format DATE_FORMAT
                         Defines the time format used
+  --version             show program's version number and exit
 
 (c) Daniel Krajzewicz 2016-2025
 """
