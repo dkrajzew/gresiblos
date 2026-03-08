@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# =============================================================================
 """gresiblos - Tests for the main method - examples application."""
 # =============================================================================
 __author__     = "Daniel Krajzewicz"

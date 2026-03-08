@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """gresiblos - greyrat's simple blog system."""
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
