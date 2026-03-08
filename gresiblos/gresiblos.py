@@ -51,7 +51,7 @@ class Entry:
         _fields (Dict[str, str]): A dictionary to store entry fields.
     """
 
-    def __init__(self, fields : Dict[str, str]={}):
+    def __init__(self, fields: Dict[str, str] = {}):
         """
         Initializes an Entry object with default values.
 
@@ -61,7 +61,7 @@ class Entry:
         self._fields = {} if fields is None else fields.copy()
 
 
-    def get(self, key : str) -> str:
+    def get(self, key: str) -> str:
         """
         Returns the value of a field by key.
 
@@ -74,7 +74,7 @@ class Entry:
         return self._fields[key]
 
 
-    def has_key(self, key : str) -> bool:
+    def has_key(self, key: str) -> bool:
         """
         Returns whether the key is known.
 
@@ -87,7 +87,7 @@ class Entry:
         return key in self._fields
 
 
-    def get_isodate(self, date_format : str) -> str:
+    def get_isodate(self, date_format: str) -> str:
         """
         Returns the date in isoformat, if given. Otherwise return None.
 
@@ -104,7 +104,7 @@ class Entry:
         return datetime.datetime.strptime(self._fields["date"], date_format).isoformat(' ')
 
 
-    def load(self, filename : str) -> None:
+    def load(self, filename: str) -> None:
         """
         Loads entry data from a filename.
 
@@ -151,8 +151,8 @@ class Entry:
             t = os.path.getmtime(filename)
             self._fields["date"] = datetime.datetime.fromtimestamp(t).isoformat(' ')
 
-
-    def embed(self, template : str, topics_format : str, apply_markdown : bool=False, prettifier : Any=None) -> str:
+    def embed(self, template: str, topics_format: str,
+              apply_markdown: bool = False, prettifier: Any = None) -> str:
         """
         Embeds entry data into a template.
 
@@ -224,12 +224,12 @@ class PlainStorage:
         _meta (Dict[str, Dict[str, str]]): A dictionary to store metadata of entries.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initializes a PlainStorage object."""
         self._meta = {}
 
 
-    def add(self, filename : str, entry : Entry, date_format : str) -> None:
+    def add(self, filename: str, entry: Entry, date_format: str) -> None:
         """
         Adds an entry's metadata to the storage.
 
@@ -298,8 +298,9 @@ class PlainStorage:
         return ret
 
 
-
-def write_list(title : str, dest_path : str, template : str, entries : List[Dict[str, str]], topic_format : str, apply_markdown : bool, prettifier : Any) -> None:
+def write_list(title: str, dest_path: str, template: str,
+               entries: List[Dict[str, str]], topic_format: str,
+               apply_markdown: bool, prettifier: Any) -> None:
     """
     Generates an unordered list from the given list of entry metadata, embeds
     it into the given template, and saves the result under the given path.
@@ -333,7 +334,7 @@ def write_list(title : str, dest_path : str, template : str, entries : List[Dict
 
 
 # --- functions -------------------------------------------------------------
-def main(arguments : List[str] = None) -> int:
+def main(arguments: List[str] = None) -> int:
     """
     The main method using parameters from the command line.
 
