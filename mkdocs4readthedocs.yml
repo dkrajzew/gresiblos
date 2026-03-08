@@ -19,9 +19,9 @@ nav:
     - Usage: usage.md
     - Command Line: cmd.md
     - Links: links.md
-    - ChangeLog: changes.md
-    - License (BSD): license.md
     - API: api_gresiblos.md
+    - ChangeLog: changes.md
+    - License (GPL-3.0): license.md
     - Legal: legal.md
 
 markdown_extensions:

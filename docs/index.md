@@ -1,4 +1,4 @@
-[![License: BSD](https://img.shields.io/badge/License-BSD-green.svg)](https://github.com/dkrajzew/gresiblos/blob/main/LICENSE)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL-green.svg)](https://github.com/dkrajzew/gresiblos/blob/main/LICENSE)
 [![PyPI version](https://badge.fury.io/py/gresiblos.svg)](https://pypi.org/project/gresiblos/)
 ![test](https://github.com/dkrajzew/gresiblos/actions/workflows/test.yml/badge.svg)
 [![Downloads](https://pepy.tech/badge/gresiblos)](https://pepy.tech/projects/gresiblos)
@@ -44,6 +44,12 @@ __gresiblos__ is meant to be run on the command line. The documentation consists
 If you want to contribute, you may check the [API documentation](api_gresiblos.md) or visit [gresiblos on github](https://github.com/dkrajzew/gresiblos) where besides the code you may find the [gresiblos issue tracker](https://github.com/dkrajzew/gresiblos/issues) or a [discussions about gresiblos](https://github.com/dkrajzew/gresiblos/discussions) sections.
 
 Additional documentation includes a page with relevant [links](links.md), the [ChangeLog](changes.md), as well as the [license](license.md). __gresiblos__ is licensed under the [BSD license](license.md).
+
+
+
+## License
+
+__gresiblos__ is licensed under the [GPL-3.0 license](license.md).
 
 
 ## Background

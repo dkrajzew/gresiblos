@@ -29,7 +29,7 @@ nav:
     - Links: links.md
     - API: api_gresiblos.md
     - ChangeLog: changes.md
-    - License (BSD): license.md
+    - License (GPL-3.0): license.md
     - Legal: legal.md
 
 markdown_extensions:

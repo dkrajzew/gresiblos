@@ -6,7 +6,7 @@
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2024-2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
-__license__    = "BSD"
+__license__    = "GPL-3.0"
 __version__    = "0.8.0"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
