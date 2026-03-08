@@ -32,13 +32,13 @@ _HAVE_DEGROTESQUE = False
 try:
     import degrotesque
     _HAVE_DEGROTESQUE = True
-except:
+except Exception:
     pass
 _HAVE_MARKDOWN = False
 try:
     import markdown
     _HAVE_MARKDOWN = True
-except:
+except Exception:
     pass
 
 
@@ -89,7 +89,7 @@ class Entry:
 
     def get_isodate(self, date_format: str) -> str:
         """
-        Returns the date in isoformat, if given. Otherwise return None.
+        Returns the date in ISO format, if given. Otherwise return None.
 
         Args:
             date_format (str): The date format if it differs from ISO
@@ -112,30 +112,34 @@ class Entry:
             filename (str): The path to the filename containing entry data.
         """
         self._fields = {}
-        # load
+        # load file
         with open(filename, mode="r", encoding="utf-8") as fd:
             is_multi_line = False
             first = True
+            key = None
             for line in fd:
                 ls = line.strip()
                 if is_multi_line:
-                    if ls=='===':
+                    if ls == '===':
                         is_multi_line = False
                         continue
                     self._fields[key] = self._fields[key] + line
                     continue
-                if len(ls)==0:
+                if len(ls) == 0:
                     continue
-                if first and line.find(":")<0:
+                if first and line.find(":") < 0:
                     is_multi_line = True
                     key = "content"
                     self._fields[key] = line
                     first = False
                     continue
                 first = False
-                if ls[-1]!=':':
+                if ls[-1] != ':':
+                    # split the line at the first colon. values may contain
+                    # additional colons, so join the remainder back together.
                     vs = ls.split(":")
-                    self._fields[vs[0]] = ":".join(vs[1:])
+                    # remove leading/trailing whitespace from the value portion.
+                    self._fields[vs[0]] = ":".join(vs[1:]).strip()
                     continue
                 key = ls[:-1]
                 self._fields[key] = ""
@@ -159,30 +163,32 @@ class Entry:
         Args:
             template (str): The HTML template to embed data into.
             topics_format (str): The format for topics in the template.
-            apply_markdown (bool): Whether the content/title/abstract shall be parsed as markdown.
-            prettifier (Any): The degrotesque instance to prettify the content/title/abstract.
+            apply_markdown (bool): Whether the content/title/abstract shall
+                be parsed as markdown.
+            prettifier (Any): The degrotesque instance to prettify the
+                content/title/abstract.
 
         Returns:
             (str): The template with embedded entry data.
         """
-        # remove optional fields
+        # remove optional fields (begin tags with [[:?key:]] ... [[:key?:]])
         b = template.find("[[:?")
-        while b>=0:
-            e = template.find(":]]", b+4)
-            if e<0:
-                print (f"gresiblos: error: Missing ':]]' at the begin tag of an optional document part that starts at {b}", file=sys.stderr)
+        while b >= 0:
+            e = template.find(":]]", b + 4)
+            if e < 0:
+                print(f"gresiblos: error: Missing ':]]' at the begin tag of an optional document part that starts at {b}", file=sys.stderr)
                 raise SystemExit(3)
-            field_key = template[b+4:e]
+            field_key = template[b + 4:e]
             b2 = template.find("[[:" + field_key + "?:]]")
-            if b2<0:
-                print (f"gresiblos: error: Missing closing tag of an optional document part that starts at {b}; field_key='{field_key}'", file=sys.stderr)
+            if b2 < 0:
+                print(f"gresiblos: error: Missing closing tag of an optional document part that starts at {b}; field_key='{field_key}'", file=sys.stderr)
                 raise SystemExit(3)
             if field_key not in self._fields:
-                template = template[:b] + template[b2+len(field_key)+7:]
+                template = template[:b] + template[b2 + len(field_key) + 7:]
                 b = template.find("[[:?", b)
             else:
-                template = template[:b2] + template[b2+len(field_key)+7:]
-                template = template[:b] + template[b+len(field_key)+7:]
+                template = template[:b2] + template[b2 + len(field_key) + 7:]
+                template = template[:b] + template[b + len(field_key) + 7:]
                 b = template.find("[[:?", b)
         # replace plain, given fields
         for field_key in self._fields:
@@ -194,17 +200,17 @@ class Entry:
                         value = value[3:-4]
                 if prettifier is not None:
                     value = prettifier.prettify(value, True)
-            if field_key=="topics":
+            if field_key == "topics":
                 topics = self._fields[field_key].split(",")
-                html = []
+                html_topics = []
                 for t in topics:
                     t = t.strip()
                     t = topics_format.replace("[[:topic:]]", t)
-                    html.append(t)
-                value = ", ".join(html)
-            elif field_key=="title" and "state" in self._fields and self._fields["state"]!="release":
+                    html_topics.append(t)
+                value = ", ".join(html_topics)
+            elif field_key == "title" and "state" in self._fields and self._fields.get("state") != "release":
                 value = "(Draft) " + self._fields[field_key]
-            template = template.replace("[[:"+field_key+":]]", value)
+            template = template.replace("[[:" + field_key + ":]]", value)
         # remove plain, not given fields
         empty_regex = re.compile(r"(\[\[\:[a-zA-Z0-9_]+?\:\]\])", flags=re.MULTILINE)
         template = empty_regex.sub("", template)
@@ -226,7 +232,7 @@ class PlainStorage:
 
     def __init__(self) -> None:
         """Initializes a PlainStorage object."""
-        self._meta = {}
+        self._meta: Dict[str, Dict[str, str]] = {}
 
 
     def add(self, filename: str, entry: Entry, date_format: str) -> None:
@@ -236,7 +242,7 @@ class PlainStorage:
         Args:
             filename (str): The filename of the entry.
             entry (Entry): The Entry object containing metadata.
-            date_format (str): The date format if it differs from ISO
+            date_format (str): The date format if it differs from ISO.
         """
         self._meta[filename] = {}
         if entry.has_key("date"):
@@ -245,7 +251,7 @@ class PlainStorage:
             self._meta[filename]["title"] = entry.get("title")
         if entry.has_key("topics"):
             topics = entry.get("topics")
-            self._meta[filename]["topics"] = topics.split(",") if len(topics)!=0 else []
+            self._meta[filename]["topics"] = topics.split(",") if len(topics) != 0 else []
         if entry.has_key("abstract"):
             self._meta[filename]["abstract"] = entry.get("abstract")
         self._meta[filename]["filename"] = filename
@@ -302,8 +308,8 @@ def write_list(title: str, dest_path: str, template: str,
                entries: List[Dict[str, str]], topic_format: str,
                apply_markdown: bool, prettifier: Any) -> None:
     """
-    Generates an unordered list from the given list of entry metadata, embeds
-    it into the given template, and saves the result under the given path.
+    Generates an unordered list from the given list of entry metadata,
+    embeds it into the given template, and saves the result under the given path.
 
     Args:
         title (str): The title to apply.
@@ -316,21 +322,21 @@ def write_list(title: str, dest_path: str, template: str,
     """
     content = "<ul>\n"
     for entry in entries:
-        content = content + f'  <li><a href="{entry["filename"]}">{entry["title"]}</a>'
-        if "date" in entry and len(entry["date"])>0:
-            content = content + f' ({entry["date"]})'
-        if "abstract" in entry and len(entry["abstract"])>0:
-            content = content + f'<br>{entry["abstract"]}'
-        content = content + '</li>\n'
+        content += f'  <li><a href="{entry["filename"]}">{entry["title"]}</a>'
+        if "date" in entry and entry["date"]:
+            content += f' ({entry["date"]})'
+        if "abstract" in entry and entry["abstract"]:
+            content += f'<br>{entry["abstract"]}'
+        content += '</li>\n'
     content += "</ul>\n"
     fields = {
         "title": title,
         "content": content
     }
-    entry = Entry(fields)
-    c = entry.embed(template, topic_format, apply_markdown, prettifier)
+    entry_obj = Entry(fields)
+    rendered = entry_obj.embed(template, topic_format, apply_markdown, prettifier)
     with open(dest_path, "w", encoding="utf-8") as fdo:
-        fdo.write(c)
+        fdo.write(rendered)
 
 
 # --- functions -------------------------------------------------------------
@@ -344,20 +350,21 @@ def main(arguments: List[str] = None) -> int:
     Returns:
         (int): The exit code (0 for success).
     """
+    defaults: Dict[str, Any] = {}
     # parse options
     # https://stackoverflow.com/questions/3609852/which-is-the-best-way-to-allow-configuration-options-be-overridden-at-the-comman
-    defaults = {}
     conf_parser = argparse.ArgumentParser(prog='gresiblos', add_help=False)
     conf_parser.add_argument("-c", "--config", metavar="FILE", help="Reads the named configuration file")
     args, remaining_argv = conf_parser.parse_known_args(arguments)
     if args.config is not None:
         if not os.path.exists(args.config):
-            print (f"gresiblos: error: configuration file '{args.config}' does not exist", file=sys.stderr)
+            print(f"gresiblos: error: configuration file '{args.config}' does not exist", file=sys.stderr)
             raise SystemExit(2)
         config = configparser.ConfigParser()
         config.read([args.config])
         defaults.update(dict(config.items("gresiblos")))
-    parser = argparse.ArgumentParser(prog='gresiblos', parents=[conf_parser],
+    parser = argparse.ArgumentParser(prog='gresiblos',
+                                     parents=[conf_parser],
                                      description="greyrat's simple blog system",
                                      epilog='(c) Daniel Krajzewicz 2016-2025')
     parser.add_argument("input" if "input" not in defaults else "--input")
@@ -403,27 +410,25 @@ def main(arguments: List[str] = None) -> int:
     with open(template_path, mode="r", encoding="utf-8") as fd:
         template = fd.read()
     # process files
-    prettifier = None if not _HAVE_DEGROTESQUE or not args.degrotesque else degrotesque.Degrotesque()
-    #if prettifier:
-    #    prettifier.set_format("html")
+    prettifier = None if (not _HAVE_DEGROTESQUE or not args.degrotesque) else degrotesque.Degrotesque()
     apply_markdown = _HAVE_MARKDOWN and args.markdown
     storage = PlainStorage()
     for file in input_file_names:
-        print (f"Processing '{file}'")
+        print(f"Processing '{file}'")
         entry = Entry()
         entry.load(file)
-        if args.state is not None and args.state!=entry.get("state"):
-            print (f" ... skipped for state='{entry.get('state')}'")
+        if args.state is not None and args.state != entry.get("state"):
+            print(f" ... skipped for state='{entry.get('state')}'")
             continue
-        c = entry.embed(template, args.topic_format, apply_markdown, prettifier)
+        rendered = entry.embed(template, args.topic_format, apply_markdown, prettifier)
         # write file
         filename = f"{entry.get('filename')}.{args.extension}"
         dest_path = os.path.join(args.destination, filename)
         os.makedirs(os.path.join(os.path.split(dest_path)[0]), exist_ok=True)
-        print (f"Writing to {dest_path}")
+        print(f"Writing to {dest_path}")
         with open(dest_path, mode="w", encoding="utf-8") as fdo:
-            fdo.write(c)
-        # add to topics
+            fdo.write(rendered)
+        # add to storage
         storage.add(filename, entry, args.date_format)
     # (optional) write metadata to a JSON file
     if args.index_output:
@@ -434,13 +439,13 @@ def main(arguments: List[str] = None) -> int:
     # (optional) write chronological entries list
     if args.chrono_output:
         dest_path = os.path.join(args.destination, args.chrono_output)
-        print (f"Writing chronological list to '{dest_path}'")
+        print(f"Writing chronological list to '{dest_path}'")
         entries = storage.get_entries_chronological()
         write_list("entries by publication date", dest_path, template, entries, args.topic_format, apply_markdown, prettifier)
     # (optional) write alphabetical entries list
     if args.alpha_output:
         dest_path = os.path.join(args.destination, args.alpha_output)
-        print (f"Writing alphabetical list to '{dest_path}'")
+        print(f"Writing alphabetical list to '{dest_path}'")
         entries = storage.get_entries_alphabetical()
         write_list("entries by title", dest_path, template, entries, args.topic_format, apply_markdown, prettifier)
     return 0
