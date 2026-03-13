@@ -15,9 +15,9 @@ __gresiblos__ - a simple private blogging system
 
 ## Introduction
 
-__gresiblos__ is a radically simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from text, markdown, or HTML files. It has no dependencies and as static pages are generated, no server backend is needed. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__.
+__gresiblos__ is a radically simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from text, markdown, or HTML files. It has no dependencies and no server backend is needed. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__.
 
-__gresiblos__ reads blog entries from files that may include some meta information and embeds their contents into a template. Optionally, it additionally generates: a) a json-file with meta information about the entries, b) lists of the entries sorted alphabetically or chronologically. __gresiblos__ comes with a php-file that realises browsing, as well as with a php-file that generates rss and atom feeds.
+__gresiblos__ reads blog entries from files that may include some meta information and embeds their contents into a template. Optionally, it additionally generates: a) a json-file with meta information about the entries, b) lists of the entries sorted alphabetically or chronologically, c) RSS 2.0 and Atom feed files. __gresiblos__ comes with a basic php-file that realises browsing by topic and/or entries.
 
 
 ## Installation
@@ -63,7 +63,7 @@ __gresiblos__ is licensed under the [GPL-3.0 license](license.md).
 
 ## Background
 
-I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wrote it. __gresiblos__ has some specific features &#8212; like the inclusion of custom JavaScript and CSS files &#8212; I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).
+I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wrote __gresiblos__. It has some specific features &#8212; like the inclusion of custom JavaScript and CSS files &#8212; I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).
 
 
 
