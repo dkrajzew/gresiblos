@@ -25,9 +25,9 @@ import json
 import re
 import datetime
 import urllib.parse
-from typing import List
-from typing import Dict
-from typing import Any
+import email.utils
+import html
+from typing import List, Dict, Any
 _HAVE_DEGROTESQUE = False
 try:
     import degrotesque
@@ -339,7 +339,114 @@ def write_list(title: str, dest_path: str, template: str,
         fdo.write(rendered)
 
 
-# --- functions -------------------------------------------------------------
+def write_rss(dest_path, entries: List[Dict[str, Any]], args) -> None:
+    """
+    Generates a simple RSS 2.0 feed from the given list of entry metadata and writes it to dest_path.
+
+    Args:
+        entries (List[Dict[str, Any]]): A list of entry metadata dictionaries.
+    """
+    feed_site = args.feed_site.rstrip("/") if args.feed_site is not None else ""
+    lines: List[str] = []
+    lines.append('<?xml version="1.0" encoding="UTF-8"?>')
+    lines.append('<rss version="2.0">')
+    lines.append('  <channel>')
+    lines.append(f'    <title>{html.escape(args.feed_title)}</title>')
+    lines.append(f'    <link>{html.escape(feed_site)}/</link>')
+    if args.feed_description is not None:
+        lines.append(f'    <description>{html.escape(args.feed_description)}</description>')
+    if args.feed_editor is not None:
+        lines.append(f'    <managingEditor>{html.escape(args.feed_editor)}</managingEditor>')
+    if args.feed_language is not None:
+        lines.append(f'    <language>{html.escape(args.feed_language)}</language>')
+    if args.feed_copyright is not None:
+        lines.append(f'    <copyright>{html.escape(args.feed_copyright)}</copyright>')
+    # Most recent entries first
+    for entry in reversed(entries):
+        if "title" not in entry or "filename" not in entry:
+            continue # pragma: no cover
+        lines.append('    <item>')
+        lines.append(f'      <title>{html.escape(entry["title"])}</title>')
+        link = entry["filename"]
+        if feed_site:
+            link = f"{feed_site}/{link}"
+        lines.append(f'      <link>{html.escape(link)}</link>')
+        if "abstract" in entry and entry["abstract"]:
+            lines.append(f'      <description>{html.escape(entry["abstract"])}</description>')
+        if "date" in entry and entry["date"] is not None:
+            try:
+                dt = datetime.datetime.fromisoformat(entry["date"])
+                pub_date = email.utils.format_datetime(dt)
+                lines.append(f'      <pubDate>{pub_date}</pubDate>')
+            except Exception: # pragma: no cover
+                pass # pragma: no cover
+        if "topics" in entry:
+            topics = entry["topics"] if isinstance(entry["topics"], list) else entry["topics"].split(",")
+            for topic in topics:
+                topic = topic.strip()
+                if topic:
+                    lines.append(f'      <category>{html.escape(topic)}</category>')
+        lines.append('    </item>')
+    lines.append('  </channel>')
+    lines.append('</rss>')
+    lines.append('')
+    with open(dest_path, "w", encoding="utf-8") as fdo:
+        fdo.write('\n'.join(lines))
+
+
+def write_atom(dest_path, entries: List[Dict[str, Any]], args) -> None:
+    """
+    Generates a simple Atom feed from the given list of entry metadata and writes it to dest_path.
+
+    Args:
+        entries (List[Dict[str, Any]]): A list of entry metadata dictionaries.
+    """
+    feed_site = args.feed_site.rstrip("/") if args.feed_site is not None else ""
+    lines: List[str] = []
+    lines.append('<?xml version="1.0" encoding="utf-8"?>')
+    lines.append('<feed xmlns="http://www.w3.org/2005/Atom">')
+    lines.append(f'  <title type="text">{html.escape(args.feed_title)}</title>')
+    lines.append(f'  <updated>{email.utils.format_datetime(datetime.datetime.now())}</updated>')
+    lines.append(f'  <link href="{html.escape(feed_site)}"/>')
+    lines.append(f'  <link rel="alternate" type="text/html" hreflang="{html.escape(args.feed_language[:2])}" href="{html.escape(feed_site)}"/>')
+    if args.feed_editor is not None:
+        lines.append(f'    <author><email>{html.escape(args.feed_editor)}</email></author>')
+    if args.feed_copyright is not None:
+        lines.append(f'    <rights>{html.escape(args.feed_copyright)}</rights>')
+    lines.append(f'  <generator uri="https://github.com/dkrajzew/gresiblos/" version="0.10.0">gresiblos</generator>')
+    # Most recent entries first
+    for entry in reversed(entries):
+        if "title" not in entry or "filename" not in entry:
+            continue # pragma: no cover
+        lines.append('  <entry>')
+        lines.append(f'    <title type="text">{html.escape(entry["title"])}</title>')
+        link = entry["filename"]
+        if feed_site:
+            link = f"{feed_site}/{link}"
+        lines.append(f'    <link href="{html.escape(link)}"/>')
+        if "abstract" in entry and entry["abstract"]:
+            lines.append(f'    <summary>{html.escape(entry["abstract"])}</summary>')
+        if "date" in entry and entry["date"] is not None:
+            try:
+                dt = datetime.datetime.fromisoformat(entry["date"])
+                pub_date = email.utils.format_datetime(dt)
+                lines.append(f'    <published>{pub_date}</published>')
+            except Exception: # pragma: no cover
+                pass # pragma: no cover
+        if "topics" in entry:
+            topics = entry["topics"] if isinstance(entry["topics"], list) else entry["topics"].split(",")
+            for topic in topics:
+                topic = topic.strip()
+                if topic:
+                    lines.append(f'    <category>{html.escape(topic)}</category>')
+        lines.append('  </entry>')
+    lines.append('</rss>')
+    lines.append('')
+    with open(dest_path, "w", encoding="utf-8") as fdo:
+        fdo.write('\n'.join(lines))
+        
+        
+        
 def main(arguments: List[str] = None) -> int:
     """
     The main method using parameters from the command line.
@@ -380,6 +487,14 @@ def main(arguments: List[str] = None) -> int:
     parser.add_argument("--topic-format", default="[[:topic:]]", help="Defines how each of the topics is rendered")
     parser.add_argument("--index-indent", type=int, default=None, help="Defines the indent used for the index file")
     parser.add_argument("--date-format", default=None, help="Defines the time format used")
+    parser.add_argument("--rss-output", default=None, help="Writes an RSS 2.0 feed to the named file")
+    parser.add_argument("--atom-output", default=None, help="Writes an Atom feed to the named file")
+    parser.add_argument("--feed-title", default="My Blog", help="Title to use for the feed")
+    parser.add_argument("--feed-site", default="", help="Base URL used to prefix entry filenames in the feed")
+    parser.add_argument("--feed-description", default=None, help="The feed description")
+    parser.add_argument("--feed-editor", default=None, help="The editor of the feed (e-mail)")
+    parser.add_argument("--feed-language", default="en-en", help="The language of the feed")
+    parser.add_argument("--feed-copyright", default=None, help="The copyright information about the feed")
     parser.add_argument('--version', action='version', version='%(prog)s 0.8.0')
     parser.set_defaults(**defaults)
     args = parser.parse_args(remaining_argv)
@@ -395,7 +510,7 @@ def main(arguments: List[str] = None) -> int:
         raise SystemExit(2)
     # collect files; https://stackoverflow.com/questions/4568580/python-glob-multiple-filetypes
     input_argument = args.input.split(",")
-    input_file_names = []
+    input_file_names: List[str] = []
     for entry in input_argument:
         if os.path.isfile(entry):
             input_file_names.append(entry)
@@ -448,6 +563,17 @@ def main(arguments: List[str] = None) -> int:
         print(f"Writing alphabetical list to '{dest_path}'")
         entries = storage.get_entries_alphabetical()
         write_list("entries by title", dest_path, template, entries, args.topic_format, apply_markdown, prettifier)
+    # optional: write RSS/Atom feed
+    if args.rss_output:
+        dest_path = os.path.join(args.destination, args.rss_output)
+        entries = storage.get_entries_chronological()
+        write_rss(dest_path, entries, args)
+        print(f"Writing RSS feed to '{dest_path}'")
+    if args.atom_output:
+        dest_path = os.path.join(args.destination, args.atom_output)
+        entries = storage.get_entries_chronological()
+        write_atom(dest_path, entries, args)
+        print(f"Writing Atom feed to '{dest_path}'")
     return 0
 
 

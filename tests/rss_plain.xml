@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>My Blog</title>
+    <link>/</link>
+    <language>en-en</language>
+    <item>
+      <title>A second blog entry</title>
+      <link>my-second-blog-entry.html</link>
+      <description>A second blog entry</description>
+      <pubDate>Thu, 26 Dec 2024 20:37:00 -0000</pubDate>
+      <category>blog</category>
+      <category>example</category>
+    </item>
+    <item>
+      <title>My first blog entry</title>
+      <link>my-first-blog-entry.html</link>
+      <description>A very first introduction into blogging</description>
+      <pubDate>Thu, 26 Dec 2024 19:25:00 -0000</pubDate>
+      <category>blog</category>
+      <category>example</category>
+    </item>
+  </channel>
+</rss>

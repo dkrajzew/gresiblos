@@ -33,10 +33,12 @@ def pname(string, path="<DIR>"):
     return string.replace("__main__.py", "gresiblos").replace("pytest", "gresiblos").replace("optional arguments", "options")
 
 
-def pdate(string):
+def pdate(s):
     # https://www.google.com/search?client=firefox-b-d&q=pytthon+isoformat+regex
-    regex = r'(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9]) (2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?'
-    return re.sub(regex, "<DATE>", string)
+    regex1 = r'(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9]) (2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])?'
+    s = re.sub(regex1, "<DATE>", s)
+    regex2 = r'\w\w\w, \d\d \w\w\w \d\d\d\d \d\d:\d\d:\d\d [-+]\d\d\d\d'
+    return re.sub(regex2, "<DATE>", s)
 
 
 def fread(filepath, patch_date=False):

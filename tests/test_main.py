@@ -39,7 +39,11 @@ def test_main_empty1(capsys):
                  [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
                  [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
                  [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
-                 [--version]
+                 [--rss-output RSS_OUTPUT] [--atom-output ATOM_OUTPUT]
+                 [--feed-title FEED_TITLE] [--feed-site FEED_SITE]
+                 [--feed-description FEED_DESCRIPTION]
+                 [--feed-editor FEED_EDITOR] [--feed-language FEED_LANGUAGE]
+                 [--feed-copyright FEED_COPYRIGHT] [--version]
                  input
 gresiblos: error: the following arguments are required: input
 """
@@ -60,7 +64,11 @@ def test_main_empty2(capsys):
                  [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
                  [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
                  [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
-                 [--version]
+                 [--rss-output RSS_OUTPUT] [--atom-output ATOM_OUTPUT]
+                 [--feed-title FEED_TITLE] [--feed-site FEED_SITE]
+                 [--feed-description FEED_DESCRIPTION]
+                 [--feed-editor FEED_EDITOR] [--feed-language FEED_LANGUAGE]
+                 [--feed-copyright FEED_COPYRIGHT] [--version]
                  input
 gresiblos: error: the following arguments are required: input
 """
@@ -81,7 +89,11 @@ def test_main_help(capsys):
                  [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
                  [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
                  [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
-                 [--version]
+                 [--rss-output RSS_OUTPUT] [--atom-output ATOM_OUTPUT]
+                 [--feed-title FEED_TITLE] [--feed-site FEED_SITE]
+                 [--feed-description FEED_DESCRIPTION]
+                 [--feed-editor FEED_EDITOR] [--feed-language FEED_LANGUAGE]
+                 [--feed-copyright FEED_COPYRIGHT] [--version]
                  input
 
 greyrat's simple blog system
@@ -118,6 +130,22 @@ options:
                         Defines the indent used for the index file
   --date-format DATE_FORMAT
                         Defines the time format used
+  --rss-output RSS_OUTPUT
+                        Writes an RSS 2.0 feed to the named file
+  --atom-output ATOM_OUTPUT
+                        Writes an Atom feed to the named file
+  --feed-title FEED_TITLE
+                        Title to use for the feed
+  --feed-site FEED_SITE
+                        Base URL used to prefix entry filenames in the feed
+  --feed-description FEED_DESCRIPTION
+                        The feed description
+  --feed-editor FEED_EDITOR
+                        The editor of the feed (e-mail)
+  --feed-language FEED_LANGUAGE
+                        The language of the feed
+  --feed-copyright FEED_COPYRIGHT
+                        The copyright information about the feed
   --version             show program's version number and exit
 
 (c) Daniel Krajzewicz 2016-2025
