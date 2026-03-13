@@ -2,7 +2,7 @@
 """gresiblos - Setup module."""
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2014-2025, Daniel Krajzewicz"
+__copyright__  = "Copyright 2014-2026, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "GPL-3.0"
 __version__    = "0.8.0"

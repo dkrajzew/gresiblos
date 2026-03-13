@@ -2,7 +2,7 @@
 """gresiblos - Tests for the main method."""
 # =============================================================================
 __author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2024-2025, Daniel Krajzewicz"
+__copyright__  = "Copyright 2024-2026, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "GPL-3.0"
 __version__    = "0.8.0"
@@ -148,7 +148,7 @@ options:
                         The copyright information about the feed
   --version             show program's version number and exit
 
-(c) Daniel Krajzewicz 2016-2025
+(c) Daniel Krajzewicz 2016-2026
 """
     assert pname(captured.err) == ""
 

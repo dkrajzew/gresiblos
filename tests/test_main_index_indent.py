@@ -2,7 +2,7 @@
 """gresiblos - Tests for the main method - examples application."""
 # =============================================================================
 __author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2024-2025, Daniel Krajzewicz"
+__copyright__  = "Copyright 2024-2026, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "GPL-3.0"
 __version__    = "0.8.0"

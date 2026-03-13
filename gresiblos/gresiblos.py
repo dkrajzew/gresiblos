@@ -2,7 +2,7 @@
 """gresiblos - greyrat's simple blog system."""
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2016-2025, Daniel Krajzewicz"
+__copyright__  = "Copyright 2016-2026, Daniel Krajzewicz"
 __credits__    = "Daniel Krajzewicz"
 __license__    = "GPL-3.0"
 __version__    = "0.8.0"
@@ -473,7 +473,7 @@ def main(arguments: List[str] = None) -> int:
     parser = argparse.ArgumentParser(prog='gresiblos',
                                      parents=[conf_parser],
                                      description="greyrat's simple blog system",
-                                     epilog='(c) Daniel Krajzewicz 2016-2025')
+                                     epilog='(c) Daniel Krajzewicz 2016-2026')
     parser.add_argument("input" if "input" not in defaults else "--input")
     parser.add_argument("-d", "--destination", default="./gresiblos_out", help="Sets the path to store the generated file(s) into")
     parser.add_argument("-t", "--template", default=None, help="Defines the template to use")
