@@ -27,20 +27,23 @@ import gresiblos
 def test_opt_text(capsys):
     """Parsing first example (by name)"""
     entry = gresiblos.Entry({"foo": "bar"})
-    assert entry.embed("[[:?foo:]]here[[:foo?:]]", "")=="here"
+    template = gresiblos.Template("[[:?foo:]]here[[:foo?:]]")
+    assert template.embed(entry._fields, "[[:topic:]]")=="here"
 
 
 def test_opt_field(capsys):
     """Parsing first example (by name)"""
     entry = gresiblos.Entry({"foo": "bar"})
-    assert entry.embed("[[:?foo:]][[:foo:]][[:foo?:]]", "")=="bar"
+    template = gresiblos.Template("[[:?foo:]][[:foo:]][[:foo?:]]")
+    assert template.embed(entry._fields, "[[:topic:]]")=="bar"
 
 
 def test_err_not_start_closed1(capsys):
     """Parsing first example (by name)"""
     entry = gresiblos.Entry({"foo": "bar"})
+    template = gresiblos.Template("[[:?foo[[:foo:]][[:foo?:]]")
     try:
-        assert entry.embed("[[:?foo[[:foo:]][[:foo?:]]", "")=="bar"
+        assert template.embed(entry._fields, "[[:topic:]]")=="bar"
         assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())
@@ -54,8 +57,9 @@ def test_err_not_start_closed1(capsys):
 def test_err_not_start_closed2(capsys):
     """Parsing first example (by name)"""
     entry = gresiblos.Entry({"foo": "bar"})
+    template = gresiblos.Template("[[:?foo")
     try:
-        assert entry.embed("[[:?foo", "")=="bar"
+        assert template.embed(entry._fields, "[[:topic:]]")=="bar"
         assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())

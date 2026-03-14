@@ -26,23 +26,27 @@ import gresiblos
 # --- test functions ----------------------------------------------------------
 def test_replace_plain_given(capsys, tmp_path):
     """Parsing first example (by name)"""
+    template = gresiblos.Template("[[:foo:]]")
     entry = gresiblos.Entry({"foo": "bar"})
-    assert entry.embed("[[:foo:]]", "")=="bar"
+    assert template.embed(entry._fields, "[[:topic:]]")=="bar"
 
 
 def test_replace_plain_missing(capsys, tmp_path):
     """Parsing first example (by name)"""
+    template = gresiblos.Template("[[:bar:]]")
     entry = gresiblos.Entry({"foo": "bar"})
-    assert entry.embed("[[:bar:]]", "")==""
+    assert template.embed(entry._fields, "[[:topic:]]")==""
 
 
 def test_replace_opt_given(capsys, tmp_path):
     """Parsing first example (by name)"""
+    template = gresiblos.Template("[[:foo|foo:]]")
     entry = gresiblos.Entry({"foo": "bar"})
-    assert entry.embed("[[:foo|foo:]]", "")=="bar"
+    assert template.embed(entry._fields, "[[:topic:]]")=="bar"
 
 
 def test_replace_opt_missing(capsys, tmp_path):
     """Parsing first example (by name)"""
+    template = gresiblos.Template("[[:bar|foo:]]")
     entry = gresiblos.Entry({"foo": "bar"})
-    assert entry.embed("[[:bar|foo:]]", "")=="foo"
+    assert template.embed(entry._fields, "[[:topic:]]")=="foo"
