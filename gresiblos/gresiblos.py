@@ -43,6 +43,63 @@ except Exception:
 
 
 # --- class definitions -----------------------------------------------------
+class Template:
+    def __init__(self, template: str):
+        self._template = template
+
+    def embed(self, fields, topics_format: str,
+              apply_markdown: bool = False, prettifier: Any = None) -> str:
+        # remove optional fields (begin tags with [[:?key:]] ... [[:key?:]])
+        entry = self._template
+        b = entry.find("[[:?")
+        while b >= 0:
+            e = entry.find(":]]", b + 4)
+            if e < 0:
+                print(f"gresiblos: error: Missing ':]]' at the begin tag of an optional document part that starts at {b}", file=sys.stderr)
+                raise SystemExit(3)
+            field_key = entry[b + 4:e]
+            b2 = entry.find("[[:" + field_key + "?:]]")
+            if b2 < 0:
+                print(f"gresiblos: error: Missing closing tag of an optional document part that starts at {b}; field_key='{field_key}'", file=sys.stderr)
+                raise SystemExit(3)
+            if field_key not in fields:
+                entry = entry[:b] + entry[b2 + len(field_key) + 7:]
+                b = entry.find("[[:?", b)
+            else:
+                entry = entry[:b2] + entry[b2 + len(field_key) + 7:]
+                entry = entry[:b] + entry[b + len(field_key) + 7:]
+                b = entry.find("[[:?", b)
+        # replace plain, given fields
+        for field_key in fields:
+            value = fields[field_key]
+            if field_key in ["content", "title", "abstract"]:
+                if apply_markdown:
+                    value = markdown.markdown(value)
+                    if value.startswith("<p>") and value.endswith("</p>"):
+                        value = value[3:-4]
+                if prettifier is not None:
+                    value = prettifier.prettify(value, True)
+            if field_key == "topics":
+                topics = fields[field_key].split(",")
+                html_topics = []
+                for t in topics:
+                    t = t.strip()
+                    t = topics_format.replace("[[:topic:]]", t)
+                    html_topics.append(t)
+                value = ", ".join(html_topics)
+            elif field_key == "title" and "state" in fields and fields.get("state") != "release":
+                value = "(Draft) " + fields[field_key]
+            entry = entry.replace("[[:" + field_key + ":]]", value)
+        # remove plain, not given fields
+        empty_regex = re.compile(r"(\[\[\:[a-zA-Z0-9_]+?\:\]\])", flags=re.MULTILINE)
+        entry = empty_regex.sub("", entry)
+        # check for replacements with defaults
+        opt_regex = re.compile(r"\[\[\:([a-zA-Z0-9_]+?)\|([^\:\]\]]+?)\:\]\]", flags=re.MULTILINE)
+        # https://stackoverflow.com/questions/69376798/python3-replace-string-using-dict-with-regex
+        entry = opt_regex.sub(lambda x: fields[x.group(1)] if x.group(1) in fields else x.group(2), entry)
+        return entry
+
+
 class Entry:
     """
     Represents a blog entry with metadata and content.
@@ -155,72 +212,6 @@ class Entry:
             t = os.path.getmtime(filename)
             self._fields["date"] = datetime.datetime.fromtimestamp(t).isoformat(' ')
 
-    def embed(self, template: str, topics_format: str,
-              apply_markdown: bool = False, prettifier: Any = None) -> str:
-        """
-        Embeds entry data into a template.
-
-        Args:
-            template (str): The HTML template to embed data into.
-            topics_format (str): The format for topics in the template.
-            apply_markdown (bool): Whether the content/title/abstract shall
-                be parsed as markdown.
-            prettifier (Any): The degrotesque instance to prettify the
-                content/title/abstract.
-
-        Returns:
-            (str): The template with embedded entry data.
-        """
-        # remove optional fields (begin tags with [[:?key:]] ... [[:key?:]])
-        b = template.find("[[:?")
-        while b >= 0:
-            e = template.find(":]]", b + 4)
-            if e < 0:
-                print(f"gresiblos: error: Missing ':]]' at the begin tag of an optional document part that starts at {b}", file=sys.stderr)
-                raise SystemExit(3)
-            field_key = template[b + 4:e]
-            b2 = template.find("[[:" + field_key + "?:]]")
-            if b2 < 0:
-                print(f"gresiblos: error: Missing closing tag of an optional document part that starts at {b}; field_key='{field_key}'", file=sys.stderr)
-                raise SystemExit(3)
-            if field_key not in self._fields:
-                template = template[:b] + template[b2 + len(field_key) + 7:]
-                b = template.find("[[:?", b)
-            else:
-                template = template[:b2] + template[b2 + len(field_key) + 7:]
-                template = template[:b] + template[b + len(field_key) + 7:]
-                b = template.find("[[:?", b)
-        # replace plain, given fields
-        for field_key in self._fields:
-            value = self._fields[field_key]
-            if field_key in ["content", "title", "abstract"]:
-                if apply_markdown:
-                    value = markdown.markdown(value)
-                    if value.startswith("<p>") and value.endswith("</p>"):
-                        value = value[3:-4]
-                if prettifier is not None:
-                    value = prettifier.prettify(value, True)
-            if field_key == "topics":
-                topics = self._fields[field_key].split(",")
-                html_topics = []
-                for t in topics:
-                    t = t.strip()
-                    t = topics_format.replace("[[:topic:]]", t)
-                    html_topics.append(t)
-                value = ", ".join(html_topics)
-            elif field_key == "title" and "state" in self._fields and self._fields.get("state") != "release":
-                value = "(Draft) " + self._fields[field_key]
-            template = template.replace("[[:" + field_key + ":]]", value)
-        # remove plain, not given fields
-        empty_regex = re.compile(r"(\[\[\:[a-zA-Z0-9_]+?\:\]\])", flags=re.MULTILINE)
-        template = empty_regex.sub("", template)
-        # check for replacements with defaults
-        opt_regex = re.compile(r"\[\[\:([a-zA-Z0-9_]+?)\|([^\:\]\]]+?)\:\]\]", flags=re.MULTILINE)
-        # https://stackoverflow.com/questions/69376798/python3-replace-string-using-dict-with-regex
-        template = opt_regex.sub(lambda x: self._fields[x.group(1)] if x.group(1) in self._fields else x.group(2), template)
-        return template
-
-
 
 class PlainStorage:
     """
@@ -304,7 +295,7 @@ class PlainStorage:
         return ret
 
 
-def write_list(title: str, dest_path: str, template: str,
+def write_list(title: str, dest_path: str, template: Template,
                entries: List[Dict[str, str]], topic_format: str,
                apply_markdown: bool, prettifier: Any) -> None:
     """
@@ -334,7 +325,7 @@ def write_list(title: str, dest_path: str, template: str,
         "content": content
     }
     entry_obj = Entry(fields)
-    rendered = entry_obj.embed(template, topic_format, apply_markdown, prettifier)
+    rendered = template.embed(entry_obj._fields, topic_format, apply_markdown, prettifier)
     with open(dest_path, "w", encoding="utf-8") as fdo:
         fdo.write(rendered)
 
@@ -521,9 +512,10 @@ def main(arguments: List[str] = None) -> int:
     template_path = args.template
     if template_path is None:
         template_path = os.path.join(os.path.split(__file__)[0], "data", "template.html")
-    template = ""
+    template_str = ""
     with open(template_path, mode="r", encoding="utf-8") as fd:
-        template = fd.read()
+        template_str = fd.read()
+    template = Template(template_str)
     # process files
     prettifier = None if (not _HAVE_DEGROTESQUE or not args.degrotesque) else degrotesque.Degrotesque()
     apply_markdown = _HAVE_MARKDOWN and args.markdown
@@ -535,7 +527,7 @@ def main(arguments: List[str] = None) -> int:
         if args.state is not None and args.state != entry.get("state"):
             print(f" ... skipped for state='{entry.get('state')}'")
             continue
-        rendered = entry.embed(template, args.topic_format, apply_markdown, prettifier)
+        rendered = template.embed(entry._fields, args.topic_format, apply_markdown, prettifier)
         # write file
         filename = f"{entry.get('filename')}.{args.extension}"
         dest_path = os.path.join(args.destination, filename)
