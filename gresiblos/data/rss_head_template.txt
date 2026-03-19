@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>[[:feed_title:]]</title>
+    <link>[[:feed_site:]]/</link>[[:?feed_description:]]
+    <description>[[:feed_description:]]</description>[[:feed_description?:]][[:?feed_editor:]]
+    <managingEditor>[[:feed_editor:]]</managingEditor>[[:feed_editor?:]][[:?feed_language:]]
+    <language>[[:feed_language:]]</language>[[:feed_language?:]][[:?feed_copyright:]]
+    <copyright>[[:feed_copyright:]]</copyright>[[:feed_copyright?:]]

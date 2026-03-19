@@ -4,8 +4,8 @@
   <updated>Thu, 12 Mar 2026 20:18:41 -0000</updated>
   <link href="foo_site"/>
   <link rel="alternate" type="text/html" hreflang="fo" href="foo_site"/>
-    <author><email>foo_editor</email></author>
-    <rights>foo_copy</rights>
+  <author><email>foo_editor</email></author>
+  <rights>foo_copy</rights>
   <generator uri="https://github.com/dkrajzew/gresiblos/" version="0.10.0">gresiblos</generator>
   <entry>
     <title type="text">A second blog entry</title>
@@ -23,4 +23,4 @@
     <category>blog</category>
     <category>example</category>
   </entry>
-</rss>
+</feed>
