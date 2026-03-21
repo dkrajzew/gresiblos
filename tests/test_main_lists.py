@@ -27,7 +27,7 @@ import gresiblos
 
 # --- test functions ----------------------------------------------------------
 def test_main_no_list(capsys, tmp_path):
-    """Parsing secomd example (by name)"""
+    """Plain parsing of two files"""
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt")])
     captured = capsys.readouterr()
@@ -42,7 +42,7 @@ Writing to <DIR>/my-second-blog-entry.html
 
 
 def test_main_list_alpha(capsys, tmp_path):
-    """Parsing secomd example (by name)"""
+    """Parsing two files and generating an alphabetically sorted list"""
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--alpha-output", "alpha.html", "-d", str(tmp_path), str(tmp_path / "entry*.txt")])
     captured = capsys.readouterr()
@@ -59,7 +59,7 @@ Writing alphabetical list to '<DIR>/alpha.html'
 
 
 def test_main_list_chrono(capsys, tmp_path):
-    """Parsing secomd example (by name)"""
+    """Parsing two files and generating a chronological list"""
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--chrono-output", "chrono.html", "-d", str(tmp_path), str(tmp_path / "entry*.txt")])
     captured = capsys.readouterr()
@@ -76,7 +76,7 @@ Writing chronological list to '<DIR>/chrono.html'
 
 
 def test_main_list_both(capsys, tmp_path):
-    """Parsing secomd example (by name)"""
+    """Parsing two files and generating a chronological and an alphabetically sorted list"""
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--alpha-output", "alpha.html", "--chrono-output", "chrono.html", "-d", str(tmp_path), str(tmp_path / "entry*.txt")])
     captured = capsys.readouterr()

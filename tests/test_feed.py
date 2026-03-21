@@ -27,7 +27,7 @@ import gresiblos
 
 # --- test functions ----------------------------------------------------------
 def test_rss_plain(capsys, tmp_path):
-    """Parsing secomd example (by name)"""
+    """Generating RSS with no further arguments"""
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt"), "--rss-output", str(tmp_path / "rss.xml")])
     captured = capsys.readouterr()
@@ -42,8 +42,9 @@ Writing RSS feed to '<DIR>/rss.xml'
     assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
     assert fread(tmp_path / "rss.xml") == fread(Path(TEST_PATH) / "rss_plain.xml")
 
+
 def test_rss_ext(capsys, tmp_path):
-    """Parsing secomd example (by name)"""
+    """Generating RSS with additional arguments"""
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt"), "--rss-output", str(tmp_path / "rss.xml"), "--feed-title", "foo_title", "--feed-site", "foo_site", "--feed-description", "foo_desc", "--feed-editor", "foo_editor", "--feed-language", "foo_lang", "--feed-copyright", "foo_copy"])
     captured = capsys.readouterr()
@@ -63,7 +64,7 @@ Writing RSS feed to '<DIR>/rss.xml'
 
 
 def test_atom_plain(capsys, tmp_path):
-    """Parsing secomd example (by name)"""
+    """Generating Atom with no further arguments"""
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt"), "--atom-output", str(tmp_path / "atom.xml")])
     captured = capsys.readouterr()
@@ -81,8 +82,9 @@ Writing Atom feed to '<DIR>/atom.xml'
     assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
     assert fread(tmp_path / "atom.xml", True) == fread(Path(TEST_PATH) / "atom_plain.xml", True)
 
+
 def test_atom_ext(capsys, tmp_path):
-    """Parsing secomd example (by name)"""
+    """Generating Atom with no additional arguments"""
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt"), "--atom-output", str(tmp_path / "atom.xml"), "--feed-title", "foo_title", "--feed-site", "foo_site", "--feed-description", "foo_desc", "--feed-editor", "foo_editor", "--feed-language", "foo_lang", "--feed-copyright", "foo_copy"])
     captured = capsys.readouterr()
@@ -99,3 +101,5 @@ Writing Atom feed to '<DIR>/atom.xml'
     assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
     assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
     assert fread(tmp_path / "atom.xml", True) == fread(Path(TEST_PATH) / "atom_ext.xml", True)
+
+

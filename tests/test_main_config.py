@@ -28,7 +28,7 @@ import gresiblos
 
 # --- test functions ----------------------------------------------------------
 def test_main_missing_config(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """Using a non-existing configuration file"""
     copy_files_and_template(tmp_path, ["entry1.txt"])
     try:
         ret = gresiblos.main(["--config", str(tmp_path / "cfg1.cfg")])
@@ -43,7 +43,7 @@ def test_main_missing_config(capsys, tmp_path):
 
 
 def test_main_entry1_by_name(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """Using a given configuration file with first example"""
     shutil.copy(os.path.join((TEST_PATH), "cfg1.cfg"), str(tmp_path / "cfg1.cfg"))
     copy_files_and_template(tmp_path, ["entry1.txt"])
     ret = gresiblos.main(["--config", str(tmp_path / "cfg1.cfg"), "--template", str(tmp_path / "template.html"), "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry1.txt")])
@@ -57,7 +57,7 @@ Writing to <DIR>/my-first-blog-entry.php
 
 
 def test_main_two_entries_by_name(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """Using a given configuration file with both examples"""
     shutil.copy(os.path.join((TEST_PATH), "cfg1.cfg"), str(tmp_path / "cfg1.cfg"))
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
     ret = gresiblos.main(["--config", str(tmp_path / "cfg1.cfg"), "--template", str(tmp_path / "template.html"), "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry*.txt")])
@@ -74,7 +74,7 @@ Writing to <DIR>/my-second-blog-entry.php
 
 
 def test_main_two_entries_by_name_filter_state(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """Using a given configuration file with both examples and state filter"""
     shutil.copy(os.path.join((TEST_PATH), "cfg2.cfg"), str(tmp_path / "cfg2.cfg"))
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
     ret = gresiblos.main(["--config", str(tmp_path / "cfg2.cfg"), "--template", str(tmp_path / "template.html"), "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry*.txt")])

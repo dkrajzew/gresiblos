@@ -26,8 +26,8 @@ import gresiblos
 
 
 # --- test functions ----------------------------------------------------------
-def test_main_entry1_plain(capsys, tmp_path):
-    """Parsing first example (by name)"""
+def test_topic_encoding_entry1_plain(capsys, tmp_path):
+    """Parsing first example (by name) with default format"""
     copy_files_and_template(tmp_path, ["entry1.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry1.txt")])
     captured = capsys.readouterr()
@@ -38,8 +38,8 @@ Writing to <DIR>/my-first-blog-entry.html
     assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
 
 
-def test_main_entry1_format(capsys, tmp_path):
-    """Parsing first example (by name)"""
+def test_topic_encoding_entry1_format(capsys, tmp_path):
+    """Parsing first example (by name) with given format"""
     copy_files_and_template(tmp_path, ["entry1.txt"])
     ret = gresiblos.main(["--topic-format", "<a href=\"index.php?topic=[[:topic:]]\">[[:topic:]]</a>", "--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry1.txt")])
     captured = capsys.readouterr()

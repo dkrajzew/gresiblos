@@ -53,7 +53,7 @@ Writing to <DIR>/my-second-blog-entry.html
 
 
 def test_main_both_entries_by_name(capsys, tmp_path):
-    """Parsing secomd example (by name)"""
+    """Parsing both examples (by name)"""
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
     ret = gresiblos.main(["--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry1.txt")+","+str(tmp_path / "entry2.txt")])
     captured = capsys.readouterr()
@@ -69,7 +69,7 @@ Writing to <DIR>/my-second-blog-entry.html
 
 
 def test_main_both_entries_by_extension_glob(capsys, tmp_path):
-    """Parsing secomd example (by name)"""
+    """Parsing both examples (globbing)"""
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
     ret = gresiblos.main(["--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry*.txt")])
     captured = capsys.readouterr()
@@ -85,7 +85,7 @@ Writing to <DIR>/my-second-blog-entry.html
 
 
 def test_main_state_release_by_extension_glob(capsys, tmp_path):
-    """Parsing secomd example (by name)"""
+    """Parsing both examples (globbing) with state filter"""
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
     ret = gresiblos.main(["--state", "release", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry*.txt")])
     captured = capsys.readouterr()
@@ -100,7 +100,7 @@ Processing '<DIR>/entry2.txt'
 
 
 def test_main_dateformat_by_name(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """Processing a different date format"""
     copy_files_and_template(tmp_path, ["entry1_dateformat2.txt"])
     ret = gresiblos.main(["--date-format", "%d.%m.%Y %H:%M:%S", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry1_dateformat2.txt")])
     captured = capsys.readouterr()
@@ -113,7 +113,7 @@ Writing to <DIR>/my-first-blog-entry.html
 
 
 def test_main_entries_by_extension_glob_recursive(capsys, tmp_path):
-    """Parsing secomd example (by name)"""
+    """Parsing both examples (globbing) with subfolders"""
     copy_files_and_template(tmp_path, ["entry1.txt"])
     os.makedirs(tmp_path / "sub")
     copy_files(tmp_path / "sub", ["entry2.txt"])
@@ -131,7 +131,7 @@ Writing to <DIR>/my-second-blog-entry.html
 
 
 def test_main_entry1_by_name__template(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """Parsing both examples (globbing) with index output"""
     copy_files_and_template(tmp_path, ["entry1.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry1.txt")])
     captured = capsys.readouterr()

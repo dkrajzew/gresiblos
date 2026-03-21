@@ -25,21 +25,21 @@ import gresiblos
 
 # --- test functions ----------------------------------------------------------
 def test_opt_text(capsys):
-    """Parsing first example (by name)"""
+    """Replace optional with given value"""
     entry = gresiblos.Entry({"foo": "bar"})
     template = gresiblos.Template("[[:?foo:]]here[[:foo?:]]")
     assert template.embed(entry._fields, "[[:topic:]]")=="here"
 
 
 def test_opt_field(capsys):
-    """Parsing first example (by name)"""
+    """Replace optional with placeholder with given value"""
     entry = gresiblos.Entry({"foo": "bar"})
     template = gresiblos.Template("[[:?foo:]][[:foo:]][[:foo?:]]")
     assert template.embed(entry._fields, "[[:topic:]]")=="bar"
 
 
 def test_err_not_start_closed1(capsys):
-    """Parsing first example (by name)"""
+    """Error: not properly closed optional opening"""
     entry = gresiblos.Entry({"foo": "bar"})
     template = gresiblos.Template("[[:?foo[[:foo:]][[:foo?:]]")
     try:
@@ -55,7 +55,7 @@ def test_err_not_start_closed1(capsys):
 
 
 def test_err_not_start_closed2(capsys):
-    """Parsing first example (by name)"""
+    """Error: not properly closed optional opening"""
     entry = gresiblos.Entry({"foo": "bar"})
     template = gresiblos.Template("[[:?foo")
     try:

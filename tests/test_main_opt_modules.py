@@ -29,7 +29,7 @@ import gresiblos
 
 # --- test functions ----------------------------------------------------------
 def test_main_entry3_plain(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """Plain processing"""
     copy_files_and_template(tmp_path, ["entry3_optional.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
     captured = capsys.readouterr()
@@ -42,7 +42,7 @@ Writing to <DIR>/entry3_optional.html
 
 
 def test_main_entry3_degrotesque_missing(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """Missing but called degrotesque"""
     # https://stackoverflow.com/questions/51044068/test-for-import-of-optional-dependencies-in-init-py-with-pytest-python-3-5
     with patch.dict(sys.modules, {'degrotesque': None}):
         reload(sys.modules['gresiblos'])
@@ -61,7 +61,7 @@ def test_main_entry3_degrotesque_missing(capsys, tmp_path):
 
 
 def test_main_entry3_degrotesque(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """With degrotesque"""
     copy_files_and_template(tmp_path, ["entry3_optional.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--degrotesque", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
     captured = capsys.readouterr()
@@ -74,7 +74,7 @@ Writing to <DIR>/entry3_optional.html
 
 
 def test_main_entry3_markdown_missing(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """Missing but called markdown"""
     # https://stackoverflow.com/questions/51044068/test-for-import-of-optional-dependencies-in-init-py-with-pytest-python-3-5
     with patch.dict(sys.modules, {'markdown': None}):
         reload(sys.modules['gresiblos'])
@@ -93,7 +93,7 @@ def test_main_entry3_markdown_missing(capsys, tmp_path):
 
 
 def test_main_entry3_markdown(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """With markdown"""
     copy_files_and_template(tmp_path, ["entry3_optional.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--markdown", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
     captured = capsys.readouterr()
@@ -106,7 +106,7 @@ Writing to <DIR>/entry3_optional.html
     
     
 def test_main_entry3_missing2(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """Missing but called degrotesque and markdown"""
     # https://stackoverflow.com/questions/51044068/test-for-import-of-optional-dependencies-in-init-py-with-pytest-python-3-5
     with patch.dict(sys.modules, {'degrotesque': None, 'markdown': None}):
         reload(sys.modules['gresiblos'])
@@ -126,7 +126,7 @@ gresiblos: error: markdown application is set, but markdown is not installed
 
 
 def test_main_entry3_both(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """With markdown and degrotesque"""
     copy_files_and_template(tmp_path, ["entry3_optional.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--degrotesque", "--markdown", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
     captured = capsys.readouterr()
