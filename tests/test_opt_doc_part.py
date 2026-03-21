@@ -31,11 +31,25 @@ def test_opt_text(capsys):
     assert template.embed(entry._fields, "[[:topic:]]")=="here"
 
 
+def test_opt_text_missing(capsys):
+    """Replace optional with missing value"""
+    entry = gresiblos.Entry({})
+    template = gresiblos.Template("[[:?foo:]]here[[:foo?:]]")
+    assert template.embed(entry._fields, "[[:topic:]]")==""
+
+
 def test_opt_field(capsys):
     """Replace optional with placeholder with given value"""
     entry = gresiblos.Entry({"foo": "bar"})
     template = gresiblos.Template("[[:?foo:]][[:foo:]][[:foo?:]]")
     assert template.embed(entry._fields, "[[:topic:]]")=="bar"
+
+
+def test_opt_field_missing(capsys):
+    """Replace optional with placeholder with missing value"""
+    entry = gresiblos.Entry({})
+    template = gresiblos.Template("[[:?foo:]][[:foo:]][[:foo?:]]")
+    assert template.embed(entry._fields, "[[:topic:]]")==""
 
 
 def test_err_not_start_closed1(capsys):
@@ -66,6 +80,22 @@ def test_err_not_start_closed2(capsys):
         assert e.code==3
     captured = capsys.readouterr()
     assert captured.err == """gresiblos: error: Missing ':]]' at the begin tag of an optional document part that starts at 0
+"""
+    assert captured.out == ""
+
+
+def test_err_missing_end(capsys):
+    """Error: not properly closed optional opening"""
+    entry = gresiblos.Entry({"foo": "bar"})
+    template = gresiblos.Template("[[:?foo:]][[:foo:]]")
+    try:
+        assert template.embed(entry._fields, "[[:topic:]]")=="bar"
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==3
+    captured = capsys.readouterr()
+    assert captured.err == """gresiblos: error: Missing closing tag of an optional document part that starts at 0; field_key='foo'
 """
     assert captured.out == ""
 
