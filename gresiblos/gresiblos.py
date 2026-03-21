@@ -28,7 +28,7 @@ import urllib.parse
 import email.utils
 import html
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Optional, Any
 _HAVE_DEGROTESQUE = False
 try:
     import degrotesque
@@ -46,7 +46,12 @@ except ModuleNotFoundError:
 # --- class definitions -----------------------------------------------------
 class Template:
     """A class realising a template with optional fields and fields to replace
-    by given values"""
+    by given values
+
+    Attributes:
+        template (str): The string template to be used by the Template object.
+    """
+    _template: str = ""
 
     def __init__(self, template: str) -> None:
         """
@@ -56,7 +61,6 @@ class Template:
             template (str): The string template to be used by the Template object.
         """
         self._template = template
-
 
     def process_optional_fields(self, tpl: str, values: dict) -> str:
         """
@@ -103,7 +107,6 @@ class Template:
                 b = tpl.find("[[:?", b)
         return tpl
 
-
     def encode_topics(self, values: dict, topics_format: str) -> str:
         """
         Encodes the 'topics' field from a dictionary into
@@ -124,8 +127,7 @@ class Template:
         html_topics = [topics_format.replace("[[:topic:]]", t.strip()) for t in topics]
         return ", ".join(html_topics)
 
-
-    def embed(self, values: Dict[str, str], topics_format: str) -> str:
+    def embed(self, values: Dict[str, str], topics_format: str = "[[:topic:]]") -> str:
         """
         Embeds the given values into a template.
 
@@ -166,11 +168,10 @@ class Entry:
         _destination (str): The path and complete filename the entry shall be written to.
     """
     _fields: Dict[str, str] = {}
-    _date = None
-    _destination = None
+    _date: datetime.datetime = datetime.datetime.now()
+    _destination: str = ""
 
-
-    def __init__(self, fields: Dict[str, str] = None) -> None:
+    def __init__(self, fields: Optional[Dict[str, str]] = None) -> None:
         """
         Initializes an Entry object with default values.
 
@@ -178,9 +179,8 @@ class Entry:
             fields (Dict[str, str]): The entry's meta data and content.
         """
         self._fields = {} if fields is None else fields.copy()
-        self._date = None
-        self._destination = None
-
+        self._date = datetime.datetime.now()
+        self._destination = ""
 
     def get_date(self) -> datetime.datetime:
         """
@@ -191,7 +191,6 @@ class Entry:
         """
         return self._date
 
-
     def get_destination(self) -> str:
         """
         Returns the path and complete filename the entry shall be written to.
@@ -200,7 +199,6 @@ class Entry:
             (str): The path and complete filename the entry shall be written to.
         """
         return self._destination
-
 
     def get(self, key: str) -> str:
         """
@@ -214,7 +212,6 @@ class Entry:
         """
         return self._fields[key]
 
-
     def has_key(self, key: str) -> bool:
         """
         Returns whether the key is known.
@@ -227,8 +224,7 @@ class Entry:
         """
         return key in self._fields
 
-
-    def _consolidate(self, filename: str, date_format: str, extension: str):
+    def _consolidate(self, filename: str, date_format: str, extension: str) -> None:
         """
         Consolidates the entry fields from a file.
 
@@ -261,7 +257,6 @@ class Entry:
         # - destination
         self._destination = f"{self._fields['filename']}.{extension}"
 
-
     def load(self, filename: str, date_format: str, extension: str) -> None:
         """
         Loads entry data from a filename.
@@ -276,7 +271,7 @@ class Entry:
         with open(filename, mode="r", encoding="utf-8") as fd:
             is_multi_line = False
             first = True
-            key = None
+            key = ""
             for line in fd:
                 ls = line.strip()
                 if is_multi_line:
@@ -304,8 +299,7 @@ class Entry:
         # add missing fields / set needed information
         self._consolidate(filename, date_format, extension)
 
-
-    def apply_processors(self, apply_markdown: bool, prettifier: Any) -> None:
+    def apply_processors(self, apply_markdown: bool, prettifier: "degrotesque.Degrotesque") -> None:
         """
         Applies text processors optionally:
         a) converts markdown to HTML
@@ -337,7 +331,6 @@ class PlainStorage:
     """
     _entries: Dict[str, Entry] = {}
 
-
     def __init__(self) -> None:
         """
         Initialize a new instance of PlainStorage.
@@ -345,7 +338,6 @@ class PlainStorage:
         This method initializes an empty dictionary to store entries.
         """
         self._entries = {}
-
 
     def add(self, entry: Entry) -> bool:
         """
@@ -362,7 +354,6 @@ class PlainStorage:
         self._entries[entry.get("filename")] = entry
         return True
 
-
     def get_entries(self) -> List[Entry]:
         """
         Returns all stored entries' metadata as a list.
@@ -372,7 +363,6 @@ class PlainStorage:
         """
         ret = [entry for filename, entry in self._entries.items()]
         return ret
-
 
     def as_json(self, index_indent: int) -> str:
         """
@@ -386,7 +376,10 @@ class PlainStorage:
         """
         entries = []
         for _, entry in self._entries.items():
-            desc = {"date": entry.get_date().isoformat(' '), "title": entry.get("title")}
+            desc: Dict[str, Any] = {
+                "date": entry.get_date().isoformat(' '),
+                "title": entry.get("title")
+            }
             if entry.has_key("topics"):
                 desc["topics"] = [t.strip() for t in entry.get("topics").split(",")]
             if entry.has_key("abstract"):
@@ -396,7 +389,7 @@ class PlainStorage:
         return json.dumps(entries, indent=index_indent)
 
 
-def load_template(path: str, filename: str):
+def load_template(path: Optional[str], filename: str) -> Template:
     """
     Loads a template either from a given path or from
     the data folder.
@@ -416,7 +409,7 @@ def load_template(path: str, filename: str):
 
 
 def write_list(title: str, dest_path: str, template: Template,
-               entries: List[Entry], topic_format: str) -> None:
+               entries: List[Entry], topic_format: str = "[[:topic:]]") -> None:
     """
     Generates an unordered list from the given list of entry metadata,
     embeds it into the given template, and saves the result under the given path.
@@ -471,7 +464,7 @@ def write_feed(storage: PlainStorage, feed_type: str, args: argparse.Namespace,
     entries = storage.get_entries()
     entries.sort(key=lambda a:a.get_date())
     #
-    feed = templates[0].embed(params, "[[:topic:]]")
+    feed = templates[0].embed(params)
     for entry in reversed(entries):
         values = {}
         values["title"] = html.escape(entry.get("title"))
@@ -485,14 +478,14 @@ def write_feed(storage: PlainStorage, feed_type: str, args: argparse.Namespace,
             topics = entry.get("topics").split(",")
             topics = [f'{ident}    <category>{html.escape(topic)}</category>' for topic in topics]
             values["encoded_categories"] = "\n".join(topics)
-        entry_rep = templates[1].embed(values, "[[:topic:]]")
+        entry_rep = templates[1].embed(values)
         feed += "\n" + entry_rep
-    feed += "\n" + templates[2].embed([], "")
+    feed += "\n" + templates[2].embed({})
     with open(dest_path, "w", encoding="utf-8") as fdo:
         fdo.write(feed)
 
 
-def get_args(arguments: List[str] = None) -> argparse.Namespace:
+def get_args(arguments: Optional[List[str]] = None) -> argparse.Namespace:
     """
     Parse command line arguments.
 
@@ -600,7 +593,7 @@ def collect_files_sorted(input_arg: str) -> List[str]:
     return input_file_names
 
 
-def main(arguments: List[str] = None) -> int:
+def main(arguments: Optional[List[str]] = None) -> int:
     """
     The main method using parameters from the command line.
 
