@@ -60,6 +60,18 @@ Writing RSS feed to '<DIR>/rss.xml'
     assert fread(tmp_path / "rss.xml") == fread(Path(TEST_PATH) / "rss_ext.xml")
 
 
+def test_rss_dateformat(capsys, tmp_path):
+    """Generating RSS with a different date format in entries"""
+    copy_files_and_template(tmp_path, ["entry1_dateformat2.txt"])
+    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt"), "--rss-output", str(tmp_path / "rss.xml"), "--date-format", "%d.%m.%Y %H:%M:%S"])
+    captured = capsys.readouterr()
+    assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry1_dateformat2.txt'
+Writing to <DIR>/my-first-blog-entry.html
+Writing RSS feed to '<DIR>/rss.xml'
+"""
+    assert pname(captured.err, tmp_path) == ""
+    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry_dateformat.html")
+    assert fread(tmp_path / "rss.xml") == fread(Path(TEST_PATH) / "rss_plain_dateformat.xml")
 
 
 
@@ -101,5 +113,19 @@ Writing Atom feed to '<DIR>/atom.xml'
     assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
     assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
     assert fread(tmp_path / "atom.xml", True) == fread(Path(TEST_PATH) / "atom_ext.xml", True)
+
+
+def test_atom_dateformat(capsys, tmp_path):
+    """Generating Atom with a different date format in entries"""
+    copy_files_and_template(tmp_path, ["entry1_dateformat2.txt"])
+    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt"), "--atom-output", str(tmp_path / "atom.xml"), "--date-format", "%d.%m.%Y %H:%M:%S"])
+    captured = capsys.readouterr()
+    assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry1_dateformat2.txt'
+Writing to <DIR>/my-first-blog-entry.html
+Writing Atom feed to '<DIR>/atom.xml'
+"""
+    assert pname(captured.err, tmp_path) == ""
+    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fread(tmp_path / "atom.xml", True) == fread(Path(TEST_PATH) / "atom_plain_dateformat.xml", True)
 
 
