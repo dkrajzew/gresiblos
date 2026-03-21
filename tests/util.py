@@ -49,7 +49,7 @@ def fread(filepath, patch_date=False):
     if patch_date:
         c1 = pdate(c1)
     return c1
-    
+
 
 def copy_template(tmp_path):
     """Copy the template to the test path"""
@@ -68,5 +68,4 @@ def copy_files_and_template(tmp_path, files):
     copy_files(tmp_path, files)
 
 
-    
-    
+

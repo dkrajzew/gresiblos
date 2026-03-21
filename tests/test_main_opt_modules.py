@@ -103,8 +103,8 @@ Writing to <DIR>/entry3_optional.html
     assert pname(captured.err, tmp_path) == ""
     assert fread(tmp_path / "entry3_optional.html", True) == fread(Path(TEST_PATH) / "entry3_optional_markdown.html")
     assert fread(tmp_path / "entries.json", True) == fread(Path(TEST_PATH) / "entry3_sum.json")
-    
-    
+
+
 def test_main_entry3_missing2(capsys, tmp_path):
     """Missing but called degrotesque and markdown"""
     # https://stackoverflow.com/questions/51044068/test-for-import-of-optional-dependencies-in-init-py-with-pytest-python-3-5
