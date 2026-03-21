@@ -328,9 +328,6 @@ class Entry:
             self._fields[field] = value
 
 
-
-
-
 class PlainStorage:
     """
     Stores blog entries.
