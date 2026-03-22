@@ -1,21 +1,18 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# =============================================================================
-"""gresiblos - greyrat's simple blog system."""
-# =============================================================================
-__author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2024-2025, Daniel Krajzewicz"
-__credits__    = ["Daniel Krajzewicz"]
-__license__    = "BSD"
-__version__    = "0.6.0"
-__maintainer__ = "Daniel Krajzewicz"
-__email__      = "daniel@krajzewicz.de"
-__status__     = "Production"
+"""init module for gresiblos - greyrat's simple blog system."""
 # ===========================================================================
 # - https://github.com/dkrajzew/gresiblos
 # - http://www.krajzewicz.de
+# - contact me: daniel@krajzewicz.de
 # ===========================================================================
-
-
-# --- imports ---------------------------------------------------------------
-import gresiblos
+from __version__ import *
+from gresiblos import Template
+from gresiblos import Entry
+from gresiblos import PlainStorage
+from gresiblos import load_template
+from gresiblos import write_list
+from gresiblos import write_feed
+from gresiblos import get_args
+from gresiblos import collect_files_sorted
+from gresiblos import main
+from gresiblos import script_run

@@ -1,17 +1,9 @@
 #!/usr/bin/env python
-"""gresiblos - Tests for the main method - examples application."""
-# =============================================================================
-__author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2025-2026, Daniel Krajzewicz"
-__credits__    = ["Daniel Krajzewicz"]
-__license__    = "GPL-3.0"
-__version__    = "0.8.0"
-__maintainer__ = "Daniel Krajzewicz"
-__email__      = "daniel@krajzewicz.de"
-__status__     = "Production"
+"""gresiblos - Tests for optional modules (markdown, degrotesque)."""
 # ===========================================================================
 # - https://github.com/dkrajzew/gresiblos
 # - http://www.krajzewicz.de
+# - contact me: daniel@krajzewicz.de
 # ===========================================================================
 
 

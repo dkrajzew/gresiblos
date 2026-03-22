@@ -1,17 +1,9 @@
 #!/usr/bin/env python
 """gresiblos - greyrat's simple blog system."""
 # ===========================================================================
-__author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2016-2026, Daniel Krajzewicz"
-__credits__    = "Daniel Krajzewicz"
-__license__    = "GPL-3.0"
-__version__    = "0.8.0"
-__maintainer__ = "Daniel Krajzewicz"
-__email__      = "daniel@krajzewicz.de"
-__status__     = "Production"
-# ===========================================================================
 # - https://github.com/dkrajzew/gresiblos
 # - http://www.krajzewicz.de
+# - contact me: daniel@krajzewicz.de
 # ===========================================================================
 
 
@@ -29,6 +21,7 @@ import email.utils
 import html
 from pathlib import Path
 from typing import List, Dict, Optional, Any
+from __version__ import __version__
 _HAVE_DEGROTESQUE = False
 try:
     import degrotesque
@@ -555,7 +548,7 @@ def get_args(arguments: Optional[List[str]] = None) -> argparse.Namespace:
                         help="The language of the feed")
     parser.add_argument("--feed-copyright", default=None,
                         help="The copyright information about the feed")
-    parser.add_argument('--version', action='version', version='%(prog)s 0.8.0')
+    parser.add_argument('--version', action='version', version='%(prog)s ' + __version__)
     parser.set_defaults(**defaults)
     args = parser.parse_args(remaining_argv)
     # check
