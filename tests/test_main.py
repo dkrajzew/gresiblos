@@ -76,7 +76,25 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert pname(captured.out) == """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
+    assert pname(captured.out) == PRE_3_13_HELP if sys.version_info[1] < 13 else POST_3_13_HELP
+    assert pname(captured.err) == ""
+
+
+def test_main_version(capsys):
+    """Test behaviour when version information is wished"""
+    try:
+        gresiblos.main(["--version"])
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==0
+    captured = capsys.readouterr()
+    assert pname(captured.out) == """gresiblos 0.8.0
+"""
+    assert pname(captured.err) == ""
+
+
+PRE_3_13_HELP = """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [--index-output INDEX_OUTPUT]
                  [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
                  [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
@@ -142,18 +160,69 @@ options:
 
 (c) Daniel Krajzewicz 2016-2026
 """
-    assert pname(captured.err) == ""
 
 
-def test_main_version(capsys):
-    """Test behaviour when version information is wished"""
-    try:
-        gresiblos.main(["--version"])
-        assert False # pragma: no cover
-    except SystemExit as e:
-        assert type(e)==type(SystemExit())
-        assert e.code==0
-    captured = capsys.readouterr()
-    assert pname(captured.out) == """gresiblos 0.8.0
+POST_3_13_HELP = """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
+                 [-s STATE] [--index-output INDEX_OUTPUT]
+                 [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
+                 [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
+                 [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
+                 [--rss-output RSS_OUTPUT] [--atom-output ATOM_OUTPUT]
+                 [--feed-title FEED_TITLE] [--feed-site FEED_SITE]
+                 [--feed-description FEED_DESCRIPTION]
+                 [--feed-editor FEED_EDITOR] [--feed-language FEED_LANGUAGE]
+                 [--feed-copyright FEED_COPYRIGHT] [--version]
+                 input
+
+greyrat's simple blog system
+
+positional arguments:
+  input
+
+options:
+  -h, --help            show this help message and exit
+  -c, --config FILE     Reads the named configuration file
+  -d, --destination DESTINATION
+                        Sets the path to store the generated file(s) into
+  -t, --template TEMPLATE
+                        Defines the template to use
+  -e, --extension EXTENSION
+                        Sets the extension of the built file(s)
+  -s, --state STATE     Use only files with the given state(s)
+  --index-output INDEX_OUTPUT
+                        Writes the index to the named file
+  --chrono-output CHRONO_OUTPUT
+                        Writes the named file with entries in chronological
+                        order
+  --alpha-output ALPHA_OUTPUT
+                        Writes the named file with entries in alphabetical
+                        order
+  --markdown            If set, markdown is applied on the contents
+  --degrotesque         If set, degrotesque is applied on the contents and the
+                        title
+  --topic-format TOPIC_FORMAT
+                        Defines how each of the topics is rendered
+  --index-indent INDEX_INDENT
+                        Defines the indent used for the index file
+  --date-format DATE_FORMAT
+                        Defines the time format used
+  --rss-output RSS_OUTPUT
+                        Writes an RSS 2.0 feed to the named file
+  --atom-output ATOM_OUTPUT
+                        Writes an Atom feed to the named file
+  --feed-title FEED_TITLE
+                        Title to use for the feed
+  --feed-site FEED_SITE
+                        Base URL used to prefix entry filenames in the feed
+  --feed-description FEED_DESCRIPTION
+                        The feed description
+  --feed-editor FEED_EDITOR
+                        The editor of the feed (e-mail)
+  --feed-language FEED_LANGUAGE
+                        The language of the feed
+  --feed-copyright FEED_COPYRIGHT
+                        The copyright information about the feed
+  --version             show program's version number and exit
+
+(c) Daniel Krajzewicz 2016-2026
 """
-    assert pname(captured.err) == ""
