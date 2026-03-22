@@ -12,7 +12,7 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "gresiblos"))
 from pathlib import Path
-from util import pname, copy_files_and_template, fread, TEST_PATH
+from util import pname, copy_files_and_template, fread, fpread, TEST_PATH
 import gresiblos
 
 
@@ -30,9 +30,9 @@ Writing to <DIR>/my-second-blog-entry.html
 Writing RSS feed to '<DIR>/rss.xml'
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
-    assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
-    assert fread(tmp_path / "rss.xml") == fread(Path(TEST_PATH) / "rss_plain.xml")
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fpread(tmp_path / "my-second-blog-entry.html") == fpread(Path(TEST_PATH) / "my-second-blog-entry.html")
+    assert fpread(tmp_path / "rss.xml") == fpread(Path(TEST_PATH) / "rss_plain.xml")
 
 
 def test_rss_ext(capsys, tmp_path):
@@ -47,9 +47,9 @@ Writing to <DIR>/my-second-blog-entry.html
 Writing RSS feed to '<DIR>/rss.xml'
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
-    assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
-    assert fread(tmp_path / "rss.xml") == fread(Path(TEST_PATH) / "rss_ext.xml")
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fpread(tmp_path / "my-second-blog-entry.html") == fpread(Path(TEST_PATH) / "my-second-blog-entry.html")
+    assert fpread(tmp_path / "rss.xml") == fpread(Path(TEST_PATH) / "rss_ext.xml")
 
 
 def test_rss_dateformat(capsys, tmp_path):
@@ -62,8 +62,8 @@ Writing to <DIR>/my-first-blog-entry.html
 Writing RSS feed to '<DIR>/rss.xml'
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry_dateformat.html")
-    assert fread(tmp_path / "rss.xml") == fread(Path(TEST_PATH) / "rss_plain_dateformat.xml")
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry_dateformat.html")
+    assert fpread(tmp_path / "rss.xml") == fpread(Path(TEST_PATH) / "rss_plain_dateformat.xml")
 
 
 
@@ -78,13 +78,10 @@ Processing '<DIR>/entry2.txt'
 Writing to <DIR>/my-second-blog-entry.html
 Writing Atom feed to '<DIR>/atom.xml'
 """
-    c = fread(tmp_path / "atom.xml")
-    with open("d:\\atom_plain.xml", "w") as fd:
-        fd.write(c)
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
-    assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
-    assert fread(tmp_path / "atom.xml", True) == fread(Path(TEST_PATH) / "atom_plain.xml", True)
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fpread(tmp_path / "my-second-blog-entry.html") == fpread(Path(TEST_PATH) / "my-second-blog-entry.html")
+    assert fpread(tmp_path / "atom.xml") == fpread(Path(TEST_PATH) / "atom_plain.xml")
 
 
 def test_atom_ext(capsys, tmp_path):
@@ -98,13 +95,10 @@ Processing '<DIR>/entry2.txt'
 Writing to <DIR>/my-second-blog-entry.html
 Writing Atom feed to '<DIR>/atom.xml'
 """
-    c = fread(tmp_path / "atom.xml")
-    with open("d:\\atom_ext.xml", "w") as fd:
-        fd.write(c)
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
-    assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
-    assert fread(tmp_path / "atom.xml", True) == fread(Path(TEST_PATH) / "atom_ext.xml", True)
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fpread(tmp_path / "my-second-blog-entry.html") == fpread(Path(TEST_PATH) / "my-second-blog-entry.html")
+    assert fpread(tmp_path / "atom.xml") == fpread(Path(TEST_PATH) / "atom_ext.xml")
 
 
 def test_atom_dateformat(capsys, tmp_path):
@@ -117,7 +111,7 @@ Writing to <DIR>/my-first-blog-entry.html
 Writing Atom feed to '<DIR>/atom.xml'
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
-    assert fread(tmp_path / "atom.xml", True) == fread(Path(TEST_PATH) / "atom_plain_dateformat.xml", True)
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry_dateformat.html")
+    assert fpread(tmp_path / "atom.xml") == fpread(Path(TEST_PATH) / "atom_plain_dateformat.xml")
 
 

@@ -12,7 +12,7 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "gresiblos"))
 from pathlib import Path
-from util import pname, copy_files, copy_files_and_template, fread, TEST_PATH
+from util import pname, copy_files, copy_files_and_template, TEST_PATH
 import gresiblos
 
 import shutil

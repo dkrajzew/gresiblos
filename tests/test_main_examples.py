@@ -12,7 +12,7 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "gresiblos"))
 from pathlib import Path
-from util import pname, copy_files, copy_files_and_template, fread, TEST_PATH
+from util import pname, copy_files, copy_files_and_template, fread, fpread, TEST_PATH
 import gresiblos
 
 import shutil
@@ -27,7 +27,7 @@ def test_main_entry1_by_name(capsys, tmp_path):
 Writing to <DIR>/my-first-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry.html")
     assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entry1_sum.json")
 
 
@@ -40,7 +40,7 @@ def test_main_entry2_by_name(capsys, tmp_path):
 Writing to <DIR>/my-second-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
+    assert fpread(tmp_path / "my-second-blog-entry.html") == fpread(Path(TEST_PATH) / "my-second-blog-entry.html")
     assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entry2_sum.json")
 
 
@@ -55,8 +55,8 @@ Processing '<DIR>/entry2.txt'
 Writing to <DIR>/my-second-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
-    assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fpread(tmp_path / "my-second-blog-entry.html") == fpread(Path(TEST_PATH) / "my-second-blog-entry.html")
     assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entries_sum.json")
 
 
@@ -71,8 +71,8 @@ Processing '<DIR>/entry2.txt'
 Writing to <DIR>/my-second-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
-    assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fpread(tmp_path / "my-second-blog-entry.html") == fpread(Path(TEST_PATH) / "my-second-blog-entry.html")
     assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entries_sum.json")
 
 
@@ -87,7 +87,7 @@ Processing '<DIR>/entry2.txt'
  ... skipped for state='work'
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
     assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entry1_sum.json")
 
 
@@ -100,7 +100,7 @@ def test_main_dateformat_by_name(capsys, tmp_path):
 Writing to <DIR>/my-first-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry_dateformat.html")
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry_dateformat.html")
     assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entry1_sum.json")
 
 
@@ -117,8 +117,8 @@ Processing '<DIR>/sub/entry2.txt'
 Writing to <DIR>/my-second-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
-    assert fread(tmp_path / "my-second-blog-entry.html") == fread(Path(TEST_PATH) / "my-second-blog-entry.html")
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fpread(tmp_path / "my-second-blog-entry.html") == fpread(Path(TEST_PATH) / "my-second-blog-entry.html")
     assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entries_sum.json")
 
 
@@ -131,7 +131,7 @@ def test_main_entry1_by_name__template(capsys, tmp_path):
 Writing to <DIR>/my-first-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry.html")
     assert fread(tmp_path / "entries.json") == fread(Path(TEST_PATH) / "entry1_sum.json")
 
 

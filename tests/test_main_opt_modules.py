@@ -14,7 +14,7 @@ sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "gresiblos"))
 from unittest.mock import patch
 from importlib import reload
 from pathlib import Path
-from util import pname, copy_files_and_template, fread, pdate, TEST_PATH
+from util import pname, copy_files_and_template, fread, fpread, pdate, TEST_PATH
 import gresiblos
 
 
@@ -29,8 +29,8 @@ def test_main_entry3_plain(capsys, tmp_path):
 Writing to <DIR>/entry3_optional.html
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "entry3_optional.html", True) == fread(Path(TEST_PATH) / "entry3_optional_plain.html")
-    assert fread(tmp_path / "entries.json", True) == fread(Path(TEST_PATH) / "entry3_sum.json")
+    assert fpread(tmp_path / "entry3_optional.html") == fpread(Path(TEST_PATH) / "entry3_optional_plain.html")
+    assert fpread(tmp_path / "entries.json") == fpread(Path(TEST_PATH) / "entry3_sum.json")
 
 
 def test_main_entry3_degrotesque_missing(capsys, tmp_path):
@@ -61,8 +61,8 @@ def test_main_entry3_degrotesque(capsys, tmp_path):
 Writing to <DIR>/entry3_optional.html
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "entry3_optional.html", True) == fread(Path(TEST_PATH) / "entry3_optional_degrotesque.html")
-    assert fread(tmp_path / "entries.json", True) == fread(Path(TEST_PATH) / "entry3_sum.json")
+    assert fpread(tmp_path / "entry3_optional.html") == fpread(Path(TEST_PATH) / "entry3_optional_degrotesque.html")
+    assert fpread(tmp_path / "entries.json") == fpread(Path(TEST_PATH) / "entry3_sum.json")
 
 
 def test_main_entry3_markdown_missing(capsys, tmp_path):
@@ -93,8 +93,8 @@ def test_main_entry3_markdown(capsys, tmp_path):
 Writing to <DIR>/entry3_optional.html
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "entry3_optional.html", True) == fread(Path(TEST_PATH) / "entry3_optional_markdown.html")
-    assert fread(tmp_path / "entries.json", True) == fread(Path(TEST_PATH) / "entry3_sum.json")
+    assert fpread(tmp_path / "entry3_optional.html") == fpread(Path(TEST_PATH) / "entry3_optional_markdown.html")
+    assert fpread(tmp_path / "entries.json") == fpread(Path(TEST_PATH) / "entry3_sum.json")
 
 
 def test_main_entry3_missing2(capsys, tmp_path):
@@ -126,5 +126,5 @@ def test_main_entry3_both(capsys, tmp_path):
 Writing to <DIR>/entry3_optional.html
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "entry3_optional.html", True) == fread(Path(TEST_PATH) / "entry3_optional_both.html")
-    assert fread(tmp_path / "entries.json", True) == fread(Path(TEST_PATH) / "entry3_sum.json")
+    assert fpread(tmp_path / "entry3_optional.html") == fpread(Path(TEST_PATH) / "entry3_optional_both.html")
+    assert fpread(tmp_path / "entries.json") == fpread(Path(TEST_PATH) / "entry3_sum.json")

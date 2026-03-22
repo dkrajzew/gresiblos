@@ -12,7 +12,7 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "gresiblos"))
 from pathlib import Path
-from util import pname, copy_files_and_template, fread, TEST_PATH
+from util import pname, copy_files_and_template, fread, fpread, TEST_PATH
 import gresiblos
 
 
@@ -27,7 +27,7 @@ def test_topic_encoding_entry1_plain(capsys, tmp_path):
 Writing to <DIR>/my-first-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry.html")
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry.html")
 
 
 def test_topic_encoding_entry1_format(capsys, tmp_path):
@@ -39,4 +39,4 @@ def test_topic_encoding_entry1_format(capsys, tmp_path):
 Writing to <DIR>/my-first-blog-entry.html
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fread(tmp_path / "my-first-blog-entry.html") == fread(Path(TEST_PATH) / "my-first-blog-entry_phpindex.html")
+    assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry_phpindex.html")
