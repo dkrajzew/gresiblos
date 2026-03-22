@@ -1,6 +1,15 @@
 #!/usr/bin/env python
 """gresiblos - greyrat's simple blog system."""
 # ===========================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2016-2026, Daniel Krajzewicz"
+__credits__    = "Daniel Krajzewicz"
+__license__    = "GPL-3.0"
+__version__    = "0.8.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Production"
+# ===========================================================================
 # - https://github.com/dkrajzew/gresiblos
 # - http://www.krajzewicz.de
 # - contact me: daniel@krajzewicz.de
@@ -21,7 +30,6 @@ import email.utils
 import html
 from pathlib import Path
 from typing import List, Dict, Optional, Any
-from __version__ import __version__
 _HAVE_DEGROTESQUE = False
 try:
     import degrotesque
