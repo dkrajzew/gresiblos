@@ -1,5 +1,6 @@
   <entry>
     <title type="text">[[:title:]]</title>
+    <id>[[:link:]]</id>
     <link href="[[:link:]]"/>[[:?abstract:]]
     <summary>[[:abstract:]]</summary>[[:abstract?:]]
     <published>[[:date:]]</published>[[:?encoded_categories:]]

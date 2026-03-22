@@ -7,6 +7,7 @@
   <generator uri="https://github.com/dkrajzew/gresiblos/" version="0.10.0">gresiblos</generator>
   <entry>
     <title type="text">A second blog entry</title>
+    <id>my-second-blog-entry.html</id>
     <link href="my-second-blog-entry.html"/>
     <summary>A second blog entry</summary>
     <published>Thu, 26 Dec 2024 20:37:00 -0000</published>
@@ -15,6 +16,7 @@
   </entry>
   <entry>
     <title type="text">My first blog entry</title>
+    <id>my-first-blog-entry.html</id>
     <link href="my-first-blog-entry.html"/>
     <summary>A very first introduction into blogging</summary>
     <published>Thu, 26 Dec 2024 19:25:00 -0000</published>
