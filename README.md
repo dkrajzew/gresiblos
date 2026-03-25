@@ -1,10 +1,10 @@
 # gresiblos
 
-[![License: GPL-3.0](https://img.shields.io/badge/License-GPL-green.svg)](https://github.com/dkrajzew/gresiblos/blob/master/LICENSE)
-[![PyPI version](https://badge.fury.io/py/gresiblos.svg)](https://pypi.python.org/pypi/gresiblos)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL-green.svg)](https://github.com/dkrajzew/gresiblos/blob/main/LICENSE)
+[![PyPI version](https://badge.fury.io/py/gresiblos.svg)](https://pypi.org/project/gresiblos/)
 ![test](https://github.com/dkrajzew/gresiblos/actions/workflows/test.yml/badge.svg)
-[![Downloads](https://pepy.tech/badge/gresiblos)](https://pepy.tech/project/gresiblos)
-[![Downloads](https://static.pepy.tech/badge/gresiblos/week)](https://pepy.tech/project/gresiblos)
+[![Downloads](https://static.pepy.tech/badge/gresiblos)](https://pepy.tech/projects/gresiblos)
+[![Downloads](https://static.pepy.tech/badge/gresiblos/week)](https://pepy.tech/projects/gresiblos)
 [![Coverage Status](https://coveralls.io/repos/github/dkrajzew/gresiblos/badge.svg?branch=main)](https://coveralls.io/github/dkrajzew/gresiblos?branch=main)
 [![Documentation Status](https://readthedocs.org/projects/gresiblos/badge/?version=latest)](https://gresiblos.readthedocs.io/en/latest/?badge=latest)
 [![Dependecies](https://img.shields.io/badge/dependencies-none-green)](https://img.shields.io/badge/dependencies-none-green)
