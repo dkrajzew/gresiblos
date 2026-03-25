@@ -11,7 +11,7 @@
 
 #
 
-__gresiblos__ - a simple private blogging system
+__gresiblos__ &#8212; a simple private blogging system
 
 ## Introduction
 
@@ -35,13 +35,13 @@ There is a page about [installing gresiblos](install.md) that lists further opti
 
 __gresiblos__ is started on the command line. Write your blog entries as text, markdown or HTML.
 
-Assuming they are stored in the 'blog' folder, run __gresiblos__ on them like:
+Assuming they are stored in the &#8216;blog&#8217; folder, run __gresiblos__ on them like:
 
 ```shell
 gresiblos ./blog/*.txt
 ```
 
-&#8230; and it will convert them into complete HTML pages using a default template and store them into the folder 'gresiblos_out'.
+&#8230; and it will convert them into complete HTML pages using a default template and store them into the folder &#8216;gresiblos_out&#8217;.
 
 For more complete blogs &mdash; including authors, abstracts, release dates, etc. &mdash; the entries can be enriched by meta information. __gresiblos__ templates support placeholders that are filled with given meta information, as well as optional fields.
 
