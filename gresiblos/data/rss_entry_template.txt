@@ -1,6 +1,7 @@
     <item>
       <title>[[:title:]]</title>
-      <link>[[:link:]]</link>[[:?abstract:]]
+      <link>[[:link:]]</link>
+      <guid>[[:link:]]</guid>[[:?abstract:]]
       <description>[[:abstract:]]</description>[[:abstract?:]]
       <pubDate>[[:date:]]</pubDate>[[:?encoded_categories:]]
 [[:encoded_categories:]][[:encoded_categories?:]]

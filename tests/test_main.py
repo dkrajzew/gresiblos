@@ -34,13 +34,16 @@ def test_main_empty1(capsys):
                  [--rss-output RSS_OUTPUT] [--atom-output ATOM_OUTPUT]
                  [--feed-title FEED_TITLE] [--feed-site FEED_SITE]
                  [--feed-description FEED_DESCRIPTION]
-                 [--feed-editor FEED_EDITOR] [--feed-language FEED_LANGUAGE]
-                 [--feed-copyright FEED_COPYRIGHT] [--version]
+                 [--feed-editor-email FEED_EDITOR_EMAIL]
+                 [--feed-editor-name FEED_EDITOR_NAME]
+                 [--feed-language FEED_LANGUAGE]
+                 [--feed-copyright FEED_COPYRIGHT] [--feed-utz FEED_UTZ]
+                 [--version]
                  input
 gresiblos: error: the following arguments are required: input
 """
     assert pname(captured.out) == ""
-    
+
 
 def test_main_empty2(capsys):
     """Test behaviour if no arguments are given"""
@@ -59,8 +62,11 @@ def test_main_empty2(capsys):
                  [--rss-output RSS_OUTPUT] [--atom-output ATOM_OUTPUT]
                  [--feed-title FEED_TITLE] [--feed-site FEED_SITE]
                  [--feed-description FEED_DESCRIPTION]
-                 [--feed-editor FEED_EDITOR] [--feed-language FEED_LANGUAGE]
-                 [--feed-copyright FEED_COPYRIGHT] [--version]
+                 [--feed-editor-email FEED_EDITOR_EMAIL]
+                 [--feed-editor-name FEED_EDITOR_NAME]
+                 [--feed-language FEED_LANGUAGE]
+                 [--feed-copyright FEED_COPYRIGHT] [--feed-utz FEED_UTZ]
+                 [--version]
                  input
 gresiblos: error: the following arguments are required: input
 """
@@ -102,8 +108,11 @@ PRE_3_13_HELP = """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLATE
                  [--rss-output RSS_OUTPUT] [--atom-output ATOM_OUTPUT]
                  [--feed-title FEED_TITLE] [--feed-site FEED_SITE]
                  [--feed-description FEED_DESCRIPTION]
-                 [--feed-editor FEED_EDITOR] [--feed-language FEED_LANGUAGE]
-                 [--feed-copyright FEED_COPYRIGHT] [--version]
+                 [--feed-editor-email FEED_EDITOR_EMAIL]
+                 [--feed-editor-name FEED_EDITOR_NAME]
+                 [--feed-language FEED_LANGUAGE]
+                 [--feed-copyright FEED_COPYRIGHT] [--feed-utz FEED_UTZ]
+                 [--version]
                  input
 
 greyrat's simple blog system
@@ -150,12 +159,15 @@ options:
                         Base URL used to prefix entry filenames in the feed
   --feed-description FEED_DESCRIPTION
                         The feed description
-  --feed-editor FEED_EDITOR
-                        The editor of the feed (e-mail)
+  --feed-editor-email FEED_EDITOR_EMAIL
+                        The email of the feed editor
+  --feed-editor-name FEED_EDITOR_NAME
+                        The name of the feed editor
   --feed-language FEED_LANGUAGE
                         The language of the feed
   --feed-copyright FEED_COPYRIGHT
                         The copyright information about the feed
+  --feed-utz FEED_UTZ   The feed's time zone
   --version             show program's version number and exit
 
 (c) Daniel Krajzewicz 2016-2026
@@ -170,8 +182,11 @@ POST_3_13_HELP = """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLAT
                  [--rss-output RSS_OUTPUT] [--atom-output ATOM_OUTPUT]
                  [--feed-title FEED_TITLE] [--feed-site FEED_SITE]
                  [--feed-description FEED_DESCRIPTION]
-                 [--feed-editor FEED_EDITOR] [--feed-language FEED_LANGUAGE]
-                 [--feed-copyright FEED_COPYRIGHT] [--version]
+                 [--feed-editor-email FEED_EDITOR_EMAIL]
+                 [--feed-editor-name FEED_EDITOR_NAME]
+                 [--feed-language FEED_LANGUAGE]
+                 [--feed-copyright FEED_COPYRIGHT] [--feed-utz FEED_UTZ]
+                 [--version]
                  input
 
 greyrat's simple blog system
@@ -216,12 +231,15 @@ options:
                         Base URL used to prefix entry filenames in the feed
   --feed-description FEED_DESCRIPTION
                         The feed description
-  --feed-editor FEED_EDITOR
-                        The editor of the feed (e-mail)
+  --feed-editor-email FEED_EDITOR_EMAIL
+                        The email of the feed editor
+  --feed-editor-name FEED_EDITOR_NAME
+                        The name of the feed editor
   --feed-language FEED_LANGUAGE
                         The language of the feed
   --feed-copyright FEED_COPYRIGHT
                         The copyright information about the feed
+  --feed-utz FEED_UTZ   The feed's time zone
   --version             show program's version number and exit
 
 (c) Daniel Krajzewicz 2016-2026

@@ -38,7 +38,7 @@ Writing RSS feed to '<DIR>/rss.xml'
 def test_rss_ext(capsys, tmp_path):
     """Generating RSS with additional arguments"""
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
-    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt"), "--rss-output", str(tmp_path / "rss.xml"), "--feed-title", "foo_title", "--feed-site", "foo_site", "--feed-description", "foo_desc", "--feed-editor", "foo_editor", "--feed-language", "foo_lang", "--feed-copyright", "foo_copy"])
+    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt"), "--rss-output", str(tmp_path / "rss.xml"), "--feed-title", "foo_title", "--feed-site", "foo_site", "--feed-description", "foo_desc", "--feed-editor-email", "foo_editor_email", "--feed-editor-name", "foo_editor_name", "--feed-language", "foo_lang", "--feed-copyright", "foo_copy"])
     captured = capsys.readouterr()
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry1.txt'
 Writing to <DIR>/my-first-blog-entry.html
@@ -78,6 +78,9 @@ Processing '<DIR>/entry2.txt'
 Writing to <DIR>/my-second-blog-entry.html
 Writing Atom feed to '<DIR>/atom.xml'
 """
+    c = fpread(tmp_path / "atom.xml")
+    with open("d:\\atom.xml", "w") as fdo:
+        fdo.write(c)
     assert pname(captured.err, tmp_path) == ""
     assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry.html")
     assert fpread(tmp_path / "my-second-blog-entry.html") == fpread(Path(TEST_PATH) / "my-second-blog-entry.html")
@@ -87,7 +90,7 @@ Writing Atom feed to '<DIR>/atom.xml'
 def test_atom_ext(capsys, tmp_path):
     """Generating Atom with no additional arguments"""
     copy_files_and_template(tmp_path, ["entry1.txt", "entry2.txt"])
-    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt"), "--atom-output", str(tmp_path / "atom.xml"), "--feed-title", "foo_title", "--feed-site", "foo_site", "--feed-description", "foo_desc", "--feed-editor", "foo_editor", "--feed-language", "foo_lang", "--feed-copyright", "foo_copy"])
+    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt"), "--atom-output", str(tmp_path / "atom.xml"), "--feed-title", "foo_title", "--feed-site", "foo_site", "--feed-description", "foo_desc", "--feed-editor-email", "foo_editor_email", "--feed-editor-name", "foo_editor_name", "--feed-language", "foo_lang", "--feed-copyright", "foo_copy"])
     captured = capsys.readouterr()
     assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry1.txt'
 Writing to <DIR>/my-first-blog-entry.html

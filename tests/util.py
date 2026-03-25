@@ -37,6 +37,8 @@ def pdate(s):
     s = re.sub(regex3, "<DATE3>", s)
     regex4 = r'\d\d\.\d\d\.\d\d\d\d \d\d:\d\d:\d\d'
     s = re.sub(regex4, "<DATE4>", s)
+    regex5 = r'\d\d\d\d\-\d\d\-\d\dT\d\d:\d\d:\d\d(\.\d+)?[\+\-]\d\d:\d\d'
+    s = re.sub(regex5, "<DATE5>", s)
     return s
 
 

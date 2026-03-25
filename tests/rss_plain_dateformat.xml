@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>My Blog</title>
-    <link>/</link>
+    <link></link>
+    <atom:link href="rss.xml" rel="self" type="application/rss+xml"/>
     <language>en-en</language>
     <item>
       <title>My first blog entry</title>
       <link>my-first-blog-entry.html</link>
+      <guid>my-first-blog-entry.html</guid>
       <description>A very first introduction into blogging</description>
       <pubDate>Thu, 26 Dec 2024 19:25:00 -0000</pubDate>
       <category>blog</category>

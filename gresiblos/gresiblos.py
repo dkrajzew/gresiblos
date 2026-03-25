@@ -455,29 +455,35 @@ def write_feed(storage: PlainStorage, feed_type: str, args: argparse.Namespace,
         load_template(None, f"{feed_type}_entry_template.txt"),
         load_template(None, f"{feed_type}_foot_template.txt")
     ]
-    ident = '  ' if feed_type=='rss' else ''
     #
     params = {k: v for k, v in vars(args).items() if v is not None and isinstance(v, str)}
-    params["now"] = email.utils.format_datetime(datetime.datetime.now())
+    utz = args.feed_utz if args.feed_utz is not None else "+00:00"
+    params["now"] = datetime.datetime.now().isoformat() + utz
     params["feed_language_short"] = args.feed_language[:2]
-    feed_site = args.feed_site.rstrip("/") if args.feed_site is not None else ""
+    if "feed_site" in params and params["feed_site"]!="" and not params["feed_site"].endswith("/"):
+        params["feed_site"] = params["feed_site"] + "/"
     #
     entries = storage.get_entries()
     entries.sort(key=lambda a:a.get_date())
     #
     feed = templates[0].embed(params)
+    feed_site = params["feed_site"] if "feed_site" in params else ""
     for entry in reversed(entries):
         values = {}
         values["title"] = html.escape(entry.get("title"))
         values["link"] = entry.get_destination()
         if feed_site:
-            values["link"] = f"{feed_site}/{entry.get_destination()}"
+            values["link"] = f"{feed_site}{entry.get_destination()}"
         if entry.has_key("abstract"):
-            values["abstract"] = entry.get("abstract")
+            values["abstract"] = html.escape(entry.get("abstract"))
         values["date"] = email.utils.format_datetime(entry.get_date())
+        values["rfc3339_date"] = entry.get_date().isoformat() + utz
         if entry.has_key("topics"):
             topics = entry.get("topics").split(",")
-            topics = [f'{ident}    <category>{html.escape(topic)}</category>' for topic in topics]
+            if feed_type=="atom":
+                topics = [f'    <category term="{html.escape(topic)}"/>' for topic in topics]
+            else:
+                topics = [f'      <category>{html.escape(topic)}</category>' for topic in topics]
             values["encoded_categories"] = "\n".join(topics)
         entry_rep = templates[1].embed(values)
         feed += "\n" + entry_rep
@@ -550,12 +556,16 @@ def get_args(arguments: Optional[List[str]] = None) -> argparse.Namespace:
                         help="Base URL used to prefix entry filenames in the feed")
     parser.add_argument("--feed-description", default=None,
                         help="The feed description")
-    parser.add_argument("--feed-editor", default=None,
-                        help="The editor of the feed (e-mail)")
+    parser.add_argument("--feed-editor-email", default=None,
+                        help="The email of the feed editor")
+    parser.add_argument("--feed-editor-name", default=None,
+                        help="The name of the feed editor")
     parser.add_argument("--feed-language", default="en-en",
                         help="The language of the feed")
     parser.add_argument("--feed-copyright", default=None,
                         help="The copyright information about the feed")
+    parser.add_argument("--feed-utz", default=None,
+                        help="The feed's time zone")
     parser.add_argument('--version', action='version', version='%(prog)s ' + __version__)
     parser.set_defaults(**defaults)
     args = parser.parse_args(remaining_argv)
