@@ -2,15 +2,15 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="html">foo_title</title>
   <updated>2026-03-24T20:44:39.450289+00:00</updated>
-  <link href="foo_site/"/>
-  <link rel="self" href="foo_site/"/>
-  <link rel="alternate" type="text/html" hreflang="fo" href="foo_site/"/>
+  <link href="foo_site/atom.xml"/>
+  <link rel="self" href="foo_site/atom.xml"/>
+  <link rel="alternate" type="text/html" hreflang="fo" href="foo_site/atom.xml"/>
   <author>
     <name>foo_editor_name</name>
     <email>foo_editor_email</email>
   </author>
   <rights>foo_copy</rights>
-  <id>foo_site/</id>
+  <id>foo_site/atom.xml</id>
   <generator uri="https://github.com/dkrajzew/gresiblos/" version="0.10.0">gresiblos</generator>
   <entry>
     <title type="html">A second blog entry</title>

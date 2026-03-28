@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Collec"ted Notes</title>
-    <link>http://john.doe.org/</link>
-    <atom:link href="http://john.doe.org/rss.xml" rel="self" type="application/rss+xml"/>
+    <link>http://john.doe.org/rss_bad_values.xml</link>
+    <atom:link href="http://john.doe.org/rss_bad_values.xml" rel="self" type="application/rss+xml"/>
     <description>Notes c"ollected in the past time</description>
     <managingEditor>jo"hn@doe.org (John" Doe)</managingEditor>
     <language>en-en</language>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="html">My Blog</title>
   <updated>2026-03-24T20:44:39.450289+00:00</updated>
-  <link href=""/>
-  <link rel="self" href=""/>
-  <link rel="alternate" type="text/html" hreflang="en" href=""/>
-  <id></id>
+  <link href="atom.xml"/>
+  <link rel="self" href="atom.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en" href="atom.xml"/>
+  <id>atom.xml</id>
   <generator uri="https://github.com/dkrajzew/gresiblos/" version="0.10.0">gresiblos</generator>
   <entry>
     <title type="html">My first blog entry</title>

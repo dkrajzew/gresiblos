@@ -2,13 +2,13 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="html">[[:feed_title:]]</title>
   <updated>[[:now:]]</updated>
-  <link href="[[:feed_site:]]"/>
-  <link rel="self" href="[[:feed_site:]]"/>
-  <link rel="alternate" type="text/html" hreflang="[[:feed_language_short:]]" href="[[:feed_site:]]"/>[[:?feed_editor_name:]]
+  <link href="[[:feed_site:]][[:output:]]"/>
+  <link rel="self" href="[[:feed_site:]][[:output:]]"/>
+  <link rel="alternate" type="text/html" hreflang="[[:feed_language_short:]]" href="[[:feed_site:]][[:output:]]"/>[[:?feed_editor_name:]]
   <author>
     <name>[[:feed_editor_name:]]</name>[[:?feed_editor_email:]]
     <email>[[:feed_editor_email:]]</email>[[:feed_editor_email?:]]
   </author>[[:feed_editor_name?:]][[:?feed_copyright:]]
   <rights>[[:feed_copyright:]]</rights>[[:feed_copyright?:]]
-  <id>[[:feed_site:]]</id>
+  <id>[[:feed_site:]][[:output:]]</id>
   <generator uri="https://github.com/dkrajzew/gresiblos/" version="0.10.0">gresiblos</generator>

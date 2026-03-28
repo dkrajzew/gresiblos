@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>foo_title</title>
-    <link>foo_site/</link>
+    <link>foo_site/rss.xml</link>
     <atom:link href="foo_site/rss.xml" rel="self" type="application/rss+xml"/>
     <description>foo_desc</description>
     <managingEditor>foo_editor_email (foo_editor_name)</managingEditor>

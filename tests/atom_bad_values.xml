@@ -2,15 +2,15 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="html">Collec"ted Notes</title>
   <updated>2026-03-24T20:44:39.450289+00:00</updated>
-  <link href="http://john.doe.org/"/>
-  <link rel="self" href="http://john.doe.org/"/>
-  <link rel="alternate" type="text/html" hreflang="en" href="http://john.doe.org/"/>
+  <link href="http://john.doe.org/atom_bad_values.xml"/>
+  <link rel="self" href="http://john.doe.org/atom_bad_values.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en" href="http://john.doe.org/atom_bad_values.xml"/>
   <author>
     <name>John" Doe</name>
     <email>jo"hn@doe.org</email>
   </author>
   <rights>(c) John" Doe 2026</rights>
-  <id>http://john.doe.org/</id>
+  <id>http://john.doe.org/atom_bad_values.xml</id>
   <generator uri="https://github.com/dkrajzew/gresiblos/" version="0.10.0">gresiblos</generator>
   <entry>
     <title type="html">My first blog entry</title>

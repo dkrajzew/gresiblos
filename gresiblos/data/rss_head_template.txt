@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>[[:feed_title:]]</title>
-    <link>[[:feed_site:]]</link>
-    <atom:link href="[[:feed_site:]]rss.xml" rel="self" type="application/rss+xml"/>[[:?feed_description:]]
+    <link>[[:feed_site:]][[:output:]]</link>
+    <atom:link href="[[:feed_site:]][[:output:]]" rel="self" type="application/rss+xml"/>[[:?feed_description:]]
     <description>[[:feed_description:]]</description>[[:feed_description?:]][[:?feed_editor_email:]]
     <managingEditor>[[:feed_editor_email:]][[:?feed_editor_name:]] ([[:feed_editor_name:]])[[:feed_editor_name?:]]</managingEditor>[[:feed_editor_email?:]][[:?feed_language:]]
     <language>[[:feed_language:]]</language>[[:feed_language?:]][[:?feed_copyright:]]

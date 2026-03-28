@@ -467,6 +467,7 @@ def write_feed(storage: PlainStorage, feed_type: str, args: argparse.Namespace,
     params["feed_language_short"] = args.feed_language[:2]
     if "feed_site" in params and params["feed_site"]!="" and not params["feed_site"].endswith("/"):
         params["feed_site"] = params["feed_site"] + "/"
+    params["output"] = os.path.split(dest_path)[1]
     #
     entries = storage.get_entries()
     entries.sort(key=lambda a:a.get_date())
