@@ -125,13 +125,13 @@ options:
   -c FILE, --config FILE
                         Reads the named configuration file
   -d DESTINATION, --destination DESTINATION
-                        Sets the path to store the generated file(s) into
+                        The path to store the generated file(s) into
   -t TEMPLATE, --template TEMPLATE
-                        Defines the template to use
+                        Defines the template file to use
   -e EXTENSION, --extension EXTENSION
-                        Sets the extension of the built file(s)
+                        The extension of the built file(s)
   -s STATE, --state STATE
-                        Use only files with the given state(s)
+                        The state the entries must have for being processed
   --index-output INDEX_OUTPUT
                         Writes the index to the named file
   --chrono-output CHRONO_OUTPUT
@@ -141,8 +141,8 @@ options:
                         Writes the named file with entries in alphabetical
                         order
   --markdown            If set, markdown is applied on the contents
-  --degrotesque         If set, degrotesque is applied on the contents and the
-                        title
+  --degrotesque         If set, degrotesque is applied on the contents, the
+                        abstract, and the title
   --topic-format TOPIC_FORMAT
                         Defines how each of the topics is rendered
   --index-indent INDEX_INDENT
@@ -198,12 +198,12 @@ options:
   -h, --help            show this help message and exit
   -c, --config FILE     Reads the named configuration file
   -d, --destination DESTINATION
-                        Sets the path to store the generated file(s) into
+                        The path to store the generated file(s) into
   -t, --template TEMPLATE
-                        Defines the template to use
+                        Defines the template file to use
   -e, --extension EXTENSION
-                        Sets the extension of the built file(s)
-  -s, --state STATE     Use only files with the given state(s)
+                        The extension of the built file(s)
+  -s, --state STATE     The state the entries must have for being processed
   --index-output INDEX_OUTPUT
                         Writes the index to the named file
   --chrono-output CHRONO_OUTPUT
@@ -213,8 +213,8 @@ options:
                         Writes the named file with entries in alphabetical
                         order
   --markdown            If set, markdown is applied on the contents
-  --degrotesque         If set, degrotesque is applied on the contents and the
-                        title
+  --degrotesque         If set, degrotesque is applied on the contents, the
+                        abstract, and the title
   --topic-format TOPIC_FORMAT
                         Defines how each of the topics is rendered
   --index-indent INDEX_INDENT

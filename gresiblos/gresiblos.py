@@ -529,13 +529,13 @@ def get_args(arguments: Optional[List[str]] = None) -> argparse.Namespace:
                                      epilog='(c) Daniel Krajzewicz 2016-2026')
     parser.add_argument("input" if "input" not in defaults else "--input")
     parser.add_argument("-d", "--destination", default="./gresiblos_out",
-                        help="Sets the path to store the generated file(s) into")
+                        help="The path to store the generated file(s) into")
     parser.add_argument("-t", "--template",
-                        help="Defines the template to use")
+                        help="Defines the template file to use")
     parser.add_argument("-e", "--extension", default="html",
-                        help="Sets the extension of the built file(s)")
+                        help="The extension of the built file(s)")
     parser.add_argument("-s", "--state",
-                        help="Use only files with the given state(s)")
+                        help="The state the entries must have for being processed")
     parser.add_argument("--index-output",
                         help="Writes the index to the named file")
     parser.add_argument("--chrono-output",
@@ -545,7 +545,7 @@ def get_args(arguments: Optional[List[str]] = None) -> argparse.Namespace:
     parser.add_argument("--markdown", action="store_true",
                         help="If set, markdown is applied on the contents")
     parser.add_argument("--degrotesque", action="store_true",
-                        help="If set, degrotesque is applied on the contents and the title")
+                        help="If set, degrotesque is applied on the contents, the abstract, and the title")
     parser.add_argument("--topic-format", default="[[:topic:]]",
                         help="Defines how each of the topics is rendered")
     parser.add_argument("--index-indent", type=int,
