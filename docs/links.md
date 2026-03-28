@@ -14,3 +14,10 @@
 __gresiblos__ is used at the following pages:
 
 * <https://www.krajzewicz.de/blog/index.php>: my own blog
+
+
+## References
+
+### RSS / Atom
+
+* W3C Feed Validation Service: <https://validator.w3.org/feed/>

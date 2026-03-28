@@ -11,11 +11,11 @@
 
 #
 
-__gresiblos__ &#8212; a simple private blogging system
+__gresiblos__ &#8212; a simple private blogging system.
 
 ## Introduction
 
-__gresiblos__ is a radically simple blogging system written in [Python](https://www.python.org/) that generates static HTML pages from text, markdown, or HTML files. It has no dependencies and no server backend is needed. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__.
+__gresiblos__ is a radically simple static site generator / blogging system written in [Python](https://www.python.org/). It generates static HTML pages from text or markdown files, or HTML contents. It has no dependencies and no server backend is needed. __gresiblos__ is the acronym for __<u>gre</u>yrat&#39;s <u>si</u>mple <u>blo</u>g <u>s</u>ystem__.
 
 __gresiblos__ reads blog entries from files that may include some meta information and embeds their contents into a template. Optionally, it additionally generates: a) a json-file with meta information about the entries, b) lists of the entries sorted alphabetically or chronologically, c) RSS 2.0 and Atom feed files. __gresiblos__ comes with a basic php-file that realises browsing by topic and/or entries.
 
@@ -33,7 +33,7 @@ There is a page about [installing gresiblos](install.md) that lists further opti
 
 ## Usage
 
-__gresiblos__ is started on the command line. Write your blog entries as text, markdown or HTML.
+__gresiblos__ is started on the command line. Write your blog [entries](./use_entries.md) as text, markdown, or HTML.
 
 Assuming they are stored in the &#8216;blog&#8217; folder, run __gresiblos__ on them like:
 
@@ -41,16 +41,16 @@ Assuming they are stored in the &#8216;blog&#8217; folder, run __gresiblos__ on 
 gresiblos ./blog/*.txt
 ```
 
-&#8230; and it will convert them into complete HTML pages using a default template and store them into the folder &#8216;gresiblos_out&#8217;.
+&#8230; and it will convert them into complete HTML pages using a default [template](./use_templates.md) and store them into the folder &#8216;gresiblos_out&#8217;.
 
-For more complete blogs &mdash; including authors, abstracts, release dates, etc. &mdash; the entries can be enriched by meta information. __gresiblos__ templates support placeholders that are filled with given meta information, as well as optional fields.
+For more complete blogs &mdash; including authors, abstracts, release dates, etc. &mdash; the [entries](./use_entries.md) can be enriched by meta information. __gresiblos__ [templates](./use_templates.md) support placeholders that are filled with given meta information, as well as optional fields.
 
 
 ## Documentation
 
-The documentation consists of a [user manual](usage.md) and a [man-page like call documentation](cmd.md).
+The documentation consists of a [user manual](use_basics.md) and a [man-page like call documentation](cmd.md).
 
-If you want to contribute, you may check the [API documentation](api_gresiblos.md) or visit [gresiblos on github](https://github.com/dkrajzew/gresiblos) where besides the code you may find the [gresiblos issue tracker](https://github.com/dkrajzew/gresiblos/issues) or a [discussions about gresiblos](https://github.com/dkrajzew/gresiblos/discussions) section.
+If you want to contribute, you may check the [API documentation](api_gresiblos.md) or visit [gresiblos on github](https://github.com/dkrajzew/gresiblos) where besides the code you may find the [gresiblos issue tracker](https://github.com/dkrajzew/gresiblos/issues) or a [discussions about gresiblos section](https://github.com/dkrajzew/gresiblos/discussions).
 
 Additional documentation includes a page with relevant [links](links.md) or the [ChangeLog](changes.md). You may find the complete documentation at the [gresiblos readthedocs pages](https://gresiblos.readthedocs.io/).
 
@@ -69,7 +69,7 @@ I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wr
 
 ## Status &amp; Contributing
 
-__gresiblos__ works as intended for me, but lacks quite some features of enterprise systems. The next steps to release 1.0 will involve some refactorings, including API changes.
+__gresiblos__ works as intended for me, but lacks quite some features of enterprise systems.
 
 Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__ by [adding an issue](https://github.com/dkrajzew/gresiblos/issues) or by dropping me a mail.
 
