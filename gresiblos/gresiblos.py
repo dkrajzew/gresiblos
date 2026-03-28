@@ -524,17 +524,17 @@ def get_args(arguments: Optional[List[str]] = None) -> argparse.Namespace:
     parser.add_argument("input" if "input" not in defaults else "--input")
     parser.add_argument("-d", "--destination", default="./gresiblos_out",
                         help="Sets the path to store the generated file(s) into")
-    parser.add_argument("-t", "--template", default=None,
+    parser.add_argument("-t", "--template",
                         help="Defines the template to use")
     parser.add_argument("-e", "--extension", default="html",
                         help="Sets the extension of the built file(s)")
-    parser.add_argument("-s", "--state", default=None,
+    parser.add_argument("-s", "--state",
                         help="Use only files with the given state(s)")
-    parser.add_argument("--index-output", default=None,
+    parser.add_argument("--index-output",
                         help="Writes the index to the named file")
-    parser.add_argument("--chrono-output", default=None,
+    parser.add_argument("--chrono-output",
                         help="Writes the named file with entries in chronological order")
-    parser.add_argument("--alpha-output", default=None,
+    parser.add_argument("--alpha-output",
                         help="Writes the named file with entries in alphabetical order")
     parser.add_argument("--markdown", action="store_true",
                         help="If set, markdown is applied on the contents")
@@ -542,29 +542,29 @@ def get_args(arguments: Optional[List[str]] = None) -> argparse.Namespace:
                         help="If set, degrotesque is applied on the contents and the title")
     parser.add_argument("--topic-format", default="[[:topic:]]",
                         help="Defines how each of the topics is rendered")
-    parser.add_argument("--index-indent", type=int, default=None,
+    parser.add_argument("--index-indent", type=int,
                         help="Defines the indent used for the index file")
-    parser.add_argument("--date-format", default=None,
+    parser.add_argument("--date-format",
                         help="Defines the time format used")
-    parser.add_argument("--rss-output", default=None,
+    parser.add_argument("--rss-output",
                         help="Writes an RSS 2.0 feed to the named file")
-    parser.add_argument("--atom-output", default=None,
+    parser.add_argument("--atom-output",
                         help="Writes an Atom feed to the named file")
     parser.add_argument("--feed-title", default="My Blog",
                         help="Title to use for the feed")
     parser.add_argument("--feed-site", default="",
                         help="Base URL used to prefix entry filenames in the feed")
-    parser.add_argument("--feed-description", default=None,
+    parser.add_argument("--feed-description",
                         help="The feed description")
-    parser.add_argument("--feed-editor-email", default=None,
+    parser.add_argument("--feed-editor-email",
                         help="The email of the feed editor")
-    parser.add_argument("--feed-editor-name", default=None,
+    parser.add_argument("--feed-editor-name",
                         help="The name of the feed editor")
     parser.add_argument("--feed-language", default="en-en",
                         help="The language of the feed")
-    parser.add_argument("--feed-copyright", default=None,
+    parser.add_argument("--feed-copyright",
                         help="The copyright information about the feed")
-    parser.add_argument("--feed-utz", default=None,
+    parser.add_argument("--feed-utz",
                         help="The feed's time zone")
     parser.add_argument('--version', action='version', version='%(prog)s ' + __version__)
     parser.set_defaults(**defaults)
