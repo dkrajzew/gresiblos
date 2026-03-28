@@ -118,3 +118,19 @@ Writing Atom feed to '<DIR>/atom.xml'
     assert fpread(tmp_path / "atom.xml") == fpread(Path(TEST_PATH) / "atom_plain_dateformat.xml")
 
 
+def test_feed_bad_values(capsys, tmp_path):
+    """Generating Atom with a different date format in entries"""
+    copy_files_and_template(tmp_path, ["entry1_bad_topics.txt", "bad_values.cfg"])
+    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "-d", str(tmp_path), str(tmp_path / "entry*.txt"), "-c", str(tmp_path / "bad_values.cfg"), "--atom-output", str(tmp_path / "atom_bad_values.xml"), "--rss-output", str(tmp_path / "rss_bad_values.xml")])
+    captured = capsys.readouterr()
+    assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry1_bad_topics.txt'
+Writing to <DIR>/my-first-blog-entry_bad_topics.html
+Writing RSS feed to '<DIR>/rss_bad_values.xml'
+Writing Atom feed to '<DIR>/atom_bad_values.xml'
+"""
+    assert pname(captured.err, tmp_path) == ""
+    assert fpread(tmp_path / "my-first-blog-entry_bad_topics.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry_bad_topics.html")
+    assert fpread(tmp_path / "atom_bad_values.xml") == fpread(Path(TEST_PATH) / "atom_bad_values.xml")
+    assert fpread(tmp_path / "rss_bad_values.xml") == fpread(Path(TEST_PATH) / "rss_bad_values.xml")
+
+

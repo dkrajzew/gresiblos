@@ -1,0 +1,13 @@
+state:release
+title:My first blog entry
+filename:my-first-blog-entry_bad_topics
+author:Daniel Krajzewicz
+date:2024-12-26 19:25:00
+topics:ha"llo,it's me
+abstract:A very first introduction into blogging
+content:
+<b>Hello there!</b><br/>
+This is my very first blog post!
+===
+
+

@@ -119,3 +119,23 @@ Writing Atom feed to '<DIR>/atom-example.xml'
     assert fpread(tmp_path / "my-first-blog-entry-example_tpl1.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry-example_tpl1.html")
     assert fpread(tmp_path / "my-second-blog-entry-example_tpl1.html") == fpread(Path(TEST_PATH) / "my-second-blog-entry-example_tpl1.html")
     assert fpread(tmp_path / "atom-example.xml") == fpread(Path(TEST_PATH) / "atom_example.xml")
+
+def test_full_examples_feed_config(capsys, tmp_path):
+    """Generating RSS with no further arguments"""
+    os.makedirs(tmp_path / "blog")
+    copy_files(tmp_path / "blog", ["full-example1_tpl1.txt", "full-example2_tpl1.txt"])
+    copy_files(tmp_path, ["example-template.txt", "examples.cfg"])
+    ret = gresiblos.main(["--template", str(tmp_path / "example-template.txt"), "-d", str(tmp_path), str(tmp_path / "blog/*.txt"), "-c", str(tmp_path / "examples.cfg")])
+    captured = capsys.readouterr()
+    assert pname(captured.out, tmp_path) == """Processing '<DIR>/blog/full-example1_tpl1.txt'
+Writing to <DIR>/my-first-blog-entry-example_tpl1.html
+Processing '<DIR>/blog/full-example2_tpl1.txt'
+Writing to <DIR>/my-second-blog-entry-example_tpl1.html
+Writing RSS feed to 'rss-example.xml'
+Writing Atom feed to 'atom-example.xml'
+"""
+    assert pname(captured.err, tmp_path) == ""
+    assert fpread(tmp_path / "my-first-blog-entry-example_tpl1.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry-example_tpl1.html")
+    assert fpread(tmp_path / "my-second-blog-entry-example_tpl1.html") == fpread(Path(TEST_PATH) / "my-second-blog-entry-example_tpl1.html")
+    assert fpread(Path("atom-example.xml")) == fpread(Path(TEST_PATH) / "atom_example.xml")
+    assert fpread(Path("rss-example.xml")) == fpread(Path(TEST_PATH) / "rss_example.xml")

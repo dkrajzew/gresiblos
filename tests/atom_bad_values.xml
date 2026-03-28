@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="html">Collec"ted Notes</title>
+  <updated>2026-03-24T20:44:39.450289+00:00</updated>
+  <link href="http://john.doe.org/"/>
+  <link rel="self" href="http://john.doe.org/"/>
+  <link rel="alternate" type="text/html" hreflang="en" href="http://john.doe.org/"/>
+  <author>
+    <name>John" Doe</name>
+    <email>jo"hn@doe.org</email>
+  </author>
+  <rights>(c) John" Doe 2026</rights>
+  <id>http://john.doe.org/</id>
+  <generator uri="https://github.com/dkrajzew/gresiblos/" version="0.10.0">gresiblos</generator>
+  <entry>
+    <title type="html">My first blog entry</title>
+    <id>http://john.doe.org/my-first-blog-entry_bad_topics.html</id>
+    <link href="http://john.doe.org/my-first-blog-entry_bad_topics.html"/>
+    <summary type="html">A very first introduction into blogging</summary>
+    <published>2024-12-26T19:25:00.450289+00:00</published>
+    <updated>2024-12-26T19:25:00.450289+00:00</updated>
+    <category term="ha&quot;llo"/>
+    <category term="it&#x27;s me"/>
+  </entry>
+</feed>
