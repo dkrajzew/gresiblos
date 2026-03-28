@@ -31,8 +31,8 @@ You may add meta information to your files. __gresiblos__ assumes that your file
 Meta information is stored in the files to process. Each meta information is stored as a key/value pair, separated by a &lsquo;:&rsquo;, e.g.:
 
 ```
-author: Daniel Krajzewicz
-date: 2025-03-23
+author: John Doe
+date: 2025-01-02 19:25:00
 ```
 
 You may as well include multi-line fields. In this case, the key is stored in one line and the line is closed with a &lsquo;:&rsquo;. The following lines are interpreted as the respective value until a line that contains &ldquo;===&rdquo; only occurs:
@@ -58,8 +58,8 @@ So a complete blog entry with meta information may look like this:
 state:release
 title:My first blog entry
 filename:my-first-blog-entry
-author:Daniel Krajzewicz
-date:2024-01-02 19:25:00
+author:John Doe
+date:2025-01-02 19:25:00
 topics:blog,example
 abstract:A very first introduction into blogging
 content:

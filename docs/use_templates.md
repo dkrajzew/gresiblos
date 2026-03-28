@@ -10,8 +10,8 @@ So given the entry:
 state:release
 title:My first blog entry
 filename:my-first-blog-entry
-author:Daniel Krajzewicz
-date:26.12.2024 19:25
+author:John Doe
+date:2025-01-02 19:25:00
 topics:blog,example
 abstract:A very first introduction into blogging
 content:
@@ -23,44 +23,61 @@ This is my very first blog post!
 and the template:
 
 ```html
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
- <head><title>[[:title:]] &mdash; A sample blog</title>
-[[:includes:]]
- </head>
+<head>
+    <meta charset="utf-8" />
+    <title>[[:title:]] &mdash; A sample blog</title>
+</head>
+<body>
+    <header>
+        <h1>[[:title:]]</h1>[[:?date:]]
+        <p class="date">Published on [[:date:]]</p>[[:date?:]]
+    </header>
 
- <body>
-  <div id="title">My new blog</div>
-<h1>[[:title:]]</h1>
-<div><p><b>Abstract:</b> [[:abstract:]]</p></div>
-<div><p><b>Topics:</b> [[:topics:]]</p></div>
-<div id="blogCopy">&copy; Copyright [[:author:]], [[:date:]]</div>
+    <!-- Optional topics section -->
+[[:?topics:]]<div class="topics">Topics: [[:topics:]]</div>[[:topics?:]]
+    <!-- Optional abstract section -->
+[[:?abstract:]]<div class="abstract">[[:abstract:]]</div>[[:abstract?:]]
+
+    <!-- Main content -->
+    <article>
 [[:content:]]
-<div id="footer">&copy; Copyright [[:author2|Daniel Krajzewicz:]]</div>
- </body>
-
+    </article>
+    <div id="footer">&copy; Copyright [[:author2|John Doe:]]</div>
+</body>
 </html>
 ```
 
 you will get
 
 ```html
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
- <head><title>My first blog entry &mdash; A sample blog</title>
- </head>
+<head>
+    <meta charset="utf-8" />
+    <title>My first blog entry &mdash; A sample blog</title>
+</head>
+<body>
+    <header>
+        <h1>My first blog entry</h1>
+        <p class="date">Published on <DATE1></p>
+    </header>
 
- <body>
-  <div id="title">My new blog</div>
-<h1>My first blog entry</h1>
-<div><p><b>Abstract:</b> A very first introduction into blogging</p></div>
-<div><p><b>Topics:</b> blog, example</p></div>
-<div id="blogCopy">&copy; Copyright Daniel Krajzewicz, 26.12.2024 19:25</div>
+    <!-- Optional topics section -->
+<div class="topics">Topics: blog, example</div>
+    <!-- Optional abstract section -->
+<div class="abstract">A very first introduction into blogging</div>
+
+    <!-- Main content -->
+    <article>
 <b>Hello there!</b><br/>
 This is my very first blog post!
-<div id="footer">&copy; Copyright Daniel Krajzewicz</div>
- </body>
 
+    </article>
+    <div id="footer">&copy; Copyright John Doe</div>
+</body>
 </html>
 ```
 
@@ -79,7 +96,7 @@ In some cases, it is not sufficient to use defaults. If, e.g., no topics are giv
 
 ```html
 ...
-<div><p><b>Topics:</b> </p></div>
+<div class="topics">Topics: </div>
 ...
 ```
 
@@ -87,9 +104,10 @@ __gresiblos__ allows to tag parts of the document if a certain meta data is not 
 
 ```html
 ...
-<div><p><b>Abstract:</b> [[:abstract:]]</p></div>
-[[:?topics:]]<div><p><b>Topics:</b> [[:topics:]]</p></div>[[:topics?:]]
-<div id="blogCopy">&copy; Copyright [[:author:]], [[:date:]]</div>
+    <!-- Optional topics section -->
+[[:?topics:]]<div class="topics">Topics: [[:topics:]]</div>[[:topics?:]]
+    <!-- Optional abstract section -->
+[[:?abstract:]]<div class="abstract">[[:abstract:]]</div>[[:abstract?:]]
 ...
 ```
 
@@ -97,9 +115,10 @@ will &mdash; in the case ___topics___ is not given within the meta information &
 
 ```html
 ...
-<div><p><b>Abstract:</b> A very first introduction into blogging</p></div>
+    <!-- Optional topics section -->
 
-<div id="blogCopy">&copy; Copyright Daniel Krajzewicz, 26.12.2024 19:25</div>
+    <!-- Optional abstract section -->
+[[:?abstract:]]<div class="abstract">[[:abstract:]]</div>[[:abstract?:]]
 ...
 ```
 

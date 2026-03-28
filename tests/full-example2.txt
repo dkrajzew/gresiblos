@@ -1,0 +1,14 @@
+state:work
+title:A second blog entry
+filename:my-second-blog-entry-example
+author:John Doe
+date:2025-01-03 19:25:00
+topics:blog,example
+abstract:A second blog entry
+content:
+**Hello there!**
+
+Welcome to my second post!
+===
+
+

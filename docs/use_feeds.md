@@ -30,11 +30,11 @@ You can write both in one batch:
 ```shell
 > gresiblos blog/*.txt --atom-output <FILE_NAME1> --rss-output <FILE_NAME2>
     --feed_title "Collected Notes"
-    --feed_site=<URL>
+    --feed_site http://john.doe.org
     --feed_description "Notes collected in the past time"
-    --feed_editor_email <EMAIL>
-    --feed_editor_name <NAME>
-    --feed_copyright <COPYRIGHT>
+    --feed_editor_email john@doe.org
+    --feed_editor_name "John Doe"
+    --feed_copyright "(c) John Doe 2026"
 ```
 
 You may want to use a configuration file:

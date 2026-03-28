@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>[[:title:]] &mdash; A sample blog</title>
+</head>
+<body>
+    <header>
+        <h1>[[:title:]]</h1>[[:?date:]]
+        <p class="date">Published on [[:date:]]</p>[[:date?:]]
+    </header>
+
+    <!-- Optional topics section -->
+[[:?topics:]]<div class="topics">Topics: [[:topics:]]</div>[[:topics?:]]
+    <!-- Optional abstract section -->
+[[:?abstract:]]<div class="abstract">[[:abstract:]]</div>[[:abstract?:]]
+
+    <!-- Main content -->
+    <article>
+[[:content:]]
+    </article>
+    <div id="footer">&copy; Copyright [[:author2|John Doe:]]</div>
+</body>
+</html>
