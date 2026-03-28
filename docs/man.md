@@ -1,16 +1,29 @@
 # Man page
 
-__gresiblos__ is a simple private blogging system.
+__gresiblos__ &#8212; a simple private blogging system.
 
 ## Synopsis
 
 ```shell
-gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
+gresiblos [-t TEMPLATE] [-e EXTENSION]
           [-s STATE] [-d DESTINATION] [--index-output INDEX_OUTPUT]
           [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
           [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
           [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
           input
+
+gresiblos -c FILE
+
+gresiblos [-c FILE] [-t TEMPLATE] [-e EXTENSION]
+          [-s STATE] [-d DESTINATION] [--index-output INDEX_OUTPUT]
+          [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
+          [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
+          [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
+          [input]
+          
+gresiblos --help
+
+gresiblos --version
 ```
 
 ## Description
@@ -38,24 +51,14 @@ The entry/entries to process are given as the last parameter. Multiple entries c
 The options can be stored in a configuration file which can be passed to __gresiblos__ using the option **--config *&lt;CONFIGURATION&gt;*** / **-c *&lt;CONFIGURATION&gt;***. Options given on the command line will overwrite the options set in the configuration file.
 
 
-## Examples
+## Arguments and options
 
-```shell
-gresiblos ./entries/*
-```
+__gresiblos__ requires one parameter:
 
-Generates pages using the default template ```./data/template.html``` and the blog entries located in ```entries``` and writes them to ```./```.
-
-```shell
-gresiblos --template mytemplate.html --state release ./entries/*
-```
-
-Generates pages using the template ```mytemplate.html``` and the blog entries located in ```entries``` and writes them to ```./```. Processes only entries with state=release.
+* **input**: The files (entries) to read, separated by &#8216;,&#8217;; accepts wildcards as well
 
 
-## Command line arguments
-
-The script can be started on the command line with the following options:
+__gresiblos__ can be started with the following options:
 
 * **--config *&lt;CFG_FILE&gt;*** / **-c *&lt;CFG_FILE&gt;***: Reads the named configuration file
 * **--template *&lt;TEMPLATE_FILE&gt;*** / **-t *&lt;TEMPLATE_FILE&gt;***: Uses the named template file
@@ -73,7 +76,37 @@ The script can be started on the command line with the following options:
 * **--help** / **-h**: Show a help message
 * **--version**: Show the version information
 
-__gresiblos__ requires one parameter:
 
-* **input**: The files (entries) to read, separated by &#8216;,&#8217;; accepts wildcards as well
+## Examples
 
+```shell
+gresiblos ./entries/*
+```
+
+Generates pages using the default template ```./data/template.html``` and the blog entries located in ```entries``` and writes them to ```./gresiblos_out```.
+
+```shell
+gresiblos --template mytemplate.html --state release ./entries/*
+```
+
+Generates pages using the template ```mytemplate.html``` and the blog entries located in ```entries``` and writes them to ```./gresiblos_out```. Processes only entries with state=release.
+
+
+
+## Files
+
+!!!
+
+## Diagnostics
+
+!!!
+
+## Bugs and caveats
+
+None known :-)
+
+## See also
+
+!!!
+
+ 
