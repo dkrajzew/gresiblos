@@ -300,7 +300,10 @@ class Entry:
         # add missing fields / set needed information
         self._consolidate(filename, date_format, extension)
 
-    def apply_processors(self, apply_markdown: bool, prettifier: "degrotesque.Degrotesque") -> None:
+    def apply_processors(self, 
+                         apply_markdown: bool,
+                         prettifier: "degrotesque.Degrotesque",
+                         is_plain_txt: bool) -> None:
         """
         Applies text processors optionally:
         a) converts markdown to HTML
@@ -318,6 +321,8 @@ class Entry:
                 value = markdown.markdown(value)
                 if value.startswith("<p>") and value.endswith("</p>"):
                     value = value[3:-4]
+            elif is_plain_txt and field=="content" and value.find("<br")<0:
+                value = value.replace("\n", "<br/>\n")
             if prettifier is not None:
                 value = prettifier.prettify(value, True)
             self._fields[field] = value
@@ -632,7 +637,7 @@ def main(arguments: Optional[List[str]] = None) -> int:
         if args.state is not None and args.state != entry.get("state"):
             print(f" ... skipped for state='{entry.get('state')}'")
             continue
-        entry.apply_processors(apply_markdown, prettifier)
+        entry.apply_processors(apply_markdown, prettifier, file.endswith(".txt"))
         # add to storage
         if not storage.add(entry):
             print ("gresiblos: error: "

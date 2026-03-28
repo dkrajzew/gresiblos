@@ -15,7 +15,7 @@ Assume you would have some text files with notes stored in a folder named &ldquo
 > gresiblos blog/*.txt
 ```
 
-The contents of the text files will be embedded into the default template and written to the destination folder **./gresiblos_out**.
+The contents of the text files will be embedded into the default template and written to the destination folder **./gresiblos_out**. The ```<br/>``` element is added to each newline within the file's contents if no markdown conversion (see discussion on [entries](./use_entries.md)) is enabled and the file's extension is "txt".
 
 The generated files will be named as your text files, though Python&apos;s ```urllib.parse.quote``` is applied to encode characters that are not compliant for being a part of an URL assuming the files will be uploaded to a server. Some further information is extracted from the files: the __date__ using the file&apos;s change date, and the __title__ using the file&apos;s file name.
 
