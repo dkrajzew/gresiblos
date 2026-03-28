@@ -566,7 +566,7 @@ def get_args(arguments: Optional[List[str]] = None) -> argparse.Namespace:
                         help="The email of the feed editor")
     parser.add_argument("--feed-editor-name",
                         help="The name of the feed editor")
-    parser.add_argument("--feed-language", default="en-en",
+    parser.add_argument("--feed-language", default="en-US",
                         help="The language of the feed")
     parser.add_argument("--feed-copyright",
                         help="The copyright information about the feed")

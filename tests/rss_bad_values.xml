@@ -6,7 +6,7 @@
     <atom:link href="http://john.doe.org/rss_bad_values.xml" rel="self" type="application/rss+xml"/>
     <description>Notes c"ollected in the past time</description>
     <managingEditor>jo"hn@doe.org (John" Doe)</managingEditor>
-    <language>en-en</language>
+    <language>en-US</language>
     <copyright>(c) John" Doe 2026</copyright>
     <item>
       <title>My first blog entry</title>

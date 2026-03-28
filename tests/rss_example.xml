@@ -6,7 +6,7 @@
     <atom:link href="http://john.doe.org/rss-example.xml" rel="self" type="application/rss+xml"/>
     <description>Notes collected in the past time</description>
     <managingEditor>john@doe.org (John Doe)</managingEditor>
-    <language>en-en</language>
+    <language>en-US</language>
     <copyright>(c) John Doe 2026</copyright>
     <item>
       <title>A second blog entry</title>
