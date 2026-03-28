@@ -47,15 +47,14 @@ The accrding configuration file ```blog.cfg``` would look like this:
 
 ```cfg
 [gresiblos]
-input=blog/*.txt
-atom_output=<FILE_NAME1>
-rss_output=<FILE_NAME2>
+atom_output=atom-example.xml
+rss_output=rss-example.xml
 feed_title=Collected Notes
-feed_site=<URL>
+feed_site=http://john.doe.org
 feed_description=Notes collected in the past time
-feed_editor_email=<EMAIL>
-feed_editor_name=<NAME>
-feed_copyright=<COPYRIGHT>
+feed_editor_email=john@doe.org
+feed_editor_name=John Doe
+feed_copyright=(c) John Doe 2026
 ```
 
 The values are inserted into the respective feeds as given in the next table.
@@ -70,11 +69,4 @@ The values are inserted into the respective feeds as given in the next table.
 | --feed-copyright      |  &lt;copyright&gt;_[[:feed_copyright:]]_&lt;/copyright&gt; | &lt;rights&gt;_[[:feed_copyright:]]_&lt;/rights&gt; |
 | --feed-language       |  &lt;language&gt;*[[:feed_language:]]*&lt;/language&gt; | &lt;link rel="alternate" type="text/html" hreflang="*[[:feed_language_short:]]*" href="*[[:feed_site:]]*"/&gt; |
 | --feed-utz            | | |
-
-
-The generated __Atom__ feed looks like this:
-
-
-The generated __RSS 2.0__ feed looks like this:
-
 
