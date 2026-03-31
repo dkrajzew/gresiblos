@@ -7,29 +7,32 @@
 [![Downloads](https://static.pepy.tech/badge/gresiblos/week)](https://pepy.tech/projects/gresiblos)
 [![Coverage Status](https://coveralls.io/repos/github/dkrajzew/gresiblos/badge.svg?branch=main)](https://coveralls.io/github/dkrajzew/gresiblos?branch=main)
 [![Documentation Status](https://readthedocs.org/projects/gresiblos/badge/?version=latest)](https://gresiblos.readthedocs.io/en/latest/?badge=latest)
-[![Dependecies](https://img.shields.io/badge/dependencies-none-green)](https://img.shields.io/badge/dependencies-none-green)
+[![Dependecies](https://img.shields.io/badge/dependencies-none-green)](#)
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVQQWZKB6FDES)
 
+#
+
+__gresiblos__ &#8212; a simple private blogging system.
 
 ## Introduction
 
-__gresiblos__ is a simple blogging system written in [Python](https://www.python.org/).  __gresiblos__ generates static HTML pages from optionally annotated text, markdown, or HTML files. __gresiblos__ is the acronym for __*gre*yrat&#39;s *si*mple *blo*g *s*ystem__.
+__gresiblos__ is a radically simple static site generator / blogging system written in [Python](https://www.python.org/). It generates static HTML pages from text or markdown files, or HTML contents. It has no dependencies and no server backend is needed. __gresiblos__ is the acronym for __<u>gre</u>yrat&#39;s <u>si</u>mple <u>blo</u>g <u>s</u>ystem__.
 
-__gresiblos__ reads blog entries from files that may include some meta information and embeds the contents into a template. Optionally, in addition, it generates a json-file with meta information about the entries. __gresiblos__ comes with a php-file that realises browsing, as well as with a php-file that generates rss and atom feeds.
+__gresiblos__ reads blog entries from files that may include some meta information and embeds their contents into a template. Optionally, it additionally generates: a) a JSON-file with meta information about the entries, b) lists of the entries sorted alphabetically or chronologically, c) RSS 2.0 and Atom feed files. __gresiblos__ comes with a basic php-file that realizes browsing by topic and/or entries.
 
 
 ## Usage
 
-Write your blog entries as text, markdown or HTML.
+__gresiblos__ is started on the command line. Write your blog entries as text, markdown, or HTML.
 
-Then run __gresiblos__ on it:
+Assuming they are stored in the &#8216;blog&#8217; folder, run __gresiblos__ on them like:
 
 ```shell
-python src\gresiblos.py entry1.txt
+gresiblos ./blog/*.txt
 ```
 
-&#8230; and it will convert it into a complete HTML page using the default template stored in ```./data/```.
+&#8230; and it will convert them into complete HTML pages using a default template and store them into the folder &#8216;gresiblos_out&#8217;.
 
 You may as well add some meta data, storing the blog entry contents under the ```contents``` key:
 
@@ -60,9 +63,9 @@ You may find further information at [the gresiblos documentation pages](https://
 
 __gresiblos__ is meant to be run on the command line. The documentation consists of a [user manual](https://gresiblos.readthedocs.io/en/latest/usage.html) and a [man-page like call documentation](https://gresiblos.readthedocs.io/en/latest/cmd.html) (yet incomplete).
 
-If you want to contribute, you may check the [API documentation](https://gresiblos.readthedocs.io/en/latest/api_gresiblos.html) or visit [gresiblos on github](https://github.com/dkrajzew/gresiblos) where besides the code you may find the [gresiblos issue tracker](https://github.com/dkrajzew/gresiblos/issues) or [discussions about gresiblos](https://github.com/dkrajzew/gresiblos/discussions).
+If you want to contribute, you may check the [API documentation](https://gresiblos.readthedocs.io/en/latest/api_gresiblos.html) or visit [gresiblos on github](https://github.com/dkrajzew/gresiblos) where besides the code you may find the [gresiblos issue tracker](https://github.com/dkrajzew/gresiblos/issues) or a [discussions about gresiblos section](https://github.com/dkrajzew/gresiblos/discussions).
 
-Additional documentation includes a page with relevant [links](https://gresiblos.readthedocs.io/en/latest/links.html) or the [ChangeLog](https://gresiblos.readthedocs.io/en/latest/changes.html).
+Additional documentation includes a page with relevant [links](https://gresiblos.readthedocs.io/en/latest/links.html) or the [ChangeLog](https://gresiblos.readthedocs.io/en/latest/changes.html). You may find the complete documentation at the [gresiblos readthedocs pages](https://gresiblos.readthedocs.io/).
 
 
 
@@ -73,9 +76,7 @@ __gresiblos__ is licensed under the [GPL-3.0 license](license.md).
 
 ## Installation
 
-The __current version__ is [gresiblos-0.10.0](https://github.com/dkrajzew/gresiblos/releases/tag/0.10.0).
-
-You may __install gresiblos__ using
+The current version is 0.10.0. You may install the latest release using pip:
 
 ```console
 python -m pip install gresiblos
@@ -84,13 +85,17 @@ python -m pip install gresiblos
 Or download the [latest release](https://github.com/dkrajzew/gresiblos/releases/tag/0.10.0) from github. You may as well clone or download the [gresiblos git repository](https://github.com/dkrajzew/gresiblos.git). There is also a page about [installing gresiblos](https://gresiblos.readthedocs.io/en/latest/install.html) which lists further options.
 
 
-## Status
+## Background
+
+I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wrote __gresiblos__. It has some specific features &#8212; like the inclusion of custom JavaScript and CSS files &#8212; I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).
+
+
+
+## Status &amp; Contributing
 
 __gresiblos__ works as intended for me, but lacks quite some features of enterprise systems.
 
-The next steps to release 1.0 will involve some refactorings, including API changes.
-
-Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__&hellip;
+Please let me know if you have any idea / feature request / question / whatever or contribute to __gresiblos__ by [adding an issue](https://github.com/dkrajzew/gresiblos/issues) or by dropping me a mail.
 
 
 
