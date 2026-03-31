@@ -1,4 +1,4 @@
-# Usage - Lists and Indices
+# Usage &#8212; Lists and Indices
 
 ## Static entry lists
 

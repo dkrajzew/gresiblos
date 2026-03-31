@@ -1,4 +1,4 @@
-# Usage - Entries
+# Usage &#8212; Entries
 
 Up to now, we processed plain text files. Yet, you may want to format your entries and/or give them some styling. As well, a blog may have different authors, the date may be wanted to be fixed, the title may be more complex than the file name, etc. In the following, some possibilities for enriching your entries are given.
 
@@ -17,9 +17,9 @@ Please note that the __markdown__ module is not part of the standard installatio
 
 ## Plain HTML
 
-You may as well write your entries in plain HTML - I use HTML with additional meta information.
+You may as well write your entries in plain HTML &#8212; I use HTML with additional meta information.
 
-No options have to be set, the entries' HTML contents are simply embedded into the template. Please note that your entries should contain only the content - no header / body tags...
+No options have to be set, the entries&#39; HTML contents are simply embedded into the template. Please note that your entries should contain only the content &#8212; no header / body tags&#8230;
 
 
 ## Meta information

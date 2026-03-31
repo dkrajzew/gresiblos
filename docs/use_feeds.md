@@ -1,4 +1,4 @@
-# Usage - Feeds
+# Usage &#8212; Feeds
 
 __gresiblos__ can generate __Atom__ and __RSS 2.0__ feeds listing the read entries.
 

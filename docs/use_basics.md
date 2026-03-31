@@ -1,4 +1,4 @@
-# Usage - Basics
+# Usage &#8212; Basics
 
 ## Prerequisites
 
@@ -15,11 +15,11 @@ Assume you would have some text files with notes stored in a folder named &ldquo
 > gresiblos blog/*.txt
 ```
 
-The contents of the text files will be embedded into the default template and written to the destination folder **./gresiblos_out**. The ```<br/>``` element is added to each newline within the file's contents if no markdown conversion (see discussion on [entries](./use_entries.md)) is enabled and the file's extension is "txt".
+The contents of the text files will be embedded into the default template and written to the destination folder **./gresiblos_out**. The ```<br/>``` element is added to each newline within the file&#39;s contents if no markdown conversion (see discussion on [entries](./use_entries.md)) is enabled and the file&#39;s extension is &#8220;txt&#8221;.
 
 The generated files will be named as your text files, though Python&apos;s ```urllib.parse.quote``` is applied to encode characters that are not compliant for being a part of an URL assuming the files will be uploaded to a server. Some further information is extracted from the files: the __date__ using the file&apos;s change date, and the __title__ using the file&apos;s file name.
 
-In case your entries are stored as [markdown](https://python-markdown.github.io/) files, you may install [markdown](https://python-markdown.github.io/) additionally and start __gresiblos__ with the **--markdown** option. This will convert the entries' contents into HTML - and render links, if given - before embedding them into the template.
+In case your entries are stored as [markdown](https://python-markdown.github.io/) files, you may install [markdown](https://python-markdown.github.io/) additionally and start __gresiblos__ with the **--markdown** option. This will convert the entries&#39; contents into HTML &#8212; and render links, if given &#8212; before embedding them into the template.
 
 At subsequent pages, you will find some information about how the [entries](./use_entries.md) and the [template](./use_templates.md) can be enriched for obtaining full-fledged blog pages and about generating [lists and indices](./use_lists.md) or [feeds](./use_feeds.md) to browse your blog.
 

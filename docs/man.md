@@ -50,7 +50,7 @@ The entries may include the meta-information ```state```. You may filter entries
 
 __gresiblos__ generates an RSS 2.0 feed if the option **--rss-output *&lt;FILE&gt;*** is set and writes it into ***&lt;FILE&gt;***. It generates an Atom feed if the option **--atom-output *&lt;FILE&gt;*** is set and writes it into ***&lt;FILE&gt;***.
 
-Further options should be set when generating feeds for supplying needed information. **--feed-title *&lt;STRING&gt;*** sets the title of the feed, **--feed-site *&lt;STRING&gt;*** the URL of the feed (without the file name which is generated from ), **--feed-description *&lt;STRING&gt;*** sets the feed description, **--feed-editor-email *&lt;STRING&gt;*** sets the editor's e-mail address and **--feed-editor-name *&lt;STRING&gt;*** the editor's name. **--feed-language *&lt;STRING&gt;*** sets the feed's language, **--feed-copyright *&lt;STRING&gt;*** sets the copyright information about the feed, and **--feed-utz *&lt;STRING&gt;*** sets the feed's time zone. The defined language must match the ISO 639 specification.
+Further options should be set when generating feeds for supplying needed information. **--feed-title *&lt;STRING&gt;*** sets the title of the feed, **--feed-site *&lt;STRING&gt;*** the URL of the feed (without the file name which is generated from ), **--feed-description *&lt;STRING&gt;*** sets the feed description, **--feed-editor-email *&lt;STRING&gt;*** sets the editor&#39;s e-mail address and **--feed-editor-name *&lt;STRING&gt;*** the editor&#39;s name. **--feed-language *&lt;STRING&gt;*** sets the feed&#39;s language, **--feed-copyright *&lt;STRING&gt;*** sets the copyright information about the feed, and **--feed-utz *&lt;STRING&gt;*** sets the feed&#39;s time zone. The defined language must match the ISO 639 specification.
 
 The options can be stored in a configuration file which can be passed to __gresiblos__ using the option **--config *&lt;CONFIGURATION&gt;*** / **-c *&lt;CONFIGURATION&gt;***. Options given on the command line will overwrite the options set in the configuration file.
 
@@ -86,7 +86,7 @@ __gresiblos__ can be started with the following options:
 * **--feed-editor-name *&lt;STRING&gt;***: The name of the feed editor
 * **--feed-language *&lt;STRING&gt;***: The language of the feed
 * **--feed-copyright *&lt;STRING&gt;***: The copyright information about the feed
-* **--feed-utz *&lt;STRING&gt;***: The feed's time zone
+* **--feed-utz *&lt;STRING&gt;***: The feed&#39;s time zone
 * **--help** / **-h**: Show a help message
 * **--version**: Show the version information
 
@@ -132,7 +132,7 @@ Reads settings from the configuration file ```my_blog.cfg``` and processes as de
 
 __gresiblos__ comes with a default template.
 
-As well, __gresiblos__ uses templates for generating the feeds. For both, RSS and Atom, files that contain the feed's head and tail, as well as files for the entries are used, respectively.
+As well, __gresiblos__ uses templates for generating the feeds. For both, RSS and Atom, files that contain the feed&#39;s head and tail, as well as files for the entries are used, respectively.
 
 All files are located in the folder ```./data/``` which is located in the same folder as ```./gresiblos.py/```.
 

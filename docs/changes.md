@@ -13,7 +13,7 @@
     * the template has been updated
 * updated index.php
     * removed cross site scripting vulnerability
-* extended the documentation - split the user manual into parts
+* extended the documentation &#8212; split the user manual into parts
 
 ## gresiblos-0.8.0 (05.07.2025)
 

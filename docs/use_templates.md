@@ -1,4 +1,4 @@
-# Usage - Templates
+# Usage &#8212; Templates
 
 The template is a HTML file with placeholders. Set up as you like it. Let __gresiblos__ use your template using the __--template *&lt;TEMPLATE_FILE&gt;*__ (or __-t *&lt;TEMPLATE_FILE&gt;*__ for short) option where __*&lt;TEMPLATE_FILE&gt;*__ is the path to your template.
 
