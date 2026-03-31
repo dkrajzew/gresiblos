@@ -29,12 +29,12 @@ You can write both in one batch:
 
 ```shell
 > gresiblos blog/*.txt --atom-output <FILE_NAME1> --rss-output <FILE_NAME2>
-    --feed_title "Collected Notes"
-    --feed_site http://john.doe.org
-    --feed_description "Notes collected in the past time"
-    --feed_editor_email john@doe.org
-    --feed_editor_name "John Doe"
-    --feed_copyright "(c) John Doe 2026"
+    --feed-title "Collected Notes"
+    --feed-site http://john.doe.org
+    --feed-description "Notes collected in the past time"
+    --feed-editor-email john@doe.org
+    --feed-editor-name "John Doe"
+    --feed-copyright "(c) John Doe 2026"
 ```
 
 You may want to use a configuration file:
@@ -43,7 +43,7 @@ You may want to use a configuration file:
 gresiblos blog/*.txt -c blog.cfg
 ```
 
-The accrding configuration file ```blog.cfg``` would look like this:
+The according configuration file ```blog.cfg``` would look like this:
 
 ```cfg
 [gresiblos]

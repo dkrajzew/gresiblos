@@ -4,7 +4,16 @@
 ## gresiblos-0.10.0 (to come)
 
 * changed the license from BSD to GPL-3.0
-
+* added file output for rss/atom feeds instead of using a php-script
+    * according options had to be added
+* much debugging and code cleaning
+* &lt;br/&gt; tags are added to newlines when reading text content
+* API / breaking changes
+    * the list of items is now a JSON list, no longer a dict
+    * the template has been updated
+* updated index.php
+    * removed cross site scripting vulnerability
+* extended the documentation - split the user manual into parts
 
 ## gresiblos-0.8.0 (05.07.2025)
 

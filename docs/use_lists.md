@@ -20,7 +20,7 @@ To get a list sorted alphabetically by the title use the option **--alpha-output
 
 ## Index file
 
-When run, __gresiblos__ optionally builds a json file with some meta information about the processed entries. This file can be used for building a page that lists the entries, the topics, or other summaries. The index file is generated using the **--index-output *&lt;OUTPUT&gt;*** option:
+When run, __gresiblos__ optionally builds a JSON file with some meta information about the processed entries. This file can be used for building a page that lists the entries, the topics, or other summaries. The index file is generated using the **--index-output *&lt;OUTPUT&gt;*** option:
 
 ```shell
 > gresiblos --index-output entries.json blog/*.txt

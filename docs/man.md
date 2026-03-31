@@ -32,21 +32,21 @@ __gresiblos__ is implemented in [Python](https://www.python.org/). It is started
 
 __gresiblos__ reads one or multiple text files and embeds them into a template. The entry/entries to process are a mandatory argument. Multiple entries can be given divided by a &#8216;,&#8217;. Wildcards are accepted as well, so giving ```./entries/*.txt``` will process all files with the extension .txt within the folder ```entries```.
 
-The template file to use is defined using the option **--template *&lt;TEMPLATE&gt;*** / **-t *&lt;TEMPLATE&gt;***. If not given the default template is used.
+The template file to use is defined using the option **--template *&lt;TEMPLATE&gt;*** / **-t *&lt;TEMPLATE&gt;***. If not given, the default template is used.
 
 Generated pages are saved as .html-files per default. You may change it (e.g. to php) using the option **--extension *&lt;EXTENSION&gt;*** / **-e *&lt;EXTENSION&gt;***.
 
-The entries may include the meta-information ```state```. You may filter entries to process by setting the option **--state *&lt;STATE&gt;*** / **-s *&lt;STATE&gt;*** to the one that shall be processed.
-
 The path to store the generated pages into can be defined using the option **--destination *&lt;PATH&gt;*** / **-d *&lt;PATH&gt;***. The default is ```./```.
 
-Besides the generated entries, **gresiblos** may generate a json-index file that lists the entries with some meta-information. The option **--index-output *&lt;FILE&gt;*** will generate the index and save it under the given file name. The index is usually stored as plain json in a single line. For a prettier output, the indentation can be changed using the option **--index-indent *&lt;INT&gt;***.
+Besides the generated entries, **gresiblos** may generate a JSON-index file that lists the entries with some meta-information. The option **--index-output *&lt;FILE&gt;*** will generate the index and save it under the given file name. The index is usually stored as plain JSON in a single line. For a prettier output, the indentation can be changed using the option **--index-indent *&lt;INT&gt;***.
 
 In addition, files containing the list of converted files can be generated. The lists are embedded into the content section of the template file. Use the option **--chrono-output *&lt;FILE&gt;*** to generate a file with the entries sorted in chronological order and/or the option **--alpha-output *&lt;FILE&gt;*** with the entries sorted alphabetically.
 
 To convert contents from markdown to HTML before embedding them, use the option **--markdown**. When set, the content, the title, and the abstract will be converted. Use the option **--degrotesque** to apply the [degrotesque](https://github.com/dkrajzew/degrotesque) type setter on the contents before embedding them. Please note that you need to install markdown and/or degrotesque by yourself.
 
 When embedding the meta-information of single blog entries into the template, the topics are split and rendered individually before being embedded. To allow for using them as links, the rendering format can be set using the option **--topic-format *&lt;TOPIC_FORMAT&gt;***. Please note that this string should include something like &#8220;\[\[:topic:\]\]&#8221;, what is replaced by the topic itself. The date meta information is assumed to be in ISO-format (e.g. ```2025-01-08 19:26:00```), but may be adapted using the option __--date-format *&lt;DATE_FORMAT&gt;*__.
+
+The entries may include the meta-information ```state```. You may filter entries to process by setting the option **--state *&lt;STATE&gt;*** / **-s *&lt;STATE&gt;*** to the one that shall be processed.
 
 __gresiblos__ generates an RSS 2.0 feed if the option **--rss-output *&lt;FILE&gt;*** is set and writes it into ***&lt;FILE&gt;***. It generates an Atom feed if the option **--atom-output *&lt;FILE&gt;*** is set and writes it into ***&lt;FILE&gt;***.
 
@@ -118,7 +118,7 @@ Generates pages using the template ```mytemplate.html``` and the blog entries lo
 gresiblos ./entries/* --rss-output atom.xml --rss-output atom.xml
 ```
 
-Generates pages using the default template ```./data/template.html``` and the blog entries located in ```entries``` and writes them to ```./gresiblos_out```. Generates an RSS 2.0 and an Atom feed containing the read items. Please note that the options starting with --feed should be set for obtaining complete and valid feeds.
+Generates pages using the default template ```./data/template.html``` and the blog entries located in ```entries``` and writes them to ```./gresiblos_out```. Generates an RSS 2.0 and an Atom feed containing the read entries. Please note that the options starting with **--feed** should be set for obtaining complete and valid feeds.
 
 
 ```shell
@@ -145,14 +145,16 @@ __gresiblos__ uses the following exit codes:
 * **2**: one of the set options is not valid
 * **3**: the given template is broken; check whether all opening / closing tags match
 
+Errors are reported on the command line.
+
 ## Bugs and caveats
 
 * When setting __--date-format *&lt;DATE_FORMAT&gt;*__, all entries must use this date format.
 
 ## See also
 
-* https://github.com/dkrajzew/gresiblos
-* http://www.krajzewicz.de/blog
+* <https://github.com/dkrajzew/gresiblos>
+* <https://www.krajzewicz.de/blog>
 
 
  

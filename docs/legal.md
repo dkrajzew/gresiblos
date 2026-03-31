@@ -1,6 +1,6 @@
 # Legal Information
 
-## Impressum
+## Imprint
 
 These pages were made by Daniel Krajzewicz, 2024&ndash;2026.
 
