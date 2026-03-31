@@ -22,7 +22,7 @@ __gresiblos__ reads blog entries from files that may include some meta informati
 
 ## Installation
 
-The current version is 0.8.0. You may install the latest release using pip:
+The current version is 0.10.0. You may install the latest release using pip:
 
 ```console
 python -m pip install gresiblos

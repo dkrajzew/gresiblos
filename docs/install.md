@@ -5,7 +5,7 @@ __gresiblos__ is a [Python](https://www.python.org/) script. To run it, you must
 
 ## Installing gresiblos
 
-The current version is [gresiblos-0.8.0](https://github.com/dkrajzew/gresiblos/releases/tag/0.8.0).
+The current version is [gresiblos-0.10.0](https://github.com/dkrajzew/gresiblos/releases/tag/0.8.0).
 
 You have different options for installing __gresiblos__.
 
@@ -48,10 +48,10 @@ Please note that the current repository version may contain an in-between versio
 
 Besides, you may __download the current release__ here:
 
-* [gresiblos-0.8.0.zip](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.8.0.zip)
-* [gresiblos-0.8.0.tar.gz](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.8.0.tar.gz)
+* [gresiblos-0.10.0.zip](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.10.0.zip)
+* [gresiblos-0.10.0.tar.gz](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.10.0.tar.gz)
 
-You will get the complete copy of the repository which you have to decompress. A folder named ```gresiblos-0.8.0``` will be generated. __gresiblos.py__ is stored in the ```gresiblos``` folder.
+You will get the complete copy of the repository which you have to decompress. A folder named ```gresiblos-0.10.0``` will be generated. __gresiblos.py__ is stored in the ```gresiblos``` folder.
 
 After changing into the generated folder, you may run __gresiblos__ using 
 
