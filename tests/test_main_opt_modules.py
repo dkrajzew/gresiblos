@@ -2,6 +2,8 @@
 """gresiblos - Tests for optional modules (markdown, degrotesque)."""
 # ===========================================================================
 # - https://github.com/dkrajzew/gresiblos
+# - http://gresiblos.readthedocs.org/
+# - http://www.krajzewicz.de/docs/gresiblos/index.html
 # - http://www.krajzewicz.de
 # - contact me: daniel@krajzewicz.de
 # ===========================================================================

@@ -5,12 +5,14 @@ __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2016-2026, Daniel Krajzewicz"
 __credits__    = "Daniel Krajzewicz"
 __license__    = "GPL-3.0"
-__version__    = "0.8.0"
+__version__    = "0.10.0"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
 __status__     = "Production"
 # ===========================================================================
 # - https://github.com/dkrajzew/gresiblos
+# - http://gresiblos.readthedocs.org/
+# - http://www.krajzewicz.de/docs/gresiblos/index.html
 # - http://www.krajzewicz.de
 # - contact me: daniel@krajzewicz.de
 # ===========================================================================
@@ -300,7 +302,7 @@ class Entry:
         # add missing fields / set needed information
         self._consolidate(filename, date_format, extension)
 
-    def apply_processors(self, 
+    def apply_processors(self,
                          apply_markdown: bool,
                          prettifier: "degrotesque.Degrotesque",
                          is_plain_txt: bool) -> None:
@@ -545,7 +547,7 @@ def get_args(arguments: Optional[List[str]] = None) -> argparse.Namespace:
     parser.add_argument("--markdown", action="store_true",
                         help="If set, markdown is applied on the contents")
     parser.add_argument("--degrotesque", action="store_true",
-                        help="If set, degrotesque is applied on the contents, the abstract, and the title")
+                        help="If set, degrotesque is applied on contents, abstract, and title")
     parser.add_argument("--topic-format", default="[[:topic:]]",
                         help="Defines how each of the topics is rendered")
     parser.add_argument("--index-indent", type=int,

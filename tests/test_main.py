@@ -2,6 +2,8 @@
 """gresiblos - Tests for the main method."""
 # ===========================================================================
 # - https://github.com/dkrajzew/gresiblos
+# - http://gresiblos.readthedocs.org/
+# - http://www.krajzewicz.de/docs/gresiblos/index.html
 # - http://www.krajzewicz.de
 # - contact me: daniel@krajzewicz.de
 # ===========================================================================
@@ -95,7 +97,7 @@ def test_main_version(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert pname(captured.out) == """gresiblos 0.8.0
+    assert pname(captured.out) == """gresiblos 0.10.0
 """
     assert pname(captured.err) == ""
 
@@ -141,8 +143,8 @@ options:
                         Writes the named file with entries in alphabetical
                         order
   --markdown            If set, markdown is applied on the contents
-  --degrotesque         If set, degrotesque is applied on the contents, the
-                        abstract, and the title
+  --degrotesque         If set, degrotesque is applied on contents, abstract,
+                        and title
   --topic-format TOPIC_FORMAT
                         Defines how each of the topics is rendered
   --index-indent INDEX_INDENT
@@ -213,8 +215,8 @@ options:
                         Writes the named file with entries in alphabetical
                         order
   --markdown            If set, markdown is applied on the contents
-  --degrotesque         If set, degrotesque is applied on the contents, the
-                        abstract, and the title
+  --degrotesque         If set, degrotesque is applied on contents, abstract,
+                        and title
   --topic-format TOPIC_FORMAT
                         Defines how each of the topics is rendered
   --index-indent INDEX_INDENT
