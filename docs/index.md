@@ -15,9 +15,11 @@ __gresiblos__ &#8212; a simple private blogging system.
 
 ## Introduction
 
-__gresiblos__ is a radically simple static site generator / blogging system written in [Python](https://www.python.org/). It generates static HTML pages from text or markdown files, or HTML contents. It has no dependencies and no server backend is needed. __gresiblos__ is the acronym for __<u>gre</u>yrat&#39;s <u>si</u>mple <u>blo</u>g <u>s</u>ystem__.
+__gresiblos__ is a radically simple static site generator / blogging system written in [Python](https://www.python.org/). It generates static HTML pages by embedding the contents of text, markdown, or HTML-snippet files into a template. It has no dependencies and no server backend is needed. __gresiblos__ is the acronym for __<u>gre</u>yrat&#39;s <u>si</u>mple <u>blo</u>g <u>s</u>ystem__.
 
-__gresiblos__ reads blog entries from files that may include some meta information and embeds their contents into a template. Optionally, it additionally generates: a) a JSON-file with meta information about the entries, b) lists of the entries sorted alphabetically or chronologically, c) RSS 2.0 and Atom feed files. __gresiblos__ comes with a basic php-file that realizes browsing by topic and/or entries.
+__gresiblos__ reads blog entries from files that may include some meta information and embeds their contents into a template. It optionally generates: a) a JSON-file with meta information about the entries, b) lists of the entries sorted alphabetically or chronologically, c) RSS 2.0 and Atom feed files. __gresiblos__ comes with a basic php-file that realizes browsing by topic and/or entries.
+
+You may see it&#39;s results here: <https://www.krajzewicz.de/blog/index.php>.
 
 
 ## Installation
@@ -38,12 +40,14 @@ __gresiblos__ is started on the command line. Write your blog [entries](./use_en
 Assuming they are stored in the &#8216;blog&#8217; folder, run __gresiblos__ on them like:
 
 ```shell
-gresiblos ./blog/*.txt
+gresiblos ./blog/*.txt --to-html
 ```
 
-&#8230; and it will convert them into complete HTML pages using a default [template](./use_templates.md) and store them into the folder &#8216;gresiblos_out&#8217;.
+and it will apply a basic conversion to HTML, embed them into the default [template](./use_templates.md) and store them into the folder &#8216;gresiblos_out&#8217;.
 
-For more complete blogs &mdash; including authors, abstracts, release dates, etc. &mdash; the [entries](./use_entries.md) can be enriched by meta information. __gresiblos__ [templates](./use_templates.md) support placeholders that are filled with given meta information, as well as optional fields.
+Of course, it makes sense to use markdown or even plain HTML snippets if you want to run a real blog&#8230;
+
+For even more &#8220;complete&#8221; blogs &mdash; including authors, abstracts, release dates, etc. &mdash; the [entries](./use_entries.md) can be enriched by meta information. __gresiblos__ [templates](./use_templates.md) support placeholders that are filled with the meta information given in an [entry](./use_entries.md), as well as optional fields. 
 
 
 ## Documentation

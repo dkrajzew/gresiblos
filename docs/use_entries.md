@@ -7,7 +7,7 @@ Up to now, we processed plain text files. Yet, you may want to format your entri
 You may use markdown to format your files. For applying markdown use the __--markdown__ option:
 
 ```shell
-> gresiblos --markdown blog/*.txt
+> gresiblos blog/*.txt --markdown
 ```
 
 The contents of the files will be converted from markdown to HTML first, and then embedded into the template. Markdown will be applied on the __title__, the __abstract__ and the __contents__ parts of your entries (see also below).

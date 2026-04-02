@@ -49,7 +49,7 @@ def test_main_entry3_degrotesque_missing(capsys, tmp_path):
             assert e.code==2
     reload(sys.modules['gresiblos'])
     captured = capsys.readouterr()
-    assert pname(captured.err, tmp_path) == """gresiblos: error: degrotesque application is set, but degrotesque is not installed
+    assert pname(captured.err, tmp_path) == """gresiblos: error: degrotesque application is set, but degrotesque is not installed.
 """
     assert pname(captured.out, tmp_path) == ""
 
@@ -81,7 +81,7 @@ def test_main_entry3_markdown_missing(capsys, tmp_path):
             assert e.code==2
     reload(sys.modules['gresiblos'])
     captured = capsys.readouterr()
-    assert pname(captured.err, tmp_path) == """gresiblos: error: markdown application is set, but markdown is not installed
+    assert pname(captured.err, tmp_path) == """gresiblos: error: markdown application is set, but markdown is not installed.
 """
     assert pname(captured.out, tmp_path) == ""
 
@@ -99,7 +99,7 @@ Writing to <DIR>/entry3_optional.html
     assert fpread(tmp_path / "entries.json") == fpread(Path(TEST_PATH) / "entry3_sum.json")
 
 
-def test_main_entry3_missing2(capsys, tmp_path):
+def test_main_entry3_both_missing(capsys, tmp_path):
     """Missing but called degrotesque and markdown"""
     # https://stackoverflow.com/questions/51044068/test-for-import-of-optional-dependencies-in-init-py-with-pytest-python-3-5
     with patch.dict(sys.modules, {'degrotesque': None, 'markdown': None}):
@@ -113,13 +113,13 @@ def test_main_entry3_missing2(capsys, tmp_path):
             assert e.code==2
     reload(sys.modules['gresiblos'])
     captured = capsys.readouterr()
-    assert pname(captured.err, tmp_path) == """gresiblos: error: degrotesque application is set, but degrotesque is not installed
-gresiblos: error: markdown application is set, but markdown is not installed
+    assert pname(captured.err, tmp_path) == """gresiblos: error: degrotesque application is set, but degrotesque is not installed.
+gresiblos: error: markdown application is set, but markdown is not installed.
 """
     assert pname(captured.out, tmp_path) == ""
 
 
-def test_main_entry3_both(capsys, tmp_path):
+def test_main_entry3_md_degrotesque(capsys, tmp_path):
     """With markdown and degrotesque"""
     copy_files_and_template(tmp_path, ["entry3_optional.txt"])
     ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--degrotesque", "--markdown", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
@@ -128,5 +128,32 @@ def test_main_entry3_both(capsys, tmp_path):
 Writing to <DIR>/entry3_optional.html
 """
     assert pname(captured.err, tmp_path) == ""
-    assert fpread(tmp_path / "entry3_optional.html") == fpread(Path(TEST_PATH) / "entry3_optional_both.html")
+    assert fpread(tmp_path / "entry3_optional.html") == fpread(Path(TEST_PATH) / "entry3_optional_md_degrotesque.html")
     assert fpread(tmp_path / "entries.json") == fpread(Path(TEST_PATH) / "entry3_sum.json")
+
+
+def test_main_entry3_html(capsys, tmp_path):
+    """With simple html annotation"""
+    copy_files_and_template(tmp_path, ["entry3_optional.txt"])
+    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--to-html", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
+    captured = capsys.readouterr()
+    assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry3_optional.txt'
+Writing to <DIR>/entry3_optional.html
+"""
+    assert pname(captured.err, tmp_path) == ""
+    assert fpread(tmp_path / "entry3_optional.html") == fpread(Path(TEST_PATH) / "entry3_optional_html.html")
+    assert fpread(tmp_path / "entries.json") == fpread(Path(TEST_PATH) / "entry3_sum.json")
+
+
+def test_main_entry3_html_degrotesque(capsys, tmp_path):
+    """With simple html annotation and degrotesque"""
+    copy_files_and_template(tmp_path, ["entry3_optional.txt"])
+    ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--to-html", "--degrotesque", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
+    captured = capsys.readouterr()
+    assert pname(captured.out, tmp_path) == """Processing '<DIR>/entry3_optional.txt'
+Writing to <DIR>/entry3_optional.html
+"""
+    assert pname(captured.err, tmp_path) == ""
+    assert fpread(tmp_path / "entry3_optional.html") == fpread(Path(TEST_PATH) / "entry3_optional_html_degrotesque.html")
+    assert fpread(tmp_path / "entries.json") == fpread(Path(TEST_PATH) / "entry3_sum.json")
+    

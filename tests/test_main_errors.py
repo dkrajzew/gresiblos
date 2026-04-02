@@ -34,5 +34,20 @@ def test_main_entry1_by_name(capsys, tmp_path):
 Writing to <DIR>/my-first-blog-entry.html
 Processing '<DIR>/entry1.txt'
 """
-    assert pname(captured.err, tmp_path) == """gresiblos: error: A page with name 'my-first-blog-entry' was already added
+    assert pname(captured.err, tmp_path) == """gresiblos: error: A page with name 'my-first-blog-entry' was already added.
 """
+
+def test_main_md_and_html(capsys, tmp_path):
+    """With simple html annotation and markdown"""
+    copy_files_and_template(tmp_path, ["entry1.txt"])
+    try:
+        ret = gresiblos.main(["-d", str(tmp_path), str(tmp_path / "entry1.txt")+","+str(tmp_path / "entry1.txt"), "--markdown", "--to-html"])
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==2
+    captured = capsys.readouterr()
+    assert pname(captured.out, tmp_path) == ""
+    assert pname(captured.err, tmp_path) == """gresiblos: error: You cannot combine --markdown and --to-html.
+"""
+

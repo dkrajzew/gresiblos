@@ -5,20 +5,36 @@ __gresiblos__ &#8212; a simple private blogging system.
 ## Synopsis
 
 ```shell
-gresiblos [-t TEMPLATE] [-e EXTENSION]
-          [-s STATE] [-d DESTINATION] [--index-output INDEX_OUTPUT]
+gresiblos [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
+          [-s STATE] [--index-output INDEX_OUTPUT]
           [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
-          [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
-          [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
+          [--to-html] [--markdown] [--degrotesque]
+          [--topic-format TOPIC_FORMAT] [--index-indent INDEX_INDENT]
+          [--date-format DATE_FORMAT] [--rss-output RSS_OUTPUT]
+          [--atom-output ATOM_OUTPUT] [--feed-title FEED_TITLE]
+          [--feed-site FEED_SITE] [--feed-description FEED_DESCRIPTION]
+          [--feed-editor-email FEED_EDITOR_EMAIL]
+          [--feed-editor-name FEED_EDITOR_NAME]
+          [--feed-language FEED_LANGUAGE]
+          [--feed-copyright FEED_COPYRIGHT] [--feed-utz FEED_UTZ]
+          [--version]
           input
 
-gresiblos -c FILE
+gresiblos -c FILE input
 
-gresiblos [-c FILE] [-t TEMPLATE] [-e EXTENSION]
-          [-s STATE] [-d DESTINATION] [--index-output INDEX_OUTPUT]
+gresiblos [-c FILE] [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
+          [-s STATE] [--index-output INDEX_OUTPUT]
           [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
-          [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
-          [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
+          [--to-html] [--markdown] [--degrotesque]
+          [--topic-format TOPIC_FORMAT] [--index-indent INDEX_INDENT]
+          [--date-format DATE_FORMAT] [--rss-output RSS_OUTPUT]
+          [--atom-output ATOM_OUTPUT] [--feed-title FEED_TITLE]
+          [--feed-site FEED_SITE] [--feed-description FEED_DESCRIPTION]
+          [--feed-editor-email FEED_EDITOR_EMAIL]
+          [--feed-editor-name FEED_EDITOR_NAME]
+          [--feed-language FEED_LANGUAGE]
+          [--feed-copyright FEED_COPYRIGHT] [--feed-utz FEED_UTZ]
+          [--version]
           [input]
           
 gresiblos --help
@@ -42,7 +58,7 @@ Besides the generated entries, **gresiblos** may generate a JSON-index file that
 
 In addition, files containing the list of converted files can be generated. The lists are embedded into the content section of the template file. Use the option **--chrono-output *&lt;FILE&gt;*** to generate a file with the entries sorted in chronological order and/or the option **--alpha-output *&lt;FILE&gt;*** with the entries sorted alphabetically.
 
-To convert contents from markdown to HTML before embedding them, use the option **--markdown**. When set, the content, the title, and the abstract will be converted. Use the option **--degrotesque** to apply the [degrotesque](https://github.com/dkrajzew/degrotesque) type setter on the contents before embedding them. Please note that you need to install markdown and/or degrotesque by yourself.
+To perform a basic conversion of the contents to HTML, use the option **--to-html**. This will embed lines into **&lt;p&gt;**-tags and embed links into **&lt;a&gt;**-tags. Markdown files can be converted using the option **--markdown**. When set, the content, the title, and the abstract will be converted. Use the option **--degrotesque** to apply the [degrotesque](https://github.com/dkrajzew/degrotesque) type setter on the contents before embedding them. Please note that you need to install markdown and/or degrotesque by yourself.
 
 When embedding the meta-information of single blog entries into the template, the topics are split and rendered individually before being embedded. To allow for using them as links, the rendering format can be set using the option **--topic-format *&lt;TOPIC_FORMAT&gt;***. Please note that this string should include something like &#8220;\[\[:topic:\]\]&#8221;, what is replaced by the topic itself. The date meta information is assumed to be in ISO-format (e.g. ```2025-01-08 19:26:00```), but may be adapted using the option __--date-format *&lt;DATE_FORMAT&gt;*__.
 
@@ -72,6 +88,7 @@ __gresiblos__ can be started with the following options:
 * **--index-output *&lt;FILE&gt;***: Writes the index to the named file
 * **--chrono-output *&lt;FILE&gt;***: Writes the named file with entries in chronological order
 * **--alpha-output *&lt;FILE&gt;***: Writes the named file with entries in alphabetical order
+* **--to-html**: If set, basic HTML tags are added
 * **--markdown**: If set, markdown is applied on the contents
 * **--degrotesque**: If set, degrotesque is applied on the contents, the abstract, and the title
 * **--topic-format *&lt;TOPIC_FORMAT&gt;***: Defines how each of the topics is rendered

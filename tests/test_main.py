@@ -31,11 +31,11 @@ def test_main_empty1(capsys):
     assert pname(captured.err) == """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [--index-output INDEX_OUTPUT]
                  [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
-                 [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
-                 [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
-                 [--rss-output RSS_OUTPUT] [--atom-output ATOM_OUTPUT]
-                 [--feed-title FEED_TITLE] [--feed-site FEED_SITE]
-                 [--feed-description FEED_DESCRIPTION]
+                 [--to-html] [--markdown] [--degrotesque]
+                 [--topic-format TOPIC_FORMAT] [--index-indent INDEX_INDENT]
+                 [--date-format DATE_FORMAT] [--rss-output RSS_OUTPUT]
+                 [--atom-output ATOM_OUTPUT] [--feed-title FEED_TITLE]
+                 [--feed-site FEED_SITE] [--feed-description FEED_DESCRIPTION]
                  [--feed-editor-email FEED_EDITOR_EMAIL]
                  [--feed-editor-name FEED_EDITOR_NAME]
                  [--feed-language FEED_LANGUAGE]
@@ -59,11 +59,11 @@ def test_main_empty2(capsys):
     assert pname(captured.err) == """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [--index-output INDEX_OUTPUT]
                  [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
-                 [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
-                 [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
-                 [--rss-output RSS_OUTPUT] [--atom-output ATOM_OUTPUT]
-                 [--feed-title FEED_TITLE] [--feed-site FEED_SITE]
-                 [--feed-description FEED_DESCRIPTION]
+                 [--to-html] [--markdown] [--degrotesque]
+                 [--topic-format TOPIC_FORMAT] [--index-indent INDEX_INDENT]
+                 [--date-format DATE_FORMAT] [--rss-output RSS_OUTPUT]
+                 [--atom-output ATOM_OUTPUT] [--feed-title FEED_TITLE]
+                 [--feed-site FEED_SITE] [--feed-description FEED_DESCRIPTION]
                  [--feed-editor-email FEED_EDITOR_EMAIL]
                  [--feed-editor-name FEED_EDITOR_NAME]
                  [--feed-language FEED_LANGUAGE]
@@ -105,11 +105,11 @@ def test_main_version(capsys):
 PRE_3_13_HELP = """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
                  [-s STATE] [--index-output INDEX_OUTPUT]
                  [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
-                 [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
-                 [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
-                 [--rss-output RSS_OUTPUT] [--atom-output ATOM_OUTPUT]
-                 [--feed-title FEED_TITLE] [--feed-site FEED_SITE]
-                 [--feed-description FEED_DESCRIPTION]
+                 [--to-html] [--markdown] [--degrotesque]
+                 [--topic-format TOPIC_FORMAT] [--index-indent INDEX_INDENT]
+                 [--date-format DATE_FORMAT] [--rss-output RSS_OUTPUT]
+                 [--atom-output ATOM_OUTPUT] [--feed-title FEED_TITLE]
+                 [--feed-site FEED_SITE] [--feed-description FEED_DESCRIPTION]
                  [--feed-editor-email FEED_EDITOR_EMAIL]
                  [--feed-editor-name FEED_EDITOR_NAME]
                  [--feed-language FEED_LANGUAGE]
@@ -142,6 +142,7 @@ options:
   --alpha-output ALPHA_OUTPUT
                         Writes the named file with entries in alphabetical
                         order
+  --to-html             If set, basic HTML tags are added
   --markdown            If set, markdown is applied on the contents
   --degrotesque         If set, degrotesque is applied on contents, abstract,
                         and title
@@ -214,6 +215,7 @@ options:
   --alpha-output ALPHA_OUTPUT
                         Writes the named file with entries in alphabetical
                         order
+  --to-html             If set, basic HTML tags are added
   --markdown            If set, markdown is applied on the contents
   --degrotesque         If set, degrotesque is applied on contents, abstract,
                         and title

@@ -71,7 +71,6 @@ class Template:
         Optional fields are enclosed in [[[:?key:?]] ... [[key?:]].
 
         Args:
-            self: The instance of the class.
             tpl (str): The template string containing optional fields.
             values (dict): A dictionary containing the values for the optional fields.
 
@@ -137,8 +136,6 @@ class Template:
         Args:
           values (Dict[str, str]): The values to embed.
           topics_format (str): The format of the topics.
-          apply_markdown (bool): Whether to apply markdown. Defaults to False.
-          prettifier (Any): The prettifier to use. Defaults to None.
         """
         encoded_topics = self.encode_topics(values, topics_format)
         tpl = self.process_optional_fields(self._template, values)
@@ -305,7 +302,7 @@ class Entry:
     def apply_processors(self,
                          apply_markdown: bool,
                          prettifier: "degrotesque.Degrotesque",
-                         is_plain_txt: bool) -> None:
+                         to_html: bool) -> None:
         """
         Applies text processors optionally:
         a) converts markdown to HTML
@@ -314,6 +311,7 @@ class Entry:
         Args:
             apply_markdown (bool): If set, markdown is applied.
             prettifier (Any): If given, the prettifier is applied.
+            to_html (bool): Whether basic HTML tags shall be added
         """
         for field in ["content", "title", "abstract"]:
             if field not in self._fields:
@@ -323,8 +321,10 @@ class Entry:
                 value = markdown.markdown(value)
                 if value.startswith("<p>") and value.endswith("</p>"):
                     value = value[3:-4]
-            elif is_plain_txt and field=="content" and value.find("<br")<0:
-                value = value.replace("\n", "<br/>\n")
+            elif to_html and field=="content":
+                url_regex = re.compile(r"(http[s]?://\S+)")
+                value = url_regex.sub(r'<a href="\1">\1</a>', value)
+                value = "<p>" + value.replace("\n", "</p>\n<p>") + "</p>\n"
             if prettifier is not None:
                 value = prettifier.prettify(value, True)
             self._fields[field] = value
@@ -372,7 +372,7 @@ class PlainStorage:
         ret = [entry for filename, entry in self._entries.items()]
         return ret
 
-    def as_json(self, index_indent: int) -> str:
+    def build_json_index(self, index_indent: int) -> str:
         """
         Returns all stored entries' metadata as a list.
 
@@ -386,13 +386,13 @@ class PlainStorage:
         for _, entry in self._entries.items():
             desc: Dict[str, Any] = {
                 "date": entry.get_date().isoformat(' '),
-                "title": entry.get("title")
+                "title": entry.get("title"),
+                "filename": entry.get_destination()
             }
             if entry.has_key("topics"):
                 desc["topics"] = [t.strip() for t in entry.get("topics").split(",")]
             if entry.has_key("abstract"):
                 desc["abstract"] = entry.get("abstract")
-            desc["filename"] = entry.get_destination()
             entries.append(desc)
         return json.dumps(entries, indent=index_indent)
 
@@ -428,8 +428,6 @@ def write_list(title: str, dest_path: str, template: Template,
         template (Template): The template to fill.
         entries (List[Entry]): A list of entry metadata.
         topic_format (str): The format of topics to use.
-        apply_markdown (bool): Whether markdown shall be applied.
-        prettifier (Any): The prettyfier to use.
     """
     content = "<ul>\n"
     for entry in entries:
@@ -544,6 +542,8 @@ def get_args(arguments: Optional[List[str]] = None) -> argparse.Namespace:
                         help="Writes the named file with entries in chronological order")
     parser.add_argument("--alpha-output",
                         help="Writes the named file with entries in alphabetical order")
+    parser.add_argument("--to-html", action="store_true",
+                        help="If set, basic HTML tags are added")
     parser.add_argument("--markdown", action="store_true",
                         help="If set, markdown is applied on the contents")
     parser.add_argument("--degrotesque", action="store_true",
@@ -580,9 +580,11 @@ def get_args(arguments: Optional[List[str]] = None) -> argparse.Namespace:
     # check
     errors = []
     if not _HAVE_DEGROTESQUE and args.degrotesque:
-        errors.append("degrotesque application is set, but degrotesque is not installed")
+        errors.append("degrotesque application is set, but degrotesque is not installed.")
     if not _HAVE_MARKDOWN and args.markdown:
-        errors.append("markdown application is set, but markdown is not installed")
+        errors.append("markdown application is set, but markdown is not installed.")
+    if args.markdown and args.to_html:
+        errors.append("You cannot combine --markdown and --to-html.")
     if len(errors)!=0:
         for error in errors:
             print (f"gresiblos: error: {error}", file=sys.stderr)
@@ -640,11 +642,11 @@ def main(arguments: Optional[List[str]] = None) -> int:
         if args.state is not None and args.state != entry.get("state"):
             print(f" ... skipped for state='{entry.get('state')}'")
             continue
-        entry.apply_processors(apply_markdown, prettifier, file.endswith(".txt"))
+        entry.apply_processors(apply_markdown, prettifier, args.to_html)
         # add to storage
         if not storage.add(entry):
             print ("gresiblos: error: "
-                + f"A page with name '{entry.get('filename')}' was already added",
+                + f"A page with name '{entry.get('filename')}' was already added.",
                 file=sys.stderr)
             raise SystemExit(1)
         rendered = template.embed(entry._fields, args.topic_format)
@@ -658,7 +660,7 @@ def main(arguments: Optional[List[str]] = None) -> int:
     if args.index_output:
         dest_path = os.path.join(args.destination, args.index_output)
         with open(dest_path, "w", encoding="utf-8") as fdo:
-            fdo.write(storage.as_json(args.index_indent))
+            fdo.write(storage.build_json_index(args.index_indent))
     # (optional) write chronological entries list
     if args.chrono_output:
         dest_path = os.path.join(args.destination, args.chrono_output)
