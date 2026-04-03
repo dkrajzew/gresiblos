@@ -26,7 +26,7 @@ You may see it&#39;s results here: <https://www.krajzewicz.de/blog/index.php>.
 
 The current version is 0.10.0. You may install the latest release using pip:
 
-```console
+```shell
 python -m pip install gresiblos
 ```
 

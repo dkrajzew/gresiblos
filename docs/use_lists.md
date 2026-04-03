@@ -5,7 +5,7 @@
 You may generate a list of files using the **--chrono-output *&lt;OUTPUT&gt;*** option:
 
 ```shell
-> gresiblos --chrono-output list_chrono.html blog/*.txt
+gresiblos --chrono-output list_chrono.html blog/*.txt
 ```
 
 This will generate a file named **list_chrono.html** that contains a list of entries sorted in chronological order.
@@ -15,7 +15,7 @@ The generated list is be embedded into the template and stored under the given n
 To get a list sorted alphabetically by the title use the option **--alpha-output *&lt;OUTPUT&gt;***: 
 
 ```shell
-> gresiblos --alpha-output list_chrono.html blog/*.txt
+gresiblos --alpha-output list_chrono.html blog/*.txt
 ```
 
 ## Index file
@@ -23,7 +23,7 @@ To get a list sorted alphabetically by the title use the option **--alpha-output
 When run, __gresiblos__ optionally builds a JSON file with some meta information about the processed entries. This file can be used for building a page that lists the entries, the topics, or other summaries. The index file is generated using the **--index-output *&lt;OUTPUT&gt;*** option:
 
 ```shell
-> gresiblos --index-output entries.json blog/*.txt
+gresiblos --index-output entries.json blog/*.txt
 ```
 
 ### Index Contents

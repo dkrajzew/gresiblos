@@ -5,7 +5,7 @@ __gresiblos__ can generate __Atom__ and __RSS 2.0__ feeds listing the read entri
 An __Atom__ feed is generated using:
 
 ```shell
-> gresiblos blog/*.txt --atom-output <FILE_NAME>
+gresiblos blog/*.txt --atom-output <FILE_NAME>
 ```
 
 Where __&lt;FILE_NAME&gt;__ is the name of the file the __Atom__ feed will be written to.
@@ -14,7 +14,7 @@ Where __&lt;FILE_NAME&gt;__ is the name of the file the __Atom__ feed will be wr
 An __RSS 2.0__ feed is generated using:
 
 ```shell
-> gresiblos blog/*.txt --rss-output <FILE_NAME>
+gresiblos blog/*.txt --rss-output <FILE_NAME>
 ```
 
 Where __&lt;FILE_NAME&gt;__ is the name of the file the __RSS 2.0__ feed will be written to.
@@ -22,13 +22,13 @@ Where __&lt;FILE_NAME&gt;__ is the name of the file the __RSS 2.0__ feed will be
 You can write both in one batch:
 
 ```shell
-> gresiblos blog/*.txt --atom-output <FILE_NAME1> --rss-output <FILE_NAME2>
+gresiblos blog/*.txt --atom-output <FILE_NAME1> --rss-output <FILE_NAME2>
 ```
 
 **Yet, several important information about the feeds will be missing.** Some things have to be set on the command line additionally. A complete call that yields in valid __Atom__ and __RSS 2.0__ should have the following feed information set:
 
 ```shell
-> gresiblos blog/*.txt --atom-output <FILE_NAME1> --rss-output <FILE_NAME2>
+gresiblos blog/*.txt --atom-output <FILE_NAME1> --rss-output <FILE_NAME2>
     --feed-title "Collected Notes"
     --feed-site http://john.doe.org
     --feed-description "Notes collected in the past time"
@@ -45,7 +45,7 @@ gresiblos blog/*.txt -c blog.cfg
 
 The according configuration file ```blog.cfg``` would look like this:
 
-```cfg
+```config
 [gresiblos]
 atom_output=atom-example.xml
 rss_output=rss-example.xml

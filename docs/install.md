@@ -13,7 +13,7 @@ You have different options for installing __gresiblos__.
 
 You may __install gresiblos__ from PyPi using
 
-```console
+```shell
 python -m pip install gresiblos
 ```
 
@@ -23,7 +23,7 @@ Before installing __gresiblos__, you may consider building a virtual environment
 
 After installing, you may run __gresiblos__ using 
 
-```console
+```shell
 gresiblos
 ```
 
@@ -31,14 +31,14 @@ gresiblos
 
 You may __clone the repository__ which is available at [gresiblos&apos;s github page](https://github.com/dkrajzew/gresiblos).
 
-```console
+```shell
 git clone https://github.com/dkrajzew/gresiblos.git
 cd gresiblos
 ```
 
 You may then run __gresiblos__ using 
 
-```console
+```shell
 python gresiblos/gresiblos.py
 ```
 
@@ -55,7 +55,7 @@ You will get the complete copy of the repository which you have to decompress. A
 
 After changing into the generated folder, you may run __gresiblos__ using 
 
-```console
+```shell
 python gresiblos/gresiblos.py
 ```
 
@@ -67,7 +67,7 @@ __gresiblos__ currently supports two add-ons that are not part of the standard i
 
 __markdown__ is a text markup language for generating HTML, see <https://python-markdown.github.io/>. Install __markdown__ using:
 
-```console
+```shell
 python -m pip install markdown
 ```
 
@@ -75,7 +75,7 @@ python -m pip install markdown
 
 __degrotesque__ is a text processor which replaces basic characters by some nicer, typographic, counterparts, see <https://degrotesque.readthedocs.io/en/latest/>. Install __degrotesque__ using:
 
-```console
+```shell
 python -m pip install degrotesque
 ```
 
@@ -88,13 +88,13 @@ For installing [Python](https://www.python.org/), use an installer for your syst
 
 You should as well install **pip**, a package manager for [Python](https://www.python.org/). After installing [Python](https://www.python.org/), you should be able to install **pip** using:
 
-```console
+```shell
 python get-pip.py
 ```
 
 You may upgrade pip using:
 
-```console
+```shell
 pip install --upgrade pip
 ```
 

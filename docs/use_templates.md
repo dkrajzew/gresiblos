@@ -6,7 +6,7 @@ The [entry&#39;s meta data](./use_entries.md#meta-information) will be inserted 
 
 So given the entry:
 
-```
+```config
 state:release
 title:My first blog entry
 filename:my-first-blog-entry

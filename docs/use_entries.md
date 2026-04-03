@@ -7,7 +7,7 @@ Up to now, we processed plain text files. Yet, you may want to format your entri
 You may use markdown to format your files. For applying markdown use the __--markdown__ option:
 
 ```shell
-> gresiblos blog/*.txt --markdown
+gresiblos blog/*.txt --markdown
 ```
 
 The contents of the files will be converted from markdown to HTML first, and then embedded into the template. Markdown will be applied on the __title__, the __abstract__ and the __contents__ parts of your entries (see also below).
@@ -30,14 +30,14 @@ You may add meta information to your files. __gresiblos__ assumes that your file
 
 Meta information is stored in the files to process. Each meta information is stored as a key/value pair, separated by a &lsquo;:&rsquo;, e.g.:
 
-```
+```config
 author: John Doe
 date: 2025-01-02 19:25:00
 ```
 
 You may as well include multi-line fields. In this case, the key is stored in one line and the line is closed with a &lsquo;:&rsquo;. The following lines are interpreted as the respective value until a line that contains &ldquo;===&rdquo; only occurs:
 
-```
+```config
 references:
 [1] my first reference
 [2] my second reference
@@ -46,7 +46,7 @@ references:
 
 __Please note that the content itself has to be named in the same way when using meta data:__
 
-```
+```config
 content:
 This is my first blog entry. I am so excited!
 ===
@@ -54,7 +54,7 @@ This is my first blog entry. I am so excited!
 
 So a complete blog entry with meta information may look like this:
 
-```
+```config
 state:release
 title:My first blog entry
 filename:my-first-blog-entry

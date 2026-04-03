@@ -4,7 +4,7 @@ __gresiblos__ &#8212; a simple private blogging system.
 
 ## Synopsis
 
-```shell
+```man
 gresiblos [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
           [-s STATE] [--index-output INDEX_OUTPUT]
           [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
