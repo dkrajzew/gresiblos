@@ -80,9 +80,6 @@ Processing '<DIR>/entry2.txt'
 Writing to <DIR>/my-second-blog-entry.html
 Writing Atom feed to '<DIR>/atom.xml'
 """
-    c = fpread(tmp_path / "atom.xml")
-    with open("d:\\atom.xml", "w") as fdo:
-        fdo.write(c)
     assert pname(captured.err, tmp_path) == ""
     assert fpread(tmp_path / "my-first-blog-entry.html") == fpread(Path(TEST_PATH) / "my-first-blog-entry.html")
     assert fpread(tmp_path / "my-second-blog-entry.html") == fpread(Path(TEST_PATH) / "my-second-blog-entry.html")
