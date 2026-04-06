@@ -111,17 +111,21 @@ __gresiblos__ is used at the following pages:
 
 ## Changes
 
-## gresiblos-0.10.0 (to come)
+## gresiblos-0.10.0 (06.05.2026)
 
 * changed the license from BSD to GPL-3.0
-
-
-### gresiblos-0.8.0 (05.07.2025)
-
-* improved installation (can be now included as a module and executed on the command line after being installed with pip
-* the default template is now included in the package
-* some linting
-* corrected documentation
+* added file output for rss/atom feeds instead of using a php-script
+    * use **--rss-output** and **--atom-output** to respectively generate RSS 2.0 and Atom feeds
+    * according options had to be added (**--feed-title**, **--feed-site**, **--feed-description**, **--feed-editor-email**, **--feed-editor-name**, **--feed-language**, **--feed-copyright**, **--feed-utz**)
+    * removed the ```feed.php``` script
+* added an option **--to-html** that embeds links in ```<a>``` tags and text paragraphs in ```<p>``` tags for converting text files to basic HTML files
+* much debugging and code cleaning
+* API / breaking changes
+    * the list of items is now a JSON list, no longer a dict
+    * the template has been updated
+* updated index.php
+    * removed cross site scripting vulnerability
+* extended the documentation &#8212; split the user manual into parts
 
 
 ### Older versions

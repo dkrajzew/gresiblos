@@ -1,13 +1,15 @@
 # ChangeLog for gresiblos
 
 
-## gresiblos-0.10.0 (to come)
+## gresiblos-0.10.0 (06.05.2026)
 
 * changed the license from BSD to GPL-3.0
 * added file output for rss/atom feeds instead of using a php-script
-    * according options had to be added
+    * use **--rss-output** and **--atom-output** to respectively generate RSS 2.0 and Atom feeds
+    * according options had to be added (**--feed-title**, **--feed-site**, **--feed-description**, **--feed-editor-email**, **--feed-editor-name**, **--feed-language**, **--feed-copyright**, **--feed-utz**)
+    * removed the ```feed.php``` script
+* added an option **--to-html** that embeds links in ```<a>``` tags and text paragraphs in ```<p>``` tags for converting text files to basic HTML files
 * much debugging and code cleaning
-* &lt;br/&gt; tags are added to newlines when reading text content
 * API / breaking changes
     * the list of items is now a JSON list, no longer a dict
     * the template has been updated
