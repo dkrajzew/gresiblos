@@ -1,7 +1,7 @@
 # ChangeLog for gresiblos
 
 
-## gresiblos-0.10.0 (06.05.2026)
+## gresiblos-0.10.0 (06.04.2026)
 
 * changed the license from BSD to GPL-3.0
 * added file output for rss/atom feeds instead of using a php-script
