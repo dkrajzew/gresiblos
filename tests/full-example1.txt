@@ -1,0 +1,12 @@
+state:release
+title:My first blog entry
+filename:my-first-blog-entry-example
+author:John Doe
+date:2025-01-02 19:25:00
+topics:blog,example
+abstract:A very first introduction into blogging
+content:
+__Hello there!__
+
+This is my very first blog post!
+===

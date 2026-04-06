@@ -1,8 +1,8 @@
 # Legal Information
 
-## Impressum
+## Imprint
 
-These pages were made by Daniel Krajzewicz, 2024&ndash;2025.
+These pages were made by Daniel Krajzewicz, 2024&ndash;2026.
 
 
 ## Disclaimer
@@ -16,7 +16,7 @@ These pages were made by Daniel Krajzewicz, 2024&ndash;2025.
 
 ## Regards
 
-**gresiblos** uses [pytest](https://docs.pytest.org/en/stable/) and [mkdocs](https://www.mkdocs.org/) together with the [material extension](https://squidfunk.github.io/mkdocs-material/). I like mkdocs very much. The docs can be read online at [readthedocs](https://gresiblos.readthedocs.io/en/latest/). Thank you!
+**gresiblos** is validated using Python&#39;s [pytest](https://docs.pytest.org/) and [coverage](https://coverage.readthedocs.io/) packages and the coverage is tracked on [coveralls](https://coveralls.io/). Thank you!
 
-**gresiblos** is validated using Python's pytest and coverage libraries and the coverage is tracked on coveralls. Thank you!
+**gresiblos** uses [mkdocs](https://www.mkdocs.org/) together with the [material extension](https://squidfunk.github.io/mkdocs-material/) for documentation. I like mkdocs very much. Thank you!
 

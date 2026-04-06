@@ -16,19 +16,24 @@ theme:
 nav:
     - Home: index.md
     - Installation: install.md
-    - Usage: usage.md
-    - Command Line: cmd.md
+    - Usage:
+        - Basics: use_basics.md
+        - Entries: use_entries.md
+        - Template: use_templates.md
+        - Lists: use_lists.md
+        - Feeds: use_feeds.md
+    - Man Page: man.md
     - Links: links.md
-    - ChangeLog: changes.md
-    - License (BSD): license.md
     - API: api_gresiblos.md
+    - ChangeLog: changes.md
+    - License (GPL-3.0): license.md
     - Legal: legal.md
 
 markdown_extensions:
     - admonition
     - sane_lists
 
-copyright: "&copy; Copyright 2016&ndash;2025, Daniel Krajzewicz."
+copyright: "&copy; Copyright 2016&ndash;2026, Daniel Krajzewicz."
 
 use_directory_urls: false
 

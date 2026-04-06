@@ -1,19 +1,11 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# =============================================================================
-"""gresiblos - Tests for the main method - examples application."""
-# =============================================================================
-__author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2024-2025, Daniel Krajzewicz"
-__credits__    = ["Daniel Krajzewicz"]
-__license__    = "BSD"
-__version__    = "0.8.0"
-__maintainer__ = "Daniel Krajzewicz"
-__email__      = "daniel@krajzewicz.de"
-__status__     = "Production"
+"""gresiblos - Tests for templates prcoessing - basic replacement."""
 # ===========================================================================
 # - https://github.com/dkrajzew/gresiblos
+# - http://gresiblos.readthedocs.org/
+# - http://www.krajzewicz.de/docs/gresiblos/index.html
 # - http://www.krajzewicz.de
+# - contact me: daniel@krajzewicz.de
 # ===========================================================================
 
 
@@ -27,24 +19,28 @@ import gresiblos
 
 # --- test functions ----------------------------------------------------------
 def test_replace_plain_given(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """Replace placeholder with given value"""
+    template = gresiblos.Template("[[:foo:]]")
     entry = gresiblos.Entry({"foo": "bar"})
-    assert entry.embed("[[:foo:]]", "")=="bar"
+    assert template.embed(entry._fields, "[[:topic:]]")=="bar"
 
 
 def test_replace_plain_missing(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """Replace placeholder with missing value"""
+    template = gresiblos.Template("[[:bar:]]")
     entry = gresiblos.Entry({"foo": "bar"})
-    assert entry.embed("[[:bar:]]", "")==""
+    assert template.embed(entry._fields, "[[:topic:]]")==""
 
 
 def test_replace_opt_given(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """Replace placeholder with default with given value"""
+    template = gresiblos.Template("[[:foo|foo:]]")
     entry = gresiblos.Entry({"foo": "bar"})
-    assert entry.embed("[[:foo|foo:]]", "")=="bar"
+    assert template.embed(entry._fields, "[[:topic:]]")=="bar"
 
 
 def test_replace_opt_missing(capsys, tmp_path):
-    """Parsing first example (by name)"""
+    """Parsing placeholder with default with missing value"""
+    template = gresiblos.Template("[[:bar|foo:]]")
     entry = gresiblos.Entry({"foo": "bar"})
-    assert entry.embed("[[:bar|foo:]]", "")=="foo"
+    assert template.embed(entry._fields, "[[:topic:]]")=="foo"

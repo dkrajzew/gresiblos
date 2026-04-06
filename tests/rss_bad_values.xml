@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Collec"ted Notes</title>
+    <link>http://john.doe.org/rss_bad_values.xml</link>
+    <atom:link href="http://john.doe.org/rss_bad_values.xml" rel="self" type="application/rss+xml"/>
+    <description>Notes c"ollected in the past time</description>
+    <managingEditor>jo"hn@doe.org (John" Doe)</managingEditor>
+    <language>en-US</language>
+    <copyright>(c) John" Doe 2026</copyright>
+    <item>
+      <title>My first blog entry</title>
+      <link>http://john.doe.org/my-first-blog-entry_bad_topics.html</link>
+      <guid>http://john.doe.org/my-first-blog-entry_bad_topics.html</guid>
+      <description>A very first introduction into blogging</description>
+      <pubDate>Thu, 26 Dec 2024 19:25:00 -0000</pubDate>
+      <category>ha&quot;llo</category>
+      <category>it&#x27;s me</category>
+    </item>
+  </channel>
+</rss>

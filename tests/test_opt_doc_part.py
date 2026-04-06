@@ -1,19 +1,11 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# =============================================================================
-"""gresiblos - Tests for the main method - examples application."""
-# =============================================================================
-__author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2024-2025, Daniel Krajzewicz"
-__credits__    = ["Daniel Krajzewicz"]
-__license__    = "BSD"
-__version__    = "0.8.0"
-__maintainer__ = "Daniel Krajzewicz"
-__email__      = "daniel@krajzewicz.de"
-__status__     = "Production"
+"""gresiblos - Tests for templates prcoessing - optional fields."""
 # ===========================================================================
 # - https://github.com/dkrajzew/gresiblos
+# - http://gresiblos.readthedocs.org/
+# - http://www.krajzewicz.de/docs/gresiblos/index.html
 # - http://www.krajzewicz.de
+# - contact me: daniel@krajzewicz.de
 # ===========================================================================
 
 
@@ -27,22 +19,39 @@ import gresiblos
 
 # --- test functions ----------------------------------------------------------
 def test_opt_text(capsys):
-    """Parsing first example (by name)"""
+    """Replace optional with given value"""
     entry = gresiblos.Entry({"foo": "bar"})
-    assert entry.embed("[[:?foo:]]here[[:foo?:]]", "")=="here"
+    template = gresiblos.Template("[[:?foo:]]here[[:foo?:]]")
+    assert template.embed(entry._fields, "[[:topic:]]")=="here"
+
+
+def test_opt_text_missing(capsys):
+    """Replace optional with missing value"""
+    entry = gresiblos.Entry({})
+    template = gresiblos.Template("[[:?foo:]]here[[:foo?:]]")
+    assert template.embed(entry._fields, "[[:topic:]]")==""
 
 
 def test_opt_field(capsys):
-    """Parsing first example (by name)"""
+    """Replace optional with placeholder with given value"""
     entry = gresiblos.Entry({"foo": "bar"})
-    assert entry.embed("[[:?foo:]][[:foo:]][[:foo?:]]", "")=="bar"
+    template = gresiblos.Template("[[:?foo:]][[:foo:]][[:foo?:]]")
+    assert template.embed(entry._fields, "[[:topic:]]")=="bar"
+
+
+def test_opt_field_missing(capsys):
+    """Replace optional with placeholder with missing value"""
+    entry = gresiblos.Entry({})
+    template = gresiblos.Template("[[:?foo:]][[:foo:]][[:foo?:]]")
+    assert template.embed(entry._fields, "[[:topic:]]")==""
 
 
 def test_err_not_start_closed1(capsys):
-    """Parsing first example (by name)"""
+    """Error: not properly closed optional opening"""
     entry = gresiblos.Entry({"foo": "bar"})
+    template = gresiblos.Template("[[:?foo[[:foo:]][[:foo?:]]")
     try:
-        assert entry.embed("[[:?foo[[:foo:]][[:foo?:]]", "")=="bar"
+        assert template.embed(entry._fields, "[[:topic:]]")=="bar"
         assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())
@@ -54,16 +63,33 @@ def test_err_not_start_closed1(capsys):
 
 
 def test_err_not_start_closed2(capsys):
-    """Parsing first example (by name)"""
+    """Error: not properly closed optional opening"""
     entry = gresiblos.Entry({"foo": "bar"})
+    template = gresiblos.Template("[[:?foo")
     try:
-        assert entry.embed("[[:?foo", "")=="bar"
+        assert template.embed(entry._fields, "[[:topic:]]")=="bar"
         assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())
         assert e.code==3
     captured = capsys.readouterr()
     assert captured.err == """gresiblos: error: Missing ':]]' at the begin tag of an optional document part that starts at 0
+"""
+    assert captured.out == ""
+
+
+def test_err_missing_end(capsys):
+    """Error: not properly closed optional opening"""
+    entry = gresiblos.Entry({"foo": "bar"})
+    template = gresiblos.Template("[[:?foo:]][[:foo:]]")
+    try:
+        assert template.embed(entry._fields, "[[:topic:]]")=="bar"
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==3
+    captured = capsys.readouterr()
+    assert captured.err == """gresiblos: error: Missing closing tag of an optional document part that starts at 0; field_key='foo'
 """
     assert captured.out == ""
 

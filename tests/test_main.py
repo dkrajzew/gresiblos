@@ -1,19 +1,11 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# =============================================================================
 """gresiblos - Tests for the main method."""
-# =============================================================================
-__author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2024-2025, Daniel Krajzewicz"
-__credits__    = ["Daniel Krajzewicz"]
-__license__    = "BSD"
-__version__    = "0.8.0"
-__maintainer__ = "Daniel Krajzewicz"
-__email__      = "daniel@krajzewicz.de"
-__status__     = "Production"
 # ===========================================================================
 # - https://github.com/dkrajzew/gresiblos
+# - http://gresiblos.readthedocs.org/
+# - http://www.krajzewicz.de/docs/gresiblos/index.html
 # - http://www.krajzewicz.de
+# - contact me: daniel@krajzewicz.de
 # ===========================================================================
 
 
@@ -36,16 +28,24 @@ def test_main_empty1(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert pname(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
-                 [-s STATE] [-d DESTINATION] [--index-output INDEX_OUTPUT]
+    assert pname(captured.err) == """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
+                 [-s STATE] [--index-output INDEX_OUTPUT]
                  [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
-                 [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
-                 [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
+                 [--to-html] [--markdown] [--degrotesque]
+                 [--topic-format TOPIC_FORMAT] [--index-indent INDEX_INDENT]
+                 [--date-format DATE_FORMAT] [--rss-output RSS_OUTPUT]
+                 [--atom-output ATOM_OUTPUT] [--feed-title FEED_TITLE]
+                 [--feed-site FEED_SITE] [--feed-description FEED_DESCRIPTION]
+                 [--feed-editor-email FEED_EDITOR_EMAIL]
+                 [--feed-editor-name FEED_EDITOR_NAME]
+                 [--feed-language FEED_LANGUAGE]
+                 [--feed-copyright FEED_COPYRIGHT] [--feed-utz FEED_UTZ]
+                 [--version]
                  input
 gresiblos: error: the following arguments are required: input
 """
     assert pname(captured.out) == ""
-    
+
 
 def test_main_empty2(capsys):
     """Test behaviour if no arguments are given"""
@@ -56,11 +56,19 @@ def test_main_empty2(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert pname(captured.err) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
-                 [-s STATE] [-d DESTINATION] [--index-output INDEX_OUTPUT]
+    assert pname(captured.err) == """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
+                 [-s STATE] [--index-output INDEX_OUTPUT]
                  [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
-                 [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
-                 [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
+                 [--to-html] [--markdown] [--degrotesque]
+                 [--topic-format TOPIC_FORMAT] [--index-indent INDEX_INDENT]
+                 [--date-format DATE_FORMAT] [--rss-output RSS_OUTPUT]
+                 [--atom-output ATOM_OUTPUT] [--feed-title FEED_TITLE]
+                 [--feed-site FEED_SITE] [--feed-description FEED_DESCRIPTION]
+                 [--feed-editor-email FEED_EDITOR_EMAIL]
+                 [--feed-editor-name FEED_EDITOR_NAME]
+                 [--feed-language FEED_LANGUAGE]
+                 [--feed-copyright FEED_COPYRIGHT] [--feed-utz FEED_UTZ]
+                 [--version]
                  input
 gresiblos: error: the following arguments are required: input
 """
@@ -76,51 +84,7 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert pname(captured.out) == """usage: gresiblos [-h] [-c FILE] [--version] [-t TEMPLATE] [-e EXTENSION]
-                 [-s STATE] [-d DESTINATION] [--index-output INDEX_OUTPUT]
-                 [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
-                 [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
-                 [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
-                 input
-
-greyrat's simple blog system
-
-positional arguments:
-  input
-
-options:
-  -h, --help            show this help message and exit
-  -c FILE, --config FILE
-                        Reads the named configuration file
-  --version             show program's version number and exit
-  -t TEMPLATE, --template TEMPLATE
-                        Defines the template to use
-  -e EXTENSION, --extension EXTENSION
-                        Sets the extension of the built file(s)
-  -s STATE, --state STATE
-                        Use only files with the given state(s)
-  -d DESTINATION, --destination DESTINATION
-                        Sets the path to store the generated file(s) into
-  --index-output INDEX_OUTPUT
-                        Writes the index to the named file
-  --chrono-output CHRONO_OUTPUT
-                        Writes the named file with entries in chronological
-                        order
-  --alpha-output ALPHA_OUTPUT
-                        Writes the named file with entries in alphabetical
-                        order
-  --markdown            If set, markdown is applied on the contents
-  --degrotesque         If set, degrotesque is applied on the contents and the
-                        title
-  --topic-format TOPIC_FORMAT
-                        Defines how each of the topics is rendered
-  --index-indent INDEX_INDENT
-                        Defines the indent used for the index file
-  --date-format DATE_FORMAT
-                        Defines the time format used
-
-(c) Daniel Krajzewicz 2016-2025
-"""
+    assert pname(captured.out) == PRE_3_13_HELP if sys.version_info[1] < 13 else POST_3_13_HELP
     assert pname(captured.err) == ""
 
 
@@ -133,6 +97,154 @@ def test_main_version(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert pname(captured.out) == """gresiblos 0.8.0
+    assert pname(captured.out) == """gresiblos 0.10.0
 """
     assert pname(captured.err) == ""
+
+
+PRE_3_13_HELP = """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
+                 [-s STATE] [--index-output INDEX_OUTPUT]
+                 [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
+                 [--to-html] [--markdown] [--degrotesque]
+                 [--topic-format TOPIC_FORMAT] [--index-indent INDEX_INDENT]
+                 [--date-format DATE_FORMAT] [--rss-output RSS_OUTPUT]
+                 [--atom-output ATOM_OUTPUT] [--feed-title FEED_TITLE]
+                 [--feed-site FEED_SITE] [--feed-description FEED_DESCRIPTION]
+                 [--feed-editor-email FEED_EDITOR_EMAIL]
+                 [--feed-editor-name FEED_EDITOR_NAME]
+                 [--feed-language FEED_LANGUAGE]
+                 [--feed-copyright FEED_COPYRIGHT] [--feed-utz FEED_UTZ]
+                 [--version]
+                 input
+
+greyrat's simple blog system
+
+positional arguments:
+  input
+
+options:
+  -h, --help            show this help message and exit
+  -c FILE, --config FILE
+                        Reads the named configuration file
+  -d DESTINATION, --destination DESTINATION
+                        The path to store the generated file(s) into
+  -t TEMPLATE, --template TEMPLATE
+                        Defines the template file to use
+  -e EXTENSION, --extension EXTENSION
+                        The extension of the built file(s)
+  -s STATE, --state STATE
+                        The state the entries must have for being processed
+  --index-output INDEX_OUTPUT
+                        Writes the index to the named file
+  --chrono-output CHRONO_OUTPUT
+                        Writes the named file with entries in chronological
+                        order
+  --alpha-output ALPHA_OUTPUT
+                        Writes the named file with entries in alphabetical
+                        order
+  --to-html             If set, basic HTML tags are added
+  --markdown            If set, markdown is applied on the contents
+  --degrotesque         If set, degrotesque is applied on contents, abstract,
+                        and title
+  --topic-format TOPIC_FORMAT
+                        Defines how each of the topics is rendered
+  --index-indent INDEX_INDENT
+                        Defines the indent used for the index file
+  --date-format DATE_FORMAT
+                        Defines the time format used
+  --rss-output RSS_OUTPUT
+                        Writes an RSS 2.0 feed to the named file
+  --atom-output ATOM_OUTPUT
+                        Writes an Atom feed to the named file
+  --feed-title FEED_TITLE
+                        Title to use for the feed
+  --feed-site FEED_SITE
+                        Base URL used to prefix entry filenames in the feed
+  --feed-description FEED_DESCRIPTION
+                        The feed description
+  --feed-editor-email FEED_EDITOR_EMAIL
+                        The email of the feed editor
+  --feed-editor-name FEED_EDITOR_NAME
+                        The name of the feed editor
+  --feed-language FEED_LANGUAGE
+                        The language of the feed
+  --feed-copyright FEED_COPYRIGHT
+                        The copyright information about the feed
+  --feed-utz FEED_UTZ   The feed's time zone
+  --version             show program's version number and exit
+
+(c) Daniel Krajzewicz 2016-2026
+"""
+
+
+POST_3_13_HELP = """usage: gresiblos [-h] [-c FILE] [-d DESTINATION] [-t TEMPLATE] [-e EXTENSION]
+                 [-s STATE] [--index-output INDEX_OUTPUT]
+                 [--chrono-output CHRONO_OUTPUT] [--alpha-output ALPHA_OUTPUT]
+                 [--markdown] [--degrotesque] [--topic-format TOPIC_FORMAT]
+                 [--index-indent INDEX_INDENT] [--date-format DATE_FORMAT]
+                 [--rss-output RSS_OUTPUT] [--atom-output ATOM_OUTPUT]
+                 [--feed-title FEED_TITLE] [--feed-site FEED_SITE]
+                 [--feed-description FEED_DESCRIPTION]
+                 [--feed-editor-email FEED_EDITOR_EMAIL]
+                 [--feed-editor-name FEED_EDITOR_NAME]
+                 [--feed-language FEED_LANGUAGE]
+                 [--feed-copyright FEED_COPYRIGHT] [--feed-utz FEED_UTZ]
+                 [--version]
+                 input
+
+greyrat's simple blog system
+
+positional arguments:
+  input
+
+options:
+  -h, --help            show this help message and exit
+  -c, --config FILE     Reads the named configuration file
+  -d, --destination DESTINATION
+                        The path to store the generated file(s) into
+  -t, --template TEMPLATE
+                        Defines the template file to use
+  -e, --extension EXTENSION
+                        The extension of the built file(s)
+  -s, --state STATE     The state the entries must have for being processed
+  --index-output INDEX_OUTPUT
+                        Writes the index to the named file
+  --chrono-output CHRONO_OUTPUT
+                        Writes the named file with entries in chronological
+                        order
+  --alpha-output ALPHA_OUTPUT
+                        Writes the named file with entries in alphabetical
+                        order
+  --to-html             If set, basic HTML tags are added
+  --markdown            If set, markdown is applied on the contents
+  --degrotesque         If set, degrotesque is applied on contents, abstract,
+                        and title
+  --topic-format TOPIC_FORMAT
+                        Defines how each of the topics is rendered
+  --index-indent INDEX_INDENT
+                        Defines the indent used for the index file
+  --date-format DATE_FORMAT
+                        Defines the time format used
+  --rss-output RSS_OUTPUT
+                        Writes an RSS 2.0 feed to the named file
+  --atom-output ATOM_OUTPUT
+                        Writes an Atom feed to the named file
+  --feed-title FEED_TITLE
+                        Title to use for the feed
+  --feed-site FEED_SITE
+                        Base URL used to prefix entry filenames in the feed
+  --feed-description FEED_DESCRIPTION
+                        The feed description
+  --feed-editor-email FEED_EDITOR_EMAIL
+                        The email of the feed editor
+  --feed-editor-name FEED_EDITOR_NAME
+                        The name of the feed editor
+  --feed-language FEED_LANGUAGE
+                        The language of the feed
+  --feed-copyright FEED_COPYRIGHT
+                        The copyright information about the feed
+  --feed-utz FEED_UTZ   The feed's time zone
+  --version             show program's version number and exit
+
+(c) Daniel Krajzewicz 2016-2026
+"""

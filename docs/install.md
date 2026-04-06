@@ -3,25 +3,27 @@
 __gresiblos__ is a [Python](https://www.python.org/) script. To run it, you must have [Python](https://www.python.org/) installed. If you have not installed [Python](https://www.python.org/), yet, please read instructions on installing [Python](https://www.python.org/) first (see below).
 
 
-## Installing gresiblos for Python
+## Installing gresiblos
 
-The current version is [gresiblos-0.8.0](https://github.com/dkrajzew/gresiblos/releases/tag/0.8.0).
+The current version is [gresiblos-0.10.0](https://github.com/dkrajzew/gresiblos/releases/tag/0.8.0).
 
 You have different options for installing __gresiblos__.
 
-### Installing the package from PyPi
+### Installing from PyPi
 
-You may __install gresiblos__ using
+You may __install gresiblos__ from PyPi using
 
-```console
+```shell
 python -m pip install gresiblos
 ```
 
-You may consider building a virtual environment, first.
+This will install __gresiblos__ as a script that may be directly called on the command line as well as the [Python](https://www.python.org/) module which you may import using ```import gresiblos```. The PyPi version only includes the (executable) source code and files needed to run it.
 
-You may then run __gresiblos__ using 
+Before installing __gresiblos__, you may consider building a virtual environment, first.
 
-```console
+After installing, you may run __gresiblos__ using 
+
+```shell
 gresiblos
 ```
 
@@ -29,29 +31,31 @@ gresiblos
 
 You may __clone the repository__ which is available at [gresiblos&apos;s github page](https://github.com/dkrajzew/gresiblos).
 
-```console
+```shell
 git clone https://github.com/dkrajzew/gresiblos.git
 cd gresiblos
 ```
 
 You may then run __gresiblos__ using 
 
-```console
+```shell
 python gresiblos/gresiblos.py
 ```
+
+Please note that the current repository version may contain an in-between version with new, undescribed, or even buggy behavior. You should rather use a recent release version.
 
 ### Download the latest release
 
 Besides, you may __download the current release__ here:
 
-* [gresiblos-0.8.0.zip](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.8.0.zip)
-* [gresiblos-0.8.0.tar.gz](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.8.0.tar.gz)
+* [gresiblos-0.10.0.zip](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.10.0.zip)
+* [gresiblos-0.10.0.tar.gz](https://github.com/dkrajzew/gresiblos/archive/refs/tags/0.10.0.tar.gz)
 
-You will get the complete copy of the repository which you have to decompress. A folder named ```gresiblos-0.8.0``` will be generated. __gresiblos.py__ is stored in the ```gresiblos``` folder.
+You will get the complete copy of the repository which you have to decompress. A folder named ```gresiblos-0.10.0``` will be generated. __gresiblos.py__ is stored in the ```gresiblos``` folder.
 
-You may run __gresiblos__ using 
+After changing into the generated folder, you may run __gresiblos__ using 
 
-```console
+```shell
 python gresiblos/gresiblos.py
 ```
 
@@ -63,7 +67,7 @@ __gresiblos__ currently supports two add-ons that are not part of the standard i
 
 __markdown__ is a text markup language for generating HTML, see <https://python-markdown.github.io/>. Install __markdown__ using:
 
-```console
+```shell
 python -m pip install markdown
 ```
 
@@ -71,26 +75,26 @@ python -m pip install markdown
 
 __degrotesque__ is a text processor which replaces basic characters by some nicer, typographic, counterparts, see <https://degrotesque.readthedocs.io/en/latest/>. Install __degrotesque__ using:
 
-```console
+```shell
 python -m pip install degrotesque
 ```
 
 
 ## Installing Python
 
-[Python](https://www.python.org/) is an interpreted programming language. For running __gresiblos__ and other scripts written in Python you have to install [Python](https://www.python.org/) itself, first.
+[Python](https://www.python.org/) is an interpreted programming language. For running __gresiblos__ and other scripts written in [Python](https://www.python.org/) you have to install [Python](https://www.python.org/) itself, first.
 
 For installing [Python](https://www.python.org/), use an installer for your system from <https://www.python.org>.
 
 You should as well install **pip**, a package manager for [Python](https://www.python.org/). After installing [Python](https://www.python.org/), you should be able to install **pip** using:
 
-```console
+```shell
 python get-pip.py
 ```
 
 You may upgrade pip using:
 
-```console
+```shell
 pip install --upgrade pip
 ```
 

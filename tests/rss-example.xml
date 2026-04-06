@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Collected Notes</title>
+    <link>http://john.doe.org/</link>
+    <atom:link href="http://john.doe.org/rss.xml" rel="self" type="application/rss+xml"/>
+    <description>Notes collected in the past time</description>
+    <managingEditor>john@doe.org (John Doe)</managingEditor>
+    <language>en-en</language>
+    <copyright>(c) John Doe 2026</copyright>
+    <item>
+      <title>A second blog entry</title>
+      <link>http://john.doe.org/my-second-blog-entry-example_tpl1.html</link>
+      <guid>http://john.doe.org/my-second-blog-entry-example_tpl1.html</guid>
+      <description>A second blog entry</description>
+      <pubDate>Fri, 03 Jan 2025 19:25:00 -0000</pubDate>
+      <category>blog</category>
+      <category>example</category>
+    </item>
+    <item>
+      <title>My first blog entry</title>
+      <link>http://john.doe.org/my-first-blog-entry-example_tpl1.html</link>
+      <guid>http://john.doe.org/my-first-blog-entry-example_tpl1.html</guid>
+      <description>A very first introduction into blogging</description>
+      <pubDate>Thu, 02 Jan 2025 19:25:00 -0000</pubDate>
+      <category>blog</category>
+      <category>example</category>
+    </item>
+  </channel>
+</rss>

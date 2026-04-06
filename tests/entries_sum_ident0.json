@@ -1,22 +1,22 @@
+[
 {
-"my-first-blog-entry.html": {
 "date": "2024-12-26 19:25:00",
 "title": "My first blog entry",
+"filename": "my-first-blog-entry.html",
 "topics": [
 "blog",
 "example"
 ],
-"abstract": "A very first introduction into blogging",
-"filename": "my-first-blog-entry.html"
+"abstract": "A very first introduction into blogging"
 },
-"my-second-blog-entry.html": {
+{
 "date": "2024-12-26 20:37:00",
 "title": "A second blog entry",
+"filename": "my-second-blog-entry.html",
 "topics": [
 "blog",
 "example"
 ],
-"abstract": "A second blog entry",
-"filename": "my-second-blog-entry.html"
+"abstract": "A second blog entry"
 }
-}
+]

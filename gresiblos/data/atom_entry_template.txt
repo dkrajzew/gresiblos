@@ -1,0 +1,9 @@
+  <entry>
+    <title type="html">[[:title:]]</title>
+    <id>[[:link:]]</id>
+    <link href="[[:link:]]"/>[[:?abstract:]]
+    <summary type="html">[[:abstract:]]</summary>[[:abstract?:]]
+    <published>[[:rfc3339_date:]]</published>
+    <updated>[[:rfc3339_date:]]</updated>[[:?encoded_categories:]]
+[[:encoded_categories:]][[:encoded_categories?:]]
+  </entry>

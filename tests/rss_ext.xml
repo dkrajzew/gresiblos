@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>foo_title</title>
+    <link>foo_site/rss.xml</link>
+    <atom:link href="foo_site/rss.xml" rel="self" type="application/rss+xml"/>
+    <description>foo_desc</description>
+    <managingEditor>foo_editor_email (foo_editor_name)</managingEditor>
+    <language>foo_lang</language>
+    <copyright>foo_copy</copyright>
+    <item>
+      <title>A second blog entry</title>
+      <link>foo_site/my-second-blog-entry.html</link>
+      <guid>foo_site/my-second-blog-entry.html</guid>
+      <description>A second blog entry</description>
+      <pubDate>Thu, 26 Dec 2024 20:37:00 -0000</pubDate>
+      <category>blog</category>
+      <category>example</category>
+    </item>
+    <item>
+      <title>My first blog entry</title>
+      <link>foo_site/my-first-blog-entry.html</link>
+      <guid>foo_site/my-first-blog-entry.html</guid>
+      <description>A very first introduction into blogging</description>
+      <pubDate>Thu, 26 Dec 2024 19:25:00 -0000</pubDate>
+      <category>blog</category>
+      <category>example</category>
+    </item>
+  </channel>
+</rss>
