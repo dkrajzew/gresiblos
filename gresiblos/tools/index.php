@@ -63,11 +63,7 @@ function filterItemsByTopic($items, $value) {
 $toShow = params_get("show"); // "items", "topics"
 if($toShow==null) $toShow = "items";
 $db = file_get_contents("entries.json");
-$db = json_decode($db);
-$entries = array();
-foreach ($db as $entry) {
-  array_push($entries, $entry);
-}
+$entries = json_decode($db);
 foreach ($entries as $entry) {
   $t1 = strptime($entry->date, '%Y-%m-%d %H:%M:%S');
   $entry->idate = mktime($t1['tm_hour'], $t1['tm_min'], 0, $t1['tm_mon']+1, $t1['tm_mday'], $t1['tm_year']+1900);
