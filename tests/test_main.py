@@ -12,9 +12,9 @@
 # --- imports ---------------------------------------------------------------
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "gresiblos"))
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
 from util import pname
-import gresiblos
+import gresiblos.gresiblos as gresiblos
 
 
 

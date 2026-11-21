@@ -12,11 +12,10 @@
 # --- imports ---------------------------------------------------------------
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "gresiblos"))
 from pathlib import Path
-from util import pname, copy_files_and_template, fread, fpread, TEST_PATH
-import gresiblos
-
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
+from util import pname, copy_files_and_template, fpread, TEST_PATH
+import gresiblos.gresiblos as gresiblos
 
 
 # --- test functions ----------------------------------------------------------

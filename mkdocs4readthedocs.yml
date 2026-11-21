@@ -42,7 +42,7 @@ plugins:
     - mkdocstrings:
         handlers:
             python:
-                paths: [./gresiblos]
+                paths: [./src]
                 options:
                     filters: [""]
                     show_source: False

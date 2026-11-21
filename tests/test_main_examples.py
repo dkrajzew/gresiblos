@@ -12,12 +12,11 @@
 # --- imports ---------------------------------------------------------------
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "gresiblos"))
 from pathlib import Path
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
 from util import pname, copy_files, copy_files_and_template, fread, fpread, TEST_PATH
-import gresiblos
+import gresiblos.gresiblos as gresiblos
 
-import shutil
 
 # --- test functions ----------------------------------------------------------
 def test_main_entry1_by_name(capsys, tmp_path):

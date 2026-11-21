@@ -21,7 +21,7 @@ __gresiblos__ is a radically simple static site generator / blogging system writ
 
 __gresiblos__ reads blog entries from files that may include some meta information and embeds their contents into a template. It optionally generates: a) a JSON-file with meta information about the entries, b) lists of the entries sorted alphabetically or chronologically, c) RSS 2.0 and Atom feed files. __gresiblos__ comes with a basic php-file that realizes browsing by topic and/or entries.
 
-You may see it&#39;s results here: <https://www.krajzewicz.de/blog/index.php>.
+You may see its results here: <https://www.krajzewicz.de/blog/index.php>.
 
 
 ## Usage
@@ -131,11 +131,6 @@ __gresiblos__ is used at the following pages:
 ### Older versions
 
 You may find the complete change log at [the gresiblos documentation pages](https://gresiblos.readthedocs.io/en/latest/).
-
-
-## Background
-
-I wanted to have a blog and I wanted it to use static pages. That&#39;s why I wrote it. __gresiblos__ has some additional features &#8212; like the inclusion of custom JavaScript and CSS files &#8212; I needed for [my own blog](https://www.krajzewicz.de/blog/index.php).
 
 
 ## Closing

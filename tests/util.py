@@ -20,7 +20,6 @@ TEST_PATH = os.path.split(__file__)[0]
 TEMPLATE_PATH = os.path.split(gresiblos.__file__)[0]
 
 
-
 # --- imports ---------------------------------------------------------------
 def pname(string, path="<DIR>"):
     """Unify the script name and the reported folder"""

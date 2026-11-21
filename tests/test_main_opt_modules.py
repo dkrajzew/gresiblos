@@ -12,13 +12,12 @@
 # --- imports ---------------------------------------------------------------
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "gresiblos"))
 from unittest.mock import patch
 from importlib import reload
 from pathlib import Path
-from util import pname, copy_files_and_template, fread, fpread, pdate, TEST_PATH
-import gresiblos
-
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
+from util import pname, copy_files_and_template, fpread, TEST_PATH
+import gresiblos.gresiblos as gresiblos
 
 
 # --- test functions ----------------------------------------------------------
@@ -39,7 +38,7 @@ def test_main_entry3_degrotesque_missing(capsys, tmp_path):
     """Missing but called degrotesque"""
     # https://stackoverflow.com/questions/51044068/test-for-import-of-optional-dependencies-in-init-py-with-pytest-python-3-5
     with patch.dict(sys.modules, {'degrotesque': None}):
-        reload(sys.modules['gresiblos'])
+        reload(sys.modules['gresiblos.gresiblos'])
         copy_files_and_template(tmp_path, ["entry3_optional.txt"])
         try:
             ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--degrotesque", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
@@ -47,7 +46,7 @@ def test_main_entry3_degrotesque_missing(capsys, tmp_path):
         except SystemExit as e:
             assert type(e)==type(SystemExit())
             assert e.code==2
-    reload(sys.modules['gresiblos'])
+    reload(sys.modules['gresiblos.gresiblos'])
     captured = capsys.readouterr()
     assert pname(captured.err, tmp_path) == """gresiblos: error: degrotesque application is set, but degrotesque is not installed.
 """
@@ -71,7 +70,7 @@ def test_main_entry3_markdown_missing(capsys, tmp_path):
     """Missing but called markdown"""
     # https://stackoverflow.com/questions/51044068/test-for-import-of-optional-dependencies-in-init-py-with-pytest-python-3-5
     with patch.dict(sys.modules, {'markdown': None}):
-        reload(sys.modules['gresiblos'])
+        reload(sys.modules['gresiblos.gresiblos'])
         copy_files_and_template(tmp_path, ["entry3_optional.txt"])
         try:
             ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--markdown", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
@@ -79,7 +78,7 @@ def test_main_entry3_markdown_missing(capsys, tmp_path):
         except SystemExit as e:
             assert type(e)==type(SystemExit())
             assert e.code==2
-    reload(sys.modules['gresiblos'])
+    reload(sys.modules['gresiblos.gresiblos'])
     captured = capsys.readouterr()
     assert pname(captured.err, tmp_path) == """gresiblos: error: markdown application is set, but markdown is not installed.
 """
@@ -103,7 +102,7 @@ def test_main_entry3_both_missing(capsys, tmp_path):
     """Missing but called degrotesque and markdown"""
     # https://stackoverflow.com/questions/51044068/test-for-import-of-optional-dependencies-in-init-py-with-pytest-python-3-5
     with patch.dict(sys.modules, {'degrotesque': None, 'markdown': None}):
-        reload(sys.modules['gresiblos'])
+        reload(sys.modules['gresiblos.gresiblos'])
         copy_files_and_template(tmp_path, ["entry3_optional.txt"])
         try:
             ret = gresiblos.main(["--template", str(tmp_path / "template.html"), "--markdown", "--degrotesque", "--index-output", "entries.json", "-d", str(tmp_path), str(tmp_path / "entry3_optional.txt")])
@@ -111,7 +110,7 @@ def test_main_entry3_both_missing(capsys, tmp_path):
         except SystemExit as e:
             assert type(e)==type(SystemExit())
             assert e.code==2
-    reload(sys.modules['gresiblos'])
+    reload(sys.modules['gresiblos.gresiblos'])
     captured = capsys.readouterr()
     assert pname(captured.err, tmp_path) == """gresiblos: error: degrotesque application is set, but degrotesque is not installed.
 gresiblos: error: markdown application is set, but markdown is not installed.

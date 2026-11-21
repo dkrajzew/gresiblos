@@ -1,6 +1,6 @@
 # Usage &#8212; Entries
 
-Up to now, we processed plain text files. Yet, you may want to format your entries and/or give them some styling. As well, a blog may have different authors, the date may be wanted to be fixed, the title may be more complex than the file name, etc. In the following, some possibilities for enriching your entries are given.
+In the [Basics](./use_basics.md) example, we processed plain text files. Yet, you may want to format your entries and/or give them some styling. As well, a blog may have different authors, the date may be wanted to be fixed, the title may be more complex than the file name, etc. In the following, some possibilities for enriching your entries are given.
 
 ## Markdown
 

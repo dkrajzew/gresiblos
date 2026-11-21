@@ -1,7 +1,7 @@
 API
 ===
 
-::: gresiblos
+::: gresiblos.gresiblos
     docstring_style: "google"
     filters: [""]
     show_source: False
